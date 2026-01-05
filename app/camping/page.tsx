@@ -71,8 +71,9 @@ export default function CampingPage() {
               <div className="border-t pt-6">
                 <h5 className="font-semibold text-gray-900 mb-3">Kontakt oss direkte:</h5>
                 <div className="space-y-2 text-gray-600">
-                  <p>📞 <a href="tel:+4712345678" className="text-blue-600 hover:underline">+47 123 45 678</a></p>
-                  <p>✉️ <a href="mailto:camping@matlandgard.no" className="text-blue-600 hover:underline">camping@matlandgard.no</a></p>
+                  <p>📞 <a href="tel:+4795458563" className="text-blue-600 hover:underline">+47 954 58 563</a></p>
+                  <p>✉️ <a href="mailto:matlandgard@gmail.com" className="text-blue-600 hover:underline">matlandgard@gmail.com</a></p>
+                  <p>📍 Ådlandsvegen 30, 5642 Holmefjord</p>
                 </div>
               </div>
             </div>

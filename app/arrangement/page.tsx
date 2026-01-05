@@ -29,14 +29,14 @@ export default function ArrangementPage() {
         {/* Main Content */}
         <div className="grid md:grid-cols-2 gap-12 mb-12">
           <div>
-            <h3 className="text-3xl font-bold text-gray-900 mb-6">Ditt eventlokale i naturskjønne omgivelser</h3>
+            <h3 className="text-3xl font-bold text-gray-900 mb-6">Den ominnredde båthallen ved fjorden</h3>
             <p className="text-gray-600 mb-4">
-              Matland Gård tilbyr unike lokaler for alle typer arrangementer. Med spektakulær 
-              utsikt over fjorden og fleksible løsninger, skaper vi den perfekte rammen rundt 
-              din spesielle dag.
+              Matland Gård, med en historie på over 400 år, tilbyr unike lokaler for alle typer arrangementer. 
+              Vår ominnredde båthall er den perfekte rammen for minnerike stunder ved fjorden.
             </p>
             <p className="text-gray-600 mb-6">
-              Våre erfarne arrangører hjelper deg med å planlegge og gjennomføre arrangementet 
+              Med spektakulær utsikt over fjorden, kombinerer vi tradisjonell arv med moderne komfort 
+              og stil. Våre erfarne arrangører hjelper deg med å planlegge og gjennomføre arrangementet 
               fra start til slutt.
             </p>
 
@@ -59,21 +59,21 @@ export default function ArrangementPage() {
               
               <div className="space-y-4">
                 <div className="border-l-4 border-purple-600 pl-4">
-                  <h5 className="font-bold text-gray-900">Festsalen</h5>
-                  <p className="text-gray-600 text-sm">Kapasitet: opptil 120 personer</p>
-                  <p className="text-gray-600 text-sm">Perfekt for store feiringer</p>
+                  <h5 className="font-bold text-gray-900">Båthallen</h5>
+                  <p className="text-gray-600 text-sm">Ominnredet til unikt eventlokale</p>
+                  <p className="text-gray-600 text-sm">Fleksibel kapasitet for alle typer arrangement</p>
                 </div>
 
                 <div className="border-l-4 border-purple-600 pl-4">
-                  <h5 className="font-bold text-gray-900">Fjordstua</h5>
-                  <p className="text-gray-600 text-sm">Kapasitet: 40-60 personer</p>
-                  <p className="text-gray-600 text-sm">Koselig og intimt</p>
+                  <h5 className="font-bold text-gray-900">Fjordutsikt</h5>
+                  <p className="text-gray-600 text-sm">Spektakulær beliggenhet ved vannet</p>
+                  <p className="text-gray-600 text-sm">Perfekt for utendørs seremonier</p>
                 </div>
 
                 <div className="border-l-4 border-purple-600 pl-4">
-                  <h5 className="font-bold text-gray-900">Uteområde</h5>
-                  <p className="text-gray-600 text-sm">Kapasitet: fleksibel</p>
-                  <p className="text-gray-600 text-sm">Sommerfester og utendørs arrangementer</p>
+                  <h5 className="font-bold text-gray-900">Historisk atmosfære</h5>
+                  <p className="text-gray-600 text-sm">400 år gammel gård</p>
+                  <p className="text-gray-600 text-sm">Tradisjon møter moderne komfort</p>
                 </div>
               </div>
             </div>
@@ -201,8 +201,9 @@ export default function ArrangementPage() {
           <div className="mt-8 pt-8 border-t">
             <h4 className="font-bold text-gray-900 mb-3">Eller kontakt oss direkte:</h4>
             <div className="space-y-2 text-gray-600">
-              <p>📞 <a href="tel:+4712345678" className="text-purple-600 hover:underline">+47 123 45 678</a></p>
-              <p>✉️ <a href="mailto:arrangement@matlandgard.no" className="text-purple-600 hover:underline">arrangement@matlandgard.no</a></p>
+              <p>📞 <a href="tel:+4795458563" className="text-purple-600 hover:underline">+47 954 58 563</a></p>
+              <p>✉️ <a href="mailto:matlandgard@gmail.com" className="text-purple-600 hover:underline">matlandgard@gmail.com</a></p>
+              <p>📍 Ådlandsvegen 30, 5642 Holmefjord</p>
             </div>
           </div>
         </div>

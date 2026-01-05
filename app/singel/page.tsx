@@ -31,9 +31,9 @@ export default async function SingelPage() {
         {/* Info Banner */}
         <div className="bg-gradient-to-r from-gray-700 to-gray-900 text-white rounded-lg p-8 mb-12">
           <h2 className="text-4xl font-bold mb-4">Matland Singel & Stein</h2>
-          <p className="text-xl mb-2">Franchisepartner av Skjold Singel & Stein</p>
+          <p className="text-xl mb-2">Forhandler av Skjold Singel & Stein</p>
           <p className="text-gray-300">
-            Vi leverer singel, pukk, matjord og andre steinprodukter av høyeste kvalitet direkte til deg.
+            Vi leverer herregårdssingel, pukk, matjord og andre steinprodukter av høyeste kvalitet direkte til deg i Vestland.
           </p>
         </div>
 
@@ -119,16 +119,17 @@ export default async function SingelPage() {
             <div>
               <h4 className="font-semibold text-gray-900 mb-2">📞 Kontakt</h4>
               <p className="text-gray-600">
-                Telefon: <a href="tel:+4712345678" className="text-green-700 hover:underline">+47 123 45 678</a><br/>
-                E-post: <a href="mailto:singel@matlandgard.no" className="text-green-700 hover:underline">singel@matlandgard.no</a>
+                Telefon: <a href="tel:+4795458563" className="text-green-700 hover:underline">+47 954 58 563</a><br/>
+                E-post: <a href="mailto:matlandgard@gmail.com" className="text-green-700 hover:underline">matlandgard@gmail.com</a><br/>
+                Adresse: Ådlandsvegen 30, 5642 Holmefjord
               </p>
             </div>
             <div>
-              <h4 className="font-semibold text-gray-900 mb-2">⏰ Åpningstider</h4>
+              <h4 className="font-semibold text-gray-900 mb-2">🏪 Henting</h4>
               <p className="text-gray-600">
-                Man-Fre: 08:00 - 16:00<br/>
-                Lør: 09:00 - 14:00<br/>
-                Søn: Stengt
+                Hent gratis i Holmefjord<br/>
+                Ta med egen henger<br/>
+                Etter avtale: <a href="tel:+4795458563" className="text-green-700 hover:underline">954 58 563</a>
               </p>
             </div>
           </div>
@@ -139,7 +140,7 @@ export default async function SingelPage() {
       <footer className="bg-green-900 text-white py-8 mt-16">
         <div className="container mx-auto px-4 text-center">
           <p>&copy; {new Date().getFullYear()} Matland Gård. Alle rettigheter reservert.</p>
-          <p className="text-green-300 text-sm mt-2">Franchisepartner av Skjold Singel & Stein</p>
+          <p className="text-green-300 text-sm mt-2">Matland Singel & Stein - Forhandler av Skjold Singel & Stein</p>
         </div>
       </footer>
     </div>

@@ -44,7 +44,7 @@ export default function HomePage() {
               <div className="p-6">
                 <h3 className="text-2xl font-bold text-gray-900 mb-3">Matland Singel & Stein</h3>
                 <p className="text-gray-600 mb-4">
-                  Franchisepartner av Skjold Singel & Stein. Vi leverer singel, pukk, 
+                  Forhandler av Skjold Singel & Stein. Vi leverer herregårdssingel, pukk, 
                   matjord og andre steinprodukter av høyeste kvalitet.
                 </p>
                 <div className="text-green-700 font-semibold flex items-center">
@@ -118,12 +118,15 @@ export default function HomePage() {
             Har du spørsmål? Vi er her for å hjelpe deg.
           </p>
           <div className="flex flex-col md:flex-row justify-center items-center gap-6">
-            <a href="tel:+4712345678" className="text-green-700 font-semibold hover:text-green-800">
-              📞 +47 123 45 678
+            <a href="tel:+4795458563" className="text-green-700 font-semibold hover:text-green-800">
+              📞 +47 954 58 563
             </a>
-            <a href="mailto:post@matlandgard.no" className="text-green-700 font-semibold hover:text-green-800">
-              ✉️ post@matlandgard.no
+            <a href="mailto:matlandgard@gmail.com" className="text-green-700 font-semibold hover:text-green-800">
+              ✉️ matlandgard@gmail.com
             </a>
+            <p className="text-gray-600">
+              📍 Ådlandsvegen 30, 5642 Holmefjord
+            </p>
           </div>
         </div>
       </main>
