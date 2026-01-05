@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Matland Gård - E-commerce Platform
 
-## Getting Started
+Next.js 16 + Prisma 7 + PostgreSQL e-commerce solution for selling aggregates (stone, gravel, sand).
 
-First, run the development server:
+## Tech Stack
 
+- **Framework**: Next.js 16.1.1 (React 19)
+- **Database**: PostgreSQL 15
+- **ORM**: Prisma 7.2.0
+- **Runtime**: Node.js 20
+- **Styling**: Tailwind CSS v4
+- **Container**: Docker + Docker Compose
+
+## Setup
+
+### 1. Clone the repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/ErFjeldheim/matland-gard.git
+cd matland-gard
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Configure environment variables
+```bash
+cp .env.example .env
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Edit `.env` and update with your database credentials.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Start with Docker
+```bash
+docker compose up -d
+```
 
-## Learn More
+### 4. Seed the database
+```bash
+docker compose exec app npx tsx prisma/seed.ts
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 5. Access the application
+- Website: http://localhost:3000
+- API: http://localhost:3000/api/products
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
+```
+.
+├── app/                    # Next.js app directory
+│   ├── api/               # API routes
+│   │   └── products/      # Product endpoints
+│   └── page.tsx           # Homepage
+├── lib/                   # Utility libraries
+│   └── prisma.ts          # Prisma client configuration
+├── prisma/                # Prisma schema and migrations
+│   ├── schema.prisma      # Database schema
+│   └── seed.ts            # Database seeding
+├── public/                # Static assets
+├── docker-compose.yml     # Docker services configuration
+├── Dockerfile             # Docker image definition
+└── package.json           # Node.js dependencies
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Development
 
-## Deploy on Vercel
+### Run locally without Docker
+```bash
+npm install
+npx prisma generate
+npm run dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Database commands
+```bash
+# Generate Prisma Client
+npx prisma generate
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Seed database
+npx tsx prisma/seed.ts
+
+# View database in Prisma Studio
+npx prisma studio
+```
+
+## Apache Configuration
+
+The application runs behind Apache as a reverse proxy on port 3000.
+
+Configuration file: `/etc/apache2/sites-available/new.matlandgard.no.conf`
+
+## License
+
+Private project for Matland Gård.
