@@ -76,7 +76,10 @@ export default async function SingelPage() {
                     <span className="text-2xl font-bold text-green-700">
                       {(product.price / 100).toFixed(2)} kr
                     </span>
-                    <span className="text-gray-500 text-sm ml-2">per m³</span>
+                    <span className="text-gray-500 text-sm ml-2">eks. mva</span>
+                    <p className="text-gray-600 text-sm mt-1">
+                      {product.name.toLowerCase().includes('grus') ? 'per tonn' : 'per storsekk (800kg)'}
+                    </p>
                   </div>
 
                   {/* Payment Options */}
