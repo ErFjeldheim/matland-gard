@@ -1,5 +1,7 @@
 # Matland Gård - E-commerce Platform
 
+> **Note**: This is a private commercial project for Matland Gård. The code is published on GitHub for portfolio and job application purposes only. It is not open source and should not be copied or reused.
+
 Next.js 16 + Prisma 7 + PostgreSQL e-commerce solution for selling aggregates (stone, gravel, sand).
 
 ## Tech Stack
@@ -11,36 +13,10 @@ Next.js 16 + Prisma 7 + PostgreSQL e-commerce solution for selling aggregates (s
 - **Styling**: Tailwind CSS v4
 - **Container**: Docker + Docker Compose
 
-## Setup
-
-### 1. Clone the repository
-```bash
-git clone https://github.com/ErFjeldheim/matland-gard.git
-cd matland-gard
-```
-
-### 2. Configure environment variables
-```bash
-cp .env.example .env
-```
-
-Edit `.env` and update with your database credentials.
-
-### 3. Start with Docker
-```bash
-docker compose up -d
-```
-
-### 4. Seed the database
-```bash
-docker compose exec app npx tsx prisma/seed.ts
-```
-
-### 5. Access the application
-- Website: http://localhost:3000
-- API: http://localhost:3000/api/products
+---
 
 ## Project Structure
+
 ```
 .
 ├── app/                    # Next.js app directory
@@ -53,38 +29,25 @@ docker compose exec app npx tsx prisma/seed.ts
 │   ├── schema.prisma      # Database schema
 │   └── seed.ts            # Database seeding
 ├── public/                # Static assets
-├── docker-compose.yml     # Docker services configuration
+├── docker-compose.yml     # Production configuration
+├── docker-compose.dev.yml # Development configuration
 ├── Dockerfile             # Docker image definition
 └── package.json           # Node.js dependencies
 ```
 
-## Development
+## Features
 
-### Run locally without Docker
-```bash
-npm install
-npx prisma generate
-npm run dev
-```
+- Server-side rendered product catalog
+- RESTful API endpoints
+- PostgreSQL database with Prisma ORM
+- Docker containerization
+- Automated deployment via GitHub Actions
+- Production-ready setup with health checks
 
-### Database commands
-```bash
-# Generate Prisma Client
-npx prisma generate
-
-# Seed database
-npx tsx prisma/seed.ts
-
-# View database in Prisma Studio
-npx prisma studio
-```
-
-## Apache Configuration
-
-The application runs behind Apache as a reverse proxy on port 3000.
-
-Configuration file: `/etc/apache2/sites-available/new.matlandgard.no.conf`
+---
 
 ## License
 
-Private project for Matland Gård.
+© 2026 Matland Gård. All rights reserved.
+
+This project is proprietary and confidential. Unauthorized copying, distribution, or use of this software, via any medium, is strictly prohibited.
