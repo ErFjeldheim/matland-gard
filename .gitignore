@@ -41,3 +41,4 @@ coverage/
 *.pem
 .vercel
 *.sql
+tsconfig.tsbuildinfo

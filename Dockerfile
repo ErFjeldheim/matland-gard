@@ -13,6 +13,10 @@ FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+# Add dummy env vars for build to prevent API routes from failing
+ENV STRIPE_SECRET_KEY=sk_test_dummy_build_key
+ENV NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_dummy_build_key
+
 RUN npx prisma generate
 RUN npm run build
 
