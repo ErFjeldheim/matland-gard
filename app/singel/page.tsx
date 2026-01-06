@@ -6,8 +6,15 @@ import SingelPageClient from './SingelPageClient';
 export const dynamic = 'force-dynamic';
 
 export default async function SingelPage() {
-  const products = await prisma.product.findMany({
+  const allProducts = await prisma.product.findMany({
     orderBy: { createdAt: 'desc' },
+  });
+
+  // Sorter slik at Herregårdssingel kommer først
+  const products = allProducts.sort((a, b) => {
+    if (a.name.toLowerCase().includes('herregårdssingel')) return -1;
+    if (b.name.toLowerCase().includes('herregårdssingel')) return 1;
+    return 0;
   });
 
   return (
