@@ -10,12 +10,12 @@ interface CheckoutModalProps {
   };
   isOpen: boolean;
   onClose: () => void;
-  paymentMethod: 'vipps' | 'stripe';
 }
 
-export default function CheckoutModal({ product, isOpen, onClose, paymentMethod }: CheckoutModalProps) {
+export default function CheckoutModal({ product, isOpen, onClose }: CheckoutModalProps) {
   const [loading, setLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [paymentMethod, setPaymentMethod] = useState<'vipps' | 'stripe' | null>(null);
   const [formData, setFormData] = useState({
     customerName: '',
     customerEmail: '',
@@ -29,6 +29,12 @@ export default function CheckoutModal({ product, isOpen, onClose, paymentMethod 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!paymentMethod) {
+      alert('Vennligst velg betalingsmetode');
+      return;
+    }
+    
     setLoading(true);
 
     try {
@@ -170,33 +176,59 @@ export default function CheckoutModal({ product, isOpen, onClose, paymentMethod 
               <p className="text-sm text-gray-600 mt-1">eks. mva og levering</p>
             </div>
 
+            {/* Payment Method Selection */}
+            <div>
+              <label className="block text-gray-700 font-medium mb-3">Velg betalingsmetode *</label>
+              <div className="grid grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  onClick={() => setPaymentMethod('vipps')}
+                  className={`py-4 px-4 rounded-lg border-2 font-semibold transition-all cursor-pointer flex flex-col items-center justify-center ${
+                    paymentMethod === 'vipps'
+                      ? 'border-[#FF5B24] bg-[#FFF5F3] text-[#FF5B24]'
+                      : 'border-gray-300 hover:border-[#FF5B24] text-gray-700'
+                  }`}
+                  disabled={loading}
+                >
+                  <svg className="w-8 h-8 mb-1" viewBox="0 0 80 80" fill="currentColor">
+                    <path d="M50.1 35.4L39.9 56.1c-1.5 3-5.7 3-7.2 0L22.5 35.4c-1.5-3 .4-6.6 3.6-6.6h20.4c3.2 0 5.1 3.6 3.6 6.6z"/>
+                  </svg>
+                  <span className="text-sm">Vipps</span>
+                </button>
+                
+                <button
+                  type="button"
+                  onClick={() => setPaymentMethod('stripe')}
+                  className={`py-4 px-4 rounded-lg border-2 font-semibold transition-all cursor-pointer flex flex-col items-center justify-center ${
+                    paymentMethod === 'stripe'
+                      ? 'border-blue-600 bg-blue-50 text-blue-600'
+                      : 'border-gray-300 hover:border-blue-600 text-gray-700'
+                  }`}
+                  disabled={loading}
+                >
+                  <svg className="w-8 h-8 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                  </svg>
+                  <span className="text-sm">Kort</span>
+                </button>
+              </div>
+            </div>
+
             {/* Submit */}
             <button
               type="submit"
-              disabled={loading}
+              disabled={loading || !paymentMethod}
               className={`w-full ${
-                paymentMethod === 'vipps' ? 'bg-[#FF5B24]' : 'bg-blue-600'
-              } text-white px-6 py-3 rounded-lg hover:opacity-90 transition-opacity font-semibold flex items-center justify-center`}
+                !paymentMethod ? 'bg-gray-400' : paymentMethod === 'vipps' ? 'bg-[#FF5B24] hover:bg-[#E64E1B]' : 'bg-blue-600 hover:bg-blue-700'
+              } text-white px-6 py-4 rounded-lg transition-colors font-semibold flex items-center justify-center text-lg cursor-pointer disabled:cursor-not-allowed`}
             >
               {loading ? (
                 'Behandler...'
+              ) : !paymentMethod ? (
+                'Velg betalingsmetode'
               ) : (
                 <>
-                  {paymentMethod === 'vipps' ? (
-                    <>
-                      <svg className="w-6 h-6 mr-2" viewBox="0 0 80 80" fill="currentColor">
-                        <path d="M50.1 35.4L39.9 56.1c-1.5 3-5.7 3-7.2 0L22.5 35.4c-1.5-3 .4-6.6 3.6-6.6h20.4c3.2 0 5.1 3.6 3.6 6.6z"/>
-                      </svg>
-                      Betal med Vipps
-                    </>
-                  ) : (
-                    <>
-                      <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                      </svg>
-                      Betal med kort
-                    </>
-                  )}
+                  Fullfør bestilling
                 </>
               )}
             </button>
