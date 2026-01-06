@@ -19,28 +19,61 @@ async function main() {
   // Legg til nye produkter
   const products = [
     {
-      name: 'Singel 8-16mm',
-      description: 'Perfekt til drenering og grunnarbeid. Vasket og sortert singel av høy kvalitet.',
-      price: 45000, // 450 kr
-      image: null,
+      id: '550e8400-e29b-41d4-a716-446655440001',
+      name: 'Herregårdssingel',
+      description: 'Eksklusiv singel med unik farge',
+      longDescription: 'Herregårdssingel er en eksklusiv singel med unik farge og struktur. Perfekt til innkjørsler, stier og som dekorativt dekke. Leveres i tre størrelser.',
+      price: 162500, // 1625 kr
+      image: '/images/products/herregaardssingel.jpg',
+      images: [
+        '/images/products/Herregårdssingel/beskrivelse-bilde-1.jpg',
+        '/images/products/Herregårdssingel/bilde-1.jpg',
+        '/images/products/Herregårdssingel/bilde-2.jpg',
+        '/images/products/Herregårdssingel/bilde-3.jpg',
+        '/images/products/Herregårdssingel/bilde-4.jpg',
+        '/images/products/Herregårdssingel/bilde-5.jpg',
+        '/images/products/Herregårdssingel/bilde-6.jpg',
+        '/images/products/Herregårdssingel/bilde-7.jpg',
+        '/images/products/Herregårdssingel/beskrivelse-bilde-2.jpg',
+        '/images/products/Herregårdssingel/beskrivelse-bilde-3.jpg',
+        '/images/products/Herregårdssingel/minigolfen-familiepark-på-karmøy.jpg',
+      ],
+      videoUrl: 'https://www.youtube.com/watch?v=xPYXRXSM0CU',
     },
     {
-      name: 'Pukk 0-32mm',
-      description: 'Knust fjellmasse, ideell til fundamenter og veier. Kraftig og holdbar.',
-      price: 35000, // 350 kr
-      image: null,
+      id: '550e8400-e29b-41d4-a716-446655440002',
+      name: 'Kirkegårdssingel',
+      description: 'Klassisk hvit singel',
+      price: 200000, // 2000 kr
+      image: '/images/products/kirkegaardssingel.jpg',
     },
     {
-      name: 'Singel 16-32mm',
-      description: 'Grov singel til større prosjekter. Utmerket stabilitet og drainage.',
-      price: 50000, // 500 kr
-      image: null,
+      id: '550e8400-e29b-41d4-a716-446655440003',
+      name: 'Elvestein',
+      description: 'Naturlig rundslipte steiner',
+      price: 200000, // 2000 kr
+      image: '/images/products/elvestein-hauger.jpg',
     },
     {
-      name: 'Matjord Premium',
-      description: 'Næringsrik matjord perfekt for hage og grøntanlegg.',
-      price: 30000, // 300 kr
-      image: null,
+      id: '550e8400-e29b-41d4-a716-446655440004',
+      name: 'Grus 0-16mm',
+      description: 'Fin grus til fundamenter',
+      price: 49900, // 499 kr
+      image: '/images/products/grus-hauger.jpg',
+    },
+    {
+      id: '550e8400-e29b-41d4-a716-446655440005',
+      name: 'Grus 0-32mm',
+      description: 'Grov grus til drenering',
+      price: 49900, // 499 kr
+      image: '/images/products/grus-hauger.jpg',
+    },
+    {
+      id: '550e8400-e29b-41d4-a716-446655440006',
+      name: 'Sand',
+      description: 'Ren sand til lekeplass',
+      price: 175000, // 1750 kr
+      image: '/images/products/sand-lekelastebil.jpg',
     },
   ];
 
