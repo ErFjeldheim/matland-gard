@@ -12,6 +12,8 @@ model Product {
   description     String?
   longDescription String?
   price           Int
+  priceFrom       Int?
+  priceTo         Int?
   image           String?
   images          String[]    @default([])
   videoUrl        String?

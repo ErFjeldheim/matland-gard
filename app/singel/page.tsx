@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma';
 import Navigation from '@/app/components/Navigation';
 import Link from 'next/link';
-import ProductCards from '@/app/components/ProductCards';
+import SingelPageClient from './SingelPageClient';
 
 export const dynamic = 'force-dynamic';
 
@@ -37,14 +37,7 @@ export default async function SingelPage() {
           </p>
         </div>
 
-        {/* Products Section */}
-        <h3 className="text-3xl font-bold text-gray-900 mb-8">Våre Produkter</h3>
-        
-        {products.length === 0 ? (
-          <p className="text-gray-600">Ingen produkter tilgjengelig for øyeblikket.</p>
-        ) : (
-          <ProductCards products={products} />
-        )}
+        <SingelPageClient products={products} />
 
         {/* Info Section */}
         <div className="mt-16 bg-white rounded-lg shadow-lg p-8">
