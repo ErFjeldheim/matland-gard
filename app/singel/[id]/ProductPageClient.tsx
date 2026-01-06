@@ -17,10 +17,15 @@ type Product = {
   updatedAt: Date;
 };
 
-const SIZE_OPTIONS = [
+const HERREGAARDSSINGEL_SIZE_OPTIONS = [
   { size: '4-8mm', price: 175000 },
   { size: '8-16mm', price: 150000 },
   { size: '16-32mm', price: 150000 }
+];
+
+const GRUS_SIZE_OPTIONS = [
+  { size: '0-16mm', price: 59900 },
+  { size: '0-32mm', price: 59900 }
 ];
 
 export default function ProductPageClient({ product }: { product: Product }) {
@@ -29,8 +34,17 @@ export default function ProductPageClient({ product }: { product: Product }) {
   const [addedToCart, setAddedToCart] = useState(false);
   const { addItem } = useCart();
   
-  // Check if this product requires size selection (Herregårdssingel)
-  const requiresSize = product.name === 'Herregårdssingel';
+  // Check if this product requires size selection
+  const requiresSize = product.name === 'Herregårdssingel' || product.name === 'Grus';
+  
+  // Get size options based on product
+  const getSizeOptions = () => {
+    if (product.name === 'Herregårdssingel') return HERREGAARDSSINGEL_SIZE_OPTIONS;
+    if (product.name === 'Grus') return GRUS_SIZE_OPTIONS;
+    return [];
+  };
+  
+  const SIZE_OPTIONS = getSizeOptions();
   
   // Get price based on selected size
   const getPrice = () => {
