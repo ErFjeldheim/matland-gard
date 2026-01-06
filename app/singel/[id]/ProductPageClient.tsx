@@ -112,7 +112,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
               {(currentPrice / 100).toFixed(0)} kr
             </span>
           )}
-          <span className="text-gray-500 text-sm ml-2">eks. mva</span>
+          <span className="text-gray-500 text-sm ml-2">inkl. mva.</span>
         </div>
         <p className="text-gray-600 text-sm">
           {product.name.toLowerCase().includes('grus') 

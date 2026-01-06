@@ -72,7 +72,7 @@ export default function ProductCards({ products }: ProductCardsProps) {
                 <span className="text-2xl font-bold text-green-700">
                   {Math.round(product.price / 100)} kr
                 </span>
-                <span className="text-gray-500 text-sm ml-2">inkl. mva</span>
+                <span className="text-gray-500 text-sm ml-2">inkl. mva.</span>
                 <p className="text-gray-600 text-sm mt-1">
                   {product.name.toLowerCase().includes('grus') 
                     ? 'per tonn' 
