@@ -6,10 +6,11 @@ type Product = {
   id: string;
   name: string;
   description: string | null;
+  longDescription: string | null;
   price: number;
-  priceFrom: number | null;
-  priceTo: number | null;
   image: string | null;
+  images: string[];
+  videoUrl: string | null;
   createdAt: Date;
   updatedAt: Date;
 };
