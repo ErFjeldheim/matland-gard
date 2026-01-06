@@ -10,10 +10,12 @@ export default async function SingelPage() {
     orderBy: { createdAt: 'desc' },
   });
 
-  // Sorter slik at Herregårdssingel kommer først
+  // Sorter slik at Herregårdssingel kommer først og Singelmatter ECCOgravel kommer sist
   const products = allProducts.sort((a, b) => {
     if (a.name.toLowerCase().includes('herregårdssingel')) return -1;
     if (b.name.toLowerCase().includes('herregårdssingel')) return 1;
+    if (a.name.toLowerCase().includes('singelmatter')) return 1;
+    if (b.name.toLowerCase().includes('singelmatter')) return -1;
     return 0;
   });
 
