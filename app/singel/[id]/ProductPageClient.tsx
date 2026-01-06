@@ -99,7 +99,11 @@ export default function ProductPageClient({ product }: { product: Product }) {
           <span className="text-gray-500 text-sm ml-2">eks. mva</span>
         </div>
         <p className="text-gray-600 text-sm">
-          per storsekk (800kg)
+          {product.name.toLowerCase().includes('grus') 
+            ? 'per tonn' 
+            : product.name.toLowerCase().includes('matte')
+            ? 'per m²'
+            : 'per storsekk (800kg)'}
         </p>
       </div>
 

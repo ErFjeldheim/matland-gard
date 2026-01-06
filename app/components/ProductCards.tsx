@@ -84,7 +84,11 @@ export default function ProductCards({ products }: ProductCardsProps) {
                   </>
                 )}
                 <p className="text-gray-600 text-sm mt-1">
-                  {product.name.toLowerCase().includes('grus') ? 'per tonn' : 'per storsekk (800kg)'}
+                  {product.name.toLowerCase().includes('grus') 
+                    ? 'per tonn' 
+                    : product.name.toLowerCase().includes('matte')
+                    ? 'per m²'
+                    : 'per storsekk (800kg)'}
                 </p>
               </div>
 

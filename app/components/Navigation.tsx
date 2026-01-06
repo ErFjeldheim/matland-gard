@@ -40,7 +40,7 @@ export default function Navigation() {
           </ul>
           
           {/* Cart Icon - Only show on /singel page */}
-          {pathname === '/singel' && (
+          {pathname?.startsWith('/singel') && (
             <Link 
               href="/handlekurv"
               className="relative text-white hover:text-green-200 transition-colors"
