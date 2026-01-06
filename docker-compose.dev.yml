@@ -8,13 +8,17 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
+      - /app/.next
     environment:
       - DATABASE_URL=${DATABASE_URL}
       - NODE_ENV=development
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}
+      - NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL}
     depends_on:
       db:
         condition: service_healthy
-    command: sh -c "npx prisma generate && npm run dev"
+    command: sh -c "npm install && npx prisma generate && npm run dev"
   
   db:
     image: postgres:15-alpine

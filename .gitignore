@@ -42,3 +42,4 @@ coverage/
 .vercel
 *.sql
 tsconfig.tsbuildinfo
+commit.md
