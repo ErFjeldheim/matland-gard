@@ -105,7 +105,7 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
                       <p className="text-sm text-gray-600">Antall: {item.quantity}</p>
                     </div>
                     <p className="font-semibold text-gray-900">
-                      {((item.price * item.quantity) / 100).toFixed(2)} kr
+                      {((item.price * item.quantity) / 100).toFixed(0)} kr
                     </p>
                   </div>
                 ))}
@@ -116,7 +116,7 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
             <div className="flex justify-between items-center text-xl">
               <span className="font-bold text-gray-900">Totalt</span>
               <span className="font-bold text-green-700">
-                {(order.totalAmount / 100).toFixed(2)} kr
+                {(order.totalAmount / 100).toFixed(0)} kr
               </span>
             </div>
 
@@ -125,7 +125,7 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
               <div className="mt-6 bg-orange-50 border border-orange-200 rounded-lg p-4">
                 <p className="text-orange-800 font-semibold mb-2">Vipps-betaling</p>
                 <p className="text-orange-700 text-sm">
-                  Send {(order.totalAmount / 100).toFixed(2)} kr til <span className="font-bold">954 58 563</span>
+                  Send {(order.totalAmount / 100).toFixed(0)} kr til <span className="font-bold">954 58 563</span>
                 </p>
                 <p className="text-orange-700 text-sm mt-1">
                   Oppgi ordrenummer i meldingen: <span className="font-mono font-bold">{order.id.slice(0, 8).toUpperCase()}</span>

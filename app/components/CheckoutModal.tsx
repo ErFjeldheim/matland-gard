@@ -171,7 +171,7 @@ export default function CheckoutModal({ product, isOpen, onClose }: CheckoutModa
             <div className="border-t pt-4">
               <div className="flex justify-between items-center text-xl">
                 <span className="font-bold text-gray-900">Totalt:</span>
-                <span className="font-bold text-green-700">{totalAmount.toFixed(2)} kr</span>
+                <span className="font-bold text-green-700">{totalAmount.toFixed(0)} kr</span>
               </div>
               <p className="text-sm text-gray-600 mt-1">eks. mva og levering</p>
             </div>

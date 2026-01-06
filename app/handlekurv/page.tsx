@@ -75,7 +75,7 @@ export default function HandlekurvPage() {
                       {item.productName}
                     </h3>
                     <p className="text-green-700 font-bold mb-3">
-                      {(item.price / 100).toFixed(2)} kr <span className="text-gray-500 text-sm">eks. mva</span>
+                      {(item.price / 100).toFixed(0)} kr <span className="text-gray-500 text-sm">eks. mva</span>
                     </p>
 
                     {/* Quantity Controls */}
@@ -107,7 +107,7 @@ export default function HandlekurvPage() {
                   {/* Subtotal */}
                   <div className="text-right">
                     <p className="text-lg font-bold text-gray-900">
-                      {((item.price * item.quantity) / 100).toFixed(2)} kr
+                      {((item.price * item.quantity) / 100).toFixed(0)} kr
                     </p>
                   </div>
                 </div>
@@ -127,7 +127,7 @@ export default function HandlekurvPage() {
                   <div className="border-t pt-3 flex justify-between items-center">
                     <span className="text-xl font-bold text-gray-900">Totalt:</span>
                     <span className="text-2xl font-bold text-green-700">
-                      {(totalPrice / 100).toFixed(2)} kr
+                      {(totalPrice / 100).toFixed(0)} kr
                     </span>
                   </div>
                   <p className="text-sm text-gray-600">eks. mva og levering</p>

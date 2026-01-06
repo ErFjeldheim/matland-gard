@@ -61,6 +61,8 @@ export default function ProductPageClient({ product }: { product: Product }) {
     const prices = SIZE_OPTIONS.map(opt => opt.price);
     const min = Math.min(...prices);
     const max = Math.max(...prices);
+    // Don't show range if all prices are the same
+    if (min === max) return null;
     return { min, max };
   };
   
