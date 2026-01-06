@@ -1,0 +1,156 @@
+'use client';
+
+import Link from 'next/link';
+import Image from 'next/image';
+import { useCart } from '../context/CartContext';
+import Navigation from '../components/Navigation';
+
+export default function HandlekurvPage() {
+  const { items, removeItem, updateQuantity, totalPrice, clearCart } = useCart();
+
+  if (items.length === 0) {
+    return (
+      <>
+        <Navigation />
+        <div className="min-h-screen bg-gray-50">
+          <div className="container mx-auto px-4 py-16">
+            <h1 className="text-4xl font-bold text-gray-900 mb-8">Handlekurv</h1>
+            <div className="bg-white rounded-lg shadow-md p-12 text-center">
+              <svg className="w-24 h-24 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-2">Handlekurven er tom</h2>
+              <p className="text-gray-600 mb-6">Legg til produkter for å fortsette</p>
+              <Link
+                href="/singel"
+                className="inline-block bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-semibold"
+              >
+                Gå til produkter
+              </Link>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <Navigation />
+      <div className="min-h-screen bg-gray-50">
+        <div className="container mx-auto px-4 py-12">
+          <div className="flex justify-between items-center mb-8">
+            <h1 className="text-4xl font-bold text-gray-900">Handlekurv</h1>
+            <button
+              onClick={clearCart}
+              className="text-red-600 hover:text-red-700 font-medium"
+            >
+              Tøm handlekurv
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Cart Items */}
+            <div className="lg:col-span-2 space-y-4">
+              {items.map((item) => (
+                <div
+                  key={`${item.productId}-${item.size || 'default'}`}
+                  className="bg-white rounded-lg shadow-md p-6 flex gap-6"
+                >
+                  {/* Product Image */}
+                  {item.image && (
+                    <div className="relative w-24 h-24 flex-shrink-0">
+                      <Image
+                        src={item.image}
+                        alt={item.productName}
+                        fill
+                        className="object-cover rounded-lg"
+                      />
+                    </div>
+                  )}
+
+                  {/* Product Info */}
+                  <div className="flex-grow">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                      {item.productName}
+                    </h3>
+                    <p className="text-green-700 font-bold mb-3">
+                      {(item.price / 100).toFixed(2)} kr <span className="text-gray-500 text-sm">eks. mva</span>
+                    </p>
+
+                    {/* Quantity Controls */}
+                    <div className="flex items-center gap-4">
+                      <button
+                        onClick={() => updateQuantity(item.productId, item.quantity - 1, item.size)}
+                        className="bg-gray-200 text-gray-900 px-3 py-1 rounded hover:bg-gray-300 font-bold"
+                      >
+                        -
+                      </button>
+                      <span className="font-semibold w-8 text-center">{item.quantity}</span>
+                      <button
+                        onClick={() => updateQuantity(item.productId, item.quantity + 1, item.size)}
+                        className="bg-gray-200 text-gray-900 px-3 py-1 rounded hover:bg-gray-300 font-bold"
+                      >
+                        +
+                      </button>
+                      <button
+                        onClick={() => removeItem(item.productId, item.size)}
+                        className="ml-auto text-red-600 hover:text-red-700"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Subtotal */}
+                  <div className="text-right">
+                    <p className="text-lg font-bold text-gray-900">
+                      {((item.price * item.quantity) / 100).toFixed(2)} kr
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Order Summary */}
+            <div className="lg:col-span-1">
+              <div className="bg-white rounded-lg shadow-md p-6 sticky top-4">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Sammendrag</h2>
+                
+                <div className="space-y-3 mb-6">
+                  <div className="flex justify-between text-gray-700">
+                    <span>Antall varer:</span>
+                    <span className="font-semibold">{items.reduce((sum, item) => sum + item.quantity, 0)}</span>
+                  </div>
+                  <div className="border-t pt-3 flex justify-between items-center">
+                    <span className="text-xl font-bold text-gray-900">Totalt:</span>
+                    <span className="text-2xl font-bold text-green-700">
+                      {(totalPrice / 100).toFixed(2)} kr
+                    </span>
+                  </div>
+                  <p className="text-sm text-gray-600">eks. mva og levering</p>
+                </div>
+
+                <Link
+                  href="/bestilling"
+                  className="w-full bg-green-600 text-white px-6 py-4 rounded-lg hover:bg-green-700 transition-colors font-semibold flex items-center justify-center text-lg cursor-pointer block text-center"
+                >
+                  Gå til kasse
+                </Link>
+
+                <Link
+                  href="/singel"
+                  className="block text-center text-green-700 hover:text-green-800 font-medium mt-4"
+                >
+                  ← Fortsett å handle
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
