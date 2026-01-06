@@ -1,9 +1,7 @@
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import CheckoutModal from './CheckoutModal';
 
 type Product = {
   id: string;
@@ -23,16 +21,6 @@ type ProductCardsProps = {
 };
 
 export default function ProductCards({ products }: ProductCardsProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [paymentMethod, setPaymentMethod] = useState<'stripe' | 'vipps'>('vipps');
-
-  const handlePaymentClick = (product: Product, method: 'stripe' | 'vipps') => {
-    setSelectedProduct(product);
-    setPaymentMethod(method);
-    setIsModalOpen(true);
-  };
-
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -82,39 +70,17 @@ export default function ProductCards({ products }: ProductCardsProps) {
                 </p>
               </div>
 
-              {/* Payment Options */}
-              <div className="space-y-2">
-                <button 
-                  onClick={() => handlePaymentClick(product, 'vipps')}
-                  className="w-full bg-[#FF5B24] text-white px-6 py-3 rounded-lg hover:bg-[#E64E1B] transition-colors font-semibold flex items-center justify-center"
-                >
-                  <svg className="w-6 h-6 mr-2" viewBox="0 0 80 80" fill="currentColor">
-                    <path d="M50.1 35.4L39.9 56.1c-1.5 3-5.7 3-7.2 0L22.5 35.4c-1.5-3 .4-6.6 3.6-6.6h20.4c3.2 0 5.1 3.6 3.6 6.6z"/>
-                  </svg>
-                  Betal med Vipps
-                </button>
-                <button 
-                  onClick={() => handlePaymentClick(product, 'stripe')}
-                  className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold flex items-center justify-center"
-                >
-                  <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                  </svg>
-                  Betal med kort
-                </button>
-              </div>
+              {/* Call to Action */}
+              <Link 
+                href={`/singel/${product.id}`}
+                className="block w-full bg-green-700 text-white px-6 py-3 rounded-lg hover:bg-green-800 transition-colors font-semibold text-center"
+              >
+                Se produkt
+              </Link>
             </div>
           </div>
         ))}
       </div>
-
-      {selectedProduct && (
-        <CheckoutModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          product={selectedProduct}
-        />
-      )}
     </>
   );
 }
