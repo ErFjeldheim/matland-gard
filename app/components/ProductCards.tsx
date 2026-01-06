@@ -123,7 +123,6 @@ export default function ProductCards({ products }: ProductCardsProps) {
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           product={selectedProduct}
-          paymentMethod={paymentMethod}
         />
       )}
     </>
