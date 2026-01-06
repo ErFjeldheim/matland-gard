@@ -107,7 +107,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
             </>
           ) : (
             <span className="text-3xl font-bold text-green-700">
-              {(currentPrice / 100).toFixed(2)} kr
+              {(currentPrice / 100).toFixed(0)} kr
             </span>
           )}
           <span className="text-gray-500 text-sm ml-2">eks. mva</span>
