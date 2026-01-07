@@ -3,6 +3,12 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  
+  /* Matland Gard Color Palette */
+  --color-primary: #499fa4;      /* Teal */
+  --color-secondary: #bec6c3;    /* Slate */
+  --color-accent: #e9bc8b;       /* Tangerine */
+  --color-dark: #3d4a55;         /* Charcoal */
 }
 
 @theme inline {
@@ -10,6 +16,12 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  
+  /* Brand Colors */
+  --color-brand-primary: var(--color-primary);
+  --color-brand-secondary: var(--color-secondary);
+  --color-brand-accent: var(--color-accent);
+  --color-brand-dark: var(--color-dark);
 }
 
 @media (prefers-color-scheme: dark) {

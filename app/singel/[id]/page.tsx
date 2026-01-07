@@ -25,26 +25,17 @@ export default async function ProductPage({ params }: { params: Params }) {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-green-800 text-white py-8">
-        <div className="container mx-auto px-4">
-          <Link href="/">
-            <h1 className="text-4xl font-bold hover:text-green-200 transition-colors cursor-pointer">
-              Matland Gård
-            </h1>
-          </Link>
-          <p className="text-green-100 mt-2">Stein • Camping • Arrangement</p>
-        </div>
+      <header className="bg-[var(--color-dark)] text-white">
+        <Navigation />
       </header>
-
-      <Navigation />
 
       {/* Content */}
       <main className="container mx-auto px-4 py-12">
         {/* Breadcrumb */}
         <div className="mb-6 text-sm text-gray-600">
-          <Link href="/" className="hover:text-green-700">Hjem</Link>
+          <Link href="/" className="hover:text-[var(--color-primary)]">Hjem</Link>
           {' > '}
-          <Link href="/singel" className="hover:text-green-700">Singel & Stein</Link>
+          <Link href="/singel" className="hover:text-[var(--color-primary)]">Singel & Stein</Link>
           {' > '}
           <span className="text-gray-900">{product.name}</span>
         </div>
@@ -99,9 +90,9 @@ export default async function ProductPage({ params }: { params: Params }) {
       </main>
 
       {/* Footer */}
-      <footer className="bg-green-900 text-white py-8 mt-16">
+      <footer className="bg-[var(--color-dark)] text-white py-8 mt-16">
         <div className="container mx-auto px-4 text-center">
-          <p>© {new Date().getFullYear()} Matland Gård. Alle rettigheter reservert.</p>
+          <p>© {new Date().getFullYear()} Matland Gard. Alle rettigheter reservert.</p>
         </div>
       </footer>
     </div>

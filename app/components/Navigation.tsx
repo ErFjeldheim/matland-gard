@@ -9,14 +9,22 @@ export default function Navigation() {
   const pathname = usePathname();
   
   return (
-    <nav className="bg-green-700 border-b border-green-600">
+    <nav className="bg-[var(--color-dark)]">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center">
-          <ul className="flex space-x-8 py-4">
+        <div className="flex justify-between items-center py-4">
+          {/* Logo */}
+          <Link href="/" className="flex items-center">
+            <h1 className="text-2xl font-bold text-white hover:text-[var(--color-accent)] transition-colors">
+              Matland Gard
+            </h1>
+          </Link>
+
+          {/* Navigation Links */}
+          <ul className="flex space-x-8">
             <li>
               <Link 
                 href="/singel" 
-                className="text-white hover:text-green-200 transition-colors font-medium"
+                className="text-white hover:text-[var(--color-accent)] transition-colors font-medium"
               >
                 Singel & Stein
               </Link>
@@ -24,7 +32,7 @@ export default function Navigation() {
             <li>
               <Link 
                 href="/camping" 
-                className="text-white hover:text-green-200 transition-colors font-medium"
+                className="text-white hover:text-[var(--color-accent)] transition-colors font-medium"
               >
                 Camping
               </Link>
@@ -32,7 +40,7 @@ export default function Navigation() {
             <li>
               <Link 
                 href="/arrangement" 
-                className="text-white hover:text-green-200 transition-colors font-medium"
+                className="text-white hover:text-[var(--color-accent)] transition-colors font-medium"
               >
                 Arrangement
               </Link>
@@ -43,7 +51,7 @@ export default function Navigation() {
           {pathname?.startsWith('/singel') && (
             <Link 
               href="/handlekurv"
-              className="relative text-white hover:text-green-200 transition-colors"
+              className="relative text-white hover:text-[var(--color-accent)] transition-colors"
             >
               <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />

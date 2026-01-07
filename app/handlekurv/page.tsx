@@ -23,7 +23,7 @@ export default function HandlekurvPage() {
               <p className="text-gray-600 mb-6">Legg til produkter for å fortsette</p>
               <Link
                 href="/singel"
-                className="inline-block bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-semibold"
+                className="inline-block bg-[var(--color-primary)] text-white px-6 py-3 rounded-lg hover:bg-[var(--color-dark)] transition-colors font-semibold"
               >
                 Gå til produkter
               </Link>
@@ -74,7 +74,7 @@ export default function HandlekurvPage() {
                     <h3 className="text-lg font-semibold text-gray-900 mb-1">
                       {item.productName}
                     </h3>
-                    <p className="text-green-700 font-bold mb-3">
+                    <p className="text-[var(--color-primary)] font-bold mb-3">
                       {(item.price / 100).toFixed(0)} kr <span className="text-gray-500 text-sm">eks. mva</span>
                     </p>
 
@@ -126,7 +126,7 @@ export default function HandlekurvPage() {
                   </div>
                   <div className="border-t pt-3 flex justify-between items-center">
                     <span className="text-xl font-bold text-gray-900">Totalt:</span>
-                    <span className="text-2xl font-bold text-green-700">
+                    <span className="text-2xl font-bold text-[var(--color-primary)]">
                       {(totalPrice / 100).toFixed(0)} kr
                     </span>
                   </div>
@@ -142,7 +142,7 @@ export default function HandlekurvPage() {
 
                 <Link
                   href="/singel"
-                  className="block text-center text-green-700 hover:text-green-800 font-medium mt-4"
+                  className="block text-center text-[var(--color-primary)] hover:text-[var(--color-dark)] font-medium mt-4"
                 >
                   ← Fortsett å handle
                 </Link>

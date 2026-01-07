@@ -121,7 +121,7 @@ export default function CheckoutModal({ product, isOpen, onClose }: CheckoutModa
                 required
                 value={formData.customerName}
                 onChange={(e) => setFormData({ ...formData, customerName: e.target.value })}
-                className="w-full bg-white text-gray-900 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                className="w-full bg-white text-gray-900 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
                 placeholder="Ola Nordmann"
                 disabled={loading}
               />
@@ -134,7 +134,7 @@ export default function CheckoutModal({ product, isOpen, onClose }: CheckoutModa
                 required
                 value={formData.customerEmail}
                 onChange={(e) => setFormData({ ...formData, customerEmail: e.target.value })}
-                className="w-full bg-white text-gray-900 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                className="w-full bg-white text-gray-900 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
                 placeholder="ola@example.com"
                 disabled={loading}
               />
@@ -147,7 +147,7 @@ export default function CheckoutModal({ product, isOpen, onClose }: CheckoutModa
                 required
                 value={formData.customerPhone}
                 onChange={(e) => setFormData({ ...formData, customerPhone: e.target.value })}
-                className="w-full bg-white text-gray-900 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                className="w-full bg-white text-gray-900 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
                 placeholder="+47 123 45 678"
                 disabled={loading}
               />
@@ -161,7 +161,7 @@ export default function CheckoutModal({ product, isOpen, onClose }: CheckoutModa
                 rows={2}
                 value={formData.deliveryAddress}
                 onChange={(e) => setFormData({ ...formData, deliveryAddress: e.target.value })}
-                className="w-full bg-white text-gray-900 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                className="w-full bg-white text-gray-900 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
                 placeholder="La stå tom for henting i Holmefjord"
                 disabled={loading}
               />
@@ -171,7 +171,7 @@ export default function CheckoutModal({ product, isOpen, onClose }: CheckoutModa
             <div className="border-t pt-4">
               <div className="flex justify-between items-center text-xl">
                 <span className="font-bold text-gray-900">Totalt:</span>
-                <span className="font-bold text-green-700">{totalAmount.toFixed(0)} kr</span>
+                <span className="font-bold text-[var(--color-primary)]">{totalAmount.toFixed(0)} kr</span>
               </div>
               <p className="text-sm text-gray-600 mt-1">eks. mva og levering</p>
             </div>
@@ -201,8 +201,8 @@ export default function CheckoutModal({ product, isOpen, onClose }: CheckoutModa
                   onClick={() => setPaymentMethod('stripe')}
                   className={`py-4 px-4 rounded-lg border-2 font-semibold transition-all cursor-pointer flex flex-col items-center justify-center ${
                     paymentMethod === 'stripe'
-                      ? 'border-blue-600 bg-blue-50 text-blue-600'
-                      : 'border-gray-300 hover:border-blue-600 text-gray-700'
+                      ? 'border-[var(--color-primary)] bg-[var(--color-accent)]/20 text-[var(--color-dark)]'
+                      : 'border-gray-300 hover:border-[var(--color-primary)] text-gray-700'
                   }`}
                   disabled={loading}
                 >
@@ -219,7 +219,7 @@ export default function CheckoutModal({ product, isOpen, onClose }: CheckoutModa
               type="submit"
               disabled={loading || !paymentMethod}
               className={`w-full ${
-                !paymentMethod ? 'bg-gray-400' : paymentMethod === 'vipps' ? 'bg-[#FF5B24] hover:bg-[#E64E1B]' : 'bg-blue-600 hover:bg-blue-700'
+                !paymentMethod ? 'bg-gray-400' : paymentMethod === 'vipps' ? 'bg-[#FF5B24] hover:bg-[#E64E1B]' : 'bg-[var(--color-primary)] hover:bg-[var(--color-dark)]'
               } text-white px-6 py-4 rounded-lg transition-colors font-semibold flex items-center justify-center text-lg cursor-pointer disabled:cursor-not-allowed`}
             >
               {loading ? (

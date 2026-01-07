@@ -22,23 +22,14 @@ export default async function SingelPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-green-800 text-white py-8">
-        <div className="container mx-auto px-4">
-          <Link href="/">
-            <h1 className="text-4xl font-bold hover:text-green-200 transition-colors cursor-pointer">
-              Matland Gård
-            </h1>
-          </Link>
-          <p className="text-green-100 mt-2">Stein • Camping • Arrangement</p>
-        </div>
+      <header className="bg-[var(--color-dark)] text-white">
+        <Navigation />
       </header>
-
-      <Navigation />
 
       {/* Content */}
       <main className="container mx-auto px-4 py-12">
         {/* Info Banner */}
-        <div className="bg-gradient-to-r from-gray-700 to-gray-900 text-white rounded-lg p-8 mb-12">
+        <div className="bg-gradient-to-r from-[var(--color-dark)] to-[var(--color-primary)] text-white rounded-lg p-8 mb-12">
           <h2 className="text-4xl font-bold mb-4">Matland Singel & Stein</h2>
           <p className="text-xl mb-2">Forhandler av Skjold Singel & Stein</p>
           <p className="text-gray-300">
@@ -67,8 +58,8 @@ export default async function SingelPage() {
             <div>
               <h4 className="font-semibold text-gray-900 mb-2">📞 Kontakt</h4>
               <p className="text-gray-600">
-                Telefon: <a href="tel:+4795458563" className="text-green-700 hover:underline">+47 954 58 563</a><br/>
-                E-post: <a href="mailto:matlandgard@gmail.com" className="text-green-700 hover:underline">matlandgard@gmail.com</a><br/>
+                Telefon: <a href="tel:+4795458563" className="text-[var(--color-primary)] hover:underline">+47 954 58 563</a><br/>
+                E-post: <a href="mailto:matlandgard@gmail.com" className="text-[var(--color-primary)] hover:underline">matlandgard@gmail.com</a><br/>
                 Adresse: Ådlandsvegen 30, 5642 Holmefjord
               </p>
             </div>
@@ -77,7 +68,7 @@ export default async function SingelPage() {
               <p className="text-gray-600">
                 Hent gratis i Holmefjord<br/>
                 Ta med egen henger<br/>
-                Etter avtale: <a href="tel:+4795458563" className="text-green-700 hover:underline">954 58 563</a>
+                Etter avtale: <a href="tel:+4795458563" className="text-[var(--color-primary)] hover:underline">954 58 563</a>
               </p>
             </div>
           </div>
@@ -85,10 +76,10 @@ export default async function SingelPage() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-green-900 text-white py-8 mt-16">
+      <footer className="bg-[var(--color-dark)] text-white py-8 mt-16">
         <div className="container mx-auto px-4 text-center">
-          <p>&copy; {new Date().getFullYear()} Matland Gård. Alle rettigheter reservert.</p>
-          <p className="text-green-300 text-sm mt-2">Matland Singel & Stein - Forhandler av Skjold Singel & Stein</p>
+          <p>&copy; {new Date().getFullYear()} Matland Gard. Alle rettigheter reservert.</p>
+          <p className="text-[var(--color-secondary)] text-sm mt-2">Matland Singel & Stein - Forhandler av Skjold Singel & Stein</p>
         </div>
       </footer>
     </div>

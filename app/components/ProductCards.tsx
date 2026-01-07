@@ -47,7 +47,7 @@ export default function ProductCards({ products }: ProductCardsProps) {
             
             <div className="p-6">
               <Link href={`/singel/${product.id}`}>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2 hover:text-green-700 transition-colors cursor-pointer">
+                <h3 className="text-xl font-semibold text-gray-900 mb-2 hover:text-[var(--color-primary)] transition-colors cursor-pointer">
                   {product.name}
                 </h3>
               </Link>
@@ -57,7 +57,7 @@ export default function ProductCards({ products }: ProductCardsProps) {
               )}
               
               <div className="mb-4">
-                <span className="text-2xl font-bold text-green-700">
+                <span className="text-2xl font-bold text-[var(--color-primary)]">
                   {Math.round(product.price / 100)} kr
                 </span>
                 <span className="text-gray-500 text-sm ml-2">inkl. mva.</span>
@@ -73,7 +73,7 @@ export default function ProductCards({ products }: ProductCardsProps) {
               {/* Call to Action */}
               <Link 
                 href={`/singel/${product.id}`}
-                className="block w-full bg-green-700 text-white px-6 py-3 rounded-lg hover:bg-green-800 transition-colors font-semibold text-center"
+                className="block w-full bg-[var(--color-primary)] text-white px-6 py-3 rounded-lg hover:bg-[var(--color-dark)] transition-colors font-semibold text-center"
               >
                 Se produkt
               </Link>

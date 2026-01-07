@@ -44,24 +44,15 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-green-800 text-white py-8">
-        <div className="container mx-auto px-4">
-          <Link href="/">
-            <h1 className="text-4xl font-bold hover:text-green-200 transition-colors cursor-pointer">
-              Matland Gård
-            </h1>
-          </Link>
-          <p className="text-green-100 mt-2">Stein • Camping • Arrangement</p>
-        </div>
+      <header className="bg-[var(--color-dark)] text-white">
+        <Navigation />
       </header>
-
-      <Navigation />
 
       <main className="container mx-auto px-4 py-12">
         <div className="max-w-3xl mx-auto">
           {/* Success Message */}
-          <div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-8 text-center">
-            <svg className="w-16 h-16 text-green-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="bg-[var(--color-accent)]/20 border border-[var(--color-primary)] rounded-lg p-6 mb-8 text-center">
+            <svg className="w-16 h-16 text-[var(--color-primary)] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
@@ -115,7 +106,7 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
             {/* Total */}
             <div className="flex justify-between items-center text-xl">
               <span className="font-bold text-gray-900">Totalt</span>
-              <span className="font-bold text-green-700">
+              <span className="font-bold text-[var(--color-primary)]">
                 {(order.totalAmount / 100).toFixed(0)} kr
               </span>
             </div>
@@ -149,7 +140,7 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
               href="/singel"
-              className="flex-1 bg-green-700 text-white text-center px-6 py-3 rounded-lg hover:bg-green-800 transition-colors font-semibold"
+              className="flex-1 bg-[var(--color-primary)] text-white text-center px-6 py-3 rounded-lg hover:bg-[var(--color-dark)] transition-colors font-semibold">
             >
               Se flere produkter
             </Link>
@@ -165,11 +156,11 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
           <div className="mt-8 text-center text-gray-600">
             <p>Spørsmål om din bestilling?</p>
             <p className="mt-2">
-              <a href="tel:+4795458563" className="text-green-700 hover:underline font-semibold">
+              <a href="tel:+4795458563" className="text-[var(--color-primary)] hover:underline font-semibold">
                 +47 954 58 563
               </a>
               {' eller '}
-              <a href="mailto:matlandgard@gmail.com" className="text-green-700 hover:underline font-semibold">
+              <a href="mailto:matlandgard@gmail.com" className="text-[var(--color-primary)] hover:underline font-semibold">
                 matlandgard@gmail.com
               </a>
             </p>
@@ -177,9 +168,9 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
         </div>
       </main>
 
-      <footer className="bg-green-900 text-white py-8 mt-16">
+      <footer className="bg-[var(--color-dark)] text-white py-8 mt-16">
         <div className="container mx-auto px-4 text-center">
-          <p>&copy; {new Date().getFullYear()} Matland Gård. Alle rettigheter reservert.</p>
+          <p>&copy; {new Date().getFullYear()} Matland Gard. Alle rettigheter reservert.</p>
         </div>
       </footer>
     </div>

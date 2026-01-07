@@ -103,12 +103,12 @@ export default function ProductPageClient({ product }: { product: Product }) {
         <div className="flex items-baseline mb-2">
           {requiresSize && !selectedSize && priceRange ? (
             <>
-              <span className="text-3xl font-bold text-green-700">
+              <span className="text-3xl font-bold text-[var(--color-primary)]">
                 {(priceRange.min / 100).toFixed(0)} - {(priceRange.max / 100).toFixed(0)} kr
               </span>
             </>
           ) : (
-            <span className="text-3xl font-bold text-green-700">
+            <span className="text-3xl font-bold text-[var(--color-primary)]">
               {(currentPrice / 100).toFixed(0)} kr
             </span>
           )}
@@ -133,8 +133,8 @@ export default function ProductPageClient({ product }: { product: Product }) {
                 onClick={() => setSelectedSize(size)}
                 className={`py-3 px-4 rounded-lg border-2 font-medium transition-all cursor-pointer ${
                   selectedSize === size
-                    ? 'border-green-600 bg-green-50 text-green-700'
-                    : 'border-gray-300 hover:border-green-400 text-gray-700'
+                    ? 'border-[var(--color-primary)] bg-[var(--color-accent)]/20 text-[var(--color-dark)]'
+                    : 'border-gray-300 hover:border-[var(--color-primary)] text-gray-700'
                 }`}
               >
                 <div className="text-sm font-semibold">{size}</div>
@@ -147,7 +147,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
       <div className="space-y-3">
         <button 
           onClick={handleAddToCart}
-          className="w-full bg-green-600 text-white px-6 py-4 rounded-lg hover:bg-green-700 transition-colors font-semibold flex items-center justify-center text-lg cursor-pointer"
+          className="w-full bg-[var(--color-primary)] text-white px-6 py-4 rounded-lg hover:bg-[var(--color-dark)] transition-colors font-semibold flex items-center justify-center text-lg cursor-pointer"
         >
           <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -157,7 +157,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
         
         <button 
           onClick={handleQuickCheckout}
-          className="w-full bg-blue-600 text-white px-6 py-4 rounded-lg hover:bg-blue-700 transition-colors font-semibold flex items-center justify-center text-lg cursor-pointer"
+          className="w-full bg-[var(--color-accent)] text-white px-6 py-4 rounded-lg hover:bg-[var(--color-dark)] transition-colors font-semibold flex items-center justify-center text-lg cursor-pointer"
         >
           <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
