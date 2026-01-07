@@ -28,15 +28,6 @@ export default async function SingelPage() {
 
       {/* Content */}
       <main className="container mx-auto px-4 py-12">
-        {/* Info Banner */}
-        <div className="bg-gradient-to-r from-[var(--color-dark)] to-[var(--color-primary)] text-white rounded-lg p-8 mb-12">
-          <h2 className="text-4xl font-bold mb-4">Matland Singel & Stein</h2>
-          <p className="text-xl mb-2">Forhandler av Skjold Singel & Stein</p>
-          <p className="text-gray-300">
-            Vi leverer herregårdssingel, pukk, matjord og andre steinprodukter av høyeste kvalitet direkte til deg i Vestland.
-          </p>
-        </div>
-
         <SingelPageClient products={products} />
 
         {/* Info Section */}

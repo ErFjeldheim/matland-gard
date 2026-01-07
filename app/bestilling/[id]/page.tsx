@@ -141,7 +141,6 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
             <Link
               href="/singel"
               className="flex-1 bg-[var(--color-primary)] text-white text-center px-6 py-3 rounded-lg hover:bg-[var(--color-dark)] transition-colors font-semibold">
-            >
               Se flere produkter
             </Link>
             <Link
