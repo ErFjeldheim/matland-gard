@@ -26,13 +26,20 @@ jobs:
           # Pull latest changes
           git pull origin main
           
-          # Rebuild and restart Docker containers
+          # Stop and remove containers
           docker compose down
-          docker compose build --no-cache
+          
+          # Prune build cache to ensure fresh build
+          docker builder prune -f
+          
+          # Remove old images to force complete rebuild
+          docker compose build --no-cache --pull
+          
+          # Start containers
           docker compose up -d
           
           # Wait for services to be ready
-          sleep 5
+          sleep 10
           
           # Check if containers are running
           docker compose ps
