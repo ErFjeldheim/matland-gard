@@ -11,7 +11,7 @@ echo "🔄 Exporting data from production..."
 ssh $PROD_SERVER "cd $PROD_PATH && docker compose exec -T db pg_dump -U matland_user matland_store" > $DUMP_FILE
 
 echo "📥 Import to local development database..."
-docker compose -f docker-compose.dev.yml exec -T db psql -U matland_user -d matland_store < $DUMP_FILE
+sudo docker compose -f docker-compose.dev.yml exec -T db psql -U matland_user -d matland_store < $DUMP_FILE
 
 echo "🧹 Cleaning up dump file..."
 rm $DUMP_FILE
