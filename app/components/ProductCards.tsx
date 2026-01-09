@@ -57,11 +57,13 @@ export default function ProductCards({ products }: ProductCardsProps) {
               )}
               
               <div className="mb-4">
-                <span className="text-2xl font-bold text-[var(--color-primary)]">
-                  {Math.round(product.price / 100)} kr
-                </span>
-                <span className="text-gray-500 text-sm ml-2">inkl. mva.</span>
-                <p className="text-gray-600 text-sm mt-1">
+                <div>
+                  <span className="text-2xl font-bold text-[var(--color-primary)]">
+                    {Math.round(product.price / 100)} kr
+                  </span>
+                  <span className="text-gray-500 text-sm">inkl. mva.</span>
+                </div>
+                <p className="text-gray-600 text-sm">
                   {product.name.toLowerCase().includes('grus') 
                     ? 'per tonn' 
                     : product.name.toLowerCase().includes('matte')
