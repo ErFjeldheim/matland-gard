@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F3F4F4;
+  --foreground: #061E29;
   
   /* Matland Gard Color Palette */
-  --color-primary: #499fa4;      /* Teal */
-  --color-secondary: #bec6c3;    /* Slate */
-  --color-accent: #e9bc8b;       /* Tangerine */
-  --color-dark: #3d4a55;         /* Charcoal */
+  --color-primary: #1D546D;
+  --color-secondary: #5F9598;
+  --color-accent: #5F9598;
+  --color-dark: #061E29;
 }
 
 @theme inline {

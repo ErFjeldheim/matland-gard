@@ -70,14 +70,14 @@ export default function CheckoutModal({ product, isOpen, onClose }: CheckoutModa
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
+    <div className="bg-[var(--color-dark)] fixed inset-0 bg-opacity-50 flex items-center justify-center p-4 z-50">
+      <div className="bg-[var(--foreground)] rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-2xl font-bold text-gray-900">Bestill {product.name}</h2>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600"
+              className="text-gray-400 hover:text-gray-600 cursor-pointer"
               disabled={loading}
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -96,7 +96,7 @@ export default function CheckoutModal({ product, isOpen, onClose }: CheckoutModa
                 <button
                   type="button"
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="bg-gray-200 text-gray-900 px-4 py-2 rounded-lg hover:bg-gray-300 font-bold"
+                  className="bg-gray-200 text-gray-900 px-4 py-2 rounded-lg hover:bg-gray-300 font-bold cursor-pointer"
                   disabled={loading}
                 >
                   -
@@ -105,7 +105,7 @@ export default function CheckoutModal({ product, isOpen, onClose }: CheckoutModa
                 <button
                   type="button"
                   onClick={() => setQuantity(quantity + 1)}
-                  className="bg-gray-200 text-gray-900 px-4 py-2 rounded-lg hover:bg-gray-300 font-bold"
+                  className="bg-gray-200 text-gray-900 px-4 py-2 rounded-lg hover:bg-gray-300 font-bold cursor-pointer"
                   disabled={loading}
                 >
                   +

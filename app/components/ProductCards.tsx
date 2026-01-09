@@ -25,7 +25,7 @@ export default function ProductCards({ products }: ProductCardsProps) {
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {products.map((product) => (
-          <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow flex flex-col">
             <Link href={`/singel/${product.id}`}>
               {product.image ? (
                 <div className="relative h-64 bg-gray-200 cursor-pointer">
@@ -45,7 +45,7 @@ export default function ProductCards({ products }: ProductCardsProps) {
               )}
             </Link>
             
-            <div className="p-6">
+            <div className="p-6 flex flex-col flex-grow">
               <Link href={`/singel/${product.id}`}>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2 hover:text-[var(--color-primary)] transition-colors cursor-pointer">
                   {product.name}
@@ -56,12 +56,12 @@ export default function ProductCards({ products }: ProductCardsProps) {
                 <p className="text-gray-600 mb-4">{product.description}</p>
               )}
               
-              <div className="mb-4">
+              <div className="mb-4 mt-auto">
                 <div>
                   <span className="text-2xl font-bold text-[var(--color-primary)]">
                     {Math.round(product.price / 100)} kr
                   </span>
-                  <span className="text-gray-500 text-sm">inkl. mva.</span>
+                  <span className="text-gray-500 text-sm ml-1">inkl. mva.</span>
                 </div>
                 <p className="text-gray-600 text-sm">
                   {product.name.toLowerCase().includes('grus') 
