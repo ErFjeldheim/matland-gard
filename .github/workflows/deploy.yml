@@ -34,6 +34,10 @@ jobs:
           docker system prune -f
           docker builder prune -f
           
+          # Remove old images completely to prevent cache issues
+          docker compose rm -f
+          docker rmi -f matland-gard-app 2>/dev/null || true
+          
           # Build with no cache to ensure all changes are included
           docker compose build --no-cache --pull
           
