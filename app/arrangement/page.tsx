@@ -160,7 +160,7 @@ export default function ArrangementPage() {
               <label className="block text-gray-700 font-medium mb-2">Navn *</label>
               <input 
                 type="text" 
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent bg-white text-gray-900"
                 required
               />
             </div>
@@ -169,7 +169,7 @@ export default function ArrangementPage() {
               <label className="block text-gray-700 font-medium mb-2">Telefon *</label>
               <input 
                 type="tel" 
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent bg-white text-gray-700"
                 required
               />
             </div>
@@ -178,14 +178,14 @@ export default function ArrangementPage() {
               <label className="block text-gray-700 font-medium mb-2">E-post *</label>
               <input 
                 type="email" 
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent bg-white text-gray-700"
                 required
               />
             </div>
 
             <div>
               <label className="block text-gray-700 font-medium mb-2">Type arrangement</label>
-              <select className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent">
+              <select className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent bg-white text-gray-700">
                 <option>Bryllup</option>
                 <option>Konfirmasjon</option>
                 <option>Bursdag</option>
@@ -198,7 +198,7 @@ export default function ArrangementPage() {
               <label className="block text-gray-700 font-medium mb-2">Dato</label>
               <input 
                 type="date" 
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent bg-white text-gray-700"
               />
             </div>
 
@@ -206,7 +206,7 @@ export default function ArrangementPage() {
               <label className="block text-gray-700 font-medium mb-2">Antall gjester</label>
               <input 
                 type="number" 
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent placeholder:text-gray-500 bg-white text-gray-900"
                 placeholder="ca. antall"
               />
             </div>
@@ -215,7 +215,7 @@ export default function ArrangementPage() {
               <label className="block text-gray-700 font-medium mb-2">Melding</label>
               <textarea 
                 rows={4}
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent placeholder:text-gray-500 bg-white text-gray-900"
                 placeholder="Fortell oss litt om arrangementet ditt..."
               ></textarea>
             </div>

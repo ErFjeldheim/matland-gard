@@ -25,14 +25,14 @@ export default function HomePage() {
           {/* Singel & Stein */}
           <Link href="/singel">
             <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all transform hover:-translate-y-2 cursor-pointer">
-              <div className="relative h-64 bg-gray-900">
+              <div className="relative h-64 bg-[var(--color-dark)]">
                 <Image
                   src="/images/products/Herregårdssingel/bilde-1.jpg"
                   alt="Herregårdssingel"
                   fill
                   className="object-cover opacity-90 hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent flex items-end justify-center pb-6">
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-dark)]/80 to-transparent flex items-end justify-center pb-6">
                   <h3 className="text-2xl font-bold text-white">Singel & Stein</h3>
                 </div>
               </div>
@@ -40,7 +40,7 @@ export default function HomePage() {
                 <h3 className="text-2xl font-bold text-gray-900 mb-3">Matland Singel & Stein</h3>
                 <p className="text-gray-600 mb-4">
                   Forhandler av Skjold Singel & Stein. Vi leverer herregårdssingel, pukk, 
-                  matjord og andre steinprodukter av høyeste kvalitet.
+                  andre steinprodukter.
                 </p>
                 <div className="text-[var(--color-primary)] font-semibold flex items-center">
                   Se produkter og priser
@@ -58,7 +58,7 @@ export default function HomePage() {
               <div className="relative h-64 bg-[var(--color-dark)]">
                 <Image
                   src="/images/camping/campingbil.jpg"
-                  alt="Matland Fjord Camping"
+                  alt="Matland Fjordcamp"
                   fill
                   className="object-cover opacity-90 hover:scale-105 transition-transform duration-500"
                 />
@@ -67,7 +67,7 @@ export default function HomePage() {
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">Matland Fjord Camping</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Matland Fjordcamp</h3>
                 <p className="text-gray-600 mb-4">
                   Opplev naturen ved fjorden. Book din campingplass eller hytte 
                   for en uforglemmelig opplevelse.
