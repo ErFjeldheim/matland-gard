@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import Navigation from '@/app/components/Navigation';
+import Footer from '@/app/components/Footer';
 import Link from 'next/link';
 import SingelPageClient from './SingelPageClient';
 
@@ -67,12 +68,7 @@ export default async function SingelPage() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-[var(--color-dark)] text-white py-8 mt-16">
-        <div className="container mx-auto px-4 text-center">
-          <p>&copy; {new Date().getFullYear()} Matland Gard. Alle rettigheter reservert.</p>
-          <p className="text-[var(--color-secondary)] text-sm mt-2">Matland Singel & Stein - Forhandler av Skjold Singel & Stein</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

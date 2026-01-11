@@ -5,7 +5,9 @@ const prisma = new PrismaClient();
 async function main() {
   console.log('Seeding production data...');
 
-  // Clear existing data
+  // Clear existing data - delete orders first due to foreign key constraints
+  await prisma.orderItem.deleteMany({});
+  await prisma.order.deleteMany({});
   await prisma.product.deleteMany({});
 
   // Insert products with exact production data

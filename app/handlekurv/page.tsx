@@ -163,6 +163,7 @@ export default function HandlekurvPage() {
             name: `${items.length} produkt${items.length > 1 ? 'er' : ''}`,
             price: totalPrice,
           }}
+          cartItems={items}
           onClose={() => setIsCheckoutOpen(false)}
         />
       )}

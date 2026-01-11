@@ -1,12 +1,20 @@
 import { prisma } from '@/lib/prisma';
 import Navigation from '../../components/Navigation';
+import Footer from '../../components/Footer';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 export const dynamic = 'force-dynamic';
 
-export default async function OrderPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function OrderPage({ 
+  params,
+  searchParams 
+}: { 
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ success?: string }>;
+}) {
   const { id } = await params;
+  const { success } = await searchParams;
   
   const order = await prisma.order.findUnique({
     where: { id },
@@ -21,6 +29,28 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
 
   if (!order) {
     notFound();
+  }
+
+  // If coming from successful Stripe payment, mark order as paid
+  if (success === 'true' && order.status === 'pending' && order.paymentMethod === 'stripe') {
+    await prisma.order.update({
+      where: { id },
+      data: { status: 'paid' },
+    });
+    // Refresh the order data
+    const updatedOrder = await prisma.order.findUnique({
+      where: { id },
+      include: {
+        orderItems: {
+          include: {
+            product: true,
+          },
+        },
+      },
+    });
+    if (updatedOrder) {
+      Object.assign(order, updatedOrder);
+    }
   }
 
   const statusTexts: Record<string, string> = {
@@ -79,6 +109,14 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
                 <p><span className="font-medium">Navn:</span> {order.customerName}</p>
                 <p><span className="font-medium">E-post:</span> {order.customerEmail}</p>
                 <p><span className="font-medium">Telefon:</span> {order.customerPhone}</p>
+                {order.shippingMethod && (
+                  <p>
+                    <span className="font-medium">Levering:</span>{' '}
+                    {order.shippingMethod === 'pickup' 
+                      ? 'Henting i Holmefjord' 
+                      : 'Vi sender tilbud på frakt'}
+                  </p>
+                )}
                 {order.deliveryAddress && (
                   <p><span className="font-medium">Leveringsadresse:</span> {order.deliveryAddress}</p>
                 )}
@@ -131,8 +169,14 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
             <ol className="list-decimal list-inside space-y-2 text-blue-800">
               <li>Vi behandler din bestilling</li>
               <li>Du mottar en e-postbekreftelse</li>
-              <li>Vi kontakter deg for å avtale levering/henting</li>
-              <li>Du kan hente gratis i Holmefjord eller få levering mot gebyr</li>
+              {order.shippingMethod === 'pickup' ? (
+                <li>Vi kontakter deg for å avtale dato for henting i Holmefjord</li>
+              ) : (
+                <>
+                  <li>Vi kontakter deg med pristilbud på frakt</li>
+                  <li>Etter godkjenning arrangerer vi levering</li>
+                </>
+              )}
             </ol>
           </div>
 
@@ -167,11 +211,7 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
         </div>
       </main>
 
-      <footer className="bg-[var(--color-dark)] text-white py-8 mt-16">
-        <div className="container mx-auto px-4 text-center">
-          <p>&copy; {new Date().getFullYear()} Matland Gard. Alle rettigheter reservert.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

@@ -24,7 +24,7 @@ async function main() {
       description: 'Eksklusiv singel med unik farge',
       longDescription: 'Herregårdssingel er en eksklusiv singel med unik farge og struktur. Perfekt til innkjørsler, stier og som dekorativt dekke. Leveres i tre størrelser.',
       price: 162500, // 1625 kr
-      image: '/images/products/herregaardssingel.jpg',
+      image: '/images/products/Herregårdssingel/bilde-1.jpg',
       images: [
         '/images/products/Herregårdssingel/beskrivelse-bilde-1.jpg',
         '/images/products/Herregårdssingel/bilde-1.jpg',
@@ -42,38 +42,38 @@ async function main() {
     },
     {
       id: '550e8400-e29b-41d4-a716-446655440002',
-      name: 'Kirkegårdssingel',
-      description: 'Klassisk hvit singel',
-      price: 200000, // 2000 kr
-      image: '/images/products/kirkegaardssingel.jpg',
+      name: 'Grus',
+      description: 'Grus til fundamenter og drenering',
+      price: 49900, // 499 kr
+      image: '/images/products/Pukk og grus/grus-hauger.jpg',
     },
     {
       id: '550e8400-e29b-41d4-a716-446655440003',
       name: 'Elvestein',
       description: 'Naturlig rundslipte steiner',
       price: 200000, // 2000 kr
-      image: '/images/products/elvestein-hauger.jpg',
+      image: '/images/products/Elvestein/elvestein-hauger.jpg',
     },
     {
       id: '550e8400-e29b-41d4-a716-446655440004',
-      name: 'Grus 0-16mm',
-      description: 'Fin grus til fundamenter',
-      price: 49900, // 499 kr
-      image: '/images/products/grus-hauger.jpg',
+      name: 'Sand',
+      description: 'Ren sand til lekeplass og bygg',
+      price: 175000, // 1750 kr
+      image: '/images/products/Sand/sand-lekelastebil.jpg',
     },
     {
       id: '550e8400-e29b-41d4-a716-446655440005',
-      name: 'Grus 0-32mm',
-      description: 'Grov grus til drenering',
-      price: 49900, // 499 kr
-      image: '/images/products/grus-hauger.jpg',
+      name: 'Kirkegårdssingel',
+      description: 'Klassisk hvit singel',
+      price: 200000, // 2000 kr
+      image: '/images/products/Kirkegårdssingel/kirkegaardssingel.jpg',
     },
     {
       id: '550e8400-e29b-41d4-a716-446655440006',
-      name: 'Sand',
-      description: 'Ren sand til lekeplass',
-      price: 175000, // 1750 kr
-      image: '/images/products/sand-lekelastebil.jpg',
+      name: 'Singelmatter ECCOgravel',
+      description: 'Praktiske singelmatter for enkel legging',
+      price: 89900, // 899 kr
+      image: '/images/products/Singelmatter ECCOgravel/singelmatter.jpg',
     },
   ];
 

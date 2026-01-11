@@ -9,26 +9,93 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { productId, quantity, customerName, customerEmail, customerPhone, deliveryAddress } = body;
+    const { productId, quantity, cartItems, customerName, customerEmail, customerPhone, deliveryAddress, shippingMethod } = body;
 
     // Validate input
-    if (!productId || !quantity || !customerName || !customerEmail || !customerPhone) {
+    if (!customerName || !customerEmail || !customerPhone) {
       return NextResponse.json(
-        { error: 'Mangler påkrevd informasjon' },
+        { error: 'Mangler påkrevd kundeinformasjon' },
         { status: 400 }
       );
     }
 
-    // Get product
-    const product = await prisma.product.findUnique({
-      where: { id: productId },
-    });
-
-    if (!product) {
-      return NextResponse.json({ error: 'Produkt ikke funnet' }, { status: 404 });
+    if (!shippingMethod) {
+      return NextResponse.json(
+        { error: 'Mangler leveringsalternativ' },
+        { status: 400 }
+      );
     }
 
-    const totalAmount = product.price * quantity;
+    let totalAmount = 0;
+    let orderItemsData: Array<{ productId: string; quantity: number; price: number }> = [];
+    let stripeLineItems: Array<any> = [];
+
+    // Handle cart checkout vs single product checkout
+    if (cartItems && Array.isArray(cartItems) && cartItems.length > 0) {
+      // Cart checkout: create order items from cart
+      for (const item of cartItems) {
+        const product = await prisma.product.findUnique({
+          where: { id: item.productId },
+        });
+
+        if (!product) {
+          return NextResponse.json(
+            { error: `Produkt ikke funnet: ${item.productId}` },
+            { status: 404 }
+          );
+        }
+
+        totalAmount += product.price * item.quantity;
+        orderItemsData.push({
+          productId: product.id,
+          quantity: item.quantity,
+          price: product.price,
+        });
+        stripeLineItems.push({
+          price_data: {
+            currency: 'nok',
+            product_data: {
+              name: product.name,
+              description: product.description || undefined,
+            },
+            unit_amount: product.price,
+          },
+          quantity: item.quantity,
+        });
+      }
+    } else if (productId && quantity) {
+      // Single product checkout
+      const product = await prisma.product.findUnique({
+        where: { id: productId },
+      });
+
+      if (!product) {
+        return NextResponse.json({ error: 'Produkt ikke funnet' }, { status: 404 });
+      }
+
+      totalAmount = product.price * quantity;
+      orderItemsData.push({
+        productId: product.id,
+        quantity,
+        price: product.price,
+      });
+      stripeLineItems.push({
+        price_data: {
+          currency: 'nok',
+          product_data: {
+            name: product.name,
+            description: product.description || undefined,
+          },
+          unit_amount: product.price,
+        },
+        quantity,
+      });
+    } else {
+      return NextResponse.json(
+        { error: 'Mangler produkt eller handlekurv informasjon' },
+        { status: 400 }
+      );
+    }
 
     // Create order in database
     const order = await prisma.order.create({
@@ -40,12 +107,9 @@ export async function POST(request: NextRequest) {
         totalAmount,
         status: 'pending',
         paymentMethod: 'stripe',
+        shippingMethod,
         orderItems: {
-          create: [{
-            productId,
-            quantity,
-            price: product.price,
-          }],
+          create: orderItemsData,
         },
       },
       include: {
@@ -60,19 +124,7 @@ export async function POST(request: NextRequest) {
     // Create Stripe checkout session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
-      line_items: [
-        {
-          price_data: {
-            currency: 'nok',
-            product_data: {
-              name: product.name,
-              description: product.description || undefined,
-            },
-            unit_amount: product.price,
-          },
-          quantity,
-        },
-      ],
+      line_items: stripeLineItems,
       mode: 'payment',
       success_url: `${process.env.NEXT_PUBLIC_URL}/bestilling/${order.id}?success=true`,
       cancel_url: `${process.env.NEXT_PUBLIC_URL}/singel?cancelled=true`,

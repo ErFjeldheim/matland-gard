@@ -2,6 +2,15 @@
 
 import { useState } from 'react';
 
+interface CartItem {
+  productId: string;
+  productName: string;
+  price: number;
+  quantity: number;
+  size?: string;
+  image?: string;
+}
+
 interface CheckoutModalProps {
   product: {
     id: string;
@@ -10,12 +19,14 @@ interface CheckoutModalProps {
   };
   isOpen: boolean;
   onClose: () => void;
+  cartItems?: CartItem[]; // Optional: if provided, we're checking out the entire cart
 }
 
-export default function CheckoutModal({ product, isOpen, onClose }: CheckoutModalProps) {
+export default function CheckoutModal({ product, isOpen, onClose, cartItems }: CheckoutModalProps) {
   const [loading, setLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [paymentMethod, setPaymentMethod] = useState<'vipps' | 'stripe' | null>(null);
+  const [shippingMethod, setShippingMethod] = useState<'shipping_quote' | 'pickup' | null>(null);
   const [formData, setFormData] = useState({
     customerName: '',
     customerEmail: '',
@@ -25,10 +36,16 @@ export default function CheckoutModal({ product, isOpen, onClose }: CheckoutModa
 
   if (!isOpen) return null;
 
-  const totalAmount = (product.price * quantity) / 100;
+  const isCartCheckout = cartItems && cartItems.length > 0;
+  const totalAmount = isCartCheckout ? product.price / 100 : (product.price * quantity) / 100;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!shippingMethod) {
+      alert('Vennligst velg leveringsalternativ');
+      return;
+    }
     
     if (!paymentMethod) {
       alert('Vennligst velg betalingsmetode');
@@ -38,14 +55,27 @@ export default function CheckoutModal({ product, isOpen, onClose }: CheckoutModa
     setLoading(true);
 
     try {
+      const requestBody = isCartCheckout
+        ? {
+            cartItems: cartItems.map(item => ({
+              productId: item.productId,
+              quantity: item.quantity,
+              size: item.size,
+            })),
+            ...formData,
+            shippingMethod,
+          }
+        : {
+            productId: product.id,
+            quantity,
+            ...formData,
+            shippingMethod,
+          };
+
       const response = await fetch(`/api/checkout/${paymentMethod}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          productId: product.id,
-          quantity,
-          ...formData,
-        }),
+        body: JSON.stringify(requestBody),
       });
 
       const data = await response.json();
@@ -87,31 +117,57 @@ export default function CheckoutModal({ product, isOpen, onClose }: CheckoutModa
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Quantity */}
-            <div>
-              <label className="block text-gray-700 font-medium mb-2">
-                Antall {product.name.toLowerCase().includes('grus') ? '(tonn)' : '(storsekker)'}
-              </label>
-              <div className="flex items-center gap-4">
-                <button
-                  type="button"
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="bg-gray-200 text-gray-900 px-4 py-2 rounded-lg hover:bg-gray-300 font-bold cursor-pointer"
-                  disabled={loading}
-                >
-                  -
-                </button>
-                <span className="text-xl font-bold w-12 text-center text-gray-900">{quantity}</span>
-                <button
-                  type="button"
-                  onClick={() => setQuantity(quantity + 1)}
-                  className="bg-gray-200 text-gray-900 px-4 py-2 rounded-lg hover:bg-gray-300 font-bold cursor-pointer"
-                  disabled={loading}
-                >
-                  +
-                </button>
+            {/* Cart Items Summary or Quantity Selector */}
+            {isCartCheckout ? (
+              <div>
+                <label className="block text-gray-700 font-medium mb-2">
+                  Vareoppsummering
+                </label>
+                <div className="bg-gray-50 rounded-lg p-4 space-y-2 max-h-48 overflow-y-auto">
+                  {cartItems.map((item, index) => (
+                    <div key={`${item.productId}-${item.size || 'default'}-${index}`} className="flex justify-between items-center text-sm">
+                      <div className="flex-1">
+                        <span className="font-medium text-gray-900">{item.productName}</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span className="text-gray-600">×{item.quantity}</span>
+                        <span className="font-semibold text-gray-900 min-w-[70px] text-right">
+                          {((item.price * item.quantity) / 100).toFixed(0)} kr
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-xs text-gray-500 mt-2">
+                  For å endre antall eller fjerne varer, gå tilbake til handlekurven
+                </p>
               </div>
-            </div>
+            ) : (
+              <div>
+                <label className="block text-gray-700 font-medium mb-2">
+                  Antall {product.name.toLowerCase().includes('grus') ? '(tonn)' : '(storsekker)'}
+                </label>
+                <div className="flex items-center gap-4">
+                  <button
+                    type="button"
+                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    className="bg-gray-200 text-gray-900 px-4 py-2 rounded-lg hover:bg-gray-300 font-bold cursor-pointer"
+                    disabled={loading}
+                  >
+                    -
+                  </button>
+                  <span className="text-xl font-bold w-12 text-center text-gray-900">{quantity}</span>
+                  <button
+                    type="button"
+                    onClick={() => setQuantity(quantity + 1)}
+                    className="bg-gray-200 text-gray-900 px-4 py-2 rounded-lg hover:bg-gray-300 font-bold cursor-pointer"
+                    disabled={loading}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            )}
 
             {/* Customer Info */}
             <div>
@@ -153,19 +209,85 @@ export default function CheckoutModal({ product, isOpen, onClose }: CheckoutModa
               />
             </div>
 
+            {/* Shipping Method Selection */}
             <div>
-              <label className="block text-gray-700 font-medium mb-2">
-                Leveringsadresse (valgfritt)
-              </label>
-              <textarea
-                rows={2}
-                value={formData.deliveryAddress}
-                onChange={(e) => setFormData({ ...formData, deliveryAddress: e.target.value })}
-                className="w-full bg-white text-gray-900 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
-                placeholder="La stå tom for henting i Holmefjord"
-                disabled={loading}
-              />
+              <label className="block text-gray-700 font-medium mb-3">Velg leveringsalternativ *</label>
+              <div className="space-y-3">
+                <button
+                  type="button"
+                  onClick={() => setShippingMethod('shipping_quote')}
+                  className={`w-full py-4 px-4 rounded-lg border-2 font-medium transition-all cursor-pointer text-left ${
+                    shippingMethod === 'shipping_quote'
+                      ? 'border-[var(--color-primary)] bg-[var(--color-accent)]/20 text-[var(--color-dark)]'
+                      : 'border-gray-300 hover:border-[var(--color-primary)] text-gray-700'
+                  }`}
+                  disabled={loading}
+                >
+                  <div className="flex items-start gap-3">
+                    <div className={`w-5 h-5 rounded-full border-2 mt-0.5 flex-shrink-0 flex items-center justify-center ${
+                      shippingMethod === 'shipping_quote'
+                        ? 'border-[var(--color-primary)] bg-[var(--color-primary)]'
+                        : 'border-gray-400'
+                    }`}>
+                      {shippingMethod === 'shipping_quote' && (
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                      )}
+                    </div>
+                    <div className="flex-1">
+                      <div className="font-semibold">Send meg tilbud på frakt</div>
+                      <div className="text-sm text-gray-600 mt-1">Vi kontakter deg med pristilbud på levering</div>
+                      <div className="text-sm font-semibold text-green-600 mt-1">Gratis</div>
+                    </div>
+                  </div>
+                </button>
+                
+                <button
+                  type="button"
+                  onClick={() => setShippingMethod('pickup')}
+                  className={`w-full py-4 px-4 rounded-lg border-2 font-medium transition-all cursor-pointer text-left ${
+                    shippingMethod === 'pickup'
+                      ? 'border-[var(--color-primary)] bg-[var(--color-accent)]/20 text-[var(--color-dark)]'
+                      : 'border-gray-300 hover:border-[var(--color-primary)] text-gray-700'
+                  }`}
+                  disabled={loading}
+                >
+                  <div className="flex items-start gap-3">
+                    <div className={`w-5 h-5 rounded-full border-2 mt-0.5 flex-shrink-0 flex items-center justify-center ${
+                      shippingMethod === 'pickup'
+                        ? 'border-[var(--color-primary)] bg-[var(--color-primary)]'
+                        : 'border-gray-400'
+                    }`}>
+                      {shippingMethod === 'pickup' && (
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                      )}
+                    </div>
+                    <div className="flex-1">
+                      <div className="font-semibold">Hent hos oss i Holmefjord</div>
+                      <div className="text-sm text-gray-600 mt-1">Vi kontakter deg for å avtale dato</div>
+                      <div className="text-sm font-semibold text-green-600 mt-1">Gratis</div>
+                    </div>
+                  </div>
+                </button>
+              </div>
             </div>
+
+            {/* Delivery Address - Show only if shipping quote is selected */}
+            {shippingMethod === 'shipping_quote' && (
+              <div>
+                <label className="block text-gray-700 font-medium mb-2">
+                  Leveringsadresse *
+                </label>
+                <textarea
+                  rows={2}
+                  required
+                  value={formData.deliveryAddress}
+                  onChange={(e) => setFormData({ ...formData, deliveryAddress: e.target.value })}
+                  className="w-full bg-white text-gray-900 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
+                  placeholder="Skriv inn leveringsadressen"
+                  disabled={loading}
+                />
+              </div>
+            )}
 
             {/* Total */}
             <div className="border-t pt-4">
@@ -173,7 +295,7 @@ export default function CheckoutModal({ product, isOpen, onClose }: CheckoutModa
                 <span className="font-bold text-gray-900">Totalt:</span>
                 <span className="font-bold text-[var(--color-primary)]">{totalAmount.toFixed(0)} kr</span>
               </div>
-              <p className="text-sm text-gray-600 mt-1">eks. mva og levering</p>
+              <p className="text-sm text-gray-600 mt-1">inkl. mva.</p>
             </div>
 
             {/* Payment Method Selection */}
@@ -217,13 +339,15 @@ export default function CheckoutModal({ product, isOpen, onClose }: CheckoutModa
             {/* Submit */}
             <button
               type="submit"
-              disabled={loading || !paymentMethod}
+              disabled={loading || !paymentMethod || !shippingMethod}
               className={`w-full ${
-                !paymentMethod ? 'bg-gray-400' : paymentMethod === 'vipps' ? 'bg-[#FF5B24] hover:bg-[#E64E1B]' : 'bg-[var(--color-primary)] hover:bg-[var(--color-dark)]'
+                !paymentMethod || !shippingMethod ? 'bg-gray-400' : paymentMethod === 'vipps' ? 'bg-[#FF5B24] hover:bg-[#E64E1B]' : 'bg-[var(--color-primary)] hover:bg-[var(--color-dark)]'
               } text-white px-6 py-4 rounded-lg transition-colors font-semibold flex items-center justify-center text-lg cursor-pointer disabled:cursor-not-allowed`}
             >
               {loading ? (
                 'Behandler...'
+              ) : !shippingMethod ? (
+                'Velg leveringsalternativ'
               ) : !paymentMethod ? (
                 'Velg betalingsmetode'
               ) : (

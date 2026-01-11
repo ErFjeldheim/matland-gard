@@ -3,10 +3,20 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useCart } from '../context/CartContext';
+import { useEffect, useState } from 'react';
 
 export default function Navigation() {
   const { totalItems } = useCart();
   const pathname = usePathname();
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    // Check admin authentication status
+    fetch('/api/admin/check-auth')
+      .then(res => res.json())
+      .then(data => setIsAdmin(data.isAuthenticated))
+      .catch(() => setIsAdmin(false));
+  }, [pathname]);
   
   return (
     <nav className="bg-[var(--color-dark)]">
@@ -45,6 +55,24 @@ export default function Navigation() {
                 Arrangement
               </Link>
             </li>
+            <li>
+              <Link 
+                href="/kontakt" 
+                className="text-white hover:text-[var(--color-accent)] transition-colors font-medium"
+              >
+                Kontakt oss
+              </Link>
+            </li>
+            {isAdmin && (
+              <li>
+                <Link 
+                  href="/admin" 
+                  className="text-white hover:text-[var(--color-accent)] transition-colors font-medium"
+                >
+                  Kontrollpanel
+                </Link>
+              </li>
+            )}
           </ul>
           
           {/* Cart Icon - Only show on /singel page */}

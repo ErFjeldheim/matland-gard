@@ -4,26 +4,70 @@ import { prisma } from '@/lib/prisma';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { productId, quantity, customerName, customerEmail, customerPhone, deliveryAddress } = body;
+    const { productId, quantity, cartItems, customerName, customerEmail, customerPhone, deliveryAddress, shippingMethod } = body;
 
     // Validate input
-    if (!productId || !quantity || !customerName || !customerEmail || !customerPhone) {
+    if (!customerName || !customerEmail || !customerPhone) {
       return NextResponse.json(
-        { error: 'Mangler påkrevd informasjon' },
+        { error: 'Mangler påkrevd kundeinformasjon' },
         { status: 400 }
       );
     }
 
-    // Get product
-    const product = await prisma.product.findUnique({
-      where: { id: productId },
-    });
-
-    if (!product) {
-      return NextResponse.json({ error: 'Produkt ikke funnet' }, { status: 404 });
+    if (!shippingMethod) {
+      return NextResponse.json(
+        { error: 'Mangler leveringsalternativ' },
+        { status: 400 }
+      );
     }
 
-    const totalAmount = product.price * quantity;
+    let totalAmount = 0;
+    let orderItemsData: Array<{ productId: string; quantity: number; price: number }> = [];
+
+    // Handle cart checkout vs single product checkout
+    if (cartItems && Array.isArray(cartItems) && cartItems.length > 0) {
+      // Cart checkout: create order items from cart
+      for (const item of cartItems) {
+        const product = await prisma.product.findUnique({
+          where: { id: item.productId },
+        });
+
+        if (!product) {
+          return NextResponse.json(
+            { error: `Produkt ikke funnet: ${item.productId}` },
+            { status: 404 }
+          );
+        }
+
+        totalAmount += product.price * item.quantity;
+        orderItemsData.push({
+          productId: product.id,
+          quantity: item.quantity,
+          price: product.price,
+        });
+      }
+    } else if (productId && quantity) {
+      // Single product checkout
+      const product = await prisma.product.findUnique({
+        where: { id: productId },
+      });
+
+      if (!product) {
+        return NextResponse.json({ error: 'Produkt ikke funnet' }, { status: 404 });
+      }
+
+      totalAmount = product.price * quantity;
+      orderItemsData.push({
+        productId: product.id,
+        quantity,
+        price: product.price,
+      });
+    } else {
+      return NextResponse.json(
+        { error: 'Mangler produkt eller handlekurv informasjon' },
+        { status: 400 }
+      );
+    }
 
     // Create order in database
     const order = await prisma.order.create({
@@ -35,12 +79,9 @@ export async function POST(request: NextRequest) {
         totalAmount,
         status: 'pending',
         paymentMethod: 'vipps',
+        shippingMethod,
         orderItems: {
-          create: [{
-            productId,
-            quantity,
-            price: product.price,
-          }],
+          create: orderItemsData,
         },
       },
       include: {

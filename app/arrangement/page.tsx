@@ -1,4 +1,5 @@
 import Navigation from '../components/Navigation';
+import Footer from '../components/Footer';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -242,11 +243,7 @@ export default function ArrangementPage() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-[var(--color-dark)] text-white py-8 mt-16">
-        <div className="container mx-auto px-4 text-center">
-          <p>&copy; {new Date().getFullYear()} Matland Gard. Alle rettigheter reservert.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
