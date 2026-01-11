@@ -96,9 +96,20 @@ export async function POST(request: NextRequest) {
 
     // Send order confirmation emails
     try {
+      const orderEmailData = {
+        orderId: order.id,
+        customerName: order.customerName,
+        customerEmail: order.customerEmail,
+        customerPhone: order.customerPhone,
+        deliveryAddress: order.deliveryAddress,
+        totalAmount: order.totalAmount,
+        shippingMethod: order.shippingMethod,
+        orderItems: order.orderItems,
+      };
+      
       await Promise.all([
-        sendCustomerOrderConfirmation(order),
-        sendAdminOrderNotification(order),
+        sendCustomerOrderConfirmation(orderEmailData),
+        sendAdminOrderNotification(orderEmailData),
       ]);
     } catch (emailError) {
       console.error('Error sending order confirmation emails:', emailError);
