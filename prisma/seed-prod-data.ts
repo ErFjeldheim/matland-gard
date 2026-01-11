@@ -41,13 +41,13 @@ async function main() {
         description: 'Naturlig knust stein i ulike fraksjoner. Perfekt som fundamentering, drenering eller til veier.',
         longDescription: 'Vårt grus er naturlig knust stein som egner seg utmerket til en rekke formål. Produsert fra lokal naturstein og sortert i ulike fraksjoner for å møte dine behov. Ideelt til fundamentering, drenering, veier og anleggsverk. Gruset leveres i Big Bag à 1000 kg.',
         price: 59900,
-        image: '/images/products/Pukk og grus/Bilde 1.jpg',
+        image: '/images/products/Pukk og grus/bilde-1.jpg',
         images: [
-          '/images/products/Pukk og grus/Bilde 1.jpg',
-          '/images/products/Pukk og grus/Bilde 2.jpeg',
-          '/images/products/Pukk og grus/Bilde 3.jpg',
-          '/images/products/Pukk og grus/Bilde 4.jpg',
-          '/images/products/Pukk og grus/Bilde 5.jpg'
+          '/images/products/Pukk og grus/bilde-1.jpg',
+          '/images/products/Pukk og grus/bilde-2.jpeg',
+          '/images/products/Pukk og grus/bilde-3.jpg',
+          '/images/products/Pukk og grus/bilde-4.jpg',
+          '/images/products/Pukk og grus/bilde-5.jpg'
         ],
         videoUrl: null,
         createdAt: new Date('2026-01-06T21:56:50.963Z'),
@@ -59,11 +59,11 @@ async function main() {
         description: 'Naturlig rundslipte steiner',
         longDescription: null,
         price: 200000,
-        image: '/images/products/Elvestein/Bilde 1.jpeg',
+        image: '/images/products/Elvestein/bilde-1.jpeg',
         images: [
-          '/images/products/Elvestein/Bilde 1.jpeg',
-          '/images/products/Elvestein/Bilde 2.png',
-          '/images/products/Elvestein/Bilde 3.jpeg'
+          '/images/products/Elvestein/bilde-1.jpeg',
+          '/images/products/Elvestein/bilde-2.png',
+          '/images/products/Elvestein/bilde-3.jpeg'
         ],
         videoUrl: null,
         createdAt: new Date('2026-01-06T21:27:23.832Z'),
@@ -75,12 +75,12 @@ async function main() {
         description: 'Ren sand til lekeplass',
         longDescription: null,
         price: 175000,
-        image: '/images/products/Sand/Bilde 1.jpg',
+        image: '/images/products/Sand/bilde-1.jpg',
         images: [
-          '/images/products/Sand/Bilde 1.jpg',
-          '/images/products/Sand/Bilde 2.jpg',
-          '/images/products/Sand/Bilde 3.jpg',
-          '/images/products/Sand/Bilde 4.jpg'
+          '/images/products/Sand/bilde-1.jpg',
+          '/images/products/Sand/bilde-2.jpg',
+          '/images/products/Sand/bilde-3.jpg',
+          '/images/products/Sand/bilde-4.jpg'
         ],
         videoUrl: null,
         createdAt: new Date('2026-01-06T21:27:23.832Z'),
@@ -92,10 +92,10 @@ async function main() {
         description: 'Klassisk hvit singel',
         longDescription: null,
         price: 200000,
-        image: '/images/products/Kirkegårdssingel/Bilde 1.jpg',
+        image: '/images/products/Kirkegårdssingel/bilde-1.jpg',
         images: [
-          '/images/products/Kirkegårdssingel/Bilde 1.jpg',
-          '/images/products/Kirkegårdssingel/Bilde 2.jpg'
+          '/images/products/Kirkegårdssingel/bilde-1.jpg',
+          '/images/products/Kirkegårdssingel/bilde-2.jpg'
         ],
         videoUrl: null,
         createdAt: new Date('2026-01-06T21:27:23.832Z'),
@@ -107,13 +107,13 @@ async function main() {
         description: 'Praktisk matte for sikker plassering av singel. Hindrer ugress og gir god drenering. Pris per m².',
         longDescription: null,
         price: 24900,
-        image: '/images/products/Singelmatter ECCOgravel/Bilde 1.jpg',
+        image: '/images/products/Singelmatter ECCOgravel/bilde-1.jpg',
         images: [
-          '/images/products/Singelmatter ECCOgravel/Bilde 1.jpg',
-          '/images/products/Singelmatter ECCOgravel/Bilde 2.jpg',
-          '/images/products/Singelmatter ECCOgravel/Bilde 3.jpg',
-          '/images/products/Singelmatter ECCOgravel/Bilde 4.jpg',
-          '/images/products/Singelmatter ECCOgravel/Bilde 5.jpg'
+          '/images/products/Singelmatter ECCOgravel/bilde-1.jpg',
+          '/images/products/Singelmatter ECCOgravel/bilde-2.jpg',
+          '/images/products/Singelmatter ECCOgravel/bilde-3.jpg',
+          '/images/products/Singelmatter ECCOgravel/bilde-4.jpg',
+          '/images/products/Singelmatter ECCOgravel/bilde-5.jpg'
         ],
         videoUrl: null,
         createdAt: new Date('2026-01-06T23:10:52.088Z'),
