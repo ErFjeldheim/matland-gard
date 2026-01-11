@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { prisma } from '@/lib/prisma';
+import { sendCustomerOrderConfirmation, sendAdminOrderNotification } from '@/lib/email';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-12-15.clover',
@@ -139,6 +140,17 @@ export async function POST(request: NextRequest) {
       where: { id: order.id },
       data: { paymentId: session.id },
     });
+
+    // Send order confirmation emails
+    try {
+      await Promise.all([
+        sendCustomerOrderConfirmation(order),
+        sendAdminOrderNotification(order),
+      ]);
+    } catch (emailError) {
+      console.error('Error sending order confirmation emails:', emailError);
+      // Don't fail the order if email fails
+    }
 
     return NextResponse.json({ sessionId: session.id, url: session.url });
   } catch (error) {

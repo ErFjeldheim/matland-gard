@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { sendCustomerOrderConfirmation, sendAdminOrderNotification } from '@/lib/email';
 
 export async function POST(request: NextRequest) {
   try {
@@ -92,6 +93,17 @@ export async function POST(request: NextRequest) {
         },
       },
     });
+
+    // Send order confirmation emails
+    try {
+      await Promise.all([
+        sendCustomerOrderConfirmation(order),
+        sendAdminOrderNotification(order),
+      ]);
+    } catch (emailError) {
+      console.error('Error sending order confirmation emails:', emailError);
+      // Don't fail the order if email fails
+    }
 
     // TODO: Implement Vipps ePayment API integration
     // For now, return order details and phone number for manual Vipps payment
