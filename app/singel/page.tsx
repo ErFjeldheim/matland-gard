@@ -8,6 +8,12 @@ export const dynamic = 'force-dynamic';
 
 export default async function SingelPage() {
   const allProducts = await prisma.product.findMany({
+    where: {
+      stock: {
+        gt: 0,
+      },
+      isActive: true,
+    },
     orderBy: { createdAt: 'desc' },
   });
 

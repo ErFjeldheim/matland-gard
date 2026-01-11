@@ -67,7 +67,15 @@ export default async function AdminDashboard() {
       <main className="container mx-auto px-4 py-12">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold text-gray-900">Kontrollpanel</h1>
-          <LogoutButton />
+          <div className="flex gap-4">
+            <Link
+              href="/admin/products"
+              className="px-4 py-2 bg-[var(--color-primary)] text-white rounded-lg hover:bg-[var(--color-dark)] transition-colors"
+            >
+              Administrer produkter
+            </Link>
+            <LogoutButton />
+          </div>
         </div>
 
         {/* Statistics Cards */}

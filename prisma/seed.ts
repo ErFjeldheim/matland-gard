@@ -24,6 +24,8 @@ async function main() {
       description: 'Eksklusiv singel med unik farge',
       longDescription: 'Herregårdssingel er en eksklusiv singel med unik farge og struktur. Perfekt til innkjørsler, stier og som dekorativt dekke. Leveres i tre størrelser.',
       price: 162500, // 1625 kr
+      stock: 1000, // Default stock
+      stockUnit: 'storsekk',
       image: '/images/products/Herregårdssingel/bilde-1.jpg',
       images: [
         '/images/products/Herregårdssingel/beskrivelse-bilde-1.jpg',
@@ -45,6 +47,8 @@ async function main() {
       name: 'Grus',
       description: 'Grus til fundamenter og drenering',
       price: 49900, // 499 kr
+      stock: 1000, // Default stock
+      stockUnit: 'tonn',
       image: '/images/products/Pukk og grus/grus-hauger.jpg',
     },
     {
@@ -52,6 +56,8 @@ async function main() {
       name: 'Elvestein',
       description: 'Naturlig rundslipte steiner',
       price: 200000, // 2000 kr
+      stock: 1000, // Default stock
+      stockUnit: 'tonn',
       image: '/images/products/Elvestein/elvestein-hauger.jpg',
     },
     {
@@ -59,6 +65,8 @@ async function main() {
       name: 'Sand',
       description: 'Ren sand til lekeplass og bygg',
       price: 175000, // 1750 kr
+      stock: 1000, // Default stock
+      stockUnit: 'tonn',
       image: '/images/products/Sand/sand-lekelastebil.jpg',
     },
     {
@@ -66,6 +74,8 @@ async function main() {
       name: 'Kirkegårdssingel',
       description: 'Klassisk hvit singel',
       price: 200000, // 2000 kr
+      stock: 1000, // Default stock
+      stockUnit: 'storsekk',
       image: '/images/products/Kirkegårdssingel/kirkegaardssingel.jpg',
     },
     {
@@ -73,6 +83,12 @@ async function main() {
       name: 'Singelmatter ECCOgravel',
       description: 'Praktiske singelmatter for enkel legging',
       price: 89900, // 899 kr
+      stock: 1000, // Default stock
+      stockUnit: 'stk.',
+      image: '/images/products/Singelmatter ECCOgravel/singelmatter.jpg',
+    },
+  ];
+      stock: 1000, // Default stock
       image: '/images/products/Singelmatter ECCOgravel/singelmatter.jpg',
     },
   ];

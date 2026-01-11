@@ -13,6 +13,9 @@ model Product {
   description     String?
   longDescription String?
   price           Int
+  stock           Int         @default(0)
+  stockUnit       String      @default("storsekk")
+  isActive        Boolean     @default(true)
   image           String?
   images          String[]    @default([])
   videoUrl        String?

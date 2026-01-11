@@ -4,6 +4,12 @@ import { NextResponse } from 'next/server';
 export async function GET() {
   try {
     const products = await prisma.product.findMany({
+      where: {
+        stock: {
+          gt: 0,
+        },
+        isActive: true,
+      },
       orderBy: { createdAt: 'desc' },
     });
     return NextResponse.json(products);
