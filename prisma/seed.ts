@@ -88,10 +88,6 @@ async function main() {
       image: '/images/products/Singelmatter ECCOgravel/singelmatter.jpg',
     },
   ];
-      stock: 1000, // Default stock
-      image: '/images/products/Singelmatter ECCOgravel/singelmatter.jpg',
-    },
-  ];
 
   for (const product of products) {
     const created = await prisma.product.create({
