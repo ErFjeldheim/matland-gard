@@ -1,0 +1,14 @@
+* main
+5fe1b16 fix: pin prisma 6, add effect dependency, and fix dockerfile
+e660515 fix: pin prisma 6, automate migrations, and add stripe webhook
+1dd7d7c fix: copy entire .bin directory for Prisma CLI dependencies
+ed556fc fix: include Prisma CLI in production image for migrations
+8c2df69 fix: downgrade @prisma/adapter-pg to match Prisma Client version
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	git_diagnostics.txt
+
+nothing added to commit but untracked files present (use "git add" to track)

@@ -41,5 +41,6 @@ coverage/
 *.pem
 .vercel
 *.sql
+!prisma/migrations/**/*.sql
 tsconfig.tsbuildinfo
 commit.md
