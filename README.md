@@ -51,3 +51,4 @@ Next.js 16 + Prisma 7 + PostgreSQL e-commerce solution for selling aggregates (s
 © 2026 Matland Gård. All rights reserved.
 
 This project is proprietary and confidential. Unauthorized copying, distribution, or use of this software, via any medium, is strictly prohibited.
+
