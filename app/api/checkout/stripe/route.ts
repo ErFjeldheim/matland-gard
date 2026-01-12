@@ -141,28 +141,6 @@ export async function POST(request: NextRequest) {
       data: { paymentId: session.id },
     });
 
-    // Send order confirmation emails
-    try {
-      const orderEmailData = {
-        orderId: order.id,
-        customerName: order.customerName,
-        customerEmail: order.customerEmail,
-        customerPhone: order.customerPhone,
-        deliveryAddress: order.deliveryAddress,
-        totalAmount: order.totalAmount,
-        shippingMethod: order.shippingMethod,
-        orderItems: order.orderItems,
-      };
-      
-      await Promise.all([
-        sendCustomerOrderConfirmation(orderEmailData),
-        sendAdminOrderNotification(orderEmailData),
-      ]);
-    } catch (emailError) {
-      console.error('Error sending order confirmation emails:', emailError);
-      // Don't fail the order if email fails
-    }
-
     return NextResponse.json({ sessionId: session.id, url: session.url });
   } catch (error) {
     console.error('Stripe checkout error:', error);

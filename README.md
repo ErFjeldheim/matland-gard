@@ -8,7 +8,7 @@ Next.js 16 + Prisma 7 + PostgreSQL e-commerce solution for selling aggregates (s
 
 - **Framework**: Next.js 16.1.1 (React 19)
 - **Database**: PostgreSQL 15
-- **ORM**: Prisma 7.2.0
+- **ORM**: Prisma 6.2.0
 - **Runtime**: Node.js 20
 - **Styling**: Tailwind CSS v4
 - **Container**: Docker + Docker Compose

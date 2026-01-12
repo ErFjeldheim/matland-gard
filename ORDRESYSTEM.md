@@ -136,8 +136,18 @@ model OrderItem {
 5. Kunde: Omdirigeres til Stripe
 6. Kunde: Betaler med kort
 7. Stripe: Redirect til /bestilling/[id]?success=true
-8. Webhook: Oppdaterer ordre til "paid" (fremtidig)
+8. Webhook: Oppdaterer ordre til "paid" og sender e-postbekreftelser (via `/api/webhooks/stripe`)
 ```
+
+## Stripe Webhook
+
+Når en betaling er fullført på Stripe, sender Stripe et varsel (webhook) til nettsiden. Dette trigger:
+1. Oppdatering av ordrestatus fra `pending` til `paid`.
+2. Utsending av ordrebekreftelse til kundens e-post.
+3. Utsending av varsel til admin (Matland Gård).
+
+**Webhook URL:** `https://new.matlandgard.no/api/webhooks/stripe`
+**Event type:** `checkout.session.completed`
 
 ## Miljøvariabler
 
@@ -152,6 +162,9 @@ NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="pk_live_..."
 
 # Success/Cancel URLs
 NEXT_PUBLIC_URL="https://matlandgard.no"
+
+# Stripe Webhook Secret (for verifisering av webhook-kall)
+STRIPE_WEBHOOK_SECRET="whsec_..."
 ```
 
 ### Test-miljø:
