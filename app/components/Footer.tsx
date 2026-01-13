@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="bg-[var(--color-dark)] text-white py-8 mt-16">
       <div className="container mx-auto px-4 text-center">
         <div className="mb-4 flex justify-center gap-4">
-          <a href="/vilkar" className="hover:text-[var(--color-accent)] transition-colors">Salgsvilkår</a>
+          <a href="/vilkar" className="hover:text-[var(--color-accent)] transition-colors">Salsvilkår</a>
           <span className="text-gray-500">|</span>
           <a href="/personvern" className="hover:text-[var(--color-accent)] transition-colors">Personvern</a>
         </div>

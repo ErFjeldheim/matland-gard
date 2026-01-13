@@ -13,20 +13,20 @@ export default function TermsPage() {
 
             <main className="container mx-auto px-4 py-12 flex-grow">
                 <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
-                    <h1 className="text-4xl font-bold text-gray-900 mb-8 border-b pb-4">Salgsvilkår for Matland Gård</h1>
+                    <h1 className="text-4xl font-bold text-gray-900 mb-8 border-b pb-4">Salsvilkår for Matland Gård</h1>
 
                     <div className="prose prose-lg max-w-none text-gray-700 space-y-8">
                         <section>
                             <h2 className="text-2xl font-semibold text-gray-900 mb-4">Innleiing</h2>
                             <p>
-                                Dette kjøpet er regulert av dei nedanforståande standard salgsvilkåra for forbrukarkjøp av varer over internett. Forbrukarkjøp over internett vert regulert hovudsakeleg av avtalelova, forbrukarkjøpslova, marknadsføringslova, angrerettlova og ehandelslova, og desse lovene gjev forbrukaren ufråvikelege rettar. Vilkåra i denne avtalen skal ikkje forståast som noko avgrensing i dei lovbestemde rettane, men oppstiller partane sine viktigaste rettar og plikter for handelen.
+                                Dette kjøpet er regulert av dei nedanforståande standard salsvilkåra for forbrukarkjøp av varer over internett. Forbrukarkjøp over internett vert regulert hovudsakeleg av avtalelova, forbrukarkjøpslova, marknadsføringslova, angrerettlova og ehandelslova, og desse lovene gjev forbrukaren ufråvikelege rettar. Vilkåra i denne avtalen skal ikkje forståast som noko avgrensing i dei lovbestemde rettane, men oppstiller partane sine viktigaste rettar og plikter for handelen.
                             </p>
                         </section>
 
                         <section>
                             <h2 className="text-2xl font-semibold text-gray-900 mb-4">1. Avtalen</h2>
                             <p>
-                                Avtalen består av desse salgsvilkåra, opplysningar gjeve i bestillingsløysinga og eventuelt særskilt avtalte vilkår. Ved eventuell motstrid mellom opplysningane, går det som særskilt er avtalt mellom partane framfor, så framt det ikkje stridar mot ufråvikeleg lovgjeving.
+                                Avtalen består av desse salsvilkåra, opplysningar gjeve i bestillingsløysinga og eventuelt særskilt avtalte vilkår. Ved eventuell motstrid mellom opplysningane, går det som særskilt er avtalt mellom partane framfor, så framt det ikkje stridar mot ufråvikeleg lovgjeving.
                             </p>
                         </section>
 
