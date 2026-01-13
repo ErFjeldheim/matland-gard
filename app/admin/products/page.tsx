@@ -126,7 +126,7 @@ export default async function AdminProductsPage() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">
                       <Link
-                        href={`/singel/${product.id}`}
+                        href={`/singel/${product.slug}`}
                         className="text-[var(--color-primary)] hover:text-[var(--color-dark)] font-medium"
                         target="_blank"
                       >

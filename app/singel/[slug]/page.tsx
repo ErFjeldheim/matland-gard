@@ -10,13 +10,13 @@ import ProductImageGallery from './ProductImageGallery';
 
 export const dynamic = 'force-dynamic';
 
-type Params = Promise<{ id: string }>;
+type Params = Promise<{ slug: string }>;
 
 export default async function ProductPage({ params }: { params: Params }) {
-  const { id } = await params;
-  
+  const { slug } = await params;
+
   const product = await prisma.product.findUnique({
-    where: { id },
+    where: { slug },
   });
 
   if (!product) {
@@ -54,7 +54,7 @@ export default async function ProductPage({ params }: { params: Params }) {
           {/* Product Info */}
           <div>
             <h1 className="text-4xl font-bold text-gray-900 mb-4">{product.name}</h1>
-            
+
             {product.description && (
               <p className="text-lg text-gray-700 mb-6">{product.description}</p>
             )}

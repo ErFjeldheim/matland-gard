@@ -6,6 +6,7 @@ import Link from 'next/link';
 type Product = {
   id: string;
   name: string;
+  slug: string;
   description: string | null;
   longDescription: string | null;
   price: number;
@@ -26,7 +27,7 @@ export default function ProductCards({ products }: ProductCardsProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {products.map((product) => (
           <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow flex flex-col">
-            <Link href={`/singel/${product.id}`}>
+            <Link href={`/singel/${product.slug}`}>
               {product.image ? (
                 <div className="relative h-64 bg-gray-200 cursor-pointer">
                   <Image
@@ -46,7 +47,7 @@ export default function ProductCards({ products }: ProductCardsProps) {
             </Link>
 
             <div className="p-6 flex flex-col flex-grow">
-              <Link href={`/singel/${product.id}`}>
+              <Link href={`/singel/${product.slug}`}>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2 hover:text-[var(--color-primary)] transition-colors cursor-pointer">
                   {product.name}
                 </h3>
@@ -74,7 +75,7 @@ export default function ProductCards({ products }: ProductCardsProps) {
 
               {/* Call to Action */}
               <Link
-                href={`/singel/${product.id}`}
+                href={`/singel/${product.slug}`}
                 className="block w-full bg-[var(--color-primary)] text-white px-6 py-3 rounded-lg hover:bg-[var(--color-dark)] transition-colors font-semibold text-center"
               >
                 Sjå produkt

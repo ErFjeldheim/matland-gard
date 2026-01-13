@@ -21,6 +21,7 @@ async function main() {
     {
       id: '550e8400-e29b-41d4-a716-446655440001',
       name: 'Herregårdssingel',
+      slug: 'herregardssingel',
       description: 'Eksklusiv singel med unik farge',
       longDescription: 'Herregårdssingel er en eksklusiv singel med unik farge og struktur. Perfekt til innkjørsler, stier og som dekorativt dekke. Leveres i tre størrelser.',
       price: 162500, // 1625 kr
@@ -45,6 +46,7 @@ async function main() {
     {
       id: '550e8400-e29b-41d4-a716-446655440002',
       name: 'Grus',
+      slug: 'grus',
       description: 'Grus til fundamenter og drenering',
       price: 49900, // 499 kr
       stock: 1000, // Default stock
@@ -61,6 +63,7 @@ async function main() {
     {
       id: '550e8400-e29b-41d4-a716-446655440003',
       name: 'Elvestein',
+      slug: 'elvestein',
       description: 'Naturlig rundslipte steiner',
       price: 200000, // 2000 kr
       stock: 1000, // Default stock
@@ -75,6 +78,7 @@ async function main() {
     {
       id: '550e8400-e29b-41d4-a716-446655440004',
       name: 'Sand',
+      slug: 'sand',
       description: 'Ren sand til lekeplass og bygg',
       price: 175000, // 1750 kr
       stock: 1000, // Default stock
@@ -90,6 +94,7 @@ async function main() {
     {
       id: '550e8400-e29b-41d4-a716-446655440005',
       name: 'Kirkegårdssingel',
+      slug: 'kirkegardssingel',
       description: 'Klassisk hvit singel',
       price: 200000, // 2000 kr
       stock: 1000, // Default stock
@@ -103,6 +108,7 @@ async function main() {
     {
       id: '550e8400-e29b-41d4-a716-446655440006',
       name: 'Singelmatter ECCOgravel',
+      slug: 'singelmatter-eccogravel',
       description: 'Praktiske singelmatter for enkel legging',
       price: 89900, // 899 kr
       stock: 1000, // Default stock
