@@ -28,7 +28,6 @@ async function main() {
       stockUnit: 'storsekk',
       image: '/images/products/Herregårdssingel/bilde-1.jpg',
       images: [
-        '/images/products/Herregårdssingel/beskrivelse-bilde-1.jpg',
         '/images/products/Herregårdssingel/bilde-1.jpg',
         '/images/products/Herregårdssingel/bilde-2.jpg',
         '/images/products/Herregårdssingel/bilde-3.jpg',
@@ -36,6 +35,7 @@ async function main() {
         '/images/products/Herregårdssingel/bilde-5.jpg',
         '/images/products/Herregårdssingel/bilde-6.jpg',
         '/images/products/Herregårdssingel/bilde-7.jpg',
+        '/images/products/Herregårdssingel/beskrivelse-bilde-1.jpg',
         '/images/products/Herregårdssingel/beskrivelse-bilde-2.jpg',
         '/images/products/Herregårdssingel/beskrivelse-bilde-3.jpg',
         '/images/products/Herregårdssingel/minigolfen-familiepark-på-karmøy.jpg',
@@ -49,7 +49,14 @@ async function main() {
       price: 49900, // 499 kr
       stock: 1000, // Default stock
       stockUnit: 'tonn',
-      image: '/images/products/Pukk og grus/grus-hauger.jpg',
+      image: '/images/products/Pukk og grus/bilde-1.jpg',
+      images: [
+        '/images/products/Pukk og grus/bilde-1.jpg',
+        '/images/products/Pukk og grus/bilde-2.jpeg',
+        '/images/products/Pukk og grus/bilde-3.jpg',
+        '/images/products/Pukk og grus/bilde-4.jpg',
+        '/images/products/Pukk og grus/bilde-5.jpg',
+      ],
     },
     {
       id: '550e8400-e29b-41d4-a716-446655440003',
@@ -58,7 +65,12 @@ async function main() {
       price: 200000, // 2000 kr
       stock: 1000, // Default stock
       stockUnit: 'tonn',
-      image: '/images/products/Elvestein/elvestein-hauger.jpg',
+      image: '/images/products/Elvestein/bilde-1.jpeg',
+      images: [
+        '/images/products/Elvestein/bilde-1.jpeg',
+        '/images/products/Elvestein/bilde-2.png',
+        '/images/products/Elvestein/bilde-3.jpeg',
+      ],
     },
     {
       id: '550e8400-e29b-41d4-a716-446655440004',
@@ -67,7 +79,13 @@ async function main() {
       price: 175000, // 1750 kr
       stock: 1000, // Default stock
       stockUnit: 'tonn',
-      image: '/images/products/Sand/sand-lekelastebil.jpg',
+      image: '/images/products/Sand/bilde-1.jpg',
+      images: [
+        '/images/products/Sand/bilde-1.jpg',
+        '/images/products/Sand/bilde-2.jpg',
+        '/images/products/Sand/bilde-3.jpg',
+        '/images/products/Sand/bilde-4.jpg',
+      ],
     },
     {
       id: '550e8400-e29b-41d4-a716-446655440005',
@@ -76,7 +94,11 @@ async function main() {
       price: 200000, // 2000 kr
       stock: 1000, // Default stock
       stockUnit: 'storsekk',
-      image: '/images/products/Kirkegårdssingel/kirkegaardssingel.jpg',
+      image: '/images/products/Kirkegårdssingel/bilde-1.jpg',
+      images: [
+        '/images/products/Kirkegårdssingel/bilde-1.jpg',
+        '/images/products/Kirkegårdssingel/bilde-2.jpg',
+      ],
     },
     {
       id: '550e8400-e29b-41d4-a716-446655440006',
@@ -85,8 +107,17 @@ async function main() {
       price: 89900, // 899 kr
       stock: 1000, // Default stock
       stockUnit: 'stk.',
-      image: '/images/products/Singelmatter ECCOgravel/singelmatter.jpg',
+      image: '/images/products/Singelmatter ECCOgravel/bilde-1.jpg',
+      images: [
+        '/images/products/Singelmatter ECCOgravel/bilde-1.jpg',
+        '/images/products/Singelmatter ECCOgravel/bilde-2.jpg',
+        '/images/products/Singelmatter ECCOgravel/bilde-3.jpg',
+        '/images/products/Singelmatter ECCOgravel/bilde-4.jpg',
+        '/images/products/Singelmatter ECCOgravel/bilde-5.jpg',
+      ],
     },
+
+
   ];
 
   for (const product of products) {
