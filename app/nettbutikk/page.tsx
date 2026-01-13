@@ -43,7 +43,8 @@ export default async function SingelPage() {
           <div className="grid md:grid-cols-2 gap-8">
             <div>
               <h4 className="font-semibold text-gray-900 mb-2">📦 Fastpris på frakt</h4>
-              <ul className="text-gray-600 space-y-1">
+              <p className="text-gray-600 mb-2">For 1-2 storsekkar:</p>
+              <ul className="text-gray-600 space-y-1 ml-4">
                 <li>• Bergen, Vaksdal, Samnanger, Bjørnafjorden, Austevoll: <b>1000 kr</b></li>
                 <li>• Sotra, Askøy, Øygarden, Voss: <b>1500 kr</b></li>
               </ul>
