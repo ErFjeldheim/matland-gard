@@ -76,7 +76,7 @@ export default function KontaktPage() {
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-2">Singel & Stein</h3>
                   <p className="text-gray-600 mb-3">
-                    Besøk vår <a href="/singel" className="text-[var(--color-primary)] hover:underline font-semibold">nettbutikk</a> for å sjå produkt, prisar og legge inn bestilling.
+                    Besøk vår <a href="/nettbutikk" className="text-[var(--color-primary)] hover:underline font-semibold">nettbutikk</a> for å sjå produkt, prisar og legge inn bestilling.
                     Vi leverer til heile regionen.
                   </p>
                 </div>

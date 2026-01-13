@@ -180,7 +180,7 @@ export async function POST(request: NextRequest) {
       line_items: stripeLineItems,
       mode: 'payment',
       success_url: `${process.env.NEXT_PUBLIC_URL}/bestilling/${order.id}?success=true`,
-      cancel_url: `${process.env.NEXT_PUBLIC_URL}/singel?cancelled=true`,
+      cancel_url: `${process.env.NEXT_PUBLIC_URL}/nettbutikk?cancelled=true`,
       metadata: {
         orderId: order.id,
       },

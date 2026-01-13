@@ -203,7 +203,7 @@ export default async function OrderPage({
           {/* Actions */}
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
-              href="/singel"
+              href="/nettbutikk"
               className="flex-1 bg-[var(--color-primary)] text-white text-center px-6 py-3 rounded-lg hover:bg-[var(--color-dark)] transition-colors font-semibold">
               Se flere produkter
             </Link>

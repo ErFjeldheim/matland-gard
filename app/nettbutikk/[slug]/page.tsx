@@ -36,7 +36,7 @@ export default async function ProductPage({ params }: { params: Params }) {
         <div className="mb-6 text-sm text-gray-600">
           <Link href="/" className="hover:text-[var(--color-primary)]">Hjem</Link>
           {' > '}
-          <Link href="/singel" className="hover:text-[var(--color-primary)]">Singel & Stein</Link>
+          <Link href="/nettbutikk" className="hover:text-[var(--color-primary)]">Singel & Stein</Link>
           {' > '}
           <span className="text-gray-900">{product.name}</span>
         </div>

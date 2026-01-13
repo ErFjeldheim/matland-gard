@@ -33,7 +33,7 @@ export default function Navigation() {
           <ul className="flex space-x-8">
             <li>
               <Link
-                href="/singel"
+                href="/nettbutikk"
                 className="text-white hover:text-[var(--color-accent)] transition-colors font-medium"
               >
                 Singel & Stein
@@ -75,8 +75,8 @@ export default function Navigation() {
             )}
           </ul>
 
-          {/* Cart Icon - Only show on /singel page */}
-          {pathname?.startsWith('/singel') && (
+          {/* Cart Icon - Only show on /nettbutikk page */}
+          {pathname?.startsWith('/nettbutikk') && (
             <Link
               href="/handlekurv"
               className="relative text-white hover:text-[var(--color-accent)] transition-colors"

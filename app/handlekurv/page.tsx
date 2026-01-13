@@ -25,7 +25,7 @@ export default function HandlekurvPage() {
               <h2 className="text-2xl font-semibold text-gray-900 mb-2">Handlekorgja er tom</h2>
               <p className="text-gray-600 mb-6">Legg til produkt for å halde fram</p>
               <Link
-                href="/singel"
+                href="/nettbutikk"
                 className="inline-block bg-[var(--color-primary)] text-white px-6 py-3 rounded-lg hover:bg-[var(--color-dark)] transition-colors font-semibold"
               >
                 Gå til produkt
@@ -143,7 +143,7 @@ export default function HandlekurvPage() {
                 </button>
 
                 <Link
-                  href="/singel"
+                  href="/nettbutikk"
                   className="block text-center text-[var(--color-primary)] hover:text-[var(--color-dark)] font-medium mt-4"
                 >
                   ← Hald fram og handle

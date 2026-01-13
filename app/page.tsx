@@ -51,7 +51,7 @@ export default async function HomePage() {
         {/* Three Sections */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {/* Singel & Stein */}
-          <Link href="/singel">
+          <Link href="/nettbutikk">
             <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all transform hover:-translate-y-2 cursor-pointer h-full flex flex-col group">
               <div className="relative">
                 <CardCarousel
