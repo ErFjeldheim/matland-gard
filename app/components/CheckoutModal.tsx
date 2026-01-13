@@ -26,7 +26,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
   const [loading, setLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [paymentMethod, setPaymentMethod] = useState<'vipps' | 'stripe' | null>(null);
-  const [shippingMethod, setShippingMethod] = useState<'shipping_quote' | 'pickup' | null>(null);
+  const [shippingMethod, setShippingMethod] = useState<'shipping_quote' | 'pickup' | 'shipping_fixed_1000' | 'shipping_fixed_1500' | null>(null);
   const [formData, setFormData] = useState({
     customerName: '',
     customerEmail: '',
@@ -37,40 +37,59 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
   if (!isOpen) return null;
 
   const isCartCheckout = cartItems && cartItems.length > 0;
-  const totalAmount = isCartCheckout ? product.price / 100 : (product.price * quantity) / 100;
+
+  // Calculate total units (storsekker or tons of grus)
+  const totalUnits = isCartCheckout
+    ? cartItems.reduce((sum, item) => {
+      const name = item.productName.toLowerCase();
+      const isUnit = !name.includes('matte'); // Everything except mattene counts as a unit (bag or ton)
+      return isUnit ? sum + item.quantity : sum;
+    }, 0)
+    : (!product.name.toLowerCase().includes('matte') ? quantity : 0);
+
+  const getShippingFee = () => {
+    const multiplier = totalUnits;
+    if (shippingMethod === 'shipping_fixed_1000') return 1000 * multiplier;
+    if (shippingMethod === 'shipping_fixed_1500') return 1500 * multiplier;
+    return 0;
+  };
+
+  const baseAmount = isCartCheckout ? product.price / 100 : (product.price * quantity) / 100;
+  const shippingFee = getShippingFee();
+  const totalAmount = baseAmount + shippingFee;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!shippingMethod) {
-      alert('Vennligst velg leveringsalternativ');
+      alert('Ver vennleg og vel leveringsalternativ');
       return;
     }
-    
+
     if (!paymentMethod) {
-      alert('Vennligst velg betalingsmetode');
+      alert('Ver vennleg og vel betalingsmetode');
       return;
     }
-    
+
     setLoading(true);
 
     try {
       const requestBody = isCartCheckout
         ? {
-            cartItems: cartItems.map(item => ({
-              productId: item.productId,
-              quantity: item.quantity,
-              size: item.size,
-            })),
-            ...formData,
-            shippingMethod,
-          }
+          cartItems: cartItems.map(item => ({
+            productId: item.productId,
+            quantity: item.quantity,
+            size: item.size,
+          })),
+          ...formData,
+          shippingMethod,
+        }
         : {
-            productId: product.id,
-            quantity,
-            ...formData,
-            shippingMethod,
-          };
+          productId: product.id,
+          quantity,
+          ...formData,
+          shippingMethod,
+        };
 
       const response = await fetch(`/api/checkout/${paymentMethod}`, {
         method: 'POST',
@@ -81,16 +100,14 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Noe gikk galt');
+        throw new Error(data.error || 'Noko gjekk galt');
       }
 
       if (paymentMethod === 'stripe') {
-        // Redirect to Stripe Checkout
         if (data.url) {
           window.location.href = data.url;
         }
       } else {
-        // Vipps - redirect to order page
         window.location.href = `/bestilling/${data.orderId}`;
       }
     } catch (error) {
@@ -139,7 +156,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                   ))}
                 </div>
                 <p className="text-xs text-gray-500 mt-2">
-                  For å endre antall eller fjerne varer, gå tilbake til handlekurven
+                  For å endre antall eller fjerne varer, gå tilbake til handlekorgja.
                 </p>
               </div>
             ) : (
@@ -171,7 +188,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
 
             {/* Customer Info */}
             <div>
-              <label className="block text-gray-700 font-medium mb-2">Navn *</label>
+              <label className="block text-gray-700 font-medium mb-2">Namn *</label>
               <input
                 type="text"
                 required
@@ -191,7 +208,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                 value={formData.customerEmail}
                 onChange={(e) => setFormData({ ...formData, customerEmail: e.target.value })}
                 className="w-full bg-white text-gray-900 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
-                placeholder="ola@example.com"
+                placeholder="ola@eksempel.no"
                 disabled={loading}
               />
             </div>
@@ -213,66 +230,75 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
             <div>
               <label className="block text-gray-700 font-medium mb-3">Velg leveringsalternativ *</label>
               <div className="space-y-3">
+                {/* Region A */}
+                <button
+                  type="button"
+                  onClick={() => setShippingMethod('shipping_fixed_1000')}
+                  className={`w-full py-3 px-4 rounded-lg border-2 font-medium transition-all cursor-pointer text-left ${shippingMethod === 'shipping_fixed_1000'
+                    ? 'border-[var(--color-primary)] bg-[var(--color-accent)]/20 text-[var(--color-dark)]'
+                    : 'border-gray-300 hover:border-[var(--color-primary)] text-gray-700'
+                    }`}
+                  disabled={loading}
+                >
+                  <div className="font-semibold">Frakt: Sone 1</div>
+                  <div className="text-xs text-gray-600">Bergen, Vaksdal, Samnanger, Bjørnafjorden, Austevoll</div>
+                  <div className="text-sm font-bold text-[var(--color-primary)]">{1000 * totalUnits} kr</div>
+                </button>
+
+                {/* Region B */}
+                <button
+                  type="button"
+                  onClick={() => setShippingMethod('shipping_fixed_1500')}
+                  className={`w-full py-3 px-4 rounded-lg border-2 font-medium transition-all cursor-pointer text-left ${shippingMethod === 'shipping_fixed_1500'
+                    ? 'border-[var(--color-primary)] bg-[var(--color-accent)]/20 text-[var(--color-dark)]'
+                    : 'border-gray-300 hover:border-[var(--color-primary)] text-gray-700'
+                    }`}
+                  disabled={loading}
+                >
+                  <div className="font-semibold">Frakt: Sone 2</div>
+                  <div className="text-xs text-gray-600">Sotra, Askøy, Øygarden, Voss</div>
+                  <div className="text-sm font-bold text-[var(--color-primary)]">{1500 * totalUnits} kr</div>
+                </button>
+
+                {/* Quote */}
                 <button
                   type="button"
                   onClick={() => setShippingMethod('shipping_quote')}
-                  className={`w-full py-4 px-4 rounded-lg border-2 font-medium transition-all cursor-pointer text-left ${
-                    shippingMethod === 'shipping_quote'
-                      ? 'border-[var(--color-primary)] bg-[var(--color-accent)]/20 text-[var(--color-dark)]'
-                      : 'border-gray-300 hover:border-[var(--color-primary)] text-gray-700'
-                  }`}
+                  className={`w-full py-3 px-4 rounded-lg border-2 font-medium transition-all cursor-pointer text-left ${shippingMethod === 'shipping_quote'
+                    ? 'border-[var(--color-primary)] bg-[var(--color-accent)]/20 text-[var(--color-dark)]'
+                    : 'border-gray-300 hover:border-[var(--color-primary)] text-gray-700'
+                    }`}
                   disabled={loading}
                 >
-                  <div className="flex items-start gap-3">
-                    <div className={`w-5 h-5 rounded-full border-2 mt-0.5 flex-shrink-0 flex items-center justify-center ${
-                      shippingMethod === 'shipping_quote'
-                        ? 'border-[var(--color-primary)] bg-[var(--color-primary)]'
-                        : 'border-gray-400'
-                    }`}>
-                      {shippingMethod === 'shipping_quote' && (
-                        <div className="w-2 h-2 bg-white rounded-full"></div>
-                      )}
-                    </div>
-                    <div className="flex-1">
-                      <div className="font-semibold">Send meg tilbud på frakt</div>
-                      <div className="text-sm text-gray-600 mt-1">Vi kontakter deg med pristilbud på levering</div>
-                      <div className="text-sm font-semibold text-green-600 mt-1">Gratis</div>
-                    </div>
-                  </div>
+                  <div className="font-semibold">Andre område</div>
+                  <div className="text-xs text-gray-600">Vi kontaktar deg for pris på frakt</div>
+                  <div className="text-sm font-bold text-green-600">Få tilbod</div>
                 </button>
-                
+
+                {/* Pickup */}
                 <button
                   type="button"
                   onClick={() => setShippingMethod('pickup')}
-                  className={`w-full py-4 px-4 rounded-lg border-2 font-medium transition-all cursor-pointer text-left ${
-                    shippingMethod === 'pickup'
-                      ? 'border-[var(--color-primary)] bg-[var(--color-accent)]/20 text-[var(--color-dark)]'
-                      : 'border-gray-300 hover:border-[var(--color-primary)] text-gray-700'
-                  }`}
+                  className={`w-full py-3 px-4 rounded-lg border-2 font-medium transition-all cursor-pointer text-left ${shippingMethod === 'pickup'
+                    ? 'border-[var(--color-primary)] bg-[var(--color-accent)]/20 text-[var(--color-dark)]'
+                    : 'border-gray-300 hover:border-[var(--color-primary)] text-gray-700'
+                    }`}
                   disabled={loading}
                 >
-                  <div className="flex items-start gap-3">
-                    <div className={`w-5 h-5 rounded-full border-2 mt-0.5 flex-shrink-0 flex items-center justify-center ${
-                      shippingMethod === 'pickup'
-                        ? 'border-[var(--color-primary)] bg-[var(--color-primary)]'
-                        : 'border-gray-400'
-                    }`}>
-                      {shippingMethod === 'pickup' && (
-                        <div className="w-2 h-2 bg-white rounded-full"></div>
-                      )}
-                    </div>
-                    <div className="flex-1">
-                      <div className="font-semibold">Hent hos oss i Holmefjord</div>
-                      <div className="text-sm text-gray-600 mt-1">Vi kontakter deg for å avtale dato</div>
-                      <div className="text-sm font-semibold text-green-600 mt-1">Gratis</div>
-                    </div>
-                  </div>
+                  <div className="font-semibold">Hent sjølv i Holmefjord</div>
+                  <div className="text-sm font-bold text-green-600">Gratis</div>
                 </button>
+
+                {totalUnits >= 3 && (
+                  <p className="text-xs text-amber-600 font-medium">
+                    💡 Tips: Sidan du har 3 eller fleire einingar, kan det løna seg å be om eitt samla tilbod på frakt (vel "Andre område" ovanfor).
+                  </p>
+                )}
               </div>
             </div>
 
-            {/* Delivery Address - Show only if shipping quote is selected */}
-            {shippingMethod === 'shipping_quote' && (
+            {/* Delivery Address */}
+            {(shippingMethod && shippingMethod !== 'pickup') && (
               <div>
                 <label className="block text-gray-700 font-medium mb-2">
                   Leveringsadresse *
@@ -283,7 +309,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                   value={formData.deliveryAddress}
                   onChange={(e) => setFormData({ ...formData, deliveryAddress: e.target.value })}
                   className="w-full bg-white text-gray-900 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
-                  placeholder="Skriv inn leveringsadressen"
+                  placeholder="Skriv inn leveringsadressa"
                   disabled={loading}
                 />
               </div>
@@ -291,46 +317,50 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
 
             {/* Total */}
             <div className="border-t pt-4">
-              <div className="flex justify-between items-center text-xl">
-                <span className="font-bold text-gray-900">Totalt:</span>
-                <span className="font-bold text-[var(--color-primary)]">{totalAmount.toFixed(0)} kr</span>
+              <div className="space-y-1">
+                <div className="flex justify-between text-gray-600 text-sm">
+                  <span>Delsum varer:</span>
+                  <span>{baseAmount.toFixed(0)} kr</span>
+                </div>
+                {shippingFee > 0 && (
+                  <div className="flex justify-between text-gray-600 text-sm">
+                    <span>Frakt:</span>
+                    <span>{shippingFee.toFixed(0)} kr</span>
+                  </div>
+                )}
+                <div className="flex justify-between items-center text-xl mt-2">
+                  <span className="font-bold text-gray-900">Totalt:</span>
+                  <span className="font-bold text-[var(--color-primary)]">{totalAmount.toFixed(0)} kr</span>
+                </div>
+                <p className="text-xs text-gray-500">inkl. mva.</p>
               </div>
-              <p className="text-sm text-gray-600 mt-1">inkl. mva.</p>
             </div>
 
             {/* Payment Method Selection */}
             <div>
-              <label className="block text-gray-700 font-medium mb-3">Velg betalingsmetode *</label>
+              <label className="block text-gray-700 font-medium mb-3">Vel betalingsmetode *</label>
               <div className="grid grid-cols-2 gap-3">
                 <button
                   type="button"
                   onClick={() => setPaymentMethod('vipps')}
-                  className={`py-4 px-4 rounded-lg border-2 font-semibold transition-all cursor-pointer flex flex-col items-center justify-center ${
-                    paymentMethod === 'vipps'
-                      ? 'border-[#FF5B24] bg-[#FFF5F3] text-[#FF5B24]'
-                      : 'border-gray-300 hover:border-[#FF5B24] text-gray-700'
-                  }`}
+                  className={`py-4 px-4 rounded-lg border-2 font-semibold transition-all cursor-pointer flex flex-col items-center justify-center ${paymentMethod === 'vipps'
+                    ? 'border-[#FF5B24] bg-[#FFF5F3] text-[#FF5B24]'
+                    : 'border-gray-300 hover:border-[#FF5B24] text-gray-700'
+                    }`}
                   disabled={loading}
                 >
-                  <svg className="w-8 h-8 mb-1" viewBox="0 0 80 80" fill="currentColor">
-                    <path d="M50.1 35.4L39.9 56.1c-1.5 3-5.7 3-7.2 0L22.5 35.4c-1.5-3 .4-6.6 3.6-6.6h20.4c3.2 0 5.1 3.6 3.6 6.6z"/>
-                  </svg>
                   <span className="text-sm">Vipps</span>
                 </button>
-                
+
                 <button
                   type="button"
                   onClick={() => setPaymentMethod('stripe')}
-                  className={`py-4 px-4 rounded-lg border-2 font-semibold transition-all cursor-pointer flex flex-col items-center justify-center ${
-                    paymentMethod === 'stripe'
-                      ? 'border-[var(--color-primary)] bg-[var(--color-accent)]/20 text-[var(--color-dark)]'
-                      : 'border-gray-300 hover:border-[var(--color-primary)] text-gray-700'
-                  }`}
+                  className={`py-4 px-4 rounded-lg border-2 font-semibold transition-all cursor-pointer flex flex-col items-center justify-center ${paymentMethod === 'stripe'
+                    ? 'border-[var(--color-primary)] bg-[var(--color-accent)]/20 text-[var(--color-dark)]'
+                    : 'border-gray-300 hover:border-[var(--color-primary)] text-gray-700'
+                    }`}
                   disabled={loading}
                 >
-                  <svg className="w-8 h-8 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                  </svg>
                   <span className="text-sm">Kort</span>
                 </button>
               </div>
@@ -340,20 +370,17 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
             <button
               type="submit"
               disabled={loading || !paymentMethod || !shippingMethod}
-              className={`w-full ${
-                !paymentMethod || !shippingMethod ? 'bg-gray-400' : paymentMethod === 'vipps' ? 'bg-[#FF5B24] hover:bg-[#E64E1B]' : 'bg-[var(--color-primary)] hover:bg-[var(--color-dark)]'
-              } text-white px-6 py-4 rounded-lg transition-colors font-semibold flex items-center justify-center text-lg cursor-pointer disabled:cursor-not-allowed`}
+              className={`w-full ${!paymentMethod || !shippingMethod ? 'bg-gray-400' : paymentMethod === 'vipps' ? 'bg-[#FF5B24] hover:bg-[#E64E1B]' : 'bg-[var(--color-primary)] hover:bg-[var(--color-dark)]'
+                } text-white px-6 py-4 rounded-lg transition-colors font-semibold flex items-center justify-center text-lg cursor-pointer disabled:cursor-not-allowed`}
             >
               {loading ? (
-                'Behandler...'
+                'Behandlar...'
               ) : !shippingMethod ? (
-                'Velg leveringsalternativ'
+                'Vel leveringsalternativ'
               ) : !paymentMethod ? (
-                'Velg betalingsmetode'
+                'Vel betalingsmetode'
               ) : (
-                <>
-                  Fullfør bestilling
-                </>
+                'Fullfør bestilling'
               )}
             </button>
           </form>

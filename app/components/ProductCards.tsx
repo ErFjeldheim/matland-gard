@@ -44,18 +44,18 @@ export default function ProductCards({ products }: ProductCardsProps) {
                 </div>
               )}
             </Link>
-            
+
             <div className="p-6 flex flex-col flex-grow">
               <Link href={`/singel/${product.id}`}>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2 hover:text-[var(--color-primary)] transition-colors cursor-pointer">
                   {product.name}
                 </h3>
               </Link>
-              
+
               {product.description && (
                 <p className="text-gray-600 mb-4">{product.description}</p>
               )}
-              
+
               <div className="mb-4 mt-auto">
                 <div>
                   <span className="text-2xl font-bold text-[var(--color-primary)]">
@@ -64,20 +64,20 @@ export default function ProductCards({ products }: ProductCardsProps) {
                   <span className="text-gray-500 text-sm ml-1">inkl. mva.</span>
                 </div>
                 <p className="text-gray-600 text-sm">
-                  {product.name.toLowerCase().includes('grus') 
-                    ? 'per tonn' 
+                  {product.name.toLowerCase().includes('grus')
+                    ? 'per tonn'
                     : product.name.toLowerCase().includes('matte')
-                    ? 'per m²'
-                    : 'per storsekk (800kg)'}
+                      ? 'per m²'
+                      : 'per storsekk (800kg)'}
                 </p>
               </div>
 
               {/* Call to Action */}
-              <Link 
+              <Link
                 href={`/singel/${product.id}`}
                 className="block w-full bg-[var(--color-primary)] text-white px-6 py-3 rounded-lg hover:bg-[var(--color-dark)] transition-colors font-semibold text-center"
               >
-                Se produkt
+                Sjå produkt
               </Link>
             </div>
           </div>

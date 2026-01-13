@@ -1,0 +1,5 @@
+Checking settings...
+Key hero_text: MISSING
+Key hero_image_url: MISSING
+Key contact_phone: MISSING
+Key contact_address: MISSING

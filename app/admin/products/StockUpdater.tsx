@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -13,7 +14,7 @@ export default function StockUpdater({ productId, currentStock, stockUnit }: Sto
   const [isUpdating, setIsUpdating] = useState(false);
   const [showInput, setShowInput] = useState(false);
   const [inputValue, setInputValue] = useState((currentStock ?? 0).toString());
-  
+
   const getUnitText = (amount: number, unit: string) => {
     if (unit === 'storsekk' && amount !== 1) {
       return 'storsekker';
@@ -48,13 +49,6 @@ export default function StockUpdater({ productId, currentStock, stockUnit }: Sto
       alert('Kunne ikke oppdatere lagerbeholdning');
     } finally {
       setIsUpdating(false);
-    }
-  };
-
-  const handleQuickUpdate = (change: number) => {
-    const newStock = stock + change;
-    if (newStock >= 0) {
-      updateStock(newStock);
     }
   };
 
@@ -101,42 +95,17 @@ export default function StockUpdater({ productId, currentStock, stockUnit }: Sto
   }
 
   return (
-    <div className="flex items-center gap-2">
-      <button
-        onClick={() => handleQuickUpdate(-10)}
-        disabled={isUpdating || stock === 0}
-        className="px-2 py-1 bg-red-100 text-red-700 text-xs rounded hover:bg-red-200 disabled:bg-gray-100 disabled:text-gray-400 cursor-pointer disabled:cursor-not-allowed"
-      >
-        -10
-      </button>
-      <button
-        onClick={() => handleQuickUpdate(-1)}
-        disabled={isUpdating || stock === 0}
-        className="px-2 py-1 bg-red-100 text-red-700 text-xs rounded hover:bg-red-200 disabled:bg-gray-100 disabled:text-gray-400 cursor-pointer disabled:cursor-not-allowed"
-      >
-        -1
-      </button>
-      <button
-        onClick={() => setShowInput(true)}
-        disabled={isUpdating}
-        className="px-3 py-1 bg-gray-100 text-gray-900 font-semibold text-sm rounded hover:bg-gray-200 disabled:bg-gray-50 min-w-[60px] cursor-pointer disabled:cursor-not-allowed"
-      >
-        {isUpdating ? '...' : `${stock} ${getUnitText(stock, stockUnit || 'storsekk')}`}
-      </button>
-      <button
-        onClick={() => handleQuickUpdate(1)}
-        disabled={isUpdating}
-        className="px-2 py-1 bg-green-100 text-green-700 text-xs rounded hover:bg-green-200 disabled:bg-gray-100 cursor-pointer disabled:cursor-not-allowed"
-      >
-        +1
-      </button>
-      <button
-        onClick={() => handleQuickUpdate(10)}
-        disabled={isUpdating}
-        className="px-2 py-1 bg-green-100 text-green-700 text-xs rounded hover:bg-green-200 disabled:bg-gray-100 cursor-pointer disabled:cursor-not-allowed"
-      >
-        +10
-      </button>
-    </div>
+    <button
+      onClick={() => {
+        setInputValue(stock.toString());
+        setShowInput(true);
+      }}
+      disabled={isUpdating}
+      className="flex items-center gap-2 text-sm font-semibold text-gray-900 hover:text-[var(--color-primary)] hover:underline decoration-dashed underline-offset-4 cursor-pointer group"
+      title="Klikk for å endre lagerbeholdning"
+    >
+      <span>{stock} {getUnitText(stock, stockUnit || 'storsekk')}</span>
+      <span className="text-gray-400">✎</span>
+    </button>
   );
 }

@@ -20,12 +20,12 @@ export default function KontaktPage() {
       <main className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl font-bold text-gray-900 mb-8 text-center">Kontakt oss</h1>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             {/* Kontaktinformasjon */}
             <div className="bg-white rounded-lg shadow-lg p-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Kontaktinformasjon</h2>
-              
+
               <div className="space-y-4">
                 <div className="flex items-start">
                   <svg className="w-6 h-6 text-[var(--color-primary)] mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -45,8 +45,8 @@ export default function KontaktPage() {
                   </svg>
                   <div>
                     <h3 className="font-semibold text-gray-900">E-post</h3>
-                    <a href="mailto:post@matlandgard.no" className="text-[var(--color-primary)] hover:underline">
-                      post@matlandgard.no
+                    <a href="mailto:matlandgard@gmail.com" className="text-[var(--color-primary)] hover:underline">
+                      matlandgard@gmail.com
                     </a>
                   </div>
                 </div>
@@ -59,7 +59,7 @@ export default function KontaktPage() {
                   <div>
                     <h3 className="font-semibold text-gray-900">Adresse</h3>
                     <p className="text-gray-600">
-                      Matland Gard<br />
+                      Matland Gård<br />
                       Ådlandsvegen 30<br />
                       5642 Holmefjord
                     </p>
@@ -71,35 +71,35 @@ export default function KontaktPage() {
             {/* Åpningstider / Informasjon */}
             <div className="bg-white rounded-lg shadow-lg p-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Besøk oss</h2>
-              
+
               <div className="space-y-6">
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-2">Singel & Stein</h3>
                   <p className="text-gray-600 mb-3">
-                    Besøk vår <a href="/singel" className="text-[var(--color-primary)] hover:underline font-semibold">nettbutikk</a> for å se produkter, priser og legge inn bestilling. 
-                    Vi leverer til hele regionen.
+                    Besøk vår <a href="/singel" className="text-[var(--color-primary)] hover:underline font-semibold">nettbutikk</a> for å sjå produkt, prisar og legge inn bestilling.
+                    Vi leverer til heile regionen.
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Camping</h3>
+                  <h3 className="font-semibold text-gray-900 mb-2">Bobilparkering</h3>
                   <p className="text-gray-600">
-                    Sesong: Mai - September<br />
-                    Booking: Ring for reservasjon
+                    Sesong: April - Oktober<br />
+                    Bestilling: <a href="https://campio.no" target="_blank" rel="noopener noreferrer" className="text-[var(--color-primary)] hover:underline font-semibold">Bestill på Campio</a> eller ring oss.
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Arrangement</h3>
+                  <h3 className="font-semibold text-gray-900 mb-2">Selskapslokale</h3>
                   <p className="text-gray-600">
-                    Kontakt oss for tilgjengelighet og priser for arrangement 
-                    i våre lokaler.
+                    Kontakt oss for tilgjenge og prisar for arrangement
+                    i våre lokale.
                   </p>
                 </div>
 
                 <div className="pt-4 border-t">
                   <p className="text-sm text-gray-500">
-                    Vi svarer vanligvis innen 24 timer på hverdager.
+                    Vi svarer vanlegvis innan 24 timar på kvardagar.
                   </p>
                 </div>
               </div>
@@ -108,7 +108,7 @@ export default function KontaktPage() {
 
           {/* Kart */}
           <div className="bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Finn veien til oss</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Finn vegen til oss</h2>
             <div className="aspect-video w-full rounded-lg overflow-hidden">
               <MapComponent />
             </div>

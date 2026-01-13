@@ -17,7 +17,7 @@ export default function ProductImageGallery({ mainImage, additionalImages, produ
     <>
       <div className="space-y-4">
         {/* Main Image */}
-        <div 
+        <div
           className="relative h-96 bg-gray-200 rounded-lg overflow-hidden cursor-zoom-in"
           onClick={() => setIsLightboxOpen(true)}
         >
@@ -29,17 +29,16 @@ export default function ProductImageGallery({ mainImage, additionalImages, produ
             priority
           />
         </div>
-        
+
         {/* Thumbnail Grid */}
         {additionalImages.length > 0 && (
           <div className="grid grid-cols-4 gap-4">
             {additionalImages.map((img, idx) => (
-              <div 
-                key={idx} 
+              <div
+                key={idx}
                 onClick={() => setSelectedImage(img)}
-                className={`relative h-24 bg-gray-200 rounded-lg overflow-hidden cursor-pointer transition-all ${
-                  selectedImage === img ? 'opacity-60' : 'hover:opacity-80 hover:scale-105'
-                }`}
+                className={`relative h-24 bg-gray-200 rounded-lg overflow-hidden cursor-pointer transition-all ${selectedImage === img ? 'opacity-60' : 'hover:opacity-80 hover:scale-105'
+                  }`}
               >
                 <Image
                   src={img}
@@ -55,12 +54,12 @@ export default function ProductImageGallery({ mainImage, additionalImages, produ
 
       {/* Lightbox */}
       {isLightboxOpen && (
-        <div 
+        <div
           className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center p-4"
           onClick={() => setIsLightboxOpen(false)}
         >
           <button
-            className="absolute top-4 right-4 text-white text-4xl hover:text-gray-300 transition-colors"
+            className="absolute top-4 right-4 text-white text-4xl hover:text-gray-300 transition-colors cursor-pointer"
             onClick={() => setIsLightboxOpen(false)}
           >
             ×

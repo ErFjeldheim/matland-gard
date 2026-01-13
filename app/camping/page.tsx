@@ -17,15 +17,16 @@ export default function CampingPage() {
         <div className="relative h-96 rounded-lg overflow-hidden mb-8 shadow-2xl">
           <Image
             src="/images/hero/gard-oversikt.jpg"
-            alt="Matland Fjordcamp - oversikt"
+            alt="Matland Bobilparkering - oversikt"
             fill
             className="object-cover"
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-dark)]/80 via-[var(--color-primary)]/30 to-transparent flex items-end">
             <div className="p-12 text-white">
-              <h2 className="text-5xl font-bold mb-4">Matland Fjordcamp</h2>
+              <h2 className="text-5xl font-bold mb-4">Bobilparkering</h2>
               <p className="text-2xl">Opplev naturen ved fjorden</p>
+              <p className="text-xl mt-2 text-[var(--color-accent)] font-semibold">Sesong: April - Oktober</p>
             </div>
           </div>
         </div>
@@ -61,51 +62,50 @@ export default function CampingPage() {
               </div>
             </div>
 
-            <h3 className="text-3xl font-bold text-gray-900 mb-6">Velkommen til Matland Gård</h3>
+            <h3 className="text-3xl font-bold text-gray-900 mb-6">Velkomen til Matland Gård</h3>
             <p className="text-gray-600 mb-4">
-              Matland Gård ved Ådlandsfjorden tilbyr idyllisk overnatting for bobiler i rolige 
-              omgivelser helt nede ved vannkanten. Her kan gjester nyte spektakulær utsikt og 
-              benytte seg av marinaen, som har både badestrand og stupetårn.
+              Matland Gård ved Ådlandsfjorden tilbyr idyllisk overnatting for bubilar i rolege
+              omgjevnader heilt nede ved vannkanten. Her kan gjester nyte spektakulær utsikt og
+              nytte marinaen, som har både badestrand og stupetårn.
             </p>
             <p className="text-gray-600 mb-4">
-              Det er gode muligheter for aktiviteter som fjellturer, fiske i elv og sjø, samt 
-              leie av båt eller kajakk. Gården tilbyr også guidede turer med yacht til 
-              destinasjoner som Austevoll og Hardangerfjordene.
+              Det er gode moglegheiter for aktivitetar som fjellturar, fiske i elv og sjø, samt
+              leige av båt eller kajakk. Gården tilbyr også guida turar med yacht til
+              destinasjonar som Austevoll og Hardangerfjordane.
             </p>
             <p className="text-gray-600 mb-4">
-              Gjestene kommer tett på gårdslivet med dyr som sauer, hest og påfugler, og det 
-              er mulighet for å plukke ferske egg om morgenen. Fasilitetene inkluderer et 
-              naust med scene for sosiale sammenkomster.
+              Gjestene kjem tett på gårdslivet med dyr som sauer, hest og påfuglar, og det
+              er moglegheit for å plukke ferske egg om morgonen. Fasilitetane inkluderer eit
+              naust med scene for sosiale samankomstar.
             </p>
 
             <div className="bg-[var(--color-accent)]/20 border-l-4 border-[var(--color-primary)] p-6 mb-6">
-              <h4 className="font-bold text-[var(--color-dark)] mb-2">🏖️ Fasiliteter</h4>
+              <h4 className="font-bold text-[var(--color-dark)] mb-2">🏖️ Fasilitetar</h4>
               <ul className="text-gray-700 space-y-2">
                 <li>• Sanitærbygg med dusj og toalett</li>
-                <li>• Strøm til bobil/campingvogn</li>
-                <li>• Tømming av toalett</li>
-                <li>• Vannfylling</li>
-                <li>• Vaskemaskin</li>
+                <li>• Straum til bubil/campingvogn</li>
+                <li>• Vassfylling</li>
+                <li>• Vaskemaskin og tørketrommel</li>
                 <li>• WiFi</li>
-                <li>• Grillplasser og peis</li>
-                <li>• Brannslukningsapparat og hjertestarter</li>
+                <li>• Bålpanne</li>
+                <li>• Brannsløkkingsapparat og hjartestartar</li>
               </ul>
             </div>
           </div>
 
           <div>
             <div className="bg-white rounded-lg shadow-lg p-8">
-              <h4 className="text-2xl font-bold text-gray-900 mb-4">Book din opphold</h4>
+              <h4 className="text-2xl font-bold text-gray-900 mb-4">Bestill opphald</h4>
               <p className="text-gray-600 mb-6">
-                Booking gjøres enkelt gjennom vår samarbeidspartner Campio.
+                Bestilling gjerast enkelt gjennom vår samarbeidspartnar Campio.
               </p>
-              
-              <a 
+
+              <a
                 href="https://campio.no/nb/campsite/matland-fjord-camping?rid=66978e05e7f8ff92883c1aaf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block w-full bg-[var(--color-primary)] text-white text-center px-8 py-4 rounded-lg hover:bg-[var(--color-dark)] transition-colors font-bold text-lg mb-4">
-                Book nå via Campio →
+                Bestill no via Campio →
               </a>
 
               <div className="border-t pt-6">
@@ -119,15 +119,15 @@ export default function CampingPage() {
             </div>
 
             <div className="mt-8 bg-[var(--color-accent)]/20 border border-[var(--color-primary)] rounded-lg p-6">
-              <h5 className="font-bold text-[var(--color-dark)] mb-2">🌲 Aktiviteter</h5>
+              <h5 className="font-bold text-[var(--color-dark)] mb-2">🌲 Aktivitetar</h5>
               <ul className="text-gray-700 space-y-1">
-                <li>• Båt- og kajakk-utleie</li>
+                <li>• Båt- og kajakk-utleige</li>
                 <li>• Fiske i fjorden og elva</li>
                 <li>• Naturlig strand og stupetårn</li>
-                <li>• Fotturer i fjellet</li>
+                <li>• Fotturar i fjellet</li>
                 <li>• Besøksgård med dyr</li>
-                <li>• Guidede fjordturer med yacht</li>
-                <li>• Musikkarrangementer i båthuset</li>
+                <li>• Guida fjordturar med yacht</li>
+                <li>• Musikkarrangement i sjøbua</li>
               </ul>
             </div>
           </div>
@@ -135,30 +135,30 @@ export default function CampingPage() {
 
         {/* Prices */}
         <div className="bg-white rounded-lg shadow-lg p-8 mb-12">
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">Priser</h3>
-          
+          <h3 className="text-2xl font-bold text-gray-900 mb-6">Prisar</h3>
+
           <div className="mb-8">
-            <h4 className="font-bold text-xl text-gray-900 mb-4">Utleie</h4>
+            <h4 className="font-bold text-xl text-gray-900 mb-4">Utleige</h4>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="border rounded-lg p-4">
-                <h5 className="font-semibold text-gray-900 mb-2">Kajakker</h5>
+                <h5 className="font-semibold text-gray-900 mb-2">Kajakkar</h5>
                 <p className="text-2xl font-bold text-[var(--color-primary)] mb-1">200 kr</p>
-                <p className="text-gray-600 text-sm">Leige av 2 kajakker i 3 timer</p>
+                <p className="text-gray-600 text-sm">Leige av 2 kajakkar i 3 timar</p>
               </div>
               <div className="border rounded-lg p-4">
                 <h5 className="font-semibold text-gray-900 mb-2">SUP board</h5>
                 <p className="text-2xl font-bold text-[var(--color-primary)] mb-1">200 kr</p>
-                <p className="text-gray-600 text-sm">3 timer</p>
+                <p className="text-gray-600 text-sm">3 timar</p>
               </div>
               <div className="border rounded-lg p-4">
                 <h5 className="font-semibold text-gray-900 mb-2">Båt inkl. bensin</h5>
                 <p className="text-2xl font-bold text-[var(--color-primary)] mb-1">1 050 kr</p>
-                <p className="text-gray-600 text-sm">12 timer</p>
+                <p className="text-gray-600 text-sm">12 timar</p>
               </div>
               <div className="border rounded-lg p-4">
                 <h5 className="font-semibold text-gray-900 mb-2">Båt inkl. bensin</h5>
                 <p className="text-2xl font-bold text-[var(--color-primary)] mb-1">700 kr</p>
-                <p className="text-gray-600 text-sm">6 timer</p>
+                <p className="text-gray-600 text-sm">6 timar</p>
               </div>
             </div>
           </div>
@@ -167,15 +167,15 @@ export default function CampingPage() {
             <h4 className="font-bold text-xl text-gray-900 mb-4">Overnatting</h4>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="border rounded-lg p-4">
-                <h5 className="font-semibold text-gray-900 mb-2">Bobilplass/Vognplass</h5>
+                <h5 className="font-semibold text-gray-900 mb-2">Bubilplass/Vognplass</h5>
                 <p className="text-2xl font-bold text-[var(--color-primary)] mb-1">350 kr</p>
                 <p className="text-gray-600 text-sm">per natt</p>
               </div>
             </div>
           </div>
-          
+
           <p className="text-gray-500 text-sm mt-4">
-            * Se oppdaterte campingpriser og tilgjengelighet på Campio
+            * Sjå oppdaterte bobilprisar og tilgjengelegheit på Campio
           </p>
         </div>
       </main>

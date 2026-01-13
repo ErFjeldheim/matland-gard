@@ -1,0 +1,7 @@
+Connecting to Prisma...
+Orders fetched: 4
+Last 10 orders:
+ID: 1d835383-cb93-413e-91fc-7c384a271caa | Short: 1D835383 | Customer: Erik Hjelm Fjeldheim | Status: paid
+ID: 0e2bb332-f9ea-4b98-ab0a-a0cb55aaf2d6 | Short: 0E2BB332 | Customer: Erik Hjelm Fjeldheim | Status: paid
+ID: ec582fb7-0741-43d8-910e-8b60e7dff66f | Short: EC582FB7 | Customer: Erik Hjelm Fjeldheim | Status: paid
+ID: cf492836-5944-46c4-a092-e1937aa63164 | Short: CF492836 | Customer: Erik Hjelm Fjeldheim | Status: paid

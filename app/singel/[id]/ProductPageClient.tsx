@@ -33,28 +33,28 @@ export default function ProductPageClient({ product }: { product: Product }) {
   const [selectedSize, setSelectedSize] = useState<string>('');
   const [addedToCart, setAddedToCart] = useState(false);
   const { addItem } = useCart();
-  
+
   // Check if this product requires size selection
   const requiresSize = product.name === 'Herregårdssingel' || product.name === 'Grus';
-  
+
   // Get size options based on product
   const getSizeOptions = () => {
     if (product.name === 'Herregårdssingel') return HERREGAARDSSINGEL_SIZE_OPTIONS;
     if (product.name === 'Grus') return GRUS_SIZE_OPTIONS;
     return [];
   };
-  
+
   const SIZE_OPTIONS = getSizeOptions();
-  
+
   // Get price based on selected size
   const getPrice = () => {
     if (!requiresSize) return product.price;
     const sizeOption = SIZE_OPTIONS.find(opt => opt.size === selectedSize);
     return sizeOption ? sizeOption.price : product.price;
   };
-  
+
   const currentPrice = getPrice();
-  
+
   // Get price range for products with size options
   const getPriceRange = () => {
     if (!requiresSize) return null;
@@ -65,12 +65,12 @@ export default function ProductPageClient({ product }: { product: Product }) {
     if (min === max) return null;
     return { min, max };
   };
-  
+
   const priceRange = getPriceRange();
 
   const validateSelection = () => {
     if (requiresSize && !selectedSize) {
-      alert('Vennligst velg en størrelse før du fortsetter.');
+      alert('Ver vennleg og vel ein storleik før du held fram.');
       return false;
     }
     return true;
@@ -78,7 +78,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
 
   const handleAddToCart = () => {
     if (!validateSelection()) return;
-    
+
     addItem({
       productId: product.id,
       productName: requiresSize ? `${product.name} (${selectedSize})` : product.name,
@@ -86,7 +86,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
       size: selectedSize || undefined,
       image: product.image || undefined,
     });
-    
+
     setAddedToCart(true);
     setTimeout(() => setAddedToCart(false), 1000);
   };
@@ -115,27 +115,26 @@ export default function ProductPageClient({ product }: { product: Product }) {
           <span className="text-gray-500 text-sm ml-2">inkl. mva.</span>
         </div>
         <p className="text-gray-600 text-sm">
-          {product.name.toLowerCase().includes('grus') 
-            ? 'per tonn' 
+          {product.name.toLowerCase().includes('grus')
+            ? 'per tonn'
             : product.name.toLowerCase().includes('matte')
-            ? 'per m²'
-            : 'per storsekk (800kg)'}
+              ? 'per m²'
+              : 'per storsekk (800kg)'}
         </p>
       </div>
 
       {requiresSize && (
         <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-3">Velg størrelse</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-3">Vel storleik</h3>
           <div className="grid grid-cols-3 gap-3">
             {SIZE_OPTIONS.map(({ size }) => (
               <button
                 key={size}
                 onClick={() => setSelectedSize(size)}
-                className={`py-3 px-4 rounded-lg border-2 font-medium transition-all cursor-pointer ${
-                  selectedSize === size
-                    ? 'border-[var(--color-primary)] bg-[var(--color-accent)]/20 text-[var(--color-dark)]'
-                    : 'border-gray-300 hover:border-[var(--color-primary)] text-gray-700'
-                }`}
+                className={`py-3 px-4 rounded-lg border-2 font-medium transition-all cursor-pointer ${selectedSize === size
+                  ? 'border-[var(--color-primary)] bg-[var(--color-accent)]/20 text-[var(--color-dark)]'
+                  : 'border-gray-300 hover:border-[var(--color-primary)] text-gray-700'
+                  }`}
               >
                 <div className="text-sm font-semibold">{size}</div>
               </button>
@@ -145,17 +144,17 @@ export default function ProductPageClient({ product }: { product: Product }) {
       )}
 
       <div className="space-y-3">
-        <button 
+        <button
           onClick={handleAddToCart}
           className="w-full bg-[var(--color-primary)] text-white px-6 py-4 rounded-lg hover:bg-[var(--color-dark)] transition-colors font-semibold flex items-center justify-center text-lg cursor-pointer"
         >
           <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
           </svg>
-          {addedToCart ? '✓ Lagt til!' : 'Legg til i handlekurv'}
+          {addedToCart ? '✓ Lagt til!' : 'Legg til i handlekorg'}
         </button>
-        
-        <button 
+
+        <button
           onClick={handleQuickCheckout}
           className="w-full bg-[var(--color-accent)] text-white px-6 py-4 rounded-lg hover:bg-[var(--color-dark)] transition-colors font-semibold flex items-center justify-center text-lg cursor-pointer"
         >

@@ -1,0 +1,33 @@
+Searching for order: 1d835383-cb93-413e-91fc-7c384a271caa
+{
+  "id": "1d835383-cb93-413e-91fc-7c384a271caa",
+  "customerName": "Erik Hjelm Fjeldheim",
+  "customerEmail": "erik@fjelldata.com",
+  "customerPhone": "41246198",
+  "deliveryAddress": "Fjellheimsvegen 66",
+  "totalAmount": 1375000,
+  "status": "paid",
+  "paymentMethod": "stripe",
+  "paymentId": "cs_test_b1epl3OZbon0ry8gxzYlB787fHGQQlwzv3aOFDnYEDByzrAzgSoojCE9SC",
+  "shippingMethod": "shipping_fixed_1500",
+  "createdAt": "2026-01-13T21:18:15.367Z",
+  "updatedAt": "2026-01-13T21:18:27.896Z",
+  "orderItems": [
+    {
+      "id": "e2fb9d35-8e08-4daa-8d04-09d98ee1f0f4",
+      "orderId": "1d835383-cb93-413e-91fc-7c384a271caa",
+      "productId": "550e8400-e29b-41d4-a716-446655440005",
+      "quantity": 3,
+      "price": 200000,
+      "createdAt": "2026-01-13T21:18:15.367Z"
+    },
+    {
+      "id": "04763f8c-ca96-4025-8b92-a0737d272f73",
+      "orderId": "1d835383-cb93-413e-91fc-7c384a271caa",
+      "productId": "550e8400-e29b-41d4-a716-446655440004",
+      "quantity": 1,
+      "price": 175000,
+      "createdAt": "2026-01-13T21:18:15.367Z"
+    }
+  ]
+}

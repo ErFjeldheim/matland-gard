@@ -35,39 +35,54 @@ export async function POST(req: NextRequest) {
             if (orderId) {
                 console.log(`Processing successful payment for order: ${orderId}`);
 
-                // Update order status to paid
-                const order = await prisma.order.update({
+                // Find the order first to check its current status
+                const existingOrder = await prisma.order.findUnique({
                     where: { id: orderId },
-                    data: { status: 'paid' },
-                    include: {
-                        orderItems: {
-                            include: {
-                                product: true,
-                            },
-                        },
-                    },
                 });
 
-                // Send confirmation emails
-                try {
-                    const orderEmailData = {
-                        orderId: order.id,
-                        customerName: order.customerName,
-                        customerEmail: order.customerEmail,
-                        customerPhone: order.customerPhone,
-                        deliveryAddress: order.deliveryAddress,
-                        totalAmount: order.totalAmount,
-                        shippingMethod: order.shippingMethod,
-                        orderItems: order.orderItems,
-                    };
+                if (!existingOrder) {
+                    console.error(`Order not found in webhook: ${orderId}`);
+                    return NextResponse.json({ error: 'Order not found' }, { status: 404 });
+                }
 
-                    await Promise.all([
-                        sendCustomerOrderConfirmation(orderEmailData),
-                        sendAdminOrderNotification(orderEmailData),
-                    ]);
-                    console.log(`Confirmation emails sent for order: ${orderId}`);
-                } catch (emailError) {
-                    console.error(`Error sending emails for order ${orderId}:`, emailError);
+                // Only update and send emails if the order is still pending
+                if (existingOrder.status === 'pending') {
+                    const order = await prisma.order.update({
+                        where: { id: orderId },
+                        data: { status: 'paid' },
+                        include: {
+                            orderItems: {
+                                include: {
+                                    product: true,
+                                },
+                            },
+                        },
+                    });
+
+                    // Send confirmation emails
+                    try {
+                        const orderEmailData = {
+                            orderId: order.id,
+                            customerName: order.customerName,
+                            customerEmail: order.customerEmail,
+                            customerPhone: order.customerPhone,
+                            deliveryAddress: order.deliveryAddress,
+                            totalAmount: order.totalAmount,
+                            shippingMethod: order.shippingMethod,
+                            status: order.status,
+                            orderItems: order.orderItems as any,
+                        };
+
+                        await Promise.all([
+                            sendCustomerOrderConfirmation(orderEmailData),
+                            sendAdminOrderNotification(orderEmailData),
+                        ]);
+                        console.log(`Confirmation emails sent for order: ${orderId}`);
+                    } catch (emailError) {
+                        console.error(`Error sending emails for order ${orderId}:`, emailError);
+                    }
+                } else {
+                    console.log(`Order ${orderId} already has status: ${existingOrder.status}. Skipping duplicate emails.`);
                 }
             }
             break;

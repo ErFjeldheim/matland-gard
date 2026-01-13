@@ -6,16 +6,16 @@ import { notFound } from 'next/navigation';
 
 export const dynamic = 'force-dynamic';
 
-export default async function OrderPage({ 
+export default async function OrderPage({
   params,
-  searchParams 
-}: { 
+  searchParams
+}: {
   params: Promise<{ id: string }>;
   searchParams: Promise<{ success?: string }>;
 }) {
   const { id } = await params;
   const { success } = await searchParams;
-  
+
   const order = await prisma.order.findUnique({
     where: { id },
     include: {
@@ -33,13 +33,9 @@ export default async function OrderPage({
 
   // If coming from successful Stripe payment, mark order as paid
   if (success === 'true' && order.status === 'pending' && order.paymentMethod === 'stripe') {
-    await prisma.order.update({
+    const updatedOrder = await prisma.order.update({
       where: { id },
       data: { status: 'paid' },
-    });
-    // Refresh the order data
-    const updatedOrder = await prisma.order.findUnique({
-      where: { id },
       include: {
         orderItems: {
           include: {
@@ -48,9 +44,33 @@ export default async function OrderPage({
         },
       },
     });
-    if (updatedOrder) {
-      Object.assign(order, updatedOrder);
+
+    // Send confirmation emails (fallback if webhook is slow or fails)
+    try {
+      const { sendCustomerOrderConfirmation, sendAdminOrderNotification } = await import('@/lib/email');
+      const orderEmailData = {
+        orderId: updatedOrder.id,
+        customerName: updatedOrder.customerName,
+        customerEmail: updatedOrder.customerEmail,
+        customerPhone: updatedOrder.customerPhone,
+        deliveryAddress: updatedOrder.deliveryAddress,
+        totalAmount: updatedOrder.totalAmount,
+        shippingMethod: updatedOrder.shippingMethod,
+        status: updatedOrder.status,
+        orderItems: updatedOrder.orderItems,
+      };
+
+      await Promise.all([
+        sendCustomerOrderConfirmation(orderEmailData),
+        sendAdminOrderNotification(orderEmailData),
+      ]);
+      console.log(`Confirmation emails sent via success page fallback for order: ${id}`);
+    } catch (emailError) {
+      console.error(`Error sending emails via success page fallback for order ${id}:`, emailError);
     }
+
+    // Update local order object
+    Object.assign(order, updatedOrder);
   }
 
   const statusTexts: Record<string, string> = {
@@ -112,8 +132,8 @@ export default async function OrderPage({
                 {order.shippingMethod && (
                   <p>
                     <span className="font-medium">Levering:</span>{' '}
-                    {order.shippingMethod === 'pickup' 
-                      ? 'Henting i Holmefjord' 
+                    {order.shippingMethod === 'pickup'
+                      ? 'Henting i Holmefjord'
                       : 'Vi sender tilbud på frakt'}
                   </p>
                 )}

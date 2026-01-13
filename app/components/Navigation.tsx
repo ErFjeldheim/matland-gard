@@ -17,7 +17,7 @@ export default function Navigation() {
       .then(data => setIsAdmin(data.isAuthenticated))
       .catch(() => setIsAdmin(false));
   }, [pathname]);
-  
+
   return (
     <nav className="bg-[var(--color-dark)]">
       <div className="container mx-auto px-4">
@@ -25,39 +25,39 @@ export default function Navigation() {
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <h1 className="text-2xl font-bold text-white hover:text-[var(--color-accent)] transition-colors">
-              Matland Gard
+              Matland Gård
             </h1>
           </Link>
 
           {/* Navigation Links */}
           <ul className="flex space-x-8">
             <li>
-              <Link 
-                href="/singel" 
+              <Link
+                href="/singel"
                 className="text-white hover:text-[var(--color-accent)] transition-colors font-medium"
               >
                 Singel & Stein
               </Link>
             </li>
             <li>
-              <Link 
-                href="/camping" 
+              <Link
+                href="/camping"
                 className="text-white hover:text-[var(--color-accent)] transition-colors font-medium"
               >
-                Camping
+                Bobilparkering
               </Link>
             </li>
             <li>
-              <Link 
-                href="/arrangement" 
+              <Link
+                href="/arrangement"
                 className="text-white hover:text-[var(--color-accent)] transition-colors font-medium"
               >
-                Arrangement
+                Selskapslokale
               </Link>
             </li>
             <li>
-              <Link 
-                href="/kontakt" 
+              <Link
+                href="/kontakt"
                 className="text-white hover:text-[var(--color-accent)] transition-colors font-medium"
               >
                 Kontakt oss
@@ -65,8 +65,8 @@ export default function Navigation() {
             </li>
             {isAdmin && (
               <li>
-                <Link 
-                  href="/admin" 
+                <Link
+                  href="/admin"
                   className="text-white hover:text-[var(--color-accent)] transition-colors font-medium"
                 >
                   Kontrollpanel
@@ -74,10 +74,10 @@ export default function Navigation() {
               </li>
             )}
           </ul>
-          
+
           {/* Cart Icon - Only show on /singel page */}
           {pathname?.startsWith('/singel') && (
-            <Link 
+            <Link
               href="/handlekurv"
               className="relative text-white hover:text-[var(--color-accent)] transition-colors"
             >

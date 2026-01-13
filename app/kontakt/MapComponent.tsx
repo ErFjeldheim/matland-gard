@@ -42,7 +42,7 @@ export default function MapComponent() {
       />
       <Marker position={position} icon={icon}>
         <Popup>
-          <strong>Matland Gard</strong><br />
+          <strong>Matland Gård</strong><br />
           Ådlandsvegen 30<br />
           5642 Holmefjord
         </Popup>

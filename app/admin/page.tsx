@@ -12,7 +12,7 @@ export default async function AdminDashboard() {
   // Check authentication
   const cookieStore = await cookies();
   const isAuthenticated = cookieStore.get('admin-auth')?.value === 'authenticated';
-  
+
   if (!isAuthenticated) {
     redirect('/admin/login');
   }
@@ -59,15 +59,21 @@ export default async function AdminDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       <header className="bg-[var(--color-dark)] text-white">
         <Navigation />
       </header>
 
-      <main className="container mx-auto px-4 py-12">
+      <main className="container mx-auto px-4 py-12 flex-grow">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold text-gray-900">Kontrollpanel</h1>
           <div className="flex gap-4">
+            <Link
+              href="/admin/settings"
+              className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+            >
+              Innstillingar
+            </Link>
             <Link
               href="/admin/products"
               className="px-4 py-2 bg-[var(--color-primary)] text-white rounded-lg hover:bg-[var(--color-dark)] transition-colors"
@@ -149,7 +155,7 @@ export default async function AdminDashboard() {
           <div className="px-6 py-4 border-b border-gray-200">
             <h2 className="text-2xl font-bold text-gray-900">Alle Ordrer</h2>
           </div>
-          
+
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead className="bg-gray-50">
