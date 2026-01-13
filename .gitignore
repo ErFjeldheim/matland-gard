@@ -44,3 +44,4 @@ coverage/
 !prisma/migrations/**/*.sql
 tsconfig.tsbuildinfo
 commit.md
+commit_message.md

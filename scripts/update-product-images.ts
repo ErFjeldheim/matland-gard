@@ -18,17 +18,23 @@ async function updateProductImages() {
       { name: 'Herregårdssingel', image: '/images/products/herregaardssingel.jpg' },
       { name: 'Kirkegårdssingel', image: '/images/products/kirkegaardssingel.jpg' },
       { name: 'Elvestein', image: '/images/products/elvestein-hauger.jpg' },
+      { name: 'Grus', image: '/images/products/grus-hauger.jpg' },
       { name: 'Grus 0-16mm', image: '/images/products/grus-hauger.jpg' },
       { name: 'Grus 0-32mm', image: '/images/products/grus-hauger.jpg' },
       { name: 'Sand', image: '/images/products/sand-lekelastebil.jpg' },
+      { name: 'Singelmatter ECCOgravel', image: '/images/products/eurogravel-matte.jpg' },
     ];
 
     for (const update of updates) {
-      await prisma.product.updateMany({
+      const result = await prisma.product.updateMany({
         where: { name: update.name },
         data: { image: update.image },
       });
-      console.log(`✅ Oppdatert ${update.name} med bilde: ${update.image}`);
+      if (result.count > 0) {
+        console.log(`✅ Oppdatert ${update.name} (${result.count} stk) med bilde: ${update.image}`);
+      } else {
+        console.log(`ℹ️ Fant ingen produkter med navn "${update.name}"`);
+      }
     }
 
     console.log('\n✅ Alle produktbilder oppdatert!');
