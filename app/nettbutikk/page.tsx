@@ -45,8 +45,8 @@ export default async function SingelPage() {
               <h4 className="font-semibold text-gray-900 mb-2">📦 Fastpris på frakt</h4>
               <p className="text-gray-600 mb-2">Pris per storsekk/tonn:</p>
               <ul className="text-gray-600 space-y-1 ml-4">
-                <li>• Bergen, Vaksdal, Samnanger, Bjørnafjorden, Austevoll: <b>1000 kr</b></li>
-                <li>• Sotra, Askøy, Øygarden, Voss: <b>1500 kr</b></li>
+                <li>• Bergen, Vaksdal, Samnanger, Bjørnafjorden: <b>1000 kr</b></li>
+                <li>• Austevoll, Sotra, Askøy, Øygarden, Voss: <b>1500 kr</b></li>
               </ul>
               <p className="text-gray-600 mt-3 text-sm">
                 <i>Eksempel: 2 storsekkar til Bergen = 2000 kr frakt</i>

@@ -95,18 +95,6 @@ export default function ArrangementPage() {
                   <p className="text-gray-600 text-sm">Ominnreia til unikt eventlokale</p>
                   <p className="text-gray-600 text-sm">Fleksibel kapasitet for alle typar selskap</p>
                 </div>
-
-                <div className="border-l-4 border-[var(--color-primary)] pl-4">
-                  <h5 className="font-bold text-gray-900">Fjordutsikt</h5>
-                  <p className="text-gray-600 text-sm">Spektakulær plassering ved vatnet</p>
-                  <p className="text-gray-600 text-sm">Perfekt for utandørs seremoniar</p>
-                </div>
-
-                <div className="border-l-4 border-[var(--color-primary)] pl-4">
-                  <h5 className="font-bold text-gray-900">Historisk atmosfære</h5>
-                  <p className="text-gray-600 text-sm">400 år gammal gard</p>
-                  <p className="text-gray-600 text-sm">Tradisjon møter moderne komfort</p>
-                </div>
               </div>
             </div>
 

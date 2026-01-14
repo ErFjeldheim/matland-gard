@@ -241,7 +241,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                   disabled={loading}
                 >
                   <div className="font-semibold">Frakt: Sone 1</div>
-                  <div className="text-xs text-gray-600">Bergen, Vaksdal, Samnanger, Bjørnafjorden, Austevoll</div>
+                  <div className="text-xs text-gray-600">Bergen, Vaksdal, Samnanger, Bjørnafjorden</div>
                   <div className="text-sm font-bold text-[var(--color-primary)]">{1000 * totalUnits} kr</div>
                 </button>
 
@@ -256,7 +256,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                   disabled={loading}
                 >
                   <div className="font-semibold">Frakt: Sone 2</div>
-                  <div className="text-xs text-gray-600">Sotra, Askøy, Øygarden, Voss</div>
+                  <div className="text-xs text-gray-600">Austevoll, Sotra, Askøy, Øygarden, Voss</div>
                   <div className="text-sm font-bold text-[var(--color-primary)]">{1500 * totalUnits} kr</div>
                 </button>
 
