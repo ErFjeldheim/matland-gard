@@ -5,9 +5,13 @@ import ProductCards from '@/app/components/ProductCards';
 type Product = {
   id: string;
   name: string;
+  slug: string;
   description: string | null;
   longDescription: string | null;
   price: number;
+  stock: number;
+  stockUnit: string;
+  isActive: boolean;
   image: string | null;
   images: string[];
   videoUrl: string | null;
