@@ -1,54 +1,92 @@
 # Matland Gård - E-commerce Platform
 
-> **Note**: This is a private commercial project for Matland Gård. The code is published on GitHub for portfolio and job application purposes only. It is not open source and should not be copied or reused.
+> **Note**: This is a private commercial project for Matland Gård. The code is shared for portfolio purposes only. It is not open source and should not be copied or reused.
 
-Next.js 16 + Prisma 7 + PostgreSQL e-commerce solution for selling aggregates (stone, gravel, sand).
+A modern Next.js 16 e-commerce solution for selling aggregates (stone, gravel, sand) and other farm products, featuring full order management and automated payment processing.
 
-## Tech Stack
+## 🚀 Tech Stack
 
-- **Framework**: Next.js 16.1.1 (React 19)
-- **Database**: PostgreSQL 15
-- **ORM**: Prisma 6.2.0
-- **Runtime**: Node.js 20
-- **Styling**: Tailwind CSS v4
-- **Container**: Docker + Docker Compose
+- **Framework**: [Next.js 16.1.1](https://nextjs.org/) (React 19)
+- **Database**: [PostgreSQL 15](https://www.postgresql.org/)
+- **ORM**: [Prisma 6.19.1](https://www.prisma.io/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Payments**: [Stripe](https://stripe.com/)
+- **Maps**: [Leaflet](https://leafletjs.com/)
+- **Email**: [Nodemailer](https://nodemailer.com/)
+- **Containerization**: [Docker](https://www.docker.com/)
 
 ---
 
-## Project Structure
+## ✨ Features
+
+- **Product Management**: Full catalog with image galleries and slug-based routing.
+- **Shopping Cart & Checkout**: Seamless Stripe integration for secure payments.
+- **Order System**: Automated order confirmation, delivery handling, and status tracking.
+- **Email Notifications**: Automatic customer and admin alerts for new orders.
+- **Interactive Maps**: Production location display using Leaflet.
+- **Admin Dashboard**: Internal management for products and orders.
+- **Production Ready**: Optimized Docker setup and automated migrations.
+
+---
+
+## 📂 Project Structure
 
 ```
 .
-├── app/                    # Next.js app directory
-│   ├── api/               # API routes
-│   │   └── products/      # Product endpoints
-│   └── page.tsx           # Homepage
-├── lib/                   # Utility libraries
-│   └── prisma.ts          # Prisma client configuration
-├── prisma/                # Prisma schema and migrations
-│   ├── schema.prisma      # Database schema
-│   └── seed.ts            # Database seeding
-├── public/                # Static assets
-├── docker-compose.yml     # Production configuration
-├── docker-compose.dev.yml # Development configuration
-├── Dockerfile             # Docker image definition
-└── package.json           # Node.js dependencies
+├── app/                    # Next.js app directory (Pages, API, Components)
+├── prisma/                # Database schema and migration history
+├── public/                # Static assets (images, logos)
+├── scripts/               # Utility scripts for data sync and maintenance
+├── lib/                   # Shared utility libraries (Prisma client, etc.)
+├── Dockerfile             # Production container definition
+├── docker-compose.yml     # Production orchestration
+└── *.md                   # Documentation for specific systems (Order, Payment, etc.)
 ```
 
-## Features
-
-- Server-side rendered product catalog
-- RESTful API endpoints
-- PostgreSQL database with Prisma ORM
-- Docker containerization
-- Automated deployment via GitHub Actions
-- Production-ready setup with health checks
+### Technical Documentation
+Detailed guides for specific systems:
+- [Order System](file:///home/erik/Documents/matland-gard/ORDRESYSTEM.md)
+- [Payment Integration](file:///home/erik/Documents/matland-gard/BETALING.md)
+- [Email Setup](file:///home/erik/Documents/matland-gard/EMAIL_SETUP.md)
+- [Image Management](file:///home/erik/Documents/matland-gard/BILDER.md)
 
 ---
 
-## License
+## 🛠️ Getting Started
 
-© 2026 Matland Gård. All rights reserved.
+### 1. Environment Setup
+Copy the example environment file and fill in required keys:
+```bash
+cp .env.example .env
+```
 
-This project is proprietary and confidential. Unauthorized copying, distribution, or use of this software, via any medium, is strictly prohibited.
+### 2. Installation
+```bash
+npm install
+```
+
+### 3. Database Initialization
+```bash
+npx prisma migrate dev
+npx prisma generate
+```
+
+### 4. Development
+```bash
+npm run dev
+```
+
+---
+
+## 🚢 Deployment
+
+The project is designed to run on a Debian server using Docker Compose.
+- **Production Server**: `ssh debian-server`
+- **Build & Run**: `docker compose up -d --build`
+
+---
+
+## 📜 License
+
+© 2026 Matland Gård. All rights reserved. This project is proprietary and confidential.
 
