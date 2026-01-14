@@ -91,6 +91,16 @@ export default function CampingPage() {
                 <li>• Brannsløkkingsapparat og hjartestartar</li>
               </ul>
             </div>
+
+            <div className="bg-gray-100 rounded-lg p-6 mb-6 border border-gray-200">
+              <h4 className="font-bold text-[var(--color-dark)] mb-3">📋 Ordensreglar</h4>
+              <ul className="text-gray-700 space-y-2 text-sm">
+                <li>• <b>Innsjekk/Utsjekk:</b> Innsjekk frå kl. 14:00. Utsjekk innan kl. 12:00.</li>
+                <li>• <b>Ro på plassen:</b> Det skal vere ro mellom kl. 23:00 og 07:00.</li>
+                <li>• <b>Avfall:</b> Kast bos/avfall i tilviste containerar.</li>
+                <li>• <b>Branntryggleik:</b> Grill og bål berre på tilviste plassar.</li>
+              </ul>
+            </div>
           </div>
 
           <div>

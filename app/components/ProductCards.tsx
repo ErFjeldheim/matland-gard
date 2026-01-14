@@ -76,7 +76,7 @@ export default function ProductCards({ products }: ProductCardsProps) {
               {/* Call to Action */}
               <Link
                 href={`/nettbutikk/${product.slug}`}
-                className="block w-full bg-[var(--color-primary)] text-white px-6 py-3 rounded-lg hover:bg-[var(--color-dark)] transition-colors font-semibold text-center"
+                className="block w-full bg-[var(--color-primary)] text-white px-6 py-3 rounded-lg hover:bg-[var(--color-secondary)] active:bg-[var(--color-dark)] focus:ring-4 focus:ring-[var(--color-primary)]/20 transition-all font-semibold text-center shadow-sm hover:shadow-md"
               >
                 Sjå produkt
               </Link>

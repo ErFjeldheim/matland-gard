@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { updateOrderStatus } from '@/app/actions';
 
 interface OrderStatusUpdaterProps {
   orderId: string;
@@ -24,31 +25,23 @@ export default function OrderStatusUpdater({ orderId, currentStatus }: OrderStat
 
   const handleUpdate = async (newStatus: string) => {
     if (newStatus === status) return;
-    
+
     setLoading(true);
     setMessage('');
 
     try {
-      const response = await fetch('/api/admin/orders/update-status', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ orderId, status: newStatus }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setStatus(newStatus);
-        setMessage('Status oppdatert!');
-        setTimeout(() => {
-          router.refresh();
-          setMessage('');
-        }, 1000);
-      } else {
-        setMessage(data.error || 'Kunne ikke oppdatere status');
-      }
+      await updateOrderStatus(orderId, newStatus);
+      setStatus(newStatus);
+      setMessage('Status oppdatert!');
+      // Router refresh is handled in the server action via revalidatePath, 
+      // but we can keep it here for client-side feedback if needed, 
+      // though revalidatePath is usually sufficient. 
+      // In this case, since we updated local state, we're good.
+      setTimeout(() => {
+        setMessage('');
+      }, 2000);
     } catch (error) {
-      setMessage('Feil ved oppdatering');
+      setMessage(error instanceof Error ? error.message : 'Feil ved oppdatering');
     } finally {
       setLoading(false);
     }
@@ -73,11 +66,10 @@ export default function OrderStatusUpdater({ orderId, currentStatus }: OrderStat
             key={s.value}
             onClick={() => handleUpdate(s.value)}
             disabled={loading || status === s.value}
-            className={`px-4 py-2 rounded-lg font-medium transition-all border-2 cursor-pointer ${
-              status === s.value
-                ? statusColors[s.value] + ' cursor-default'
-                : 'bg-white text-gray-700 border-gray-300 hover:border-gray-400'
-            } disabled:opacity-50 disabled:cursor-not-allowed`}
+            className={`px-4 py-2 rounded-lg font-medium transition-all border-2 cursor-pointer ${status === s.value
+              ? statusColors[s.value] + ' cursor-default'
+              : 'bg-white text-gray-700 border-gray-300 hover:border-gray-400'
+              } disabled:opacity-50 disabled:cursor-not-allowed`}
           >
             {s.label}
             {status === s.value && ' ✓'}

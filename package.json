@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "update-images": "tsx scripts/update-product-images.ts"
+    "update-images": "tsx scripts/update-product-images.ts",
+    "qa:env": "tsx scripts/qa-verify-env.ts",
+    "qa:data": "tsx scripts/qa-verify-data.ts",
+    "qa:orders": "tsx scripts/qa-diagnose-orders.ts"
   },
   "dependencies": {
     "@prisma/adapter-pg": "6.19.1",

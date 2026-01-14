@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { deleteOrder } from '@/app/actions';
 
 interface DeleteOrderButtonProps {
   orderId: string;
@@ -17,23 +18,17 @@ export default function DeleteOrderButton({ orderId, orderNumber }: DeleteOrderB
     setLoading(true);
 
     try {
-      const response = await fetch('/api/admin/orders/delete', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ orderId }),
-      });
-
-      if (response.ok) {
-        router.push('/admin');
-        router.refresh();
-      } else {
-        const data = await response.json();
-        alert(data.error || 'Kunne ikke slette ordre');
-        setLoading(false);
-        setShowConfirm(false);
-      }
+      await deleteOrder(orderId);
+      // Determine redirection based on current path? 
+      // The server action revalidates /admin.
+      // Ideally we shouldn't need to manually push if we are on the list page, 
+      // but if we are on the detail page, we should redirect.
+      // Assuming this button is used on detail page mainly or list page.
+      // If on list page, revalidatePath is enough. If on detail page, we need to go back.
+      // The original code did router.push('/admin').
+      router.push('/admin');
     } catch (error) {
-      alert('Feil ved sletting av ordre');
+      alert(error instanceof Error ? error.message : 'Feil ved sletting av ordre');
       setLoading(false);
       setShowConfirm(false);
     }

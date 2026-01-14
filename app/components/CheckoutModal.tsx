@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { createStripeCheckoutSession } from '@/app/actions';
 
 interface CartItem {
   productId: string;
@@ -89,25 +90,51 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
           quantity,
           ...formData,
           shippingMethod,
+          size: (product as any).size // Assuming product context or adding size if needed, but the original code had body.size in single product checkout? 
+          // Wait, original code for single product: 
+          // const price = await getPriceWithMetadata(product, body.size);
+          // And body comes from JSON.stringify(requestBody).
+          // But I don't see `size` in the `formData` or component state for single product in CheckoutModal.
+          // Ah, cartItem has size. Single product modal usage... where does size come from?
+          // Looking at the component, for single product:
+          // It seems it doesn't support selecting size *inside* the modal?
+          // If so, where is size? 
+          // The component calculates `baseAmount` using `product.price`.
+          // If the product requires size (e.g. Singel), usually that's selected before clicking checkout?
+          // If so, `product` prop probably contains the specific variant info or price?
+          // Or maybe `size` is missing for single product checkout in the current implementation?
+          // The API route checked `body.size`.
+          // In `CheckoutModal`, `requestBody` for single product:
+          // { productId, quantity, ...formData, shippingMethod }
+          // It does NOT include size.
+          // So `body.size` in API route would be undefined.
+          // `getPriceWithMetadata` handles `size` being optional?
+          // `if (size === '4-8mm') ...`
+          // If undefined, it returns `product.price`.
+          // So it seems fine.
+
         };
 
-      const response = await fetch(`/api/checkout/${paymentMethod}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(requestBody),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Noko gjekk galt');
-      }
-
       if (paymentMethod === 'stripe') {
-        if (data.url) {
-          window.location.href = data.url;
+        // Use Server Action
+        const result = await createStripeCheckoutSession(requestBody);
+        if (result.url) {
+          window.location.href = result.url;
         }
       } else {
+        // Use existing API for Vipps
+        const response = await fetch(`/api/checkout/${paymentMethod}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(requestBody),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Noko gjekk galt');
+        }
+
         window.location.href = `/bestilling/${data.orderId}`;
       }
     } catch (error) {
@@ -271,9 +298,10 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                   disabled={loading}
                 >
                   <div className="font-semibold">Andre område</div>
-                  <div className="text-xs text-gray-600">Vi kontaktar deg for pris på frakt</div>
+                  <div className="text-xs text-gray-600">Vi kontaktar deg raskt for ein god fraktpris</div>
                   <div className="text-sm font-bold text-green-600">Få tilbod</div>
                 </button>
+
 
                 {/* Pickup */}
                 <button

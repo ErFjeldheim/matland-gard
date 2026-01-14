@@ -101,7 +101,7 @@ export default async function HomePage() {
               <div className="p-6 flex-grow">
                 <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-[var(--color-primary)] transition-colors">Matland Fjordcamp</h3>
                 <p className="text-gray-600 mb-4">
-                  Opplev naturen ved fjorden. Bestill plass til bobil eller hytte
+                  Opplev naturen ved fjorden. Bestill plass til bobil eller jurtetelt
                   for ei uforgløymeleg oppleving.
                 </p>
                 <div className="text-[var(--color-primary)] font-semibold flex items-center mt-auto">
