@@ -54,15 +54,31 @@ export async function sendCustomerOrderConfirmation(orderData: OrderEmailData) {
     )
     .join('\n');
 
-  const shippingText = orderData.shippingMethod === 'pickup'
-    ? 'Henting på staden'
-    : orderData.shippingMethod === 'shipping_fixed_1000'
-      ? 'Fastpris frakt (Sone 1): 1000 NOK'
-      : orderData.shippingMethod === 'shipping_fixed_1500'
-        ? 'Fastpris frakt (Sone 2): 1500 NOK'
-        : orderData.shippingMethod === 'shipping_quote'
-          ? 'Vi kontaktar deg med tilbod på frakt'
-          : 'Ikkje spesifisert';
+  const itemsTotal = (orderData.orderItems || []).reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const shippingCost = orderData.totalAmount - itemsTotal;
+
+  let shippingText = 'Ikkje spesifisert';
+
+  if (orderData.shippingMethod === 'pickup') {
+    shippingText = 'Henting på staden';
+  } else if (orderData.shippingMethod === 'shipping_quote') {
+    shippingText = 'Vi kontaktar deg med tilbod på frakt';
+  } else {
+    let methodName = 'Frakt';
+    if (orderData.shippingMethod === 'shipping_fixed_1000') methodName = 'Fastpris frakt (Sone 1)';
+    if (orderData.shippingMethod === 'shipping_fixed_1500') methodName = 'Fastpris frakt (Sone 2)';
+
+    // Check if we have a valid calculated shipping cost that is greater than 0
+    if (shippingCost > 0) {
+      shippingText = `${methodName}: ${shippingCost / 100} NOK`;
+    } else {
+      // Fallback if calculation yields 0 or negative (shouldn't happen for fixed shipping but good for safety)
+      // or if it really is free shipping
+      if (orderData.shippingMethod === 'shipping_fixed_1000') shippingText = 'Fastpris frakt (Sone 1): 1000 NOK';
+      else if (orderData.shippingMethod === 'shipping_fixed_1500') shippingText = 'Fastpris frakt (Sone 2): 1500 NOK';
+      else shippingText = `${methodName}: ${shippingCost / 100} NOK`;
+    }
+  }
 
   const isPaid = orderData.status === 'paid' || orderData.status === 'delivered';
   const totalText = isPaid ? 'Totalbeløp (betalt)' : 'Totalt å betale';
@@ -180,15 +196,28 @@ export async function sendAdminOrderNotification(orderData: OrderEmailData) {
     )
     .join('\n');
 
-  const shippingText = orderData.shippingMethod === 'pickup'
-    ? 'Henting på staden'
-    : orderData.shippingMethod === 'shipping_fixed_1000'
-      ? 'Fastpris frakt (Sone 1): 1000 NOK'
-      : orderData.shippingMethod === 'shipping_fixed_1500'
-        ? 'Fastpris frakt (Sone 2): 1500 NOK'
-        : orderData.shippingMethod === 'shipping_quote'
-          ? 'Tilbod på frakt må sendast'
-          : 'Ikkje spesifisert';
+  const itemsTotal = (orderData.orderItems || []).reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const shippingCost = orderData.totalAmount - itemsTotal;
+
+  let shippingText = 'Ikkje spesifisert';
+
+  if (orderData.shippingMethod === 'pickup') {
+    shippingText = 'Henting på staden';
+  } else if (orderData.shippingMethod === 'shipping_quote') {
+    shippingText = 'Tilbod på frakt må sendast';
+  } else {
+    let methodName = 'Frakt';
+    if (orderData.shippingMethod === 'shipping_fixed_1000') methodName = 'Fastpris frakt (Sone 1)';
+    if (orderData.shippingMethod === 'shipping_fixed_1500') methodName = 'Fastpris frakt (Sone 2)';
+
+    if (shippingCost > 0) {
+      shippingText = `${methodName}: ${shippingCost / 100} NOK`;
+    } else {
+      if (orderData.shippingMethod === 'shipping_fixed_1000') shippingText = 'Fastpris frakt (Sone 1): 1000 NOK';
+      else if (orderData.shippingMethod === 'shipping_fixed_1500') shippingText = 'Fastpris frakt (Sone 2): 1500 NOK';
+      else shippingText = `${methodName}: ${shippingCost / 100} NOK`;
+    }
+  }
 
   const brandPrimary = '#1D546D';
   const brandBackground = '#F3F4F4';
