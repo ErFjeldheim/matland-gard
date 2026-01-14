@@ -57,8 +57,19 @@ async function main() {
   ];
 
   for (const product of products) {
+    // Generate slug from product name
+    const slug = product.name
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '');
+
     const created = await prisma.product.create({
-      data: product,
+      data: {
+        ...product,
+        slug,
+      },
     });
     console.log(`✅ Opprettet: ${created.name} - ${(created.price / 100).toFixed(2)} kr`);
   }
