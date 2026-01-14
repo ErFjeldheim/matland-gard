@@ -16,6 +16,7 @@ async function main() {
       {
         id: '550e8400-e29b-41d4-a716-446655440001',
         name: 'Herregårdssingel',
+        slug: 'herregardssingel',
         description: 'Eksklusiv singel med unik farge',
         longDescription: 'Herregårdssingel er en eksklusiv singel med unik farge og struktur. Perfekt til innkjørsler, stier og som dekorativt dekke. Leveres i tre størrelser.',
         price: 162500,
@@ -40,6 +41,7 @@ async function main() {
       {
         id: '550e8400-e29b-41d4-a716-446655440004',
         name: 'Grus',
+        slug: 'grus',
         description: 'Naturlig knust stein i ulike fraksjoner. Perfekt som fundamentering, drenering eller til veier.',
         longDescription: 'Vårt grus er naturlig knust stein som egner seg utmerket til en rekke formål. Produsert fra lokal naturstein og sortert i ulike fraksjoner for å møte dine behov. Ideelt til fundamentering, drenering, veier og anleggsverk. Gruset leveres i Big Bag à 1000 kg.',
         price: 59900,
@@ -58,6 +60,7 @@ async function main() {
       {
         id: '550e8400-e29b-41d4-a716-446655440003',
         name: 'Elvestein',
+        slug: 'elvestein',
         description: 'Naturlig rundslipte steiner',
         longDescription: null,
         price: 200000,
@@ -74,6 +77,7 @@ async function main() {
       {
         id: '550e8400-e29b-41d4-a716-446655440006',
         name: 'Sand',
+        slug: 'sand',
         description: 'Ren sand til lekeplass',
         longDescription: null,
         price: 175000,
@@ -91,6 +95,7 @@ async function main() {
       {
         id: '550e8400-e29b-41d4-a716-446655440002',
         name: 'Kirkegårdssingel',
+        slug: 'kirkegardssingel',
         description: 'Klassisk hvit singel',
         longDescription: null,
         price: 200000,
@@ -106,6 +111,7 @@ async function main() {
       {
         id: '9c68ced4-f7ac-48a5-9858-18d4060597a0',
         name: 'Singelmatter ECCOgravel',
+        slug: 'singelmatter-eccogravel',
         description: 'Praktisk matte for sikker plassering av singel. Hindrer ugress og gir god drenering. Pris per m².',
         longDescription: null,
         price: 24900,
