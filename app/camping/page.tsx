@@ -24,7 +24,7 @@ export default function CampingPage() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-dark)]/80 via-[var(--color-primary)]/30 to-transparent flex items-end">
             <div className="p-12 text-white">
-              <h2 className="text-5xl font-bold mb-4">Bobilparkering</h2>
+              <h2 className="text-4xl sm:text-5xl font-bold mb-4">Bobilparkering</h2>
               <p className="text-2xl">Opplev naturen ved fjorden</p>
               <p className="text-xl mt-2 text-[var(--color-accent)] font-semibold">Sesong: April - Oktober</p>
             </div>

@@ -24,7 +24,7 @@ export default function ArrangementPage() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-dark)]/80 via-[var(--color-primary)]/30 to-transparent flex items-end">
             <div className="p-12 text-white">
-              <h2 className="text-5xl font-bold mb-4">Selskapslokale</h2>
+              <h2 className="text-4xl sm:text-5xl font-bold mb-4">Selskapslokale</h2>
               <p className="text-2xl mb-2">Skaper minnerike stunder</p>
               <p className="text-[var(--color-accent)] text-lg">Perfekt ramme for dine spesielle anledningar</p>
             </div>

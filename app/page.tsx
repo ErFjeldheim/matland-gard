@@ -40,7 +40,7 @@ export default async function HomePage() {
         />
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative z-10 container mx-auto px-4">
-          <h2 className="text-5xl md:text-6xl font-bold mb-6">{heroTitle}</h2>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">{heroTitle}</h2>
           <p className="text-xl md:text-2xl max-w-3xl mx-auto">
             {heroText}
           </p>
