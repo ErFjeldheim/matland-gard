@@ -65,18 +65,18 @@ export default async function AdminDashboard() {
       </header>
 
       <main className="container mx-auto px-4 py-12 flex-grow">
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-6 mb-8">
           <h1 className="text-4xl font-bold text-gray-900">Kontrollpanel</h1>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-3 sm:gap-4">
             <Link
               href="/admin/settings"
-              className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+              className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm sm:text-base whitespace-nowrap"
             >
               Innstillingar
             </Link>
             <Link
               href="/admin/products"
-              className="px-4 py-2 bg-[var(--color-primary)] text-white rounded-lg hover:bg-[var(--color-dark)] transition-colors"
+              className="px-4 py-2 bg-[var(--color-primary)] text-white rounded-lg hover:bg-[var(--color-dark)] transition-colors text-sm sm:text-base whitespace-nowrap"
             >
               Administrer produkter
             </Link>
