@@ -210,6 +210,11 @@
             "description": "Eksklusiv singel med unik farge",
             "longDescription": "Hvorfor velge Herregårdssingel:\n\n- Når du ønsker eit uteområde med særpreg.\n(Lys beige når singelen er tørr og brun når den er våt.)\n\n- Herregårdssingel er eit godt og rimeligere alternativ til Dansk strand- og elvesingel.\n\n- Herregårdssingel ligger også meir stabilt da steinene er knust og ikkje runde.\n\n- Herregårdssingel blir ikkje så lett forurenset av grønske og sopp som hvit singel blir.\n\n- Eksklusiv singel med unik lys brun/beige farge."
         },
+        "herregardsgrus": {
+            "name": "Herregårdsgrus",
+            "description": "Når estetikk og funksjonalitet spiller ein rolle.",
+            "longDescription": "Ønsker du eit fastere dekke i tun eller innkjørsel er Herregårdsgrus eit godt alternativ til singel. På grunn av at den inneholder 0-stoff setter den seg svært godt. Og du får samme fine lyse brun/beige fargen som ved bruk av Herregårdssingelen. Lyser opp uteområdet og blir estetisk mykje finere enn ved bruk av ordinær grå grus.\n\nVed større kvanta kan grusen selges i løst.\n\nHentepris Aksdal: 300kr inkl. mva pr. tonn.\nHentepris Holmefjord: 900kr inkl. mva pr. tonn."
+        },
         "grus": {
             "name": "Grus",
             "description": "Naturlig knust stein i ulike fraksjoner. Perfekt som fundamentering, drenering eller til veier.",

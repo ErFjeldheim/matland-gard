@@ -39,6 +39,21 @@ async function main() {
         updatedAt: new Date('2026-01-06T21:27:23.832Z'),
       },
       {
+        id: '550e8400-e29b-41d4-a716-446655440008',
+        name: 'Herregårdsgrus',
+        slug: 'herregardsgrus',
+        description: 'Når estetikk og funksjonalitet spiller ein rolle.',
+        longDescription: 'Når estetikk og funksjonalitet spiller ein rolle.\n\nØnsker du eit fastere dekke i tun eller innkjørsel er Herregårdsgrus eit godt alternativ til singel. På grunn av at den inneholder 0-stoff setter den seg svært godt. Og du får samme fine lyse brun/beige fargen som ved bruk av Herregårdssingelen. Lyser opp uteområdet og blir estetisk mykje finere enn ved bruk av ordinær grå grus.\n\nVed større kvanta kan grusen selges i løst.\n\nHentepris Aksdal: 300kr inkl. mva pr. tonn.\nHentepris Holmefjord: 900kr inkl. mva pr. tonn.',
+        price: 150000,
+        image: '/images/products/Herregårdssingel/bilde-1.jpg',
+        images: [
+          '/images/products/Herregårdssingel/bilde-1.jpg'
+        ],
+        videoUrl: null,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
         id: '550e8400-e29b-41d4-a716-446655440004',
         name: 'Grus',
         slug: 'grus',

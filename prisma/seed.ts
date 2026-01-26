@@ -44,6 +44,20 @@ async function main() {
       videoUrl: 'https://www.youtube.com/watch?v=xPYXRXSM0CU',
     },
     {
+      id: '550e8400-e29b-41d4-a716-446655440008',
+      name: 'Herregårdsgrus',
+      slug: 'herregardsgrus',
+      description: 'Når estetikk og funksjonalitet spiller ein rolle.',
+      longDescription: 'Når estetikk og funksjonalitet spiller ein rolle.\n\nØnsker du eit fastere dekke i tun eller innkjørsel er Herregårdsgrus eit godt alternativ til singel. På grunn av at den inneholder 0-stoff setter den seg svært godt. Og du får samme fine lyse brun/beige fargen som ved bruk av Herregårdssingelen. Lyser opp uteområdet og blir estetisk mykje finere enn ved bruk av ordinær grå grus.\n\nVed større kvanta kan grusen selges i løst.\n\nHentepris Aksdal: 300kr inkl. mva pr. tonn.\nHentepris Holmefjord: 900kr inkl. mva pr. tonn.',
+      price: 150000, // 1500 kr
+      stock: 1000,
+      stockUnit: 'storsekk',
+      image: '/images/products/Herregårdssingel/bilde-1.jpg', // Using same image category for now as it's similar
+      images: [
+        '/images/products/Herregårdssingel/bilde-1.jpg',
+      ],
+    },
+    {
       id: '550e8400-e29b-41d4-a716-446655440002',
       name: 'Grus',
       slug: 'grus',
@@ -139,6 +153,8 @@ async function main() {
     { key: 'herregardssingel_price_4-8mm', value: '1799', type: 'number' },
     { key: 'herregardssingel_price_8-16mm', value: '1599', type: 'number' },
     { key: 'herregardssingel_price_16-32mm', value: '1599', type: 'number' },
+    { key: 'herregardsgrus_price_0-16mm', value: '1500', type: 'number' },
+    { key: 'herregardsgrus_price_0-32mm', value: '1500', type: 'number' },
     { key: 'grus_price_0-16mm', value: '599', type: 'number' },
     { key: 'grus_price_0-32mm', value: '599', type: 'number' },
   ];
