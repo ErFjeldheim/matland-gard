@@ -227,8 +227,8 @@
         },
         "sand": {
             "name": "Sand",
-            "description": "Ren sand til lekeplass",
-            "longDescription": "Ren, siktet sand som egner seg utmerket til sandkasser, lekeplasser og fuging mellom heller."
+            "description": "Ren sand med fin lys brun/beige farge",
+            "longDescription": "Ren sand med fin lys brun/beige farge som kan brukes til sandkasse, plenstrøssel og støpesand."
         },
         "singelmatter-eccogravel": {
             "name": "Singelmatter ECCOgravel",

@@ -93,9 +93,9 @@ async function main() {
         id: '550e8400-e29b-41d4-a716-446655440006',
         name: 'Sand',
         slug: 'sand',
-        description: 'Ren sand til lekeplass',
-        longDescription: null,
-        price: 175000,
+        description: 'Ren sand med fin lys brun/beige farge',
+        longDescription: 'Ren sand med fin lys brun/beige farge som kan brukes til sandkasse, plenstrøssel og støpesand.',
+        price: 150000,
         image: '/images/products/Sand/bilde-1.jpg',
         images: [
           '/images/products/Sand/bilde-1.jpg',
