@@ -176,8 +176,8 @@
         "noProducts": "Aucun produit disponible pour le moment.",
         "viewProduct": "Voir le produit",
         "perTonn": "par tonne",
-        "perM2": "par m\u00b2",
-        "perBag": "par grand sac (800kg)",
+        "perM2": "par m²",
+        "perBag": "par grand sac (900kg)",
         "inclVat": "TVA incluse",
         "info": {
             "title": "Commande et livraison",
@@ -213,7 +213,7 @@
         "grus": {
             "name": "Pierre Concassée",
             "description": "Pierre concassée naturelle en diverses fractions. Parfait pour les fondations, le drainage ou les routes.",
-            "longDescription": "Notre pierre concassée est une pierre naturelle qui convient parfaitement à une variété d'usages. Produite à partir de pierre naturelle locale et triée en différentes fractions pour répondre à vos besoins. Idéale pour les fondations, le drainage, les routes et le génie civil. Livrée en Big Bags de 1000 kg."
+            "longDescription": "Notre pierre concassée est une pierre naturelle qui convient parfaitement à une variété d'usages. Produite à partir de pierre naturelle locale et triée en différentes fractions pour répondre à vos besoins. Idéale pour les fondations, le drainage, les routes et le génie civil. Livrée en Big Bags de 900kg."
         },
         "elvestein": {
             "name": "Pierre de Rivière",
@@ -224,11 +224,6 @@
             "name": "Sable",
             "description": "Sable propre pour les aires de jeux",
             "longDescription": "Sable propre et tamisé qui convient parfaitement aux bacs à sable, aux aires de jeux et au jointoiement entre les dalles."
-        },
-        "kirkegardssingel": {
-            "name": "Gravier de Cimetière",
-            "description": "Gravier blanc classique",
-            "longDescription": "Gravier blanc classique qui offre un aspect propre et digne. Très populaire pour les cimetières et comme pierre décorative dans les jardins."
         },
         "singelmatter-eccogravel": {
             "name": "Dalles stabilisatrices ECCOgravel",

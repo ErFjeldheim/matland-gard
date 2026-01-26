@@ -176,8 +176,8 @@
         "noProducts": "No products available at the moment.",
         "viewProduct": "View Product",
         "perTonn": "per ton",
-        "perM2": "per m\u00b2",
-        "perBag": "per big bag (800kg)",
+        "perM2": "per m²",
+        "perBag": "per big bag (900kg)",
         "inclVat": "incl. VAT",
         "info": {
             "title": "Ordering and Delivery",
@@ -208,12 +208,12 @@
         "herregardssingel": {
             "name": "Manor Gravel",
             "description": "Exclusive gravel with unique color",
-            "longDescription": "Manor Gravel is an exclusive gravel with unique color and structure. Perfect for driveways, paths, and as decorative cover. Delivered in three sizes."
+            "longDescription": "Why choose Manor Gravel:\n\n- When you want an outdoor area with character.\n(Light beige when the gravel is dry and brown when it is wet.)\n\n- Manor Gravel is a good and more affordable alternative to Danish beach and river gravel.\n\n- Manor Gravel is also more stable as the stones are crushed and not round.\n\n- Manor Gravel does not get as easily contaminated by green algae and fungus as white gravel does.\n\n- Exclusive gravel with a unique light brown/beige color."
         },
         "grus": {
             "name": "Crushed Stone",
             "description": "Natural crushed stone in various fractions. Perfect for foundations, drainage, or roads.",
-            "longDescription": "Our crushed stone is natural stone that is excellent for a variety of purposes. Produced from local natural stone and sorted into different fractions to meet your needs. Ideal for foundations, drainage, roads, and civil engineering. Delivered in Big Bags of 1000 kg."
+            "longDescription": "Our crushed stone is natural stone that is excellent for a variety of purposes. Produced from local natural stone and sorted into different fractions to meet your needs. Ideal for foundations, drainage, roads, and civil engineering. Delivered in Big Bags of 900kg."
         },
         "elvestein": {
             "name": "River Stone",
@@ -224,11 +224,6 @@
             "name": "Sand",
             "description": "Clean sand for playgrounds",
             "longDescription": "Clean, screened sand that is excellent for sandboxes, playgrounds, and jointing between pavers."
-        },
-        "kirkegardssingel": {
-            "name": "Cemetery Gravel",
-            "description": "Classic white gravel",
-            "longDescription": "Classic white gravel that provides a clean and dignified expression. Very popular for cemeteries and as decorative stone in gardens."
         },
         "singelmatter-eccogravel": {
             "name": "Gravel Mats ECCOgravel",

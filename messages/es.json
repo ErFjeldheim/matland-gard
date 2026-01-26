@@ -176,8 +176,8 @@
         "noProducts": "No hay productos disponibles en este momento.",
         "viewProduct": "Ver producto",
         "perTonn": "por tonelada",
-        "perM2": "por m\u00b2",
-        "perBag": "por saco grande (800kg)",
+        "perM2": "por m²",
+        "perBag": "por saco grande (900kg)",
         "inclVat": "IVA incluido",
         "info": {
             "title": "Pedido y entrega",
@@ -208,12 +208,12 @@
         "herregardssingel": {
             "name": "Grava Señorial",
             "description": "Grava exclusiva con un color único",
-            "longDescription": "La Grava Señorial es una grava exclusiva con un color y una estructura únicos. Perfecta para entradas, senderos y como cubierta decorativa. Se entrega en tres tamaños."
+            "longDescription": "¿Por qué elegir Grava Herregårdssingel:\n\n- Cuando desea un área exterior con carácter.\n(Beige claro cuando la grava está seca y marrón cuando está mojada).\n\n- La grava Herregårdssingel es una alternativa buena y más económica a la grava de playa y de río danesa.\n\n- La grava Herregårdssingel también es más estable ya que las piedras están trituradas y no son redondas.\n\n- La grava Herregårdssingel no se contamina tan fácilmente con verdín y hongos como la grava blanca.\n\n- Grava exclusiva con un color beige/marrón claro único."
         },
         "grus": {
             "name": "Piedra Triturada",
             "description": "Piedra triturada natural en diversas fracciones. Perfecta para cimientos, drenaje o caminos.",
-            "longDescription": "Nuestra piedra triturada es piedra natural que resulta excelente para diversos propósitos. Producida a partir de piedra natural local y seleccionada en diferentes fracciones para satisfacer sus necesidades. Ideal para cimientos, drenaje, caminos y obras civiles. Se entrega en Big Bags de 1000 kg."
+            "longDescription": "Nuestra piedra triturada es piedra natural que resulta excelente para diversos propósitos. Producida a partir de piedra natural local y seleccionada en diferentes fracciones para satisfacer sus necesidades. Ideal para cimientos, drenaje, caminos y obras civiles. Se entrega en Big Bags de 900kg."
         },
         "elvestein": {
             "name": "Piedra de Río",
@@ -224,11 +224,6 @@
             "name": "Arena",
             "description": "Arena limpia para parques infantiles",
             "longDescription": "Arena limpia y cribada que resulta excelente para areneros, parques infantiles y rejuntado entre adoquines."
-        },
-        "kirkegardssingel": {
-            "name": "Grava de Cementerio",
-            "description": "Grava blanca clásica",
-            "longDescription": "Grava blanca clásica que proporciona un aspecto limpio y digno. Muy popular para cementerios y como piedra decorativa en jardines."
         },
         "singelmatter-eccogravel": {
             "name": "Malla estabilizadora ECCOgravel",

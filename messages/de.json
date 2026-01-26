@@ -176,8 +176,8 @@
         "noProducts": "Zurzeit sind keine Produkte verfügbar.",
         "viewProduct": "Produkt ansehen",
         "perTonn": "pro Tonne",
-        "perM2": "pro m\u00b2",
-        "perBag": "pro Bigbag (800kg)",
+        "perM2": "pro m²",
+        "perBag": "pro Bigbag (900kg)",
         "inclVat": "inkl. MwSt.",
         "info": {
             "title": "Bestellung und Lieferung",
@@ -213,7 +213,7 @@
         "grus": {
             "name": "Kies",
             "description": "Natürlicher Brechsand in verschiedenen Fraktionen. Perfekt als Fundament, Entwässerung oder für Straßen.",
-            "longDescription": "Unser Kies ist natürlich gebrochener Stein, der sich hervorragend für eine Vielzahl von Zwecken eignet. Aus lokalem Naturstein hergestellt und in verschiedene Fraktionen sortiert, um Ihren Anforderungen gerecht zu werden. Ideal für Fundamente, Entwässerung, Straßen und Tiefbau. Geliefert in Bigbags à 1000 kg."
+            "longDescription": "Unser Kies ist natürlich gebrochener Stein, der sich hervorragend für eine Vielzahl von Zwecken eignet. Aus lokalem Naturstein hergestellt und in verschiedene Fraktionen sortiert, um Ihren Anforderungen gerecht zu werden. Ideal für Fundamente, Entwässerung, Straßen und Tiefbau. Geliefert in Bigbags à 900kg."
         },
         "elvestein": {
             "name": "Flussstein",
@@ -224,11 +224,6 @@
             "name": "Sand",
             "description": "Reiner Sand für Spielplätze",
             "longDescription": "Reiner, gesiebter Sand, der sich hervorragend für Sandkästen, Spielplätze und zum Verfugen von Platten eignet."
-        },
-        "kirkegardssingel": {
-            "name": "Friedhofskies",
-            "description": "Klassischer weißer Kies",
-            "longDescription": "Klassischer weißer Kies, der einen sauberen und würdevollen Eindruck vermittelt. Sehr beliebt für Friedhöfe und als Zierkies in Gärten."
         },
         "singelmatter-eccogravel": {
             "name": "Kiesmatten ECCOgravel",

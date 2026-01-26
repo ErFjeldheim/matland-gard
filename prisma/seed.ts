@@ -23,7 +23,7 @@ async function main() {
       name: 'Herregårdssingel',
       slug: 'herregardssingel',
       description: 'Eksklusiv singel med unik farge',
-      longDescription: 'Herregårdssingel er en eksklusiv singel med unik farge og struktur. Perfekt til innkjørsler, stier og som dekorativt dekke. Leveres i tre størrelser.',
+      longDescription: 'Hvorfor velge Herregårdssingel:\n\n- Når du ønsker eit uteområde med særpreg. (Lys beige når singelen er tørr og brun når den er våt.)\n\n- Herregårdssingel er eit godt og rimeligere alternativ til Dansk strand- og elvesingel.\n\n- Herregårdssingel ligger også meir stabilt da steinene er knust og ikkje runde.\n\n- Herregårdssingel blir ikkje så lett forurenset av grønske og sopp som hvit singel blir.\n\n- Eksklusiv singel med unik lys brun/beige farge.',
       price: 162500, // 1625 kr
       stock: 1000, // Default stock
       stockUnit: 'storsekk',
@@ -91,20 +91,7 @@ async function main() {
         '/images/products/Sand/bilde-4.jpg',
       ],
     },
-    {
-      id: '550e8400-e29b-41d4-a716-446655440005',
-      name: 'Kirkegårdssingel',
-      slug: 'kirkegardssingel',
-      description: 'Klassisk hvit singel',
-      price: 200000, // 2000 kr
-      stock: 1000, // Default stock
-      stockUnit: 'storsekk',
-      image: '/images/products/Kirkegårdssingel/bilde-1.jpg',
-      images: [
-        '/images/products/Kirkegårdssingel/bilde-1.jpg',
-        '/images/products/Kirkegårdssingel/bilde-2.jpg',
-      ],
-    },
+
     {
       id: '550e8400-e29b-41d4-a716-446655440006',
       name: 'Singelmatter ECCOgravel',
@@ -148,9 +135,10 @@ async function main() {
     { key: 'shipping_fixed_1000', value: '1000', type: 'number' },
     { key: 'shipping_fixed_1500', value: '1500', type: 'number' },
     // Produktpriser (eksempel, bør kanskje hentes fra Product model, men settings gir dynamisk overstyring hvis implementert slik)
-    { key: 'herregardssingel_price_4-8mm', value: '1750', type: 'number' },
-    { key: 'herregardssingel_price_8-16mm', value: '1500', type: 'number' },
-    { key: 'herregardssingel_price_16-32mm', value: '1500', type: 'number' },
+    { key: 'herregardssingel_price_2-4mm', value: '1999', type: 'number' },
+    { key: 'herregardssingel_price_4-8mm', value: '1799', type: 'number' },
+    { key: 'herregardssingel_price_8-16mm', value: '1599', type: 'number' },
+    { key: 'herregardssingel_price_16-32mm', value: '1599', type: 'number' },
     { key: 'grus_price_0-16mm', value: '599', type: 'number' },
     { key: 'grus_price_0-32mm', value: '599', type: 'number' },
   ];

@@ -18,7 +18,7 @@ async function main() {
         name: 'Herregårdssingel',
         slug: 'herregardssingel',
         description: 'Eksklusiv singel med unik farge',
-        longDescription: 'Herregårdssingel er en eksklusiv singel med unik farge og struktur. Perfekt til innkjørsler, stier og som dekorativt dekke. Leveres i tre størrelser.',
+        longDescription: 'Hvorfor velge Herregårdssingel:\n\n- Når du ønsker eit uteområde med særpreg. (Lys beige når singelen er tørr og brun når den er våt.)\n\n- Herregårdssingel er eit godt og rimeligere alternativ til Dansk strand- og elvesingel.\n\n- Herregårdssingel ligger også meir stabilt da steinene er knust og ikkje runde.\n\n- Herregårdssingel blir ikkje så lett forurenset av grønske og sopp som hvit singel blir.\n\n- Eksklusiv singel med unik lys brun/beige farge.',
         price: 162500,
         image: '/images/products/Herregårdssingel/bilde-1.jpg',
         images: [
@@ -92,22 +92,7 @@ async function main() {
         createdAt: new Date('2026-01-06T21:27:23.832Z'),
         updatedAt: new Date('2026-01-06T21:27:23.832Z'),
       },
-      {
-        id: '550e8400-e29b-41d4-a716-446655440002',
-        name: 'Kirkegårdssingel',
-        slug: 'kirkegardssingel',
-        description: 'Klassisk hvit singel',
-        longDescription: null,
-        price: 200000,
-        image: '/images/products/Kirkegårdssingel/bilde-1.jpg',
-        images: [
-          '/images/products/Kirkegårdssingel/bilde-1.jpg',
-          '/images/products/Kirkegårdssingel/bilde-2.jpg'
-        ],
-        videoUrl: null,
-        createdAt: new Date('2026-01-06T21:27:23.832Z'),
-        updatedAt: new Date('2026-01-06T21:27:23.832Z'),
-      },
+
       {
         id: '9c68ced4-f7ac-48a5-9858-18d4060597a0',
         name: 'Singelmatter ECCOgravel',

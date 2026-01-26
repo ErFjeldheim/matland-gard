@@ -176,8 +176,8 @@
         "noProducts": "Ingen produkt tilgjengeleg for augneblinken.",
         "viewProduct": "Sjå produkt",
         "perTonn": "per tonn",
-        "perM2": "per m\u00b2",
-        "perBag": "per storsekk (800kg)",
+        "perM2": "per m²",
+        "perBag": "per storsekk (900kg)",
         "inclVat": "inkl. mva.",
         "info": {
             "title": "Bestilling og levering",
@@ -208,12 +208,12 @@
         "herregardssingel": {
             "name": "Herregårdssingel",
             "description": "Eksklusiv singel med unik farge",
-            "longDescription": "Herregårdssingel er en eksklusiv singel med unik farge og struktur. Perfekt til innkjørsler, stier og som dekorativt dekke. Leveres i tre størrelser."
+            "longDescription": "Hvorfor velge Herregårdssingel:\n\n- Når du ønsker eit uteområde med særpreg.\n(Lys beige når singelen er tørr og brun når den er våt.)\n\n- Herregårdssingel er eit godt og rimeligere alternativ til Dansk strand- og elvesingel.\n\n- Herregårdssingel ligger også meir stabilt da steinene er knust og ikkje runde.\n\n- Herregårdssingel blir ikkje så lett forurenset av grønske og sopp som hvit singel blir.\n\n- Eksklusiv singel med unik lys brun/beige farge."
         },
         "grus": {
             "name": "Grus",
             "description": "Naturlig knust stein i ulike fraksjoner. Perfekt som fundamentering, drenering eller til veier.",
-            "longDescription": "Vårt grus er naturlig knust stein som egner seg utmerket til en rekke formål. Produsert fra lokal naturstein og sortert i ulike fraksjoner for å møte dine behov. Ideelt til fundamentering, drenering, veier og anleggsverk. Gruset leveres i Big Bag à 1000 kg."
+            "longDescription": "Vårt grus er naturlig knust stein som egner seg utmerket til en rekke formål. Produsert fra lokal naturstein og sortert i ulike fraksjoner for å møte dine behov. Ideelt til fundamentering, drenering, veier og anleggsverk. Gruset leveres i Big Bag à 900kg."
         },
         "elvestein": {
             "name": "Elvestein",
@@ -224,11 +224,6 @@
             "name": "Sand",
             "description": "Ren sand til lekeplass",
             "longDescription": "Ren, siktet sand som egner seg utmerket til sandkasser, lekeplasser og fuging mellom heller."
-        },
-        "kirkegardssingel": {
-            "name": "Kirkegårdssingel",
-            "description": "Klassisk hvit singel",
-            "longDescription": "Klassisk hvit singel som gir et rent og verdig uttrykk. Svært populær til kirkegårder og som pyntestein i hager."
         },
         "singelmatter-eccogravel": {
             "name": "Singelmatter ECCOgravel",
