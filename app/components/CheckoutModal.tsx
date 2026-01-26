@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { createStripeCheckoutSession } from '@/app/actions';
+import { useTranslations } from 'next-intl';
 
 interface CartItem {
   productId: string;
@@ -35,6 +36,8 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
     deliveryAddress: '',
   });
 
+  const t = useTranslations('Checkout');
+
   if (!isOpen) return null;
 
   const isCartCheckout = cartItems && cartItems.length > 0;
@@ -63,12 +66,12 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
     e.preventDefault();
 
     if (!shippingMethod) {
-      alert('Ver vennleg og vel leveringsalternativ');
+      alert(t('missingShipping'));
       return;
     }
 
     if (!paymentMethod) {
-      alert('Ver vennleg og vel betalingsmetode');
+      alert(t('missingPayment'));
       return;
     }
 
@@ -90,39 +93,15 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
           quantity,
           ...formData,
           shippingMethod,
-          size: (product as any).size // Assuming product context or adding size if needed, but the original code had body.size in single product checkout? 
-          // Wait, original code for single product: 
-          // const price = await getPriceWithMetadata(product, body.size);
-          // And body comes from JSON.stringify(requestBody).
-          // But I don't see `size` in the `formData` or component state for single product in CheckoutModal.
-          // Ah, cartItem has size. Single product modal usage... where does size come from?
-          // Looking at the component, for single product:
-          // It seems it doesn't support selecting size *inside* the modal?
-          // If so, where is size? 
-          // The component calculates `baseAmount` using `product.price`.
-          // If the product requires size (e.g. Singel), usually that's selected before clicking checkout?
-          // If so, `product` prop probably contains the specific variant info or price?
-          // Or maybe `size` is missing for single product checkout in the current implementation?
-          // The API route checked `body.size`.
-          // In `CheckoutModal`, `requestBody` for single product:
-          // { productId, quantity, ...formData, shippingMethod }
-          // It does NOT include size.
-          // So `body.size` in API route would be undefined.
-          // `getPriceWithMetadata` handles `size` being optional?
-          // `if (size === '4-8mm') ...`
-          // If undefined, it returns `product.price`.
-          // So it seems fine.
-
+          size: (product as any).size
         };
 
       if (paymentMethod === 'stripe') {
-        // Use Server Action
         const result = await createStripeCheckoutSession(requestBody);
         if (result.url) {
           window.location.href = result.url;
         }
       } else {
-        // Use existing API for Vipps
         const response = await fetch(`/api/checkout/${paymentMethod}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -148,7 +127,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
       <div className="bg-[var(--foreground)] rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-900">Bestill {product.name}</h2>
+            <h2 className="text-2xl font-bold text-gray-900">{t('modalTitle', { product: product.name })}</h2>
             <button
               onClick={onClose}
               className="text-gray-400 hover:text-gray-600 cursor-pointer"
@@ -165,7 +144,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
             {isCartCheckout ? (
               <div>
                 <label className="block text-gray-700 font-medium mb-2">
-                  Vareoppsummering
+                  {t('summary')}
                 </label>
                 <div className="bg-gray-50 rounded-lg p-4 space-y-2 max-h-48 overflow-y-auto">
                   {cartItems.map((item, index) => (
@@ -183,13 +162,13 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                   ))}
                 </div>
                 <p className="text-xs text-gray-500 mt-2">
-                  For å endre antall eller fjerne varer, gå tilbake til handlekorgja.
+                  {t('cartNote')}
                 </p>
               </div>
             ) : (
               <div>
                 <label className="block text-gray-700 font-medium mb-2">
-                  Antall {product.name.toLowerCase().includes('grus') ? '(tonn)' : '(storsekker)'}
+                  {t('quantityLabel')} {product.name.toLowerCase().includes('grus') ? t('tonn') : t('bag')}
                 </label>
                 <div className="flex items-center gap-4">
                   <button
@@ -215,7 +194,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
 
             {/* Customer Info */}
             <div>
-              <label className="block text-gray-700 font-medium mb-2">Namn *</label>
+              <label className="block text-gray-700 font-medium mb-2">{t('name')}</label>
               <input
                 type="text"
                 required
@@ -228,7 +207,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
             </div>
 
             <div>
-              <label className="block text-gray-700 font-medium mb-2">E-post *</label>
+              <label className="block text-gray-700 font-medium mb-2">{t('email')}</label>
               <input
                 type="email"
                 required
@@ -241,7 +220,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
             </div>
 
             <div>
-              <label className="block text-gray-700 font-medium mb-2">Telefon *</label>
+              <label className="block text-gray-700 font-medium mb-2">{t('phone')}</label>
               <input
                 type="tel"
                 required
@@ -255,7 +234,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
 
             {/* Shipping Method Selection */}
             <div>
-              <label className="block text-gray-700 font-medium mb-3">Velg leveringsalternativ *</label>
+              <label className="block text-gray-700 font-medium mb-3">{t('shippingTitle')}</label>
               <div className="space-y-3">
                 {/* Region A */}
                 <button
@@ -267,8 +246,8 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                     }`}
                   disabled={loading}
                 >
-                  <div className="font-semibold">Frakt: Sone 1</div>
-                  <div className="text-xs text-gray-600">Bergen, Vaksdal, Samnanger, Bjørnafjorden</div>
+                  <div className="font-semibold">{t('sone1')}</div>
+                  <div className="text-xs text-gray-600">{t('sone1Desc')}</div>
                   <div className="text-sm font-bold text-[var(--color-primary)]">{1000 * totalUnits} kr</div>
                 </button>
 
@@ -282,8 +261,8 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                     }`}
                   disabled={loading}
                 >
-                  <div className="font-semibold">Frakt: Sone 2</div>
-                  <div className="text-xs text-gray-600">Austevoll, Sotra, Askøy, Øygarden, Voss</div>
+                  <div className="font-semibold">{t('sone2')}</div>
+                  <div className="text-xs text-gray-600">{t('sone2Desc')}</div>
                   <div className="text-sm font-bold text-[var(--color-primary)]">{1500 * totalUnits} kr</div>
                 </button>
 
@@ -297,9 +276,9 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                     }`}
                   disabled={loading}
                 >
-                  <div className="font-semibold">Andre område</div>
-                  <div className="text-xs text-gray-600">Vi kontaktar deg raskt for ein god fraktpris</div>
-                  <div className="text-sm font-bold text-green-600">Få tilbod</div>
+                  <div className="font-semibold">{t('otherArea')}</div>
+                  <div className="text-xs text-gray-600">{t('otherAreaDesc')}</div>
+                  <div className="text-sm font-bold text-green-600">{t('getQuote')}</div>
                 </button>
 
 
@@ -313,13 +292,13 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                     }`}
                   disabled={loading}
                 >
-                  <div className="font-semibold">Hent sjølv i Holmefjord</div>
-                  <div className="text-sm font-bold text-green-600">Gratis</div>
+                  <div className="font-semibold">{t('pickup')}</div>
+                  <div className="text-sm font-bold text-green-600">{t('free')}</div>
                 </button>
 
                 {totalUnits >= 3 && (
                   <p className="text-xs text-amber-600 font-medium">
-                    💡 Tips: Sidan du har 3 eller fleire einingar, kan det løna seg å be om eitt samla tilbod på frakt (vel "Andre område" ovanfor).
+                    {t('bulkTip')}
                   </p>
                 )}
               </div>
@@ -329,7 +308,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
             {(shippingMethod && shippingMethod !== 'pickup') && (
               <div>
                 <label className="block text-gray-700 font-medium mb-2">
-                  Leveringsadresse *
+                  {t('deliveryAddress')}
                 </label>
                 <textarea
                   rows={2}
@@ -337,7 +316,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                   value={formData.deliveryAddress}
                   onChange={(e) => setFormData({ ...formData, deliveryAddress: e.target.value })}
                   className="w-full bg-white text-gray-900 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
-                  placeholder="Skriv inn leveringsadressa"
+                  placeholder={t('addressPlaceholder')}
                   disabled={loading}
                 />
               </div>
@@ -347,17 +326,17 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
             <div className="border-t pt-4">
               <div className="space-y-1">
                 <div className="flex justify-between text-gray-600 text-sm">
-                  <span>Delsum varer:</span>
+                  <span>{t('subtotal')}</span>
                   <span>{baseAmount.toFixed(0)} kr</span>
                 </div>
                 {shippingFee > 0 && (
                   <div className="flex justify-between text-gray-600 text-sm">
-                    <span>Frakt:</span>
+                    <span>{t('shippingFee')}</span>
                     <span>{shippingFee.toFixed(0)} kr</span>
                   </div>
                 )}
                 <div className="flex justify-between items-center text-xl mt-2">
-                  <span className="font-bold text-gray-900">Totalt:</span>
+                  <span className="font-bold text-gray-900">{t('total')}</span>
                   <span className="font-bold text-[var(--color-primary)]">{totalAmount.toFixed(0)} kr</span>
                 </div>
                 <p className="text-xs text-gray-500">inkl. mva.</p>
@@ -366,7 +345,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
 
             {/* Payment Method Selection */}
             <div>
-              <label className="block text-gray-700 font-medium mb-3">Vel betalingsmetode *</label>
+              <label className="block text-gray-700 font-medium mb-3">{t('paymentTitle')}</label>
               <div className="grid grid-cols-2 gap-3">
                 <button
                   type="button"
@@ -377,7 +356,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                     }`}
                   disabled={loading}
                 >
-                  <span className="text-sm">Vipps</span>
+                  <span className="text-sm">{t('vipps')}</span>
                 </button>
 
                 <button
@@ -389,7 +368,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                     }`}
                   disabled={loading}
                 >
-                  <span className="text-sm">Kort</span>
+                  <span className="text-sm">{t('card')}</span>
                 </button>
               </div>
             </div>
@@ -402,13 +381,13 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                 } text-white px-6 py-4 rounded-lg transition-colors font-semibold flex items-center justify-center text-lg cursor-pointer disabled:cursor-not-allowed`}
             >
               {loading ? (
-                'Behandlar...'
+                t('processing')
               ) : !shippingMethod ? (
-                'Vel leveringsalternativ'
+                t('selectShipping')
               ) : !paymentMethod ? (
-                'Vel betalingsmetode'
+                t('selectPayment')
               ) : (
-                'Fullfør bestilling'
+                t('complete')
               )}
             </button>
           </form>

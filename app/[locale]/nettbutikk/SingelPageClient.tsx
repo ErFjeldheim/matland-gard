@@ -1,6 +1,7 @@
 'use client';
 
 import ProductCards from '@/app/components/ProductCards';
+import { useTranslations } from 'next-intl';
 
 type Product = {
   id: string;
@@ -24,13 +25,15 @@ type SingelPageClientProps = {
 };
 
 export default function SingelPageClient({ products }: SingelPageClientProps) {
+  const t = useTranslations('Shop');
+
   return (
     <>
       {/* Products Section */}
-      <h3 className="text-3xl font-bold text-gray-900 mb-8">Våre produkt</h3>
+      <h3 className="text-3xl font-bold text-gray-900 mb-8">{t('title')}</h3>
 
       {products.length === 0 ? (
-        <p className="text-gray-600">Ingen produkt tilgjengeleg for augneblinken.</p>
+        <p className="text-gray-600">{t('noProducts')}</p>
       ) : (
         <ProductCards products={products} />
       )}

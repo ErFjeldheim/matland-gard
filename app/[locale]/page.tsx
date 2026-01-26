@@ -17,10 +17,9 @@ export default async function HomePage() {
     return settings.find(s => s.key === key)?.value || fallback;
   };
 
-  // Note: Hero content is dynamic from DB, but fallbacks could be translated if we strictly wanted to.
-  // For now, keeping DB content as source of truth for Hero.
-  const heroTitle = getSetting('hero_title', 'Velkomen til Matland Gård');
-  const heroText = getSetting('hero_text', 'Vi tilbyr steinprodukt av høgaste kvalitet, bobilparkering ved fjorden, og unike lokale til dine selskap.');
+  // Use translations for Hero with fallback to DB values
+  const heroTitle = t('hero.title', { defaultValue: getSetting('hero_title', 'Velkomen til Matland Gård') });
+  const heroText = t('hero.text', { defaultValue: getSetting('hero_text', 'Vi tilbyr steinprodukt av høgaste kvalitet, bobilparkering ved fjorden, og unike lokale til dine selskap.') });
   const heroImage = getSetting('hero_image_url', '/images/hero/gard-oversikt.jpg');
   const contactPhone = getSetting('contact_phone', '+47 954 58 563');
   const contactEmail = getSetting('contact_email', 'matlandgard@gmail.com');

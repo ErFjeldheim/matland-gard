@@ -1,5 +1,6 @@
 {
     "Navigation": {
+        "home": "Heim",
         "shop": "Singel & Stein",
         "parking": "Bobilparkering",
         "venue": "Selskapslokale",
@@ -8,7 +9,9 @@
         "cart": "Handlevogn"
     },
     "Common": {
-        "title": "Matland Gård"
+        "title": "Matland Gård",
+        "loadingMap": "Laster kart...",
+        "season": "Sesong: April - Oktober"
     },
     "Footer": {
         "terms": "Salsvilkår",
@@ -17,6 +20,10 @@
     },
     "Home": {
         "heroAlt": "Matland Gård oversikt",
+        "hero": {
+            "title": "Velkomen til Matland Gård",
+            "text": "Vi tilbyr steinprodukt av høgaste kvalitet, bobilparkering ved fjorden, og unike lokale til dine selskap."
+        },
         "shopCard": {
             "title": "Matland Singel & Stein",
             "desc": "Forhandlar av Skjold Singel & Stein. Vi leverer herregårdssingel, pukk og andre steinprodukt.",
@@ -38,6 +45,375 @@
         "contact": {
             "title": "Kontakt oss",
             "desc": "Har du spørsmål? Vi er her for å hjelpe deg."
+        }
+    },
+    "Camping": {
+        "title": "Bobilparkering",
+        "subtitle": "Opplev naturen ved fjorden",
+        "welcome": "Velkomen til Matland Gård",
+        "desc1": "Matland Gård ved Ådlandsfjorden tilbyr idyllisk overnatting for bubilar i rolege omgjevnader heilt nede ved vannkanten. Her kan gjester nyte spektakulær utsikt og nytte marinaen, som har både badestrand og stupetårn.",
+        "desc2": "Det er gode moglegheiter for aktivitetar som fjellturar, fiske i elv og sjø, samt leige av båt eller kajakk. Gården tilbyr også guida turar med yacht til destinasjonar som Austevoll og Hardangerfjordane.",
+        "desc3": "Gjestene kjem tett på gårdslivet med dyr som sauer, hest og påfuglar, og det er moglegheit for å plukke ferske egg om morgonen. Fasilitetane inkluderer eit naust med scene for sosiale samankomstar.",
+        "facilities": {
+            "title": "Fasilitetar",
+            "items": [
+                "Sanitærbygg med dusj og toalett",
+                "Straum til bubil/campingvogn",
+                "Vassfylling",
+                "Vaskemaskin og tørketrommel",
+                "WiFi",
+                "Bålpanne",
+                "Brannsløkkingsapparat og hjartestartar"
+            ]
+        },
+        "rules": {
+            "title": "Ordensreglar",
+            "checkInOut": "Innsjekk/Utsjekk",
+            "checkInOutDesc": "Innsjekk frå kl. 14:00. Utsjekk innan kl. 12:00.",
+            "quietTime": "Ro på plassen",
+            "quietTimeDesc": "Det skal vere ro mellom kl. 23:00 og 07:00.",
+            "waste": "Avfall",
+            "wasteDesc": "Kast bos/avfall i tilviste containerar.",
+            "fireSafety": "Branntryggleik",
+            "fireSafetyDesc": "Grill og bål berre på tilviste plassar."
+        },
+        "booking": {
+            "title": "Bestill opphald",
+            "desc": "Bestilling gjerast enkelt gjennom vår samarbeidspartnar Campio.",
+            "button": "Bestill no via Campio →",
+            "contactDirect": "Kontakt oss direkte:"
+        },
+        "activities": {
+            "title": "Aktivitetar",
+            "items": [
+                "Båt- og kajakk-utleige",
+                "Fiske i fjorden og elva",
+                "Naturlig strand og stupetårn",
+                "Fotturar i fjellet",
+                "Besøksgård med dyr",
+                "Guida fjordturar med yacht",
+                "Musikkarrangement i sjøbua"
+            ]
+        },
+        "prices": {
+            "title": "Prisar",
+            "rental": "Utleige",
+            "kayaks": "Kajakkar",
+            "kayaksDesc": "Leige av 2 kajakkar i 3 timar",
+            "sup": "SUP board",
+            "supDesc": "3 timar",
+            "boat12h": "Båt inkl. bensin",
+            "boat12hDesc": "12 timar",
+            "boat6h": "Båt inkl. bensin",
+            "boat6hDesc": "6 timar",
+            "accommodation": "Overnatting",
+            "spot": "Bubilplass/Vognplass",
+            "perNight": "per natt",
+            "campioNote": "* Sjå oppdaterte bobilprisar og tilgjengelegheit på Campio"
+        }
+    },
+    "Venue": {
+        "title": "Selskapslokale",
+        "subtitle": "Skaper minnerike stunder",
+        "tagline": "Perfekt ramme for dine spesielle anledningar",
+        "sjobuaTitle": "Den ominnreia sjøbua ved fjorden",
+        "desc1": "Matland Gård, med ei historie på over 400 år, tilbyr unike lokale for dine selskap. Vår ominnreia sjøbu er den perfekte ramma for minnerike stunder ved fjorden.",
+        "desc2": "Med spektakulær utsikt over fjorden, kombinerer vi tradisjonell arv med moderne komfort og stil.",
+        "events": {
+            "title": "Vi arrangerer",
+            "items": [
+                "Bryllup og bryllupsfestar",
+                "Konfirmasjonar og dåp",
+                "Bursdagsfestar og jubileum",
+                "Firmafestar og konferansar",
+                "Sommarfestar",
+                "Private middagar og samankomstar"
+            ]
+        },
+        "locales": {
+            "title": "Våre lokale",
+            "sjobua": "Sjøbua",
+            "sjobuaDetail1": "Ominnreia til unikt eventlokale",
+            "sjobuaDetail2": "Fleksibel kapasitet for alle typar selskap"
+        },
+        "services": {
+            "title": "Tilleggstenester",
+            "items": [
+                "Catering og mattilbod",
+                "Dekking og pynt",
+                "Lyd- og lysutstyr",
+                "Parkeringsplassar"
+            ]
+        },
+        "contact": {
+            "title": "Ta kontakt for ein uforpliktande prat",
+            "desc": "Vi hjelper deg gjerne med å planlegge ditt neste selskap. Ta kontakt på e-post eller telefon for prisar og tilgjengelegheit.",
+            "email": "E-post",
+            "phone": "Telefon",
+            "address": "Adresse"
+        }
+    },
+    "Contact": {
+        "title": "Kontakt oss",
+        "info": "Kontaktinformasjon",
+        "visitUs": "Besøk oss",
+        "shopDesc": "Besøk vår <Link>nettbutikk</Link> for å sjå produkt, prisar og legge inn bestilling. Vi leverer til heile regionen.",
+        "campingDesc": "Sesong: April - Oktober\nBestilling: <Link>Bestill på Campio</Link> eller ring oss.",
+        "venueDesc": "Kontakt oss for tilgjenge og prisar for arrangement i våre lokale.",
+        "replyNote": "Vi svarer vanlegvis innan 24 timar på kvardagar.",
+        "findWay": "Finn vegen til oss",
+        "phone": "Telefon",
+        "email": "E-post",
+        "address": "Adresse",
+        "Navigation": {
+            "shop": "Singel & Stein",
+            "parking": "Bobilparkering",
+            "venue": "Selskapslokale"
+        }
+    },
+    "Shop": {
+        "title": "Våre produkt",
+        "noProducts": "Ingen produkt tilgjengeleg for augneblinken.",
+        "viewProduct": "Sjå produkt",
+        "perTonn": "per tonn",
+        "perM2": "per m\u00b2",
+        "perBag": "per storsekk (800kg)",
+        "inclVat": "inkl. mva.",
+        "info": {
+            "title": "Bestilling og levering",
+            "shipping": "Fastpris på frakt",
+            "shippingDesc": "Pris per storsekk/tonn:",
+            "shippingZones": [
+                "Bergen, Vaksdal, Samnanger, Bjørnafjorden: 1000 kr",
+                "Austevoll, Sotra, Askøy, Øygarden, Voss: 1500 kr"
+            ],
+            "shippingExample": "Eksempel: 2 storsekkar til Bergen = 2000 kr frakt",
+            "shippingContact": "Ved bestilling av meir enn 2 einingar, ta kontakt for avtale om fraktpris.",
+            "payment": "Betaling",
+            "paymentDesc": "Vi aksepterer Vipps og alle vanlege betalingskort. Betal trygt på nett.",
+            "contact": "Kontakt",
+            "pickup": "Henting",
+            "pickupDesc": "Hent gratis i Holmefjord\nTa med eigen henger\nEtter avtale: 954 58 563"
+        }
+    },
+    "Product": {
+        "videoTitle": "Produktvideo",
+        "selectSize": "Vel storleik",
+        "addToCart": "Legg til i handlekorg",
+        "addedToCart": "✓ Lagt til!",
+        "quickCheckout": "Hurtigbetaling",
+        "sizeWarning": "Ver vennleg og vel ein storleik før du held fram."
+    },
+    "Products": {
+        "herregardssingel": {
+            "name": "Herregårdssingel",
+            "description": "Eksklusiv singel med unik farge",
+            "longDescription": "Herregårdssingel er en eksklusiv singel med unik farge og struktur. Perfekt til innkjørsler, stier og som dekorativt dekke. Leveres i tre størrelser."
+        },
+        "grus": {
+            "name": "Grus",
+            "description": "Naturlig knust stein i ulike fraksjoner. Perfekt som fundamentering, drenering eller til veier.",
+            "longDescription": "Vårt grus er naturlig knust stein som egner seg utmerket til en rekke formål. Produsert fra lokal naturstein og sortert i ulike fraksjoner for å møte dine behov. Ideelt til fundamentering, drenering, veier og anleggsverk. Gruset leveres i Big Bag à 1000 kg."
+        },
+        "elvestein": {
+            "name": "Elvestein",
+            "description": "Naturlig rundslipte steiner",
+            "longDescription": "Naturlig rundslipte steiner fra lokale kilder. Perfekt for dekorasjon i hage, rundt huset eller i blomsterbed."
+        },
+        "sand": {
+            "name": "Sand",
+            "description": "Ren sand til lekeplass",
+            "longDescription": "Ren, siktet sand som egner seg utmerket til sandkasser, lekeplasser og fuging mellom heller."
+        },
+        "kirkegardssingel": {
+            "name": "Kirkegårdssingel",
+            "description": "Klassisk hvit singel",
+            "longDescription": "Klassisk hvit singel som gir et rent og verdig uttrykk. Svært populær til kirkegårder og som pyntestein i hager."
+        },
+        "singelmatter-eccogravel": {
+            "name": "Singelmatter ECCOgravel",
+            "description": "Praktisk matte for sikker plassering av singel. Hindrer ugress og gir god drenering. Pris per m².",
+            "longDescription": "ECCOgravel er profesjonelle singelmatter som stabiliserer grus og singel. Dette gjør det enkelt å gå, sykle og trille barnevogn eller rullestol på dekket. Mattene har integrert ugressduk som hindrer vekst fra undersiden."
+        }
+    },
+    "Checkout": {
+        "modalTitle": "Bestill {product}",
+        "summary": "Vareoppsummering",
+        "cartNote": "For å endre antall eller fjerne varer, gå tilbake til handlekorgja.",
+        "quantityLabel": "Antall",
+        "tonn": "(tonn)",
+        "bag": "(storsekker)",
+        "name": "Namn *",
+        "email": "E-post *",
+        "phone": "Telefon *",
+        "deliveryAddress": "Leveringsadresse *",
+        "addressPlaceholder": "Skriv inn leveringsadressa",
+        "shippingTitle": "Velg leveringsalternativ *",
+        "sone1": "Frakt: Sone 1",
+        "sone1Desc": "Bergen, Vaksdal, Samnanger, Bjørnafjorden",
+        "sone2": "Frakt: Sone 2",
+        "sone2Desc": "Austevoll, Sotra, Askøy, Øygarden, Voss",
+        "otherArea": "Andre område",
+        "otherAreaDesc": "Vi kontaktar deg raskt for ein god fraktpris",
+        "getQuote": "Få tilbod",
+        "pickup": "Hent sjølv i Holmefjord",
+        "free": "Gratis",
+        "bulkTip": "💡 Tips: Sidan du har 3 eller fleire einingar, kan det løna seg å be om eitt samla tilbod på frakt (vel \"Andre område\" ovanfor).",
+        "subtotal": "Delsum varer:",
+        "shippingFee": "Frakt:",
+        "total": "Totalt:",
+        "paymentTitle": "Vel betalingsmetode *",
+        "vipps": "Vipps",
+        "card": "Kort",
+        "processing": "Behandlar...",
+        "selectShipping": "Vel leveringsalternativ",
+        "selectPayment": "Vel betalingsmetode",
+        "complete": "Fullfør bestilling",
+        "missingShipping": "Ver vennleg og vel leveringsalternativ",
+        "missingPayment": "Ver vennleg og vel betalingsmetode"
+    },
+    "Cart": {
+        "title": "Handlekorg",
+        "emptyTitle": "Handlekorgja er tom",
+        "emptyText": "Legg til produkt for å halde fram",
+        "backToShop": "Gå til produkt",
+        "clearCart": "Tøm handlekorg",
+        "subtotal": "Delsum:",
+        "delete": "Slett produkt",
+        "summary": "Samandrag",
+        "itemCount": "Tal på varer:",
+        "total": "Totalt:",
+        "inclVat": "inkl. mva.",
+        "checkout": "Gå til kasse",
+        "continueShopping": "← Hald fram og handle",
+        "cartSummary": "{count} produkt"
+    },
+    "Terms": {
+        "title": "Salsvilkår for Matland Gård",
+        "sections": {
+            "intro": {
+                "title": "Innleiing",
+                "text": "Dette kjøpet er regulert av dei nedanforståande standard salsvilkåra for forbrukarkjøp av varer over internett. Forbrukarkjøp over internett vert regulert hovudsakeleg av avtalelova, forbrukarkjøpslova, marknadsføringslova, angrerettlova og ehandelslova, og desse lovene gjev forbrukaren ufråvikelege rettar. Vilkåra i denne avtalen skal ikkje forståast som noko avgrensing i dei lovbestemde rettane, men oppstiller partane sine viktigaste rettar og plikter for handelen."
+            },
+            "agreement": {
+                "title": "1. Avtalen",
+                "text": "Avtalen består av desse salsvilkåra, opplysningar gjeve i bestillingsløysinga og eventuelt særskilt avtalte vilkår. Ved eventuell motstrid mellom opplysningane, går det som særskilt er avtalt mellom partane framfor, så framt det ikkje stridar mot ufråvikeleg lovgjeving."
+            },
+            "parties": {
+                "title": "2. Partane",
+                "sellerLabel": "Seljar er:",
+                "sellerDescription": "Heretter omtalt som «seljar» eller «oss».",
+                "buyerLabel": "Kjøpar er:",
+                "buyerText": "Den forbrukaren som gjer bestillinga, heretter omtalt som «kjøpar» eller «du»."
+            },
+            "price": {
+                "title": "3. Pris",
+                "text": "Den oppgjevne prisen for vara og tenester er den totale prisen kjøpar skal betale. Denne prisen inkluderer alle avgifter og meirverdiavgift. Ytterlegare kostnader som seljar før kjøpet ikkje har informert om, skal kjøpar ikkje bere."
+            },
+            "formation": {
+                "title": "4. Avtaleinngåing",
+                "text": "Avtalen er bindande for begge partar når kjøpar har sendt si bestilling til seljar."
+            },
+            "payment": {
+                "title": "5. Betalinga",
+                "text": "Seljar kan krevje betaling for vara frå det tidspunktet ho blir sendt frå seljar til kjøpar. Dersom kjøpar brukar kredittkort eller debetkort ved betaling, kan seljar reservere kjøpesummen på kortet ved bestilling. Kortet blir belasta same dag som vara blir sendt.",
+                "methods": "Vi tilbyr betaling med Vipps og kortbetaling (Stripe)."
+            },
+            "delivery": {
+                "title": "6. Levering",
+                "text": "Levering er skjedd når kjøpar, eller hans representant, har overtatt tingen.",
+                "pickup": "Henting: Kan gjerast etter avtale på Matland Gård.",
+                "shipping": "Levering: Vi tilbyr levering i spesifiserte soner (Bergen/Omegn) mot eit frakttillegg. Leveringstidspunkt avtalast nærare."
+            },
+            "withdrawal": {
+                "title": "7. Angrerett",
+                "text1": "Kjøpar kan angre kjøpet av vara etter angrerettlova. Kjøpar må gje seljar melding om bruk av angreretten innan 14 dagar etter at fristen byrja å løpe. I fristen inkluderer ein alle kalenderdagar. Dersom fristen endar på ein laurdag, heilagdag eller høgtidsdag, forlengar ein fristen til næraste virkedag.",
+                "text2": "Ved bruk av angreretten må vara leverast tilbake til seljar utan unødig opphald og seinast 14 dagar etter at melding om bruk av angreretten er gjeve. Kjøpar dekkjer dei direkte kostnadene ved å returnere vara.",
+                "exception": "Unntak: For levering av lausmasse (singel, grus, jord) som er tippa av og blanda med andre massar, eller som av natur ikkje kan returnerast, fell angreretten bort ved levering."
+            },
+            "complaints": {
+                "title": "8. Reklamasjon ved mangel og frist for å melde krav ved forseinking",
+                "text": "Dersom det føreligg ein mangel ved vara må kjøpar innan rimeleg tid etter at den vart oppdaga eller burde vore oppdaga, gje seljar melding om at han eller ho vil påberope seg mangelen. Kjøpar har alltid reklamert tidsnok dersom det skjer innan 2 mnd. frå mangelen vart oppdaga eller burde blitt oppdaga. Reklamasjon kan skje seinast to år etter at kjøpar overtok vara."
+            },
+            "conflicts": {
+                "title": "9. Konfliktløysing",
+                "text": "Klager vert retta til seljar innan rimeleg tid. Partane skal forsøke å løyse eventuelle tvistar i minnelegheit. Dersom dette ikkje lukkast, kan kjøpar ta kontakt med Forbrukertilsynet for mekling."
+            },
+            "additional": {
+                "title": "Tilleggsvilkår for Booking og Utleige",
+                "camping": {
+                    "title": "Bobilparkering / Camping",
+                    "items": [
+                        "Bestilling er bindande.",
+                        "Avbestilling må skje seinast 24 timar før ankomst for full refusjon.",
+                        "Ved avbestilling seinare enn 24 timar før ankomst, vert ikkje beløpet refundert.",
+                        "Innsjekk er etter kl. 12:00 med mindre anna er avtalt."
+                    ]
+                },
+                "venue": {
+                    "title": "Selskapslokale / Sjøbua",
+                    "items": [
+                        "For leige av selskapslokale gjeld eigen leigekontrakt som vert signert ved bestilling.",
+                        "Avbestilling av selskapslokale må skje seinast 30 dagar før arrangementet.",
+                        "Ved avbestilling 14-30 dagar før arrangementet fakturerast 50% av leigesummen.",
+                        "Ved avbestilling mindre enn 14 dagar før fakturerast heile leigesummen.",
+                        "Leigetakar er ansvarleg for eventuelle skadar på lokale og inventar i leigeperioden."
+                    ]
+                }
+            }
+        }
+    },
+    "Privacy": {
+        "title": "Personvernerklæring for Matland Gård",
+        "sections": {
+            "controller": {
+                "title": "1. Behandlingsansvarleg",
+                "text": "Matland Gård ENK (Org.nr 991 525 955) er behandlingsansvarleg for handsaminga av personopplysningar på denne nettstaden.",
+                "contact": "Kontaktinformasjon:"
+            },
+            "info": {
+                "title": "2. Hva slags informasjon vi samlar inn",
+                "text": "Vi samlar inn og lagrar nødvendig informasjon for å kunne gjennomføre bestillingar og levere varer og tenester til deg. Dette inkluderer:",
+                "items": [
+                    "Namn",
+                    "E-postadresse",
+                    "Telefonnummer",
+                    "Adresse (for levering)",
+                    "Ordrehistorikk"
+                ]
+            },
+            "purpose": {
+                "title": "3. Formålet med handsaminga",
+                "text": "Vi handsamar opplysningane for å:",
+                "items": [
+                    "Handsame og levere bestillinga di.",
+                    "Oppfylle lovpålagte plikter (t.d. bokføringslova).",
+                    "Kommunisere med deg om bestillinga di."
+                ]
+            },
+            "processors": {
+                "title": "4. Databehandlarar og tredjepartar",
+                "text": "Vi nyttar oss av følgjande tredjepartar for å drifte nettstaden og handsame betalingar:",
+                "it": {
+                    "title": "Teknisk drift og database",
+                    "text": "Fjeldheim Services ENK (Fjelldata) er vår leverandør av teknisk drift, utvikling og database. Fjelldata har tilgang til personopplysningar utelukkande for å kunne drifte og vedlikehalde systemet på vegne av oss."
+                },
+                "payment": {
+                    "title": "Betaling",
+                    "text1": "Vi handsamar ikkje kortopplysningane dine sjølve. All betaling skjer via sikre eksterne betalingsleverandørar:",
+                    "stripe": "Handsamar kortbetalingar.",
+                    "vipps": "Handsamar mobilbetalingar.",
+                    "text2": "Disse leverandørane handsamar betalingsopplysningar i tråd med sine eigne personvernerklæringar og gjeldande regelverk (PCI DSS)."
+                },
+                "email": {
+                    "title": "E-post",
+                    "text": "Vi nyttar Google (Gmail) for e-postkommunikasjon. Ordrebekreftelser og annan kommunikasjon vert sendt gjennom desse systema."
+                }
+            },
+            "rights": {
+                "title": "5. Dine rettar",
+                "text": "Du har rett til innsyn i kva opplysningar vi har lagra om deg, og du kan krevje retting eller sletting av opplysningane om dei er feil eller ikkje lenger naudsynte. Merk at vi er pliktige til å ta vare på visse opplysningar i samband med rekneskap og bokføring (i 5 år etter rekneskapsåret er avslutta)."
+            }
         }
     }
 }

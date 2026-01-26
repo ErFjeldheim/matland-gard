@@ -1,5 +1,6 @@
 {
     "Navigation": {
+        "home": "Inicio",
         "shop": "Grava y Piedra",
         "parking": "Parking de Autocaravanas",
         "venue": "Lugar de Eventos",
@@ -8,15 +9,21 @@
         "cart": "Carrito"
     },
     "Common": {
-        "title": "Matland Gård"
+        "title": "Matland Gård",
+        "loadingMap": "Cargando mapa...",
+        "season": "Temporada: Abril - Octubre"
     },
     "Footer": {
-        "terms": "Condiciones de vente",
+        "terms": "Condiciones de venta",
         "privacy": "Política de privacidad",
         "credits": "El sitio web es desarrollado, operado y mantenido por Fjelldata"
     },
     "Home": {
         "heroAlt": "Resumen de Matland Gård",
+        "hero": {
+            "title": "Bienvenidos a Matland Gård",
+            "text": "Ofrecemos productos de piedra de la más alta calidad, parking de autocaravanas junto al fiordo y lugares únicos para sus eventos."
+        },
         "shopCard": {
             "title": "Matland Grava y Piedra",
             "desc": "Distribuidor de Skjold Grava y Piedra. Entregamos grava señorial, piedra triturada y otros productos de piedra.",
@@ -38,6 +45,375 @@
         "contact": {
             "title": "Contáctenos",
             "desc": "¿Tiene alguna pregunta? Estamos aquí para ayudarle."
+        }
+    },
+    "Camping": {
+        "title": "Parking de Autocaravanas",
+        "subtitle": "Experimenta la naturaleza junto al fiordo",
+        "welcome": "Bienvenidos a Matland Gård",
+        "desc1": "Matland Gård, junto al Ådlandsfjord, ofrece un alojamiento idílico para autocaravanas en un entorno tranquilo justo a la orilla del agua. Aquí, los huéspedes pueden disfrutar de vistas espectaculares y hacer uso de la marina, que cuenta con playa y torre de saltos.",
+        "desc2": "Hay excelentes oportunidades para realizar actividades como excursiones por la montaña, pesca en el río y el mar, así como alquiler de barcos o kayaks. La finca también ofrece excursiones guiadas en yate a destinos como Austevoll y los fiordos de Hardanger.",
+        "desc3": "Los huéspedes están cerca de la vida en la granja con animales como ovejas, caballos y pavos reales, y existe la posibilidad de recoger huevos frescos por la mañana. Las instalaciones incluyen un cobertizo para botes con un escenario para reuniones sociales.",
+        "facilities": {
+            "title": "Instalaciones",
+            "items": [
+                "Edificio sanitario con ducha y WC",
+                "Electricidad para autocaravana/caravana",
+                "Llenado de agua",
+                "Lavadora y secadora",
+                "WiFi",
+                "Brasero",
+                "Extintor y desfibrilador"
+            ]
+        },
+        "rules": {
+            "title": "Reglas de convivencia",
+            "checkInOut": "Entrada/Salida",
+            "checkInOutDesc": "Entrada a partir de las 14:00. Salida antes de las 12:00.",
+            "quietTime": "Horas de silencio",
+            "quietTimeDesc": "Debe haber silencio entre las 23:00 y las 07:00.",
+            "waste": "Residuos",
+            "wasteDesc": "Deposite la basura/residuos en los contenedores designados.",
+            "fireSafety": "Seguridad contra incendios",
+            "fireSafetyDesc": "Parrillas y fuego solo en los lugares designados."
+        },
+        "booking": {
+            "title": "Reservar estancia",
+            "desc": "La reserva se realiza fácilmente a través de nuestro socio Campio.",
+            "button": "Reservar ahora a través de Campio →",
+            "contactDirect": "Contáctenos directamente:"
+        },
+        "activities": {
+            "title": "Actividades",
+            "items": [
+                "Alquiler de barcos y kayaks",
+                "Pesca en el fiordo y el río",
+                "Playa natural y torre de saltos",
+                "Excursiones por la montaña",
+                "Granja de visitas con animales",
+                "Excursiones guiadas en yate por el fiordo",
+                "Eventos musicales en el cobertizo"
+            ]
+        },
+        "prices": {
+            "title": "Precios",
+            "rental": "Alquileres",
+            "kayaks": "Kayaks",
+            "kayaksDesc": "Alquiler de 2 kayaks por 3 horas",
+            "sup": "Tabla de paddle surf (SUP)",
+            "supDesc": "3 horas",
+            "boat12h": "Barco incl. gasolina",
+            "boat12hDesc": "12 horas",
+            "boat6h": "Barco incl. gasolina",
+            "boat6hDesc": "6 horas",
+            "accommodation": "Alojamiento",
+            "spot": "Plaza de autocaravana/caravana",
+            "perNight": "por noche",
+            "campioNote": "* Consulte los precios y la disponibilidad de autocaravanas actualizados en Campio"
+        }
+    },
+    "Venue": {
+        "title": "Lugar de Eventos",
+        "subtitle": "Creando momentos memorables",
+        "tagline": "Un marco perfecto para sus ocasiones especiales",
+        "sjobuaTitle": "El cobertizo renovado junto al fiordo",
+        "desc1": "Matland Gård, con una historia de más de 400 años, ofrece lugares únicos para sus celebraciones. Nuestro cobertizo renovado es el entorno ideal para momentos memorables junto al fiordo.",
+        "desc2": "Con vistas espectaculares del fiordo, combinamos la herencia tradicional con el confort y estilo modernos.",
+        "events": {
+            "title": "Organizamos",
+            "items": [
+                "Bodas y banquetes de boda",
+                "Confirmaciones y bautizos",
+                "Fiestas de cumpleaños y aniversarios",
+                "Fiestas de empresa y conferencias",
+                "Fiestas de verano",
+                "Cenas y reuniones privadas"
+            ]
+        },
+        "locales": {
+            "title": "Nuestras instalaciones",
+            "sjobua": "El Sjøbua",
+            "sjobuaDetail1": "Renovado como un lugar único para eventos",
+            "sjobuaDetail2": "Capacidad flexible para todo tipo de fiestas"
+        },
+        "services": {
+            "title": "Servicios adicionales",
+            "items": [
+                "Catering y opciones de comida",
+                "Montaje y decoración",
+                "Equipo de sonido e iluminación",
+                "Plazas de aparcamiento"
+            ]
+        },
+        "contact": {
+            "title": "Contáctenos para una charla sin compromiso",
+            "desc": "Estaremos encantados de ayudarle a planificar su próximo evento. Contáctenos por correo electrónico o por teléfono para tarifas y disponibilidad.",
+            "email": "Correo electrónico",
+            "phone": "Teléfono",
+            "address": "Dirección"
+        }
+    },
+    "Contact": {
+        "title": "Contáctenos",
+        "info": "Información de contacto",
+        "visitUs": "Visítenos",
+        "shopDesc": "Visite nuestra <Link>tienda online</Link> para ver productos, precios y realizar pedidos. Entregamos en toda la región.",
+        "campingDesc": "Temporada: Abril - Octubre\nReserva: <Link>Reservar en Campio</Link> o llámenos.",
+        "venueDesc": "Contáctenos para disponibilidad y tarifas de eventos en nuestras instalaciones.",
+        "replyNote": "Normalmente respondemos en un plazo de 24 horas en días laborables.",
+        "findWay": "Cómo encontrarnos",
+        "phone": "Teléfono",
+        "email": "Correo electrónico",
+        "address": "Dirección",
+        "Navigation": {
+            "shop": "Grava y Piedra",
+            "parking": "Parking de Autocaravanas",
+            "venue": "Lugar de Eventos"
+        }
+    },
+    "Shop": {
+        "title": "Nuestros productos",
+        "noProducts": "No hay productos disponibles en este momento.",
+        "viewProduct": "Ver producto",
+        "perTonn": "por tonelada",
+        "perM2": "por m\u00b2",
+        "perBag": "por saco grande (800kg)",
+        "inclVat": "IVA incluido",
+        "info": {
+            "title": "Pedido y entrega",
+            "shipping": "Precio fijo de envío",
+            "shippingDesc": "Precio por saco grande/tonelada:",
+            "shippingZones": [
+                "Bergen, Vaksdal, Samnanger, Bjørnafjorden: 1000 NOK",
+                "Austevoll, Sotra, Askøy, Øygarden, Voss: 1500 NOK"
+            ],
+            "shippingExample": "Ejemplo: 2 sacos grandes para Bergen = 2000 NOK de gastos de envío",
+            "shippingContact": "Para pedidos de más de 2 unidades, contáctenos para un presupuesto de transporte.",
+            "payment": "Pago",
+            "paymentDesc": "Aceptamos Vipps y todas las tarjetas de pago comunes. Pague de forma segura online.",
+            "contact": "Contacto",
+            "pickup": "Recogida",
+            "pickupDesc": "Recogida gratuita en Holmefjord\nTraiga su propio remolque\nCon cita previa: 954 58 563"
+        }
+    },
+    "Product": {
+        "videoTitle": "Video del producto",
+        "selectSize": "Seleccionar tamaño",
+        "addToCart": "Añadir al carrito",
+        "addedToCart": "✓ ¡Añadido!",
+        "quickCheckout": "Pago rápido",
+        "sizeWarning": "Por favor, seleccione un tamaño antes de continuar."
+    },
+    "Products": {
+        "herregardssingel": {
+            "name": "Grava Señorial",
+            "description": "Grava exclusiva con un color único",
+            "longDescription": "La Grava Señorial es una grava exclusiva con un color y una estructura únicos. Perfecta para entradas, senderos y como cubierta decorativa. Se entrega en tres tamaños."
+        },
+        "grus": {
+            "name": "Piedra Triturada",
+            "description": "Piedra triturada natural en diversas fracciones. Perfecta para cimientos, drenaje o caminos.",
+            "longDescription": "Nuestra piedra triturada es piedra natural que resulta excelente para diversos propósitos. Producida a partir de piedra natural local y seleccionada en diferentes fracciones para satisfacer sus necesidades. Ideal para cimientos, drenaje, caminos y obras civiles. Se entrega en Big Bags de 1000 kg."
+        },
+        "elvestein": {
+            "name": "Piedra de Río",
+            "description": "Piedras naturalmente redondeadas",
+            "longDescription": "Piedras naturalmente redondeadas de fuentes locales. Perfectas para decoración en el jardín, alrededor de la casa o en parterres."
+        },
+        "sand": {
+            "name": "Arena",
+            "description": "Arena limpia para parques infantiles",
+            "longDescription": "Arena limpia y cribada que resulta excelente para areneros, parques infantiles y rejuntado entre adoquines."
+        },
+        "kirkegardssingel": {
+            "name": "Grava de Cementerio",
+            "description": "Grava blanca clásica",
+            "longDescription": "Grava blanca clásica que proporciona un aspecto limpio y digno. Muy popular para cementerios y como piedra decorativa en jardines."
+        },
+        "singelmatter-eccogravel": {
+            "name": "Malla estabilizadora ECCOgravel",
+            "description": "Práctica malla para la colocación segura de la grava. Evita las malas hierbas y proporciona un buen drenaje. Precio por m².",
+            "longDescription": "ECCOgravel son mallas estabilizadoras de grava profesionales que estabilizan la grava y los guijarros. Esto facilita caminar, andar en bicicleta y empujar un cochecito o silla de ruedas por la superficie. Las mallas tienen integrada una membrana antihierbas que evita el crecimiento desde abajo."
+        }
+    },
+    "Checkout": {
+        "modalTitle": "Pedir {product}",
+        "summary": "Resumen del pedido",
+        "cartNote": "Para cambiar la cantidad o eliminar artículos, regrese al carrito.",
+        "quantityLabel": "Cantidad",
+        "tonn": "(tonelada)",
+        "bag": "(sacos grandes)",
+        "name": "Nombre *",
+        "email": "Correo electrónico *",
+        "phone": "Teléfono *",
+        "deliveryAddress": "Dirección de entrega *",
+        "addressPlaceholder": "Ingrese la dirección de entrega",
+        "shippingTitle": "Seleccione el método de envío *",
+        "sone1": "Envío: Zona 1",
+        "sone1Desc": "Bergen, Vaksdal, Samnanger, Bjørnafjorden",
+        "sone2": "Envío: Zona 2",
+        "sone2Desc": "Austevoll, Sotra, Askøy, Øygarden, Voss",
+        "otherArea": "Otras regiones",
+        "otherAreaDesc": "Nos pondremos en contacto con usted en breve con un presupuesto de transporte",
+        "getQuote": "Obtener presupuesto",
+        "pickup": "Recogida en Holmefjord",
+        "free": "Gratis",
+        "bulkTip": "💡 Consejo: Como tiene 3 o más unidades, puede ser beneficioso solicitar un presupuesto de transporte combinado (seleccione \"Otras regiones\" arriba).",
+        "subtotal": "Subtotal artículos:",
+        "shippingFee": "Envío:",
+        "total": "Total:",
+        "paymentTitle": "Seleccione el método de pago *",
+        "vipps": "Vipps",
+        "card": "Tarjeta",
+        "processing": "Procesando...",
+        "selectShipping": "Seleccione el método de envío",
+        "selectPayment": "Seleccione el método de pago",
+        "complete": "Completar pedido",
+        "missingShipping": "Por favor, seleccione un método de envío",
+        "missingPayment": "Por favor, seleccione un método de pago"
+    },
+    "Cart": {
+        "title": "Carrito de compras",
+        "emptyTitle": "Su carrito está vacío",
+        "emptyText": "Añada productos para continuar",
+        "backToShop": "Ir a los productos",
+        "clearCart": "Vaciar carrito",
+        "subtotal": "Subtotal:",
+        "delete": "Eliminar producto",
+        "summary": "Resumen",
+        "itemCount": "Número de artículos:",
+        "total": "Total:",
+        "inclVat": "IVA incl.",
+        "checkout": "Ir a la caja",
+        "continueShopping": "← Continuar comprando",
+        "cartSummary": "{count} productos"
+    },
+    "Terms": {
+        "title": "Condiciones de venta de Matland Gård",
+        "sections": {
+            "intro": {
+                "title": "Introducción",
+                "text": "Esta compra se rige por las condiciones generales de venta estándar que figuran a continuación para las compras de bienes por parte de los consumidores a través de Internet. Las compras de los consumidores a través de Internet están reguladas principalmente por la Ley de Contratos, la Ley de Compras de los Consumidores, la Ley de Mercadotecnia, la Ley del Derecho de Desistimiento y la Ley de Comercio Electrónico, y estas leyes otorgan al consumidor derechos inalienables. Los términos de este acuerdo no deben entenderse como una limitación de los derechos legales, sino que establecen los derechos y obligaciones más importantes de las partes para el comercio."
+            },
+            "agreement": {
+                "title": "1. El acuerdo",
+                "text": "El acuerdo consta de estas condiciones de venta, la información proporcionada en la solución de pedido y cualquier condición específicamente acordada. En caso de conflicto entre la información, prevalecerá lo acordado específicamente entre las partes, siempre que no contradiga la legislación obligatoria."
+            },
+            "parties": {
+                "title": "2. Las partes",
+                "sellerLabel": "El vendedor es:",
+                "sellerDescription": "En lo sucesivo denominado «vendedor» o «nosotros».",
+                "buyerLabel": "El comprador es:",
+                "buyerText": "El consumidor que realiza el pedido, en lo sucesivo denominado «comprador» o «usted»."
+            },
+            "price": {
+                "title": "3. Precio",
+                "text": "El precio especificado para el artículo y los servicios es el precio total que debe pagar el comprador. Este precio incluye todos los impuestos y el impuesto sobre el valor añadido. Los costes adicionales de los que el vendedor no haya informado antes de la compra no correrán a cargo del comprador."
+            },
+            "formation": {
+                "title": "4. Formalización del contrato",
+                "text": "El acuerdo es vinculante para ambas partes cuando el comprador ha enviado su pedido al vendedor."
+            },
+            "payment": {
+                "title": "5. Pago",
+                "text": "El vendedor puede exigir el pago del artículo desde el momento en que se envía del vendedor al comprador. Si el comprador utiliza una tarjeta de crédito o de débito para el pago, el vendedor puede reservar el precio de compra en la tarjeta al realizar el pedido. El cargo en la tarjeta se realiza el mismo día en que se envía el artículo.",
+                "methods": "Ofrecemos el pago con Vipps y el pago con tarjeta (Stripe)."
+            },
+            "delivery": {
+                "title": "6. Entrega",
+                "text": "La entrega se ha producido cuando el comprador, o su representante, ha tomado posesión de la cosa.",
+                "pickup": "Recogida: Se puede realizar previa cita en Matland Gård.",
+                "shipping": "Entrega: Ofrecemos entrega en zonas especificadas (Bergen/Alrededores) mediante un suplemento de transporte. El plazo de entrega se acordará por separado."
+            },
+            "withdrawal": {
+                "title": "7. Derecho de desistimiento",
+                "text1": "El comprador puede desistir de la compra del artículo en virtud de la Ley del Derecho de Desistimiento. El comprador debe notificar al vendedor el uso del derecho de desistimiento en un plazo de 14 días a partir del inicio del plazo. El plazo incluye todos los días naturales. Si el plazo finaliza en sábado, festivo o día de descanso, el plazo se prorroga hasta el siguiente día hábil.",
+                "text2": "En caso de uso del derecho de desistimiento, el artículo debe devolverse al vendedor sin demora indebida y, a más tardar, 14 días después de la notificación del uso del derecho de desistimiento. El comprador corre con los gastos directos de devolución del artículo.",
+                "exception": "Excepción: Para la entrega de materiales a granel (guijarros, grava, tierra) que hayan sido descargados y mezclados con otras masas, o que por su naturaleza no puedan ser devueltos, el derecho de desistimiento caduca en el momento de la entrega."
+            },
+            "complaints": {
+                "title": "8. Reclamaciones por defectos y plazo para presentar reclamaciones por demora",
+                "text": "Si existe un defecto en el artículo, el comprador debe, en un plazo razonable después de haberlo descubierto o de haber debido descubrirlo, notificar al vendedor que invocará el defecto. El comprador siempre ha reclamado a tiempo si lo hace en un plazo de 2 meses a partir del momento en que se descubrió el defecto o se debió descubrir. Las reclamaciones pueden realizarse como máximo dos años después de que el comprador tomara posesión del artículo."
+            },
+            "conflicts": {
+                "title": "9. Resolución de conflictos",
+                "text": "Las quejas se dirigen al vendedor en un plazo razonable. Las partes intentarán resolver cualquier disputa de forma amistosa. Si no se logra el éxito, el comprador puede ponerse en contacto con la Autoridad del Consumidor para una mediación."
+            },
+            "additional": {
+                "title": "Condiciones adicionales para reservas y alquileres",
+                "camping": {
+                    "title": "Aparcamiento para autocaravanas / Camping",
+                    "items": [
+                        "La reserva es vinculante.",
+                        "La cancelación debe realizarse como máximo 24 horas antes de la llegada para obtener un reembolso completo.",
+                        "En caso de cancelación con menos de 24 horas de antelación, el importe no será reembolsado.",
+                        "La entrada es a partir de las 12:00, salvo que se acuerde lo contrario."
+                    ]
+                },
+                "venue": {
+                    "title": "Lugar de eventos / Sjøbua",
+                    "items": [
+                        "Para el alquiler de salas de eventos, se aplica un contrato de alquiler aparte que se firma al realizar la reserva.",
+                        "La cancelación del lugar de eventos debe realizarse como máximo 30 días antes del evento.",
+                        "En caso de cancelación de 14 a 30 días antes del evento, se facturará el 50% del importe del alquiler.",
+                        "En caso de cancelación con menos de 14 días de antelación, se facturará la totalidad del importe del alquiler.",
+                        "El arrendatario es responsable de cualquier daño causado al local y al mobiliario durante el periodo de alquiler."
+                    ]
+                }
+            }
+        }
+    },
+    "Privacy": {
+        "title": "Política de privacidad de Matland Gård",
+        "sections": {
+            "controller": {
+                "title": "1. Responsable del tratamiento",
+                "text": "Matland Gård ENK (Nº de org. 991 525 955) es el responsable del tratamiento de los datos personales en este sitio web.",
+                "contact": "Información de contacto:"
+            },
+            "info": {
+                "title": "2. Qué tipo de información recopilamos",
+                "text": "Recopilamos y almacenamos la información necesaria para poder realizar los pedidos y entregarle bienes y servicios. Esto incluye:",
+                "items": [
+                    "Nombre",
+                    "Dirección de correo electrónico",
+                    "Número de teléfono",
+                    "Dirección (para la entrega)",
+                    "Historial de pedidos"
+                ]
+            },
+            "purpose": {
+                "title": "3. Finalidad del tratamiento",
+                "text": "Tratamos la información para:",
+                "items": [
+                    "Procesar y entregar su pedido.",
+                    "Cumplir con las obligaciones legales (por ejemplo, la Ley de Contabilidad).",
+                    "Comunicarnos con usted sobre su pedido."
+                ]
+            },
+            "processors": {
+                "title": "4. Encargados del tratamiento y terceros",
+                "text": "Utilizamos a los siguientes terceros para el funcionamiento del sitio web y el procesamiento de los pagos:",
+                "it": {
+                    "title": "Funcionamiento técnico y base de datos",
+                    "text": "Fjeldheim Services ENK (Fjelldata) es nuestro proveedor de funcionamiento técnico, desarrollo y base de datos. Fjelldata tiene acceso a los datos personales exclusivamente para poder operar y mantener el sistema en nuestro nombre."
+                },
+                "payment": {
+                    "title": "Pago",
+                    "text1": "Nosotros no tratamos sus datos bancarios directamente. Todos los pagos se realizan a través de proveedores de pagos externos seguros:",
+                    "stripe": "Procesa pagos con tarjeta.",
+                    "vipps": "Procesa pagos móviles.",
+                    "text2": "Estos proveedores tratan la información de pago de acuerdo con sus propias políticas de privacidad y las normativas aplicables (PCI DSS)."
+                },
+                "email": {
+                    "title": "Correo electrónico",
+                    "text": "Utilizamos Google (Gmail) para la comunicación por correo electrónico. Las confirmaciones de pedidos y otras comunicaciones se envían a través de estos sistemas."
+                }
+            },
+            "rights": {
+                "title": "5. Sus derechos",
+                "text": "Tiene derecho a acceder a la información que tenemos almacenada sobre usted, y puede solicitar la rectificación o supresión de la información si es incorrecta o ya no es necesaria. Tenga en cuenta que estamos obligados a conservar cierta información en relación con la contabilidad (durante 5 años después de que finalice el año contable)."
+            }
         }
     }
 }

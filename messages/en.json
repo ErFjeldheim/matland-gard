@@ -1,5 +1,6 @@
 {
     "Navigation": {
+        "home": "Home",
         "shop": "Gravel & Stone",
         "parking": "Motorhome Parking",
         "venue": "Event Venue",
@@ -8,7 +9,9 @@
         "cart": "Shopping Cart"
     },
     "Common": {
-        "title": "Matland Farm"
+        "title": "Matland Farm",
+        "loadingMap": "Loading map...",
+        "season": "Season: April - October"
     },
     "Footer": {
         "terms": "Sales Terms",
@@ -17,6 +20,10 @@
     },
     "Home": {
         "heroAlt": "Matland Farm overview",
+        "hero": {
+            "title": "Welcome to Matland Farm",
+            "text": "We offer stone products of the highest quality, motorhome parking by the fjord, and unique venues for your events."
+        },
         "shopCard": {
             "title": "Matland Gravel & Stone",
             "desc": "Retailer of Skjold Gravel & Stone. We deliver manor gravel, crushed stone and other stone products.",
@@ -38,6 +45,375 @@
         "contact": {
             "title": "Contact Us",
             "desc": "Do you have any questions? We are here to help you."
+        }
+    },
+    "Camping": {
+        "title": "Motorhome Parking",
+        "subtitle": "Experience nature by the fjord",
+        "welcome": "Welcome to Matland Farm",
+        "desc1": "Matland Farm by the Ådlandsfjord offers idyllic accommodation for motorhomes in quiet surroundings right by the water's edge. Here, guests can enjoy spectacular views and make use of the marina, which has both a beach and a diving tower.",
+        "desc2": "There are great opportunities for activities such as mountain hikes, fishing in the river and sea, as well as boat or kayak rentals. The farm also offers guided yacht trips to destinations like Austevoll and the Hardangerfjords.",
+        "desc3": "Guests get close to farm life with animals like sheep, horses, and peacocks, and it's possible to pick fresh eggs in the morning. Facilities include a boathouse with a stage for social gatherings.",
+        "facilities": {
+            "title": "Facilities",
+            "items": [
+                "Sanitary building with shower and toilet",
+                "Electricity for motorhome/caravan",
+                "Water filling",
+                "Washing machine and dryer",
+                "WiFi",
+                "Fire pit",
+                "Fire extinguisher and defibrillator"
+            ]
+        },
+        "rules": {
+            "title": "Rules & Regulations",
+            "checkInOut": "Check-in/Check-out",
+            "checkInOutDesc": "Check-in from 14:00. Check-out by 12:00.",
+            "quietTime": "Quiet time",
+            "quietTimeDesc": "The area should be quiet between 23:00 and 07:00.",
+            "waste": "Waste",
+            "wasteDesc": "Dispose of trash/waste in designated containers.",
+            "fireSafety": "Fire Safety",
+            "fireSafetyDesc": "Grill and fire only in designated places."
+        },
+        "booking": {
+            "title": "Book Stay",
+            "desc": "Booking is easily done through our partner Campio.",
+            "button": "Book now via Campio →",
+            "contactDirect": "Contact us directly:"
+        },
+        "activities": {
+            "title": "Activities",
+            "items": [
+                "Boat and kayak rental",
+                "Fishing in the fjord and river",
+                "Natural beach and diving tower",
+                "Mountain hikes",
+                "Visiting farm with animals",
+                "Guided fjord trips with yacht",
+                "Music events in the boathouse"
+            ]
+        },
+        "prices": {
+            "title": "Prices",
+            "rental": "Rentals",
+            "kayaks": "Kayaks",
+            "kayaksDesc": "Rental of 2 kayaks for 3 hours",
+            "sup": "SUP board",
+            "supDesc": "3 hours",
+            "boat12h": "Boat incl. fuel",
+            "boat12hDesc": "12 hours",
+            "boat6h": "Boat incl. fuel",
+            "boat6hDesc": "6 hours",
+            "accommodation": "Accommodation",
+            "spot": "Motorhome spot",
+            "perNight": "per night",
+            "campioNote": "* See updated motorhome prices and availability on Campio"
+        }
+    },
+    "Venue": {
+        "title": "Event Venue",
+        "subtitle": "Creating memorable moments",
+        "tagline": "The perfect framework for your special occasions",
+        "sjobuaTitle": "The renovated boathouse by the fjord",
+        "desc1": "Matland Farm, with a history of over 400 years, offers unique venues for your events. Our renovated boathouse is the perfect setting for memorable moments by the fjord.",
+        "desc2": "With spectacular views of the fjord, we combine traditional heritage with modern comfort and style.",
+        "events": {
+            "title": "We Host",
+            "items": [
+                "Weddings and wedding parties",
+                "Confirmations and baptisms",
+                "Birthday parties and anniversaries",
+                "Corporate parties and conferences",
+                "Summer parties",
+                "Private dinners and gatherings"
+            ]
+        },
+        "locales": {
+            "title": "Our Venues",
+            "sjobua": "The Boathouse",
+            "sjobuaDetail1": "Renovated into a unique event venue",
+            "sjobuaDetail2": "Flexible capacity for all types of parties"
+        },
+        "services": {
+            "title": "Additional Services",
+            "items": [
+                "Catering and food options",
+                "Table setting and decoration",
+                "Audio and light equipment",
+                "Parking spaces"
+            ]
+        },
+        "contact": {
+            "title": "Contact us for a non-binding chat",
+            "desc": "We would be happy to help you plan your next event. Contact us by email or phone for prices and availability.",
+            "email": "Email",
+            "phone": "Phone",
+            "address": "Address"
+        }
+    },
+    "Contact": {
+        "title": "Contact Us",
+        "info": "Contact Information",
+        "visitUs": "Visit Us",
+        "shopDesc": "Visit our <Link>webshop</Link> to see products, prices and place orders. We deliver to the entire region.",
+        "campingDesc": "Season: April - October\nBooking: <Link>Book on Campio</Link> or call us.",
+        "venueDesc": "Contact us for availability and prices for events in our venues.",
+        "replyNote": "We usually respond within 24 hours on weekdays.",
+        "findWay": "Find your way to us",
+        "phone": "Phone",
+        "email": "Email",
+        "address": "Address",
+        "Navigation": {
+            "shop": "Gravel & Stone",
+            "parking": "Motorhome Parking",
+            "venue": "Event Venue"
+        }
+    },
+    "Shop": {
+        "title": "Our Products",
+        "noProducts": "No products available at the moment.",
+        "viewProduct": "View Product",
+        "perTonn": "per ton",
+        "perM2": "per m\u00b2",
+        "perBag": "per big bag (800kg)",
+        "inclVat": "incl. VAT",
+        "info": {
+            "title": "Ordering and Delivery",
+            "shipping": "Fixed Price Shipping",
+            "shippingDesc": "Price per big bag/ton:",
+            "shippingZones": [
+                "Bergen, Vaksdal, Samnanger, Bjørnafjorden: 1000 kr",
+                "Austevoll, Sotra, Askøy, Øygarden, Voss: 1500 kr"
+            ],
+            "shippingExample": "Example: 2 big bags to Bergen = 2000 kr shipping",
+            "shippingContact": "When ordering more than 2 units, please contact us for a shipping quote.",
+            "payment": "Payment",
+            "paymentDesc": "We accept Vipps and all common payment cards. Pay securely online.",
+            "contact": "Contact",
+            "pickup": "Pickup",
+            "pickupDesc": "Pick up for free in Holmefjord\nBring your own trailer\nBy appointment: 954 58 563"
+        }
+    },
+    "Product": {
+        "videoTitle": "Product Video",
+        "selectSize": "Select Size",
+        "addToCart": "Add to Cart",
+        "addedToCart": "✓ Added!",
+        "quickCheckout": "Quick Checkout",
+        "sizeWarning": "Please select a size before continuing."
+    },
+    "Products": {
+        "herregardssingel": {
+            "name": "Manor Gravel",
+            "description": "Exclusive gravel with unique color",
+            "longDescription": "Manor Gravel is an exclusive gravel with unique color and structure. Perfect for driveways, paths, and as decorative cover. Delivered in three sizes."
+        },
+        "grus": {
+            "name": "Crushed Stone",
+            "description": "Natural crushed stone in various fractions. Perfect for foundations, drainage, or roads.",
+            "longDescription": "Our crushed stone is natural stone that is excellent for a variety of purposes. Produced from local natural stone and sorted into different fractions to meet your needs. Ideal for foundations, drainage, roads, and civil engineering. Delivered in Big Bags of 1000 kg."
+        },
+        "elvestein": {
+            "name": "River Stone",
+            "description": "Natural rounded stones",
+            "longDescription": "Natural rounded stones from local sources. Perfect for decoration in the garden, around the house, or in flower beds."
+        },
+        "sand": {
+            "name": "Sand",
+            "description": "Clean sand for playgrounds",
+            "longDescription": "Clean, screened sand that is excellent for sandboxes, playgrounds, and jointing between pavers."
+        },
+        "kirkegardssingel": {
+            "name": "Cemetery Gravel",
+            "description": "Classic white gravel",
+            "longDescription": "Classic white gravel that provides a clean and dignified expression. Very popular for cemeteries and as decorative stone in gardens."
+        },
+        "singelmatter-eccogravel": {
+            "name": "Gravel Mats ECCOgravel",
+            "description": "Practical mat for secure placement of gravel. Prevents weeds and provides good drainage. Price per m².",
+            "longDescription": "ECCOgravel is professional gravel mats that stabilize gravel and shingles. This makes it easy to walk, cycle, and push a stroller or wheelchair on the surface. The mats have integrated weed membrane that prevents growth from underneath."
+        }
+    },
+    "Checkout": {
+        "modalTitle": "Order {product}",
+        "summary": "Order Summary",
+        "cartNote": "To change quantity or remove items, please go back to the cart.",
+        "quantityLabel": "Quantity",
+        "tonn": "(ton)",
+        "bag": "(big bags)",
+        "name": "Name *",
+        "email": "Email *",
+        "phone": "Phone *",
+        "deliveryAddress": "Delivery Address *",
+        "addressPlaceholder": "Enter delivery address",
+        "shippingTitle": "Select Shipping Method *",
+        "sone1": "Shipping: Zone 1",
+        "sone1Desc": "Bergen, Vaksdal, Samnanger, Bjørnafjorden",
+        "sone2": "Shipping: Zone 2",
+        "sone2Desc": "Austevoll, Sotra, Askøy, Øygarden, Voss",
+        "otherArea": "Other Areas",
+        "otherAreaDesc": "We will contact you shortly with a shipping quote",
+        "getQuote": "Get Quote",
+        "pickup": "Pick up in Holmefjord",
+        "free": "Free",
+        "bulkTip": "💡 Tip: Since you have 3 or more units, it may be beneficial to request a combined shipping quote (select \"Other Areas\" above).",
+        "subtotal": "Subtotal items:",
+        "shippingFee": "Shipping:",
+        "total": "Total:",
+        "paymentTitle": "Select Payment Method *",
+        "vipps": "Vipps",
+        "card": "Card",
+        "processing": "Processing...",
+        "selectShipping": "Select shipping method",
+        "selectPayment": "Select payment method",
+        "complete": "Complete Order",
+        "missingShipping": "Please select a shipping method",
+        "missingPayment": "Please select a payment method"
+    },
+    "Cart": {
+        "title": "Shopping Cart",
+        "emptyTitle": "Your shopping cart is empty",
+        "emptyText": "Add products to continue",
+        "backToShop": "Go to products",
+        "clearCart": "Clear cart",
+        "subtotal": "Subtotal:",
+        "delete": "Delete product",
+        "summary": "Summary",
+        "itemCount": "Number of items:",
+        "total": "Total:",
+        "inclVat": "incl. VAT",
+        "checkout": "Go to checkout",
+        "continueShopping": "← Continue shopping",
+        "cartSummary": "{count} products"
+    },
+    "Terms": {
+        "title": "Sales Terms for Matland Gård",
+        "sections": {
+            "intro": {
+                "title": "Introduction",
+                "text": "This purchase is governed by the standard sales conditions below for consumer purchases of goods over the internet. Consumer purchases over the internet are mainly regulated by the Contract Act, the Consumer Purchases Act, the Marketing Act, the Right of Withdrawal Act, and the E-commerce Act, and these laws give the consumer inalienable rights. The terms of this agreement should not be understood as any limitation on the statutory rights, but establish the parties' most important rights and obligations for the trade."
+            },
+            "agreement": {
+                "title": "1. The Agreement",
+                "text": "The agreement consists of these sales terms, information provided in the ordering solution, and any specifically agreed terms. In case of any conflict between the information, what is specifically agreed between the parties prevails, provided it does not contradict mandatory legislation."
+            },
+            "parties": {
+                "title": "2. The Parties",
+                "sellerLabel": "Seller is:",
+                "sellerDescription": "Hereinafter referred to as «seller» or «us».",
+                "buyerLabel": "Buyer is:",
+                "buyerText": "The consumer who makes the order, hereinafter referred to as «buyer» or «you»."
+            },
+            "price": {
+                "title": "3. Price",
+                "text": "The specified price for the item and services is the total price the buyer shall pay. This price includes all taxes and value-added tax. Additional costs that the seller has not informed about before the purchase shall not be borne by the buyer."
+            },
+            "formation": {
+                "title": "4. Contract Formation",
+                "text": "The agreement is binding for both parties when the buyer has sent their order to the seller."
+            },
+            "payment": {
+                "title": "5. Payment",
+                "text": "The seller can demand payment for the item from the time it is sent from the seller to the buyer. If the buyer uses a credit card or debit card for payment, the seller can reserve the purchase price on the card upon ordering. The card is charged on the same day the item is sent.",
+                "methods": "We offer payment with Vipps and card payment (Stripe)."
+            },
+            "delivery": {
+                "title": "6. Delivery",
+                "text": "Delivery has occurred when the buyer, or their representative, has taken possession of the item.",
+                "pickup": "Pickup: Can be done by appointment at Matland Gård.",
+                "shipping": "Delivery: We offer delivery in specified zones (Bergen/Surroundings) for a shipping fee. Delivery time is agreed upon separately."
+            },
+            "withdrawal": {
+                "title": "7. Right of Withdrawal",
+                "text1": "The buyer can withdraw from the purchase of the item under the Right of Withdrawal Act. The buyer must notify the seller of use of the right of withdrawal within 14 days after the period began to run. The period includes all calendar days. If the period ends on a Saturday, public holiday, or day of rest, the period is extended to the nearest working day.",
+                "text2": "When using the right of withdrawal, the item must be returned to the seller without undue delay and at the latest 14 days after notification of use of the right of withdrawal is given. The buyer covers the direct costs of returning the item.",
+                "exception": "Exception: For delivery of bulk materials (shingle, gravel, soil) that have been tipped off and mixed with other masses, or which by nature cannot be returned, the right of withdrawal lapses upon delivery."
+            },
+            "complaints": {
+                "title": "8. Complaints in Case of Defect and Deadline for Reporting Claims Due to Delay",
+                "text": "If there is a defect in the item, the buyer must within a reasonable time after it was discovered or should have been discovered, notify the seller that they will invoke the defect. The buyer has always complained on time if it happens within 2 months from the time the defect was discovered or should have been discovered. Complaints can occur at the latest two years after the buyer took over the item."
+            },
+            "conflicts": {
+                "title": "9. Conflict Resolution",
+                "text": "Complaints are directed to the seller within a reasonable time. The parties shall attempt to resolve any disputes amicably. If this does not succeed, the buyer can contact the Consumer Authority for mediation."
+            },
+            "additional": {
+                "title": "Additional Terms for Booking and Rental",
+                "camping": {
+                    "title": "Motorhome Parking / Camping",
+                    "items": [
+                        "Booking is binding.",
+                        "Cancellation must occur at the latest 24 hours before arrival for a full refund.",
+                        "In case of cancellation later than 24 hours before arrival, the amount is not refunded.",
+                        "Check-in is after 12:00 unless otherwise agreed."
+                    ]
+                },
+                "venue": {
+                    "title": "Event Venue / The Boathouse",
+                    "items": [
+                        "For rental of event venues, a separate rental contract applies which is signed upon booking.",
+                        "Cancellation of event venue must occur at the latest 30 days before the event.",
+                        "In case of cancellation 14-30 days before the event, 50% of the rental sum is invoiced.",
+                        "In case of cancellation less than 14 days before, the entire rental sum is invoiced.",
+                        "The tenant is responsible for any damage to the venue and inventory during the rental period."
+                    ]
+                }
+            }
+        }
+    },
+    "Privacy": {
+        "title": "Privacy Policy for Matland Gård",
+        "sections": {
+            "controller": {
+                "title": "1. Data Controller",
+                "text": "Matland Gård ENK (Org.nr 991 525 955) is the data controller for the processing of personal data on this website.",
+                "contact": "Contact Information:"
+            },
+            "info": {
+                "title": "2. What Kind of Information We Collect",
+                "text": "We collect and store necessary information to be able to carry out orders and deliver goods and services to you. This includes:",
+                "items": [
+                    "Name",
+                    "Email address",
+                    "Phone number",
+                    "Address (for delivery)",
+                    "Order history"
+                ]
+            },
+            "purpose": {
+                "title": "3. Purpose of Processing",
+                "text": "We process the information to:",
+                "items": [
+                    "Process and deliver your order.",
+                    "Fulfill statutory obligations (e.g., the Bookkeeping Act).",
+                    "Communicate with you about your order."
+                ]
+            },
+            "processors": {
+                "title": "4. Data Processors and Third Parties",
+                "text": "We use the following third parties to operate the website and process payments:",
+                "it": {
+                    "title": "Technical Operation and Database",
+                    "text": "Fjeldheim Services ENK (Fjelldata) is our provider of technical operation, development, and database. Fjelldata has access to personal data exclusively to be able to operate and maintain the system on our behalf."
+                },
+                "payment": {
+                    "title": "Payment",
+                    "text1": "We do not process your card details ourselves. All payment occurs via secure external payment providers:",
+                    "stripe": "Processes card payments.",
+                    "vipps": "Processes mobile payments.",
+                    "text2": "These providers process payment information in line with their own privacy policies and applicable regulations (PCI DSS)."
+                },
+                "email": {
+                    "title": "Email",
+                    "text": "We use Google (Gmail) for email communication. Order confirmations and other communication are sent through these systems."
+                }
+            },
+            "rights": {
+                "title": "5. Your Rights",
+                "text": "You have the right to access what information we have stored about you, and you can demand correction or deletion of the information if it is wrong or no longer necessary. Note that we are obliged to keep certain information in connection with accounting and bookkeeping (for 5 years after the accounting year is ended)."
+            }
         }
     }
 }

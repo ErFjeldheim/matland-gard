@@ -3,10 +3,12 @@
 import { useState } from 'react';
 import CheckoutModal from '@/app/components/CheckoutModal';
 import { useCart } from '@/app/context/CartContext';
+import { useTranslations } from 'next-intl';
 
 type Product = {
   id: string;
   name: string;
+  slug: string;
   description: string | null;
   longDescription: string | null;
   price: number;
@@ -33,6 +35,9 @@ export default function ProductPageClient({ product }: { product: Product }) {
   const [selectedSize, setSelectedSize] = useState<string>('');
   const [addedToCart, setAddedToCart] = useState(false);
   const { addItem } = useCart();
+  const t = useTranslations('Product');
+  const shopT = useTranslations('Shop');
+  const productsT = useTranslations('Products');
 
   // Check if this product requires size selection
   const requiresSize = product.name === 'Herregårdssingel' || product.name === 'Grus';
@@ -70,7 +75,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
 
   const validateSelection = () => {
     if (requiresSize && !selectedSize) {
-      alert('Ver vennleg og vel ein storleik før du held fram.');
+      alert(t('sizeWarning'));
       return false;
     }
     return true;
@@ -79,9 +84,12 @@ export default function ProductPageClient({ product }: { product: Product }) {
   const handleAddToCart = () => {
     if (!validateSelection()) return;
 
+    const baseName = productsT(`${product.slug}.name`, { defaultValue: product.name });
+    const productName = requiresSize ? `${baseName} (${selectedSize})` : baseName;
+
     addItem({
       productId: product.id,
-      productName: requiresSize ? `${product.name} (${selectedSize})` : product.name,
+      productName: productName,
       price: currentPrice,
       size: selectedSize || undefined,
       image: product.image || undefined,
@@ -112,20 +120,20 @@ export default function ProductPageClient({ product }: { product: Product }) {
               {(currentPrice / 100).toFixed(0)} kr
             </span>
           )}
-          <span className="text-gray-500 text-sm ml-2">inkl. mva.</span>
+          <span className="text-gray-500 text-sm ml-2">{shopT('inclVat')}</span>
         </div>
         <p className="text-gray-600 text-sm">
           {product.name.toLowerCase().includes('grus')
-            ? 'per tonn'
+            ? shopT('perTonn')
             : product.name.toLowerCase().includes('matte')
-              ? 'per m²'
-              : 'per storsekk (800kg)'}
+              ? shopT('perM2')
+              : shopT('perBag')}
         </p>
       </div>
 
       {requiresSize && (
         <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-3">Vel storleik</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('selectSize')}</h3>
           <div className="grid grid-cols-3 gap-3">
             {SIZE_OPTIONS.map(({ size }) => (
               <button
@@ -151,7 +159,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
           <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
           </svg>
-          {addedToCart ? '✓ Lagt til!' : 'Legg til i handlekorg'}
+          {addedToCart ? t('addedToCart') : t('addToCart')}
         </button>
 
         <button
@@ -161,7 +169,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
           <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
           </svg>
-          Hurtigbetaling
+          {t('quickCheckout')}
         </button>
       </div>
 
@@ -170,7 +178,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
           isOpen={isModalOpen}
           product={{
             ...product,
-            name: requiresSize ? `${product.name} (${selectedSize})` : product.name,
+            name: requiresSize ? `${productsT(`${product.slug}.name`, { defaultValue: product.name })} (${selectedSize})` : productsT(`${product.slug}.name`, { defaultValue: product.name }),
             price: currentPrice
           }}
           onClose={() => setIsModalOpen(false)}

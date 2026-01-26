@@ -1,5 +1,6 @@
 {
     "Navigation": {
+        "home": "Heim",
         "shop": "Kies & Stein",
         "parking": "Wohnmobilstellplatz",
         "venue": "Veranstaltungsort",
@@ -8,7 +9,9 @@
         "cart": "Warenkorb"
     },
     "Common": {
-        "title": "Matland Gård"
+        "title": "Matland Gård",
+        "loadingMap": "Karte laden...",
+        "season": "Saison: April - Oktober"
     },
     "Footer": {
         "terms": "Verkaufsbedingungen",
@@ -17,6 +20,10 @@
     },
     "Home": {
         "heroAlt": "Matland Gård Übersicht",
+        "hero": {
+            "title": "Willkommen auf Matland Gård",
+            "text": "Wir bieten Steinprodukte höchster Qualität, Wohnmobilstellplätze am Fjord und einzigartige Veranstaltungsorte für Ihre Feiern."
+        },
         "shopCard": {
             "title": "Matland Kies & Stein",
             "desc": "Händler von Skjold Kies & Stein. Wir liefern Herrenhauskies, Schotter und andere Steinprodukte.",
@@ -38,6 +45,375 @@
         "contact": {
             "title": "Kontaktieren Sie uns",
             "desc": "Haben Sie Fragen? Wir sind hier, um Ihnen zu helfen."
+        }
+    },
+    "Camping": {
+        "title": "Wohnmobilstellplatz",
+        "subtitle": "Erleben Sie die Natur am Fjord",
+        "welcome": "Willkommen auf Matland Gård",
+        "desc1": "Matland Gård am Ådlandsfjord bietet idyllische Übernachtungsmöglichkeiten für Wohnmobile in ruhiger Umgebung direkt am Wasser. Hier können Gäste spektakuläre Ausblicke genießen und den Yachthafen nutzen, der sowohl über einen Badestrand als auch über einen Sprungturm verfügt.",
+        "desc2": "Es gibt gute Möglichkeiten für Aktivitäten wie Bergwanderungen, Angeln in Fluss und Meer sowie den Verleih von Booten oder Kajaks. Der Hof bietet auch geführte Touren mit einer Yacht zu Zielen wie Austevoll und den Hardangerfjorden an.",
+        "desc3": "Die Gäste kommen dem Hofleben mit Tieren wie Schafen, Pferden und Pfauen nahe, und es besteht die Möglichkeit, morgens frische Eier zu sammeln. Zu den Einrichtungen gehört ein Bootshaus mit Bühne für gesellschaftliche Zusammenkünfte.",
+        "facilities": {
+            "title": "Einrichtungen",
+            "items": [
+                "Sanitärgebäude mit Dusche und WC",
+                "Strom für Wohnmobile/Wohnwagen",
+                "Wasserauffüllung",
+                "Waschmaschine und Trockner",
+                "WLAN",
+                "Feuerschale",
+                "Feuerlöscher und Defibrillator"
+            ]
+        },
+        "rules": {
+            "title": "Hausordnung",
+            "checkInOut": "Check-in/Check-out",
+            "checkInOutDesc": "Check-in ab 14:00 Uhr. Check-out bis 12:00 Uhr.",
+            "quietTime": "Nachtruhe",
+            "quietTimeDesc": "Zwischen 23:00 und 07:00 Uhr muss Ruhe auf dem Platz herrschen.",
+            "waste": "Abfall",
+            "wasteDesc": "Entsorgen Sie Müll/Abfall in den dafür vorgesehenen Containern.",
+            "fireSafety": "Brandschutz",
+            "fireSafetyDesc": "Grillen und Feuer nur an den dafür vorgesehenen Stellen."
+        },
+        "booking": {
+            "title": "Aufenthalt buchen",
+            "desc": "Die Buchung erfolgt ganz einfach über unseren Partner Campio.",
+            "button": "Jetzt über Campio buchen →",
+            "contactDirect": "Kontaktieren Sie uns direkt:"
+        },
+        "activities": {
+            "title": "Aktivitäten",
+            "items": [
+                "Boot- und Kajakverleih",
+                "Angeln im Fjord und Fluss",
+                "Naturbadestrand und Sprungturm",
+                "Bergwanderungen",
+                "Besuchsbauernhof mit Tieren",
+                "Geführte Fjordtouren mit der Yacht",
+                "Musikveranstaltungen im Bootshaus"
+            ]
+        },
+        "prices": {
+            "title": "Preise",
+            "rental": "Verleih",
+            "kayaks": "Kajaks",
+            "kayaksDesc": "Verleih von 2 Kajaks für 3 Stunden",
+            "sup": "SUP-Board",
+            "supDesc": "3 Stunden",
+            "boat12h": "Boot inkl. Benzin",
+            "boat12hDesc": "12 Stunden",
+            "boat6h": "Boot inkl. Benzin",
+            "boat6hDesc": "6 Stunden",
+            "accommodation": "Übernachtung",
+            "spot": "Wohnmobil-/Wagenplatz",
+            "perNight": "pro Nacht",
+            "campioNote": "* Aktuelle Wohnmobilpreise und Verfügbarkeit finden Sie auf Campio"
+        }
+    },
+    "Venue": {
+        "title": "Veranstaltungsort",
+        "subtitle": "Unvergessliche Momente schaffen",
+        "tagline": "Der perfekte Rahmen für Ihre besonderen Anlässe",
+        "sjobuaTitle": "Das umgebaute Bootshaus am Fjord",
+        "desc1": "Matland Gård blickt auf eine über 400-jährige Geschichte zurück und bietet einzigartige Räumlichkeiten für Ihre Feste. Unser umgebautes Bootshaus ist der perfekte Rahmen für unvergessliche Momente am Fjord.",
+        "desc2": "Mit spektakulärem Blick auf den Fjord verbinden wir traditionelles Erbe mit modernem Komfort und Stil.",
+        "events": {
+            "title": "Wir veranstalten",
+            "items": [
+                "Hochzeiten und Hochzeitsfeiern",
+                "Konfirmationen und Taufen",
+                "Geburtstagsfeiern und Jubiläen",
+                "Firmenfeiern und Konferenzen",
+                "Sommerfeste",
+                "Private Abendessen und Zusammenkünfte"
+            ]
+        },
+        "locales": {
+            "title": "Unsere Räumlichkeiten",
+            "sjobua": "Das Bootshaus (Sjøbua)",
+            "sjobuaDetail1": "Zu einem einzigartigen Veranstaltungsort umgebaut",
+            "sjobuaDetail2": "Flexible Kapazität für alle Arten von Feiern"
+        },
+        "services": {
+            "title": "Zusatzleistungen",
+            "items": [
+                "Catering und Verpflegungsangebote",
+                "Eindecken und Dekoration",
+                "Ton- und Lichtanlage",
+                "Parkplätze"
+            ]
+        },
+        "contact": {
+            "title": "Kontaktieren Sie uns für ein unverbindliches Gespräch",
+            "desc": "Gerne helfen wir Ihnen bei der Planung Ihrer nächsten Feier. Kontaktieren Sie uns per E-Mail oder Telefon für Preise und Verfügbarkeit.",
+            "email": "E-Mail",
+            "phone": "Telefon",
+            "address": "Adresse"
+        }
+    },
+    "Contact": {
+        "title": "Kontaktieren Sie uns",
+        "info": "Kontaktinformationen",
+        "visitUs": "Besuchen Sie uns",
+        "shopDesc": "Besuchen Sie unseren <Link>Onlineshop</Link>, um Produkte und Preise zu sehen und eine Bestellung aufzugeben. Wir liefern in die gesamte Region.",
+        "campingDesc": "Saison: April - Oktober\nBuchung: <Link>Auf Campio buchen</Link> oder rufen Sie uns an.",
+        "venueDesc": "Kontaktieren Sie uns für Verfügbarkeit und Preise für Veranstaltungen in unseren Räumlichkeiten.",
+        "replyNote": "Normalerweise antworten wir an Werktagen innerhalb von 24 Stunden.",
+        "findWay": "So finden Sie uns",
+        "phone": "Telefon",
+        "email": "E-Mail",
+        "address": "Adresse",
+        "Navigation": {
+            "shop": "Kies & Stein",
+            "parking": "Wohnmobilstellplatz",
+            "venue": "Veranstaltungsort"
+        }
+    },
+    "Shop": {
+        "title": "Unsere Produkte",
+        "noProducts": "Zurzeit sind keine Produkte verfügbar.",
+        "viewProduct": "Produkt ansehen",
+        "perTonn": "pro Tonne",
+        "perM2": "pro m\u00b2",
+        "perBag": "pro Bigbag (800kg)",
+        "inclVat": "inkl. MwSt.",
+        "info": {
+            "title": "Bestellung und Lieferung",
+            "shipping": "Versandfestpreis",
+            "shippingDesc": "Preis pro Bigbag/Tonne:",
+            "shippingZones": [
+                "Bergen, Vaksdal, Samnanger, Bjørnafjorden: 1000 NOK",
+                "Austevoll, Sotra, Askøy, Øygarden, Voss: 1500 NOK"
+            ],
+            "shippingExample": "Beispiel: 2 Bigbags nach Bergen = 2000 NOK Versand",
+            "shippingContact": "Bei Bestellung von mehr als 2 Einheiten kontaktieren Sie uns bitte für ein Versandangebot.",
+            "payment": "Bezahlung",
+            "paymentDesc": "Wir akzeptieren Vipps und alle gängigen Zahlungskarten. Sicher online bezahlen.",
+            "contact": "Kontakt",
+            "pickup": "Abholung",
+            "pickupDesc": "Kostenlose Abholung in Holmefjord\nBringen Sie Ihren eigenen Anhänger mit\nNach Vereinbarung: 954 58 563"
+        }
+    },
+    "Product": {
+        "videoTitle": "Produktvideo",
+        "selectSize": "Größe wählen",
+        "addToCart": "In den Warenkorb",
+        "addedToCart": "✓ Hinzugefügt!",
+        "quickCheckout": "Direktkauf",
+        "sizeWarning": "Bitte wählen Sie eine Größe aus, bevor Sie fortfahren."
+    },
+    "Products": {
+        "herregardssingel": {
+            "name": "Herrenhauskies",
+            "description": "Exklusiver Kies mit einzigartiger Farbe",
+            "longDescription": "Herrenhauskies ist ein exklusiver Kies mit einzigartiger Farbe und Struktur. Perfekt für Einfahrten, Wege und als dekorative Abdeckung. In drei Größen lieferbar."
+        },
+        "grus": {
+            "name": "Kies",
+            "description": "Natürlicher Brechsand in verschiedenen Fraktionen. Perfekt als Fundament, Entwässerung oder für Straßen.",
+            "longDescription": "Unser Kies ist natürlich gebrochener Stein, der sich hervorragend für eine Vielzahl von Zwecken eignet. Aus lokalem Naturstein hergestellt und in verschiedene Fraktionen sortiert, um Ihren Anforderungen gerecht zu werden. Ideal für Fundamente, Entwässerung, Straßen und Tiefbau. Geliefert in Bigbags à 1000 kg."
+        },
+        "elvestein": {
+            "name": "Flussstein",
+            "description": "Natürlich rundgeschliffene Steine",
+            "longDescription": "Natürlich rundgeschliffene Steine aus lokalen Quellen. Perfekt zur Dekoration im Garten, um das Haus oder in Blumenbeeten."
+        },
+        "sand": {
+            "name": "Sand",
+            "description": "Reiner Sand für Spielplätze",
+            "longDescription": "Reiner, gesiebter Sand, der sich hervorragend für Sandkästen, Spielplätze und zum Verfugen von Platten eignet."
+        },
+        "kirkegardssingel": {
+            "name": "Friedhofskies",
+            "description": "Klassischer weißer Kies",
+            "longDescription": "Klassischer weißer Kies, der einen sauberen und würdevollen Eindruck vermittelt. Sehr beliebt für Friedhöfe und als Zierkies in Gärten."
+        },
+        "singelmatter-eccogravel": {
+            "name": "Kiesmatten ECCOgravel",
+            "description": "Praktische Matte zur sicheren Verlegung von Kies. Verhindert Unkraut und sorgt für gute Entwässerung. Preis pro m².",
+            "longDescription": "ECCOgravel sind professionelle Kiesmatten, die Kies und Splitt stabilisieren. Dadurch wird das Gehen, Radfahren und Schieben von Kinderwagen oder Rollstühlen auf der Fläche erleichtert. Die Matten verfügen über ein integriertes Unkrautvlies, das Durchwuchs von unten verhindert."
+        }
+    },
+    "Checkout": {
+        "modalTitle": "Bestellen {product}",
+        "summary": "Bestellübersicht",
+        "cartNote": "Um die Menge zu ändern oder Artikel zu entfernen, gehen Sie bitte zurück zum Warenkorb.",
+        "quantityLabel": "Anzahl",
+        "tonn": "(Tonnen)",
+        "bag": "(Bigbags)",
+        "name": "Name *",
+        "email": "E-Mail *",
+        "phone": "Telefon *",
+        "deliveryAddress": "Lieferadresse *",
+        "addressPlaceholder": "Lieferadresse eingeben",
+        "shippingTitle": "Versandart wählen *",
+        "sone1": "Versand: Zone 1",
+        "sone1Desc": "Bergen, Vaksdal, Samnanger, Bjørnafjorden",
+        "sone2": "Versand: Zone 2",
+        "sone2Desc": "Austevoll, Sotra, Askøy, Øygarden, Voss",
+        "otherArea": "Andere Gebiete",
+        "otherAreaDesc": "Wir werden Sie in Kürze mit einem Versandangebot kontaktieren",
+        "getQuote": "Angebot anfordern",
+        "pickup": "Abholung in Holmefjord",
+        "free": "Kostenlos",
+        "bulkTip": "💡 Tipp: Da Sie 3 oder mehr Einheiten haben, kann es vorteilhaft sein, ein kombiniertes Versandangebot anzufordern (wählen Sie oben \"Andere Gebiete\").",
+        "subtotal": "Zwischensumme Artikel:",
+        "shippingFee": "Versand:",
+        "total": "Gesamt:",
+        "paymentTitle": "Zahlungsmethode wählen *",
+        "vipps": "Vipps",
+        "card": "Karte",
+        "processing": "Wird bearbeitet...",
+        "selectShipping": "Versandart wählen",
+        "selectPayment": "Zahlungsmethode wählen",
+        "complete": "Bestellung abschließen",
+        "missingShipping": "Bitte wählen Sie eine Versandart aus",
+        "missingPayment": "Bitte wählen Sie eine Zahlungsmethode aus"
+    },
+    "Cart": {
+        "title": "Warenkorb",
+        "emptyTitle": "Ihr Warenkorb ist leer",
+        "emptyText": "Produkte hinzufügen, um fortzufahren",
+        "backToShop": "Zu den Produkten",
+        "clearCart": "Warenkorb leeren",
+        "subtotal": "Zwischensumme:",
+        "delete": "Produkt löschen",
+        "summary": "Zusammenfassung",
+        "itemCount": "Anzahl der Artikel:",
+        "total": "Gesamt:",
+        "inclVat": "inkl. MwSt.",
+        "checkout": "Zur Kasse",
+        "continueShopping": "← Weiter einkaufen",
+        "cartSummary": "{count} Produkte"
+    },
+    "Terms": {
+        "title": "Verkaufsbedingungen für Matland Gård",
+        "sections": {
+            "intro": {
+                "title": "Einführung",
+                "text": "Dieser Kauf unterliegt den untenstehenden Standard-Verkaufsbedingungen für Verbraucherkäufe von Waren über das Internet. Verbraucherkäufe über das Internet werden hauptsächlich durch das Vertragsgesetz, das Verbraucherkaufgesetz, das Marktforschungsgesetz, das Widerrufsgesetz und das E-Commerce-Gesetz geregelt, und diese Gesetze geben dem Verbraucher unveräußerliche Rechte. Die Bedingungen dieser Vereinbarung sind nicht als Einschränkung der gesetzlichen Rechte zu verstehen, sondern legen die wichtigsten Rechte und Pflichten der Parteien für den Handel fest."
+            },
+            "agreement": {
+                "title": "1. Die Vereinbarung",
+                "text": "Die Vereinbarung besteht aus diesen Verkaufsbedingungen, Informationen im Bestellsystem und eventuell speziell vereinbarten Bedingungen. Im Falle eines Konflikts zwischen den Informationen überwiegt das, was speziell zwischen den Parteien vereinbart wurde, sofern es nicht gegen zwingende Rechtsvorschriften verstößt."
+            },
+            "parties": {
+                "title": "2. Die Parteien",
+                "sellerLabel": "Verkäufer ist:",
+                "sellerDescription": "Im Folgenden als «Verkäufer» oder «uns» bezeichnet.",
+                "buyerLabel": "Käufer ist:",
+                "buyerText": "Der Verbraucher, der die Bestellung aufgibt, im Folgenden als «Käufer» oder «Sie» bezeichnet."
+            },
+            "price": {
+                "title": "3. Preis",
+                "text": "Der angegebene Preis für den Artikel und die Dienstleistungen ist der Gesamtpreis, den der Käufer zu zahlen hat. Dieser Preis beinhaltet alle Steuern und die Mehrwertsteuer. Zusätzliche Kosten, über die der Verkäufer vor dem Kauf nicht informiert hat, trägt der Käufer nicht."
+            },
+            "formation": {
+                "title": "4. Vertragsschluss",
+                "text": "Die Vereinbarung ist für beide Parteien bindend, wenn der Käufer seine Bestellung an den Verkäufer gesendet hat."
+            },
+            "payment": {
+                "title": "5. Zahlung",
+                "text": "Der Verkäufer kann die Zahlung für den Artikel ab dem Zeitpunkt verlangen, an dem er vom Verkäufer an den Käufer versandt wird. Wenn der Käufer bei der Zahlung eine Kreditkarte oder Debitkarte verwendet, kann der Verkäufer den Kaufpreis bei der Bestellung auf der Karte reservieren. Die Karte wird am selben Tag belastet, an dem der Artikel versandt wird.",
+                "methods": "Wir bieten Zahlung mit Vipps und Kartenzahlung (Stripe) an."
+            },
+            "delivery": {
+                "title": "6. Lieferung",
+                "text": "Die Lieferung ist erfolgt, wenn der Käufer oder sein Vertreter den Gegenstand übernommen hat.",
+                "pickup": "Abholung: Kann nach Vereinbarung bei Matland Gård erfolgen.",
+                "shipping": "Lieferung: Wir bieten die Lieferung in spezifizierten Zonen (Bergen/Umgebung) gegen eine Versandgebühr an. Der Lieferzeitpunkt wird separat vereinbart."
+            },
+            "withdrawal": {
+                "title": "7. Widerrufsrecht",
+                "text1": "Der Käufer kann vom Kauf des Artikels nach dem Widerrufsgesetz zurücktreten. Der Käufer muss den Verkäufer über die Ausübung des Widerrufsrechts innerhalb von 14 Tagen informieren, nachdem die Frist zu laufen begann. Die Frist umfasst alle Kalendertage. Wenn die Frist an einem Samstag, Feiertag oder Ruhetag endet, verlängert sich die Frist bis zum nächsten Werktag.",
+                "text2": "Bei Ausübung des Widerrufsrechts muss der Artikel ohne unnötige Verzögerung und spätestens 14 Tage nach Mitteilung über die Ausübung des Widerrufsrechts an den Verkäufer zurückgegeben werden. Der Käufer trägt die direkten Kosten der Rücksendung des Artikels.",
+                "exception": "Ausnahme: Bei Lieferung von Schüttgut (Splitt, Kies, Erde), das abgekippt und mit anderen Massen vermischt wurde oder das von Natur aus nicht zurückgegeben werden kann, erlischt das Widerrufsrecht mit der Lieferung."
+            },
+            "complaints": {
+                "title": "8. Mängelrügen und Frist zur Anmeldung von Ansprüchen wegen Verzugs",
+                "text": "Liegt ein Mangel am Artikel vor, muss der Käufer innerhalb einer angemessenen Zeit nach dessen Entdeckung oder nachdem er hätte entdeckt werden müssen, dem Verkäufer mitteilen, dass er sich auf den Mangel berufen will. Der Käufer hat immer rechtzeitig reklamiert, wenn dies innerhalb von 2 Monaten ab dem Zeitpunkt geschieht, an dem der Mangel entdeckt wurde oder hätte entdeckt werden müssen. Reklamationen können spätestens zwei Jahre nach Übernahme des Artikels durch den Käufer erfolgen."
+            },
+            "conflicts": {
+                "title": "9. Konfliktlösung",
+                "text": "Beschwerden sind innerhalb einer angemessenen Zeit an den Verkäufer zu richten. Die Parteien versuchen, eventuelle Streitigkeiten gütlich beizulegen. Gelingt dies nicht, kann der Käufer die Verbraucherschutzbehörde zur Schlichtung kontaktieren."
+            },
+            "additional": {
+                "title": "Zusatzbedingungen für Buchung und Vermietung",
+                "camping": {
+                    "title": "Wohnmobilstellplatz / Camping",
+                    "items": [
+                        "Die Buchung ist verbindlich.",
+                        "Stornierungen müssen spätestens 24 Stunden vor Ankunft erfolgen, um eine volle Rückerstattung zu erhalten.",
+                        "Bei einer Stornierung später als 24 Stunden vor Ankunft wird der Betrag nicht erstattet.",
+                        "Der Check-in erfolgt nach 12:00 Uhr, sofern nicht anders vereinbart."
+                    ]
+                },
+                "venue": {
+                    "title": "Veranstaltungsort / Sjøbua",
+                    "items": [
+                        "Für die Vermietung von Veranstaltungsräumen gilt ein separater Mietvertrag, der bei der Buchung unterzeichnet wird.",
+                        "Stornierungen des Veranstaltungsortes müssen spätestens 30 Tage vor der Veranstaltung erfolgen.",
+                        "Bei einer Stornierung 14–30 Tage vor der Veranstaltung werden 50 % der Mietsumme in Rechnung gestellt.",
+                        "Bei einer Stornierung weniger als 14 Tage vorher wird die gesamte Mietsumme in Rechnung gestellt.",
+                        "Der Mieter ist für eventuelle Schäden am Raum und Inventar während der Mietzeit verantwortlich."
+                    ]
+                }
+            }
+        }
+    },
+    "Privacy": {
+        "title": "Datenschutzerklärung für Matland Gård",
+        "sections": {
+            "controller": {
+                "title": "1. Verantwortlicher",
+                "text": "Matland Gård ENK (Org.nr 991 525 955) ist der Verantwortliche für die Verarbeitung personenbezogener Daten auf dieser Website.",
+                "contact": "Kontaktinformationen:"
+            },
+            "info": {
+                "title": "2. Welche Art von Informationen wir sammeln",
+                "text": "Wir sammeln und speichern notwendige Informationen, um Bestellungen ausführen und Waren und Dienstleistungen an Sie liefern zu können. Dies beinhaltet:",
+                "items": [
+                    "Name",
+                    "E-Mail-Adresse",
+                    "Telefonnummer",
+                    "Adresse (für die Lieferung)",
+                    "Bestellhistorie"
+                ]
+            },
+            "purpose": {
+                "title": "3. Zweck der Verarbeitung",
+                "text": "Wir verarbeiten die Informationen, um:",
+                "items": [
+                    "Ihre Bestellung zu bearbeiten und auszuliefern.",
+                    "Gesetzliche Verpflichtungen zu erfüllen (z. B. das Buchführungsgesetz).",
+                    "Mit Ihnen über Ihre Bestellung zu kommunizieren."
+                ]
+            },
+            "processors": {
+                "title": "4. Auftragsverarbeiter und Dritte",
+                "text": "Wir nutzen die folgenden Dritten für den Betrieb der Website und die Abwicklung von Zahlungen:",
+                "it": {
+                    "title": "Technischer Betrieb und Datenbank",
+                    "text": "Fjeldheim Services ENK (Fjelldata) ist unser Anbieter für technischen Betrieb, Entwicklung und Datenbank. Fjelldata hat Zugriff auf personenbezogene Daten ausschließlich, um das System in unserem Namen betreiben und warten zu können."
+                },
+                "payment": {
+                    "title": "Zahlung",
+                    "text1": "Wir verarbeiten Ihre Kartendaten nicht selbst. Alle Zahlungen erfolgen über sichere externe Zahlungsanbieter:",
+                    "stripe": "Verarbeitet Kartenzahlungen.",
+                    "vipps": "Verarbeitet mobile Zahlungen.",
+                    "text2": "Diese Anbieter verarbeiten Zahlungsinformationen gemäß ihren eigenen Datenschutzrichtlinien und geltenden Vorschriften (PCI DSS)."
+                },
+                "email": {
+                    "title": "E-Mail",
+                    "text": "Wir nutzen Google (Gmail) für die E-Mail-Kommunikation. Bestellbestätigungen und andere Mitteilungen werden über diese Systeme versandt."
+                }
+            },
+            "rights": {
+                "title": "5. Ihre Rechte",
+                "text": "Sie haben das Recht auf Auskunft darüber, welche Informationen wir über Sie gespeichert haben, und Sie können die Berichtigung oder Löschung der Informationen verlangen, wenn diese falsch oder nicht mehr erforderlich sind. Beachten Sie, dass wir verpflichtet sind, bestimmte Informationen im Zusammenhang mit der Buchhaltung und Buchführung aufzubewahren (5 Jahre nach Ende des Geschäftsjahres)."
+            }
         }
     }
 }

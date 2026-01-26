@@ -3,10 +3,13 @@ import Navigation from '@/app/components/Navigation';
 import Footer from '@/app/components/Footer';
 import Link from 'next/link';
 import SingelPageClient from './SingelPageClient';
+import { getTranslations } from 'next-intl/server';
 
 export const dynamic = 'force-dynamic';
 
 export default async function SingelPage() {
+  const t = await getTranslations('Shop');
+
   const allProducts = await prisma.product.findMany({
     where: {
       stock: {
@@ -39,30 +42,31 @@ export default async function SingelPage() {
 
         {/* Info Section */}
         <div className="mt-16 bg-white rounded-lg shadow-lg p-8">
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">Bestilling og levering</h3>
+          <h3 className="text-2xl font-bold text-gray-900 mb-6">{t('info.title')}</h3>
           <div className="grid md:grid-cols-2 gap-8">
             <div>
-              <h4 className="font-semibold text-gray-900 mb-2">📦 Fastpris på frakt</h4>
-              <p className="text-gray-600 mb-2">Pris per storsekk/tonn:</p>
+              <h4 className="font-semibold text-gray-900 mb-2">📦 {t('info.shipping')}</h4>
+              <p className="text-gray-600 mb-2">{t('info.shippingDesc')}</p>
               <ul className="text-gray-600 space-y-1 ml-4">
-                <li>• Bergen, Vaksdal, Samnanger, Bjørnafjorden: <b>1000 kr</b></li>
-                <li>• Austevoll, Sotra, Askøy, Øygarden, Voss: <b>1500 kr</b></li>
+                {t.raw('info.shippingZones').map((zone: string) => (
+                  <li key={zone}>• {zone}</li>
+                ))}
               </ul>
               <p className="text-gray-600 mt-3 text-sm">
-                <i>Eksempel: 2 storsekkar til Bergen = 2000 kr frakt</i>
+                <i>{t('info.shippingExample')}</i>
               </p>
               <p className="text-gray-600 mt-2 text-sm italic">
-                Ved bestilling av meir enn 2 einingar, ta kontakt for avtale om fraktpris.
+                {t('info.shippingContact')}
               </p>
             </div>
             <div>
-              <h4 className="font-semibold text-gray-900 mb-2">💳 Betaling</h4>
+              <h4 className="font-semibold text-gray-900 mb-2">💳 {t('info.payment')}</h4>
               <p className="text-gray-600">
-                Vi aksepterer Vipps og alle vanlege betalingskort. Betal trygt på nett.
+                {t('info.paymentDesc')}
               </p>
             </div>
             <div>
-              <h4 className="font-semibold text-gray-900 mb-2">📞 Kontakt</h4>
+              <h4 className="font-semibold text-gray-900 mb-2">📞 {t('info.contact')}</h4>
               <p className="text-gray-600">
                 Telefon: <a href="tel:+4795458563" className="text-[var(--color-primary)] hover:underline">+47 954 58 563</a><br />
                 E-post: <a href="mailto:matlandgard@gmail.com" className="text-[var(--color-primary)] hover:underline">matlandgard@gmail.com</a><br />
@@ -70,11 +74,12 @@ export default async function SingelPage() {
               </p>
             </div>
             <div>
-              <h4 className="font-semibold text-gray-900 mb-2">🏪 Henting</h4>
+              <h4 className="font-semibold text-gray-900 mb-2">🏪 {t('info.pickup')}</h4>
               <p className="text-gray-600">
-                Hent gratis i Holmefjord<br />
-                Ta med eigen henger<br />
-                Etter avtale: <a href="tel:+4795458563" className="text-[var(--color-primary)] hover:underline">954 58 563</a>
+                {t.rich('info.pickupDesc', {
+                  br: () => <br />,
+                  tel: (chunks) => <a href="tel:+4795458563" className="text-[var(--color-primary)] hover:underline">{chunks}</a>
+                })}
               </p>
             </div>
           </div>

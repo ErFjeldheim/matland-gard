@@ -1,10 +1,12 @@
-
 import Navigation from '@/app/components/Navigation';
 import Footer from '@/app/components/Footer';
+import { useTranslations } from 'next-intl';
 
 export const dynamic = 'force-dynamic';
 
 export default function PrivacyPage() {
+    const t = useTranslations('Privacy');
+
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
             <header className="bg-[var(--color-dark)] text-white">
@@ -13,16 +15,16 @@ export default function PrivacyPage() {
 
             <main className="container mx-auto px-4 py-12 flex-grow">
                 <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
-                    <h1 className="text-4xl font-bold text-gray-900 mb-8 border-b pb-4">Personvernerklæring for Matland Gård</h1>
+                    <h1 className="text-4xl font-bold text-gray-900 mb-8 border-b pb-4">{t('title')}</h1>
 
                     <div className="prose prose-lg max-w-none text-gray-700 space-y-8">
                         <section>
-                            <h2 className="text-2xl font-semibold text-gray-900 mb-4">1. Behandlingsansvarleg</h2>
+                            <h2 className="text-2xl font-semibold text-gray-900 mb-4">{t('sections.controller.title')}</h2>
                             <p>
-                                <strong>Matland Gård ENK</strong> (Org.nr 991 525 955) er behandlingsansvarleg for handsaminga av personopplysningar på denne nettstaden.
+                                <strong>Matland Gård ENK</strong> (Org.nr 991 525 955) {t('sections.controller.text')}
                             </p>
                             <p>
-                                Kontaktinformasjon:<br />
+                                {t('sections.controller.contact')}<br />
                                 Matland Gård<br />
                                 Ådlandsvegen 30<br />
                                 5642 Holmefjord<br />
@@ -31,65 +33,47 @@ export default function PrivacyPage() {
                         </section>
 
                         <section>
-                            <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. Hva slags informasjon vi samlar inn</h2>
-                            <p>
-                                Vi samlar inn og lagrar nødvendig informasjon for å kunne gjennomføre bestillingar og levere varer og tenester til deg. Dette inkluderer:
-                            </p>
+                            <h2 className="text-2xl font-semibold text-gray-900 mb-4">{t('sections.info.title')}</h2>
+                            <p>{t('sections.info.text')}</p>
                             <ul className="list-disc pl-5 mt-2 space-y-1">
-                                <li>Namn</li>
-                                <li>E-postadresse</li>
-                                <li>Telefonnummer</li>
-                                <li>Adresse (for levering)</li>
-                                <li>Ordrehistorikk</li>
+                                {(t.raw('sections.info.items') as string[]).map((item, i) => (
+                                    <li key={i}>{item}</li>
+                                ))}
                             </ul>
                         </section>
 
                         <section>
-                            <h2 className="text-2xl font-semibold text-gray-900 mb-4">3. Formålet med handsaminga</h2>
-                            <p>
-                                Vi handsamar opplysningane for å:
-                            </p>
+                            <h2 className="text-2xl font-semibold text-gray-900 mb-4">{t('sections.purpose.title')}</h2>
+                            <p>{t('sections.purpose.text')}</p>
                             <ul className="list-disc pl-5 mt-2 space-y-1">
-                                <li>Handsame og levere bestillinga di.</li>
-                                <li>Oppfylle lovpålagte plikter (t.d. bokføringslova).</li>
-                                <li>Kommunisere med deg om bestillinga di.</li>
+                                {(t.raw('sections.purpose.items') as string[]).map((item, i) => (
+                                    <li key={i}>{item}</li>
+                                ))}
                             </ul>
                         </section>
 
                         <section>
-                            <h2 className="text-2xl font-semibold text-gray-900 mb-4">4. Databehandlarar og tredjepartar</h2>
-                            <p>
-                                Vi nyttar oss av følgjande tredjepartar for å drifte nettstaden og handsame betalingar:
-                            </p>
+                            <h2 className="text-2xl font-semibold text-gray-900 mb-4">{t('sections.processors.title')}</h2>
+                            <p>{t('sections.processors.text')}</p>
 
-                            <h3 className="text-xl font-medium text-gray-900 mt-4 mb-2">Teknisk drift og database</h3>
-                            <p>
-                                <strong>Fjeldheim Services ENK (Fjelldata)</strong> er vår leverandør av teknisk drift, utvikling og database. Fjelldata har tilgang til personopplysningar utelukkande for å kunne drifte og vedlikehalde systemet på vegne av oss.
-                            </p>
+                            <h3 className="text-xl font-medium text-gray-900 mt-4 mb-2">{t('sections.processors.it.title')}</h3>
+                            <p>{t('sections.processors.it.text')}</p>
 
-                            <h3 className="text-xl font-medium text-gray-900 mt-4 mb-2">Betaling</h3>
-                            <p>
-                                Vi handsamar ikkje kortopplysningane dine sjølve. All betaling skjer via sikre eksterne betalingsleverandørar:
-                            </p>
+                            <h3 className="text-xl font-medium text-gray-900 mt-4 mb-2">{t('sections.processors.payment.title')}</h3>
+                            <p>{t('sections.processors.payment.text1')}</p>
                             <ul className="list-disc pl-5 mt-2 space-y-1">
-                                <li><strong>Stripe:</strong> Handsamar kortbetalingar.</li>
-                                <li><strong>Vipps:</strong> Handsamar mobilbetalingar.</li>
+                                <li><strong>Stripe:</strong> {t('sections.processors.payment.stripe')}</li>
+                                <li><strong>Vipps:</strong> {t('sections.processors.payment.vipps')}</li>
                             </ul>
-                            <p className="mt-2">
-                                Disse leverandørane handsamar betalingsopplysningar i tråd med sine eigne personvernerklæringar og gjeldande regelverk (PCI DSS).
-                            </p>
+                            <p className="mt-2 text-sm italic">{t('sections.processors.payment.text2')}</p>
 
-                            <h3 className="text-xl font-medium text-gray-900 mt-4 mb-2">E-post</h3>
-                            <p>
-                                Vi nyttar <strong>Google (Gmail)</strong> for e-postkommunikasjon. Ordrebekreftelser og annan kommunikasjon vert sendt gjennom desse systema.
-                            </p>
+                            <h3 className="text-xl font-medium text-gray-900 mt-4 mb-2">{t('sections.processors.email.title')}</h3>
+                            <p>{t('sections.processors.email.text')}</p>
                         </section>
 
                         <section>
-                            <h2 className="text-2xl font-semibold text-gray-900 mb-4">5. Dine rettar</h2>
-                            <p>
-                                Du har rett til innsyn i kva opplysningar vi har lagra om deg, og du kan krevje retting eller sletting av opplysningane om dei er feil eller ikkje lenger naudsynte. Merk at vi er pliktige til å ta vare på visse opplysningar i samband med rekneskap og bokføring (i 5 år etter rekneskapsåret er avslutta).
-                            </p>
+                            <h2 className="text-2xl font-semibold text-gray-900 mb-4">{t('sections.rights.title')}</h2>
+                            <p>{t('sections.rights.text')}</p>
                         </section>
                     </div>
                 </div>

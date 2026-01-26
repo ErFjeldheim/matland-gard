@@ -2,8 +2,12 @@ import Navigation from '../../components/Navigation';
 import Footer from '../../components/Footer';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 export default function CampingPage() {
+  const t = useTranslations('Camping');
+  const commonT = useTranslations('Common');
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -17,16 +21,16 @@ export default function CampingPage() {
         <div className="relative h-96 rounded-lg overflow-hidden mb-8 shadow-2xl">
           <Image
             src="/images/hero/gard-oversikt.jpg"
-            alt="Matland Bobilparkering - oversikt"
+            alt={`${t('title')} - ${t('subtitle')}`}
             fill
             className="object-cover"
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-dark)]/80 via-[var(--color-primary)]/30 to-transparent flex items-end">
             <div className="p-12 text-white">
-              <h2 className="text-4xl sm:text-5xl font-bold mb-4">Bobilparkering</h2>
-              <p className="text-2xl">Opplev naturen ved fjorden</p>
-              <p className="text-xl mt-2 text-[var(--color-accent)] font-semibold">Sesong: April - Oktober</p>
+              <h2 className="text-4xl sm:text-5xl font-bold mb-4">{t('title')}</h2>
+              <p className="text-2xl">{t('subtitle')}</p>
+              <p className="text-xl mt-2 text-[var(--color-accent)] font-semibold">{commonT('season')}</p>
             </div>
           </div>
         </div>
@@ -39,7 +43,7 @@ export default function CampingPage() {
               <div className="relative h-48 rounded-lg overflow-hidden shadow-md">
                 <Image
                   src="/images/camping/kai.jpg"
-                  alt="Kai ved fjorden"
+                  alt="Kai"
                   fill
                   className="object-cover hover:scale-105 transition-transform duration-300"
                 />
@@ -47,7 +51,7 @@ export default function CampingPage() {
               <div className="relative h-48 rounded-lg overflow-hidden shadow-md">
                 <Image
                   src="/images/camping/sauer.jpg"
-                  alt="Sau på beite"
+                  alt="Sauer"
                   fill
                   className="object-cover hover:scale-105 transition-transform duration-300"
                 />
@@ -55,59 +59,49 @@ export default function CampingPage() {
               <div className="relative h-48 rounded-lg overflow-hidden shadow-md col-span-2">
                 <Image
                   src="/images/hero/kayak.jpg"
-                  alt="Kajakk på fjorden"
+                  alt="Kajakk"
                   fill
                   className="object-cover hover:scale-105 transition-transform duration-300"
                 />
               </div>
             </div>
 
-            <h3 className="text-3xl font-bold text-gray-900 mb-6">Velkomen til Matland Gård</h3>
+            <h3 className="text-3xl font-bold text-gray-900 mb-6">{t('welcome')}</h3>
             <p className="text-gray-600 mb-4">
-              Matland Gård ved Ådlandsfjorden tilbyr idyllisk overnatting for bubilar i rolege
-              omgjevnader heilt nede ved vannkanten. Her kan gjester nyte spektakulær utsikt og
-              nytte marinaen, som har både badestrand og stupetårn.
+              {t('desc1')}
             </p>
             <p className="text-gray-600 mb-4">
-              Det er gode moglegheiter for aktivitetar som fjellturar, fiske i elv og sjø, samt
-              leige av båt eller kajakk. Gården tilbyr også guida turar med yacht til
-              destinasjonar som Austevoll og Hardangerfjordane.
+              {t('desc2')}
             </p>
             <p className="text-gray-600 mb-4">
-              Gjestene kjem tett på gårdslivet med dyr som sauer, hest og påfuglar, og det
-              er moglegheit for å plukke ferske egg om morgonen. Fasilitetane inkluderer eit
-              naust med scene for sosiale samankomstar.
+              {t('desc3')}
             </p>
 
             <div className="bg-[var(--color-accent)]/20 border-l-4 border-[var(--color-primary)] p-6 mb-6">
-              <h4 className="font-bold text-[var(--color-dark)] mb-2">🏖️ Fasilitetar</h4>
+              <h4 className="font-bold text-[var(--color-dark)] mb-2">🏖️ {t('facilities.title')}</h4>
               <ul className="text-gray-700 space-y-2">
-                <li>• Sanitærbygg med dusj og toalett</li>
-                <li>• Straum til bubil/campingvogn</li>
-                <li>• Vassfylling</li>
-                <li>• Vaskemaskin og tørketrommel</li>
-                <li>• WiFi</li>
-                <li>• Bålpanne</li>
-                <li>• Brannsløkkingsapparat og hjartestartar</li>
+                {t.raw('facilities.items').map((item: string) => (
+                  <li key={item}>• {item}</li>
+                ))}
               </ul>
             </div>
 
             <div className="bg-gray-100 rounded-lg p-6 mb-6 border border-gray-200">
-              <h4 className="font-bold text-[var(--color-dark)] mb-3">📋 Ordensreglar</h4>
+              <h4 className="font-bold text-[var(--color-dark)] mb-3">📋 {t('rules.title')}</h4>
               <ul className="text-gray-700 space-y-2 text-sm">
-                <li>• <b>Innsjekk/Utsjekk:</b> Innsjekk frå kl. 14:00. Utsjekk innan kl. 12:00.</li>
-                <li>• <b>Ro på plassen:</b> Det skal vere ro mellom kl. 23:00 og 07:00.</li>
-                <li>• <b>Avfall:</b> Kast bos/avfall i tilviste containerar.</li>
-                <li>• <b>Branntryggleik:</b> Grill og bål berre på tilviste plassar.</li>
+                <li>• <b>{t('rules.checkInOut')}:</b> {t('rules.checkInOutDesc')}</li>
+                <li>• <b>{t('rules.quietTime')}:</b> {t('rules.quietTimeDesc')}</li>
+                <li>• <b>{t('rules.waste')}:</b> {t('rules.wasteDesc')}</li>
+                <li>• <b>{t('rules.fireSafety')}:</b> {t('rules.fireSafetyDesc')}</li>
               </ul>
             </div>
           </div>
 
           <div>
             <div className="bg-white rounded-lg shadow-lg p-8">
-              <h4 className="text-2xl font-bold text-gray-900 mb-4">Bestill opphald</h4>
+              <h4 className="text-2xl font-bold text-gray-900 mb-4">{t('booking.title')}</h4>
               <p className="text-gray-600 mb-6">
-                Bestilling gjerast enkelt gjennom vår samarbeidspartnar Campio.
+                {t('booking.desc')}
               </p>
 
               <a
@@ -115,11 +109,11 @@ export default function CampingPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block w-full bg-[var(--color-primary)] text-white text-center px-8 py-4 rounded-lg hover:bg-[var(--color-dark)] transition-colors font-bold text-lg mb-4">
-                Bestill no via Campio →
+                {t('booking.button')}
               </a>
 
               <div className="border-t pt-6">
-                <h5 className="font-semibold text-gray-900 mb-3">Kontakt oss direkte:</h5>
+                <h5 className="font-semibold text-gray-900 mb-3">{t('booking.contactDirect')}</h5>
                 <div className="space-y-2 text-gray-600">
                   <p>📞 <a href="tel:+4795458563" className="text-[var(--color-primary)] hover:underline">+47 954 58 563</a></p>
                   <p>✉️ <a href="mailto:matlandgard@gmail.com" className="text-[var(--color-primary)] hover:underline">matlandgard@gmail.com</a></p>
@@ -129,15 +123,11 @@ export default function CampingPage() {
             </div>
 
             <div className="mt-8 bg-[var(--color-accent)]/20 border border-[var(--color-primary)] rounded-lg p-6">
-              <h5 className="font-bold text-[var(--color-dark)] mb-2">🌲 Aktivitetar</h5>
+              <h5 className="font-bold text-[var(--color-dark)] mb-2">🌲 {t('activities.title')}</h5>
               <ul className="text-gray-700 space-y-1">
-                <li>• Båt- og kajakk-utleige</li>
-                <li>• Fiske i fjorden og elva</li>
-                <li>• Naturlig strand og stupetårn</li>
-                <li>• Fotturar i fjellet</li>
-                <li>• Besøksgård med dyr</li>
-                <li>• Guida fjordturar med yacht</li>
-                <li>• Musikkarrangement i sjøbua</li>
+                {t.raw('activities.items').map((item: string) => (
+                  <li key={item}>• {item}</li>
+                ))}
               </ul>
             </div>
           </div>
@@ -145,47 +135,47 @@ export default function CampingPage() {
 
         {/* Prices */}
         <div className="bg-white rounded-lg shadow-lg p-8 mb-12">
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">Prisar</h3>
+          <h3 className="text-2xl font-bold text-gray-900 mb-6">{t('prices.title')}</h3>
 
           <div className="mb-8">
-            <h4 className="font-bold text-xl text-gray-900 mb-4">Utleige</h4>
+            <h4 className="font-bold text-xl text-gray-900 mb-4">{t('prices.rental')}</h4>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="border rounded-lg p-4">
-                <h5 className="font-semibold text-gray-900 mb-2">Kajakkar</h5>
+                <h5 className="font-semibold text-gray-900 mb-2">{t('prices.kayaks')}</h5>
                 <p className="text-2xl font-bold text-[var(--color-primary)] mb-1">200 kr</p>
-                <p className="text-gray-600 text-sm">Leige av 2 kajakkar i 3 timar</p>
+                <p className="text-gray-600 text-sm">{t('prices.kayaksDesc')}</p>
               </div>
               <div className="border rounded-lg p-4">
-                <h5 className="font-semibold text-gray-900 mb-2">SUP board</h5>
+                <h5 className="font-semibold text-gray-900 mb-2">{t('prices.sup')}</h5>
                 <p className="text-2xl font-bold text-[var(--color-primary)] mb-1">200 kr</p>
-                <p className="text-gray-600 text-sm">3 timar</p>
+                <p className="text-gray-600 text-sm">{t('prices.supDesc')}</p>
               </div>
               <div className="border rounded-lg p-4">
-                <h5 className="font-semibold text-gray-900 mb-2">Båt inkl. bensin</h5>
+                <h5 className="font-semibold text-gray-900 mb-2">{t('prices.boat12h')}</h5>
                 <p className="text-2xl font-bold text-[var(--color-primary)] mb-1">1 050 kr</p>
-                <p className="text-gray-600 text-sm">12 timar</p>
+                <p className="text-gray-600 text-sm">{t('prices.boat12hDesc')}</p>
               </div>
               <div className="border rounded-lg p-4">
-                <h5 className="font-semibold text-gray-900 mb-2">Båt inkl. bensin</h5>
+                <h5 className="font-semibold text-gray-900 mb-2">{t('prices.boat6h')}</h5>
                 <p className="text-2xl font-bold text-[var(--color-primary)] mb-1">700 kr</p>
-                <p className="text-gray-600 text-sm">6 timar</p>
+                <p className="text-gray-600 text-sm">{t('prices.boat6hDesc')}</p>
               </div>
             </div>
           </div>
 
           <div>
-            <h4 className="font-bold text-xl text-gray-900 mb-4">Overnatting</h4>
+            <h4 className="font-bold text-xl text-gray-900 mb-4">{t('prices.accommodation')}</h4>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="border rounded-lg p-4">
-                <h5 className="font-semibold text-gray-900 mb-2">Bubilplass/Vognplass</h5>
+                <h5 className="font-semibold text-gray-900 mb-2">{t('prices.spot')}</h5>
                 <p className="text-2xl font-bold text-[var(--color-primary)] mb-1">350 kr</p>
-                <p className="text-gray-600 text-sm">per natt</p>
+                <p className="text-gray-600 text-sm">{t('prices.perNight')}</p>
               </div>
             </div>
           </div>
 
           <p className="text-gray-500 text-sm mt-4">
-            * Sjå oppdaterte bobilprisar og tilgjengelegheit på Campio
+            {t('prices.campioNote')}
           </p>
         </div>
       </main>
