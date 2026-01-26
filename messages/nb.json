@@ -50,10 +50,10 @@
     "Camping": {
         "title": "Bobilparkering",
         "subtitle": "Opplev naturen ved fjorden",
-        "welcome": "Velkomen til Matland Gård",
-        "desc1": "Matland Gård ved Ådlandsfjorden tilbyr idyllisk overnatting for bubilar i rolege omgjevnader heilt nede ved vannkanten. Her kan gjester nyte spektakulær utsikt og nytte marinaen, som har både badestrand og stupetårn.",
-        "desc2": "Det er gode moglegheiter for aktivitetar som fjellturar, fiske i elv og sjø, samt leige av båt eller kajakk. Gården tilbyr også guida turar med yacht til destinasjonar som Austevoll og Hardangerfjordane.",
-        "desc3": "Gjestene kjem tett på gårdslivet med dyr som sauer, hest og påfuglar, og det er moglegheit for å plukke ferske egg om morgonen. Fasilitetane inkluderer eit naust med scene for sosiale samankomstar.",
+        "welcome": "Velkomen til Matland Fjordcamp",
+        "desc1": "Matland Gård ved Ådlandsfjorden tilbyr idyllisk overnatting for bubilar i rolege omgjevnader heilt nede ved sjøkanten. Her kan gjester nyte spektakulær utsikt og nytte marinaen, som har både badestrand og stupetårn.",
+        "desc2": "Det er gode moglegheiter for aktivitetar som fjellturar, fiske i elv og sjø, samt leige av båt eller kajakk. Vertskapet tilbyr også guida båtturar. Gjestane kan bestilla skyss tur/retur med båt til Os for å ta buss til Bergen. Sjå eigen plakat med prisar og informasjon.",
+        "desc3": "Gjestane kan besøke dyra på gården. Her er det høner, hester, kaniner, sauer, hunder og katter. Det er leikeplass i hagen ved kårhuset på gården.",
         "facilities": {
             "title": "Fasilitetar",
             "items": [

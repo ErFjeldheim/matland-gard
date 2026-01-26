@@ -50,10 +50,10 @@
     "Camping": {
         "title": "Parking Camping-car",
         "subtitle": "Découvrez la nature au bord du fjord",
-        "welcome": "Bienvenue à Matland Gård",
-        "desc1": "Matland Gård, au bord de l'Ådlandsfjord, propose un hébergement idyllique pour les camping-cars dans un environnement calme, juste au bord de l'eau. Ici, les clients peuvent profiter de vues spectaculaires et utiliser la marina, qui dispose d'une plage et d'un plongeoir.",
-        "desc2": "Il existe d'excellentes opportunités pour des activités telles que des randonnées en montagne, la pêche en rivière et en mer, ainsi que la location de bateaux ou de kayaks. La ferme propose également des excursions guidées en yacht vers des destinations telles qu'Austevoll et les Hardangerfjords.",
-        "desc3": "Les clients sont proches de la vie à la ferme avec des animaux tels que des moutons, des chevaux et des paons, et il est possible de ramasser des œufs frais le matin. Les installations comprennent un hangar à bateaux avec une scène pour les réunions sociales.",
+        "welcome": "Bienvenue au Matland Fjordcamp",
+        "desc1": "Matland Gård, au bord de l'Ådlandsfjord, propose un hébergement idyllique pour les camping-cars dans un environnement calme, juste au bord de la mer. Ici, les clients peuvent profiter de vues spectaculaires et utiliser la marina, qui dispose d'une plage et d'un plongeoir.",
+        "desc2": "Il existe d'excellentes opportunités pour des activités telles que des randonnées en montagne, la pêche en rivière et en mer, ainsi que la location de bateaux ou de kayaks. Les hôtes proposent également des tours en bateau guidés. Les clients peuvent réserver une navette en bateau aller-retour pour Os afin de prendre le bus pour Bergen. Consultez notre affiche dédiée pour les tarifs et les informations.",
+        "desc3": "Les clients peuvent visiter les animaux de la ferme. Nous avons des poules, des chevaux, des lapins, des moutons, des chiens et des chats. Il y a une aire de jeux dans le jardin à côté de la \"kårhus\" de la ferme.",
         "facilities": {
             "title": "Installations",
             "items": [

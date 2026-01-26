@@ -50,8 +50,8 @@ export default function CampingPage() {
               </div>
               <div className="relative h-48 rounded-lg overflow-hidden shadow-md">
                 <Image
-                  src="/images/camping/sauer.jpg"
-                  alt="Sauer"
+                  src="/images/camping/campingbil.jpg"
+                  alt="Bobil"
                   fill
                   className="object-cover hover:scale-105 transition-transform duration-300"
                 />
