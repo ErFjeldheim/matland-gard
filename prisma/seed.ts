@@ -101,8 +101,6 @@ async function main() {
       images: [
         '/images/products/Sand/bilde-1.jpg',
         '/images/products/Sand/bilde-2.jpg',
-        '/images/products/Sand/bilde-3.jpg',
-        '/images/products/Sand/bilde-4.jpg',
       ],
     },
 

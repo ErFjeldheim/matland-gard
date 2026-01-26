@@ -99,9 +99,7 @@ async function main() {
         image: '/images/products/Sand/bilde-1.jpg',
         images: [
           '/images/products/Sand/bilde-1.jpg',
-          '/images/products/Sand/bilde-2.jpg',
-          '/images/products/Sand/bilde-3.jpg',
-          '/images/products/Sand/bilde-4.jpg'
+          '/images/products/Sand/bilde-2.jpg'
         ],
         videoUrl: null,
         createdAt: new Date('2026-01-06T21:27:23.832Z'),
