@@ -66,16 +66,16 @@ export default function ArrangementPage() {
             </div>
 
             <h3 className="text-3xl font-bold text-gray-900 mb-6">{t('sjobuaTitle')}</h3>
-            <p className="text-gray-600 mb-4">
+            <p className="text-gray-800 mb-4">
               {t('desc1')}
             </p>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-800 mb-6">
               {t('desc2')}
             </p>
 
             <div className="bg-[var(--color-accent)]/20 border-l-4 border-[var(--color-primary)] p-6 mb-6">
               <h4 className="font-bold text-[var(--color-dark)] mb-2">🎉 {t('events.title')}</h4>
-              <ul className="text-gray-700 space-y-2">
+              <ul className="text-gray-900 space-y-2">
                 {t.raw('events.items').map((item: string) => (
                   <li key={item}>• {item}</li>
                 ))}
@@ -90,15 +90,15 @@ export default function ArrangementPage() {
               <div className="space-y-4">
                 <div className="border-l-4 border-[var(--color-primary)] pl-4">
                   <h5 className="font-bold text-gray-900">{t('locales.sjobua')}</h5>
-                  <p className="text-gray-600 text-sm">{t('locales.sjobuaDetail1')}</p>
-                  <p className="text-gray-600 text-sm">{t('locales.sjobuaDetail2')}</p>
+                  <p className="text-gray-800 text-sm">{t('locales.sjobuaDetail1')}</p>
+                  <p className="text-gray-800 text-sm">{t('locales.sjobuaDetail2')}</p>
                 </div>
               </div>
             </div>
 
             <div className="bg-white rounded-lg shadow-lg p-8">
               <h4 className="text-2xl font-bold text-gray-900 mb-4">{t('services.title')}</h4>
-              <ul className="space-y-3 text-gray-600">
+              <ul className="space-y-3 text-gray-800">
                 {t.raw('services.items').map((item: string) => (
                   <li key={item} className="flex items-start">
                     <svg className="w-6 h-6 text-[var(--color-primary)] mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -115,7 +115,7 @@ export default function ArrangementPage() {
         {/* Contact info instead of form */}
         <div className="bg-white rounded-lg shadow-lg p-8 text-center">
           <h3 className="text-3xl font-bold text-gray-900 mb-4">{t('contact.title')}</h3>
-          <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
+          <p className="text-gray-800 mb-8 max-w-2xl mx-auto">
             {t('contact.desc')}
           </p>
 
@@ -152,7 +152,7 @@ export default function ArrangementPage() {
                 </svg>
               </div>
               <h4 className="font-bold text-gray-900 mb-1">{t('contact.address')}</h4>
-              <p className="text-gray-600 font-medium">
+              <p className="text-gray-800 font-medium">
                 Ådlandsvegen 30, 5642 Holmefjord
               </p>
             </div>

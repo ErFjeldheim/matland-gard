@@ -8,6 +8,8 @@ import CheckoutModal from '@/app/components/CheckoutModal';
 import ProductPageClient from './ProductPageClient';
 import ProductImageGallery from './ProductImageGallery';
 import { getTranslations } from 'next-intl/server';
+import ReactMarkdown from 'react-markdown';
+
 
 export const dynamic = 'force-dynamic';
 
@@ -64,11 +66,11 @@ export default async function ProductPage({ params }: { params: Params }) {
             <h1 className="text-4xl font-bold text-gray-900 mb-4">{localizedName}</h1>
 
             {localizedDesc && (
-              <p className="text-lg text-gray-700 mb-6">{localizedDesc}</p>
+              <p className="text-lg text-gray-900 mb-6">{localizedDesc}</p>
             )}
 
             {/* Payment Buttons */}
-            <ProductPageClient product={product} />
+            <ProductPageClient product={product as any} />
 
             {/* Video */}
             {product.videoUrl && (
@@ -89,10 +91,8 @@ export default async function ProductPage({ params }: { params: Params }) {
         {/* Long Description */}
         {localizedLongDesc && (
           <div className="mt-16 bg-white rounded-lg shadow-lg p-8">
-            <div className="prose prose-lg max-w-none">
-              {localizedLongDesc.split('\n').map((paragraph, idx) => (
-                paragraph.trim() && <p key={idx} className="mb-4 text-gray-700">{paragraph}</p>
-              ))}
+            <div className="prose prose-lg max-w-none text-gray-900 prose-p:text-gray-900 prose-li:text-gray-900 prose-headings:text-gray-900 prose-strong:text-gray-900">
+              <ReactMarkdown>{localizedLongDesc}</ReactMarkdown>
             </div>
           </div>
         )}

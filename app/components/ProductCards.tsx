@@ -57,7 +57,7 @@ export default function ProductCards({ products }: ProductCardsProps) {
                 </h3>
               </Link>
 
-              <p className="text-gray-600 mb-4">{productsT(`${product.slug}.description`, { defaultValue: product.description || '' })}</p>
+              <p className="text-gray-800 mb-4">{productsT(`${product.slug}.description`, { defaultValue: product.description || '' })}</p>
 
               <div className="mb-4 mt-auto">
                 <div>
