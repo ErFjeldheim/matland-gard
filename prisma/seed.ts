@@ -109,10 +109,11 @@ async function main() {
       id: '550e8400-e29b-41d4-a716-446655440006',
       name: 'Singelmatter ECCOgravel',
       slug: 'singelmatter-eccogravel',
-      description: 'Praktiske singelmatter for enkel legging',
-      price: 89900, // 899 kr
+      description: 'Stabiliseringsmatter for grus og singel (120x100 cm). Hindrer spor og ugress.',
+      longDescription: 'ECCOgravel stabiliseringsmatter gjer det mogleg å ha eit grusdekke som er like fast og stabilt som asfalt. Perfekt for innkjørslar, parkeringsplassar og gangstiar der ein ønsker eit naturleg utsjåande utan at hjul eller føter søkk ned.\n\nKvifor velge ECCOgravel:\n- **Full stabilitet:** Hindrar danning av spor og gjer det enkelt å sykle eller trille barnevogn.\n- **Integrert duk:** Kjem med pålimt ugress-membran (80 g/m²) som slepp vatn gjennom, men stoppar ugress.\n- **Enkel legging:** Platene på 120x100 cm er enkle å tilpasse med sag eller vinkelsliper.\n- **Berekraftig:** Produsert i resirkulert plast og er sjølv 100% resirkulerbar.\n- **Tåler tung belastning:** Når mattene er fylt, tåler dei personbilar og tyngre køyretøy.\n\nTekniske spesifikasjonar:\n- Plateformat: 120 x 100 x 3 cm (1,2 m² per plate).\n- Grusforbruk: ca. 75 kg per m².\n- Anbefalt singelstørrelse: 5 – 25 mm.',
+      price: 24900, // 249 kr
       stock: 1000, // Default stock
-      stockUnit: 'stk.',
+      stockUnit: 'm²',
       image: '/images/products/Singelmatter ECCOgravel/bilde-1.jpg',
       images: [
         '/images/products/Singelmatter ECCOgravel/bilde-1.jpg',
