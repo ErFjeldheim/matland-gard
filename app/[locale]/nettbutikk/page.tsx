@@ -16,18 +16,23 @@ export default async function SingelPage() {
         gt: 0,
       },
       isActive: true,
+      slug: {
+        not: null,
+      },
     },
     orderBy: { createdAt: 'desc' },
   });
 
   // Sorter slik at Herregårdssingel kommer først og Singelmatter ECCOgravel kommer sist
-  const products = allProducts.sort((a, b) => {
-    if (a.name.toLowerCase().includes('herregårdssingel')) return -1;
-    if (b.name.toLowerCase().includes('herregårdssingel')) return 1;
-    if (a.name.toLowerCase().includes('singelmatter')) return 1;
-    if (b.name.toLowerCase().includes('singelmatter')) return -1;
-    return 0;
-  });
+  const products = allProducts
+    .filter((p): p is typeof p & { slug: string } => p.slug !== null)
+    .sort((a, b) => {
+      if (a.name.toLowerCase().includes('herregårdssingel')) return -1;
+      if (b.name.toLowerCase().includes('herregårdssingel')) return 1;
+      if (a.name.toLowerCase().includes('singelmatter')) return 1;
+      if (b.name.toLowerCase().includes('singelmatter')) return -1;
+      return 0;
+    });
 
   return (
     <div className="min-h-screen bg-gray-50">
