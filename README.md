@@ -65,8 +65,9 @@ cp .env.example .env
 npm install
 ```
 
-### 3. Database Initialization
+### 3. Database Initialization (dev)
 ```bash
+docker compose -f docker-compose.dev.yml up -d
 npx prisma migrate dev
 npx prisma generate
 ```
