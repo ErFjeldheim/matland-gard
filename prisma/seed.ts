@@ -78,7 +78,7 @@ async function main() {
       id: '550e8400-e29b-41d4-a716-446655440003',
       name: 'Elvestein',
       slug: 'elvestein',
-      description: 'Naturlig rundslipte steiner',
+      description: 'Naturlig rundslipte steiner (ca. 60-150mm)',
       price: 200000, // 2000 kr
       stock: 1000, // Default stock
       stockUnit: 'tonn',

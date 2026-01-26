@@ -76,8 +76,8 @@ async function main() {
         id: '550e8400-e29b-41d4-a716-446655440003',
         name: 'Elvestein',
         slug: 'elvestein',
-        description: 'Naturlig rundslipte steiner',
-        longDescription: null,
+        description: 'Naturlig rundslipte steiner (ca. 60-150mm)',
+        longDescription: 'Naturlig rundslipte steiner fra lokale kilder. Størrelsen er ca. 60-150mm. Perfekt for dekorasjon i hage, rundt huset eller i blomsterbed.',
         price: 200000,
         image: '/images/products/Elvestein/bilde-1.jpeg',
         images: [
