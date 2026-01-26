@@ -151,14 +151,20 @@ export default function CampingPage() {
                 <p className="text-gray-800 text-sm">{t('prices.supDesc')}</p>
               </div>
               <div className="border rounded-lg p-4">
-                <h5 className="font-semibold text-gray-900 mb-2">{t('prices.boat12h')}</h5>
-                <p className="text-2xl font-bold text-[var(--color-primary)] mb-1">1 050 kr</p>
-                <p className="text-gray-800 text-sm">{t('prices.boat12hDesc')}</p>
+                <h5 className="font-semibold text-gray-900 mb-2">{t('prices.tobias')}</h5>
+                <p className="text-gray-800 text-sm mb-2">{t('prices.tobiasDesc')}</p>
+                <div className="flex justify-between items-baseline border-t pt-2 mt-2">
+                  <div className="text-sm text-gray-600">6t: <span className="text-lg font-bold text-[var(--color-primary)]">900 kr</span></div>
+                  <div className="text-sm text-gray-600">12t: <span className="text-lg font-bold text-[var(--color-primary)]">1 350 kr</span></div>
+                </div>
               </div>
               <div className="border rounded-lg p-4">
-                <h5 className="font-semibold text-gray-900 mb-2">{t('prices.boat6h')}</h5>
-                <p className="text-2xl font-bold text-[var(--color-primary)] mb-1">700 kr</p>
-                <p className="text-gray-800 text-sm">{t('prices.boat6hDesc')}</p>
+                <h5 className="font-semibold text-gray-900 mb-2">{t('prices.buster')}</h5>
+                <p className="text-gray-800 text-sm mb-2">{t('prices.busterDesc')}</p>
+                <div className="flex justify-between items-baseline border-t pt-2 mt-2">
+                  <div className="text-sm text-gray-600">6t: <span className="text-lg font-bold text-[var(--color-primary)]">1 350 kr</span></div>
+                  <div className="text-sm text-gray-600">12t: <span className="text-lg font-bold text-[var(--color-primary)]">2 000 kr</span></div>
+                </div>
               </div>
             </div>
           </div>
@@ -168,7 +174,7 @@ export default function CampingPage() {
             <div className="grid md:grid-cols-2 gap-4">
               <div className="border rounded-lg p-4">
                 <h5 className="font-semibold text-gray-900 mb-2">{t('prices.spot')}</h5>
-                <p className="text-2xl font-bold text-[var(--color-primary)] mb-1">350 kr</p>
+                <p className="text-2xl font-bold text-[var(--color-primary)] mb-1">450 kr</p>
                 <p className="text-gray-800 text-sm">{t('prices.perNight')}</p>
               </div>
             </div>

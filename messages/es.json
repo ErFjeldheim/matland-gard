@@ -69,7 +69,7 @@
         "rules": {
             "title": "Reglas de convivencia",
             "checkInOut": "Entrada/Salida",
-            "checkInOutDesc": "Entrada a partir de las 14:00. Salida antes de las 12:00.",
+            "checkInOutDesc": "Salida antes de las 12:00. (Sin límite de tiempo para la entrada.)",
             "quietTime": "Horas de silencio",
             "quietTimeDesc": "Debe haber silencio entre las 23:00 y las 07:00.",
             "waste": "Residuos",
@@ -86,26 +86,23 @@
         "activities": {
             "title": "Actividades",
             "items": [
-                "Alquiler de barcos y kayaks",
-                "Pesca en el fiordo y el río",
-                "Playa natural y torre de saltos",
-                "Excursiones por la montaña",
-                "Granja de visitas con animales",
-                "Excursiones guiadas en yate por el fiordo",
-                "Eventos musicales en el cobertizo"
+                "Alquiler de barcos, kayak y SUP",
+                "Deportes acuáticos (esquí acuático y donut)",
+                "Excursiones guiadas por el fiordo",
+                "Granja de visitas con animales"
             ]
         },
         "prices": {
             "title": "Precios",
             "rental": "Alquileres",
             "kayaks": "Kayaks",
-            "kayaksDesc": "Alquiler de 2 kayaks por 3 horas",
+            "kayaksDesc": "Alquiler de kayak",
             "sup": "Tabla de paddle surf (SUP)",
-            "supDesc": "3 horas",
-            "boat12h": "Barco incl. gasolina",
-            "boat12hDesc": "12 horas",
-            "boat6h": "Barco incl. gasolina",
-            "boat6hDesc": "6 horas",
+            "supDesc": "Alquiler de SUP",
+            "tobias": "Barco Tobias (15 pies con 9.9hp)",
+            "tobiasDesc": "Incl. gasolina",
+            "buster": "Barco Buster (15 pies con 40hp)",
+            "busterDesc": "Incl. gasolina y sonda",
             "accommodation": "Alojamiento",
             "spot": "Plaza de autocaravana/caravana",
             "perNight": "por noche",
@@ -117,7 +114,7 @@
         "subtitle": "Creando momentos memorables",
         "tagline": "Un marco perfecto para sus ocasiones especiales",
         "sjobuaTitle": "El cobertizo renovado junto al fiordo",
-        "desc1": "Matland Gård, con una historia de más de 400 años, ofrece lugares únicos para sus celebraciones. Nuestro cobertizo renovado es el entorno ideal para momentos memorables junto al fiordo.",
+        "desc1": "Matland Gård, con una historia de más de 400 años en la misma familia, ofrece un lugar único para sus eventos.",
         "desc2": "Con vistas espectaculares del fiordo, combinamos la herencia tradicional con el confort y estilo modernos.",
         "events": {
             "title": "Organizamos",

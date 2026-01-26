@@ -69,7 +69,7 @@
         "rules": {
             "title": "Ordensreglar",
             "checkInOut": "Innsjekk/Utsjekk",
-            "checkInOutDesc": "Innsjekk frå kl. 14:00. Utsjekk innan kl. 12:00.",
+            "checkInOutDesc": "Utsjekk innan kl. 12:00. (Ingen frist for innsjekk.)",
             "quietTime": "Ro på plassen",
             "quietTimeDesc": "Det skal vere ro mellom kl. 23:00 og 07:00.",
             "waste": "Avfall",
@@ -86,26 +86,23 @@
         "activities": {
             "title": "Aktivitetar",
             "items": [
-                "Båt- og kajakk-utleige",
-                "Fiske i fjorden og elva",
-                "Naturlig strand og stupetårn",
-                "Fotturar i fjellet",
-                "Besøksgård med dyr",
-                "Guida fjordturar med yacht",
-                "Musikkarrangement i sjøbua"
+                "Båt, kajakk og SUP utleie",
+                "Vannsport (vannski og ring)",
+                "Guida fjordturar",
+                "Besøksgård med dyr"
             ]
         },
         "prices": {
             "title": "Prisar",
             "rental": "Utleige",
-            "kayaks": "Kajakkar",
-            "kayaksDesc": "Leige av 2 kajakkar i 3 timar",
+            "kayaks": "Kajakker",
+            "kayaksDesc": "Utleige av kajakk",
             "sup": "SUP board",
-            "supDesc": "3 timar",
-            "boat12h": "Båt inkl. bensin",
-            "boat12hDesc": "12 timar",
-            "boat6h": "Båt inkl. bensin",
-            "boat6hDesc": "6 timar",
+            "supDesc": "Utleige av SUP",
+            "tobias": "Tobias båt (15fot med 9,9hk)",
+            "tobiasDesc": "Inkl. bensin",
+            "buster": "Buster båt (15fot med 40hk)",
+            "busterDesc": "Inkl. bensin og ekkolodd",
             "accommodation": "Overnatting",
             "spot": "Bubilplass/Vognplass",
             "perNight": "per natt",
@@ -117,7 +114,7 @@
         "subtitle": "Skaper minnerike stunder",
         "tagline": "Perfekt ramme for dine spesielle anledningar",
         "sjobuaTitle": "Den ominnreia sjøbua ved fjorden",
-        "desc1": "Matland Gård, med ei historie på over 400 år, tilbyr unike lokale for dine selskap. Vår ominnreia sjøbu er den perfekte ramma for minnerike stunder ved fjorden.",
+        "desc1": "Matland Gård med ei historie på over 400år i samme familie, tilbyr eit unikt lokale for dine selskap.",
         "desc2": "Med spektakulær utsikt over fjorden, kombinerer vi tradisjonell arv med moderne komfort og stil.",
         "events": {
             "title": "Vi arrangerer",

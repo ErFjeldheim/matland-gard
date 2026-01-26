@@ -69,7 +69,7 @@
         "rules": {
             "title": "Hausordnung",
             "checkInOut": "Check-in/Check-out",
-            "checkInOutDesc": "Check-in ab 14:00 Uhr. Check-out bis 12:00 Uhr.",
+            "checkInOutDesc": "Check-out bis 12:00 Uhr. (Keine Frist für den Check-in.)",
             "quietTime": "Nachtruhe",
             "quietTimeDesc": "Zwischen 23:00 und 07:00 Uhr muss Ruhe auf dem Platz herrschen.",
             "waste": "Abfall",
@@ -86,26 +86,23 @@
         "activities": {
             "title": "Aktivitäten",
             "items": [
-                "Boot- und Kajakverleih",
-                "Angeln im Fjord und Fluss",
-                "Naturbadestrand und Sprungturm",
-                "Bergwanderungen",
-                "Besuchsbauernhof mit Tieren",
-                "Geführte Fjordtouren mit der Yacht",
-                "Musikveranstaltungen im Bootshaus"
+                "Boot-, Kajak- und SUP-Verleih",
+                "Wassersport (Wasserski und Reifen)",
+                "Geführte Fjordtouren",
+                "Besuchsbauernhof mit Tieren"
             ]
         },
         "prices": {
             "title": "Preise",
             "rental": "Verleih",
             "kayaks": "Kajaks",
-            "kayaksDesc": "Verleih von 2 Kajaks für 3 Stunden",
+            "kayaksDesc": "Kajakverleih",
             "sup": "SUP-Board",
-            "supDesc": "3 Stunden",
-            "boat12h": "Boot inkl. Benzin",
-            "boat12hDesc": "12 Stunden",
-            "boat6h": "Boot inkl. Benzin",
-            "boat6hDesc": "6 Stunden",
+            "supDesc": "SUP-Verleih",
+            "tobias": "Tobias-Boot (15 Fuß mit 9,9 PS)",
+            "tobiasDesc": "Inkl. Benzin",
+            "buster": "Buster-Boot (15 Fuß mit 40 PS)",
+            "busterDesc": "Inkl. Benzin und Echolot",
             "accommodation": "Übernachtung",
             "spot": "Wohnmobil-/Wagenplatz",
             "perNight": "pro Nacht",
@@ -117,7 +114,7 @@
         "subtitle": "Unvergessliche Momente schaffen",
         "tagline": "Der perfekte Rahmen für Ihre besonderen Anlässe",
         "sjobuaTitle": "Das umgebaute Bootshaus am Fjord",
-        "desc1": "Matland Gård blickt auf eine über 400-jährige Geschichte zurück und bietet einzigartige Räumlichkeiten für Ihre Feste. Unser umgebautes Bootshaus ist der perfekte Rahmen für unvergessliche Momente am Fjord.",
+        "desc1": "Matland Gård, mit einer Geschichte von über 400 Jahren in derselben Familie, bietet einen einzigartigen Veranstaltungsort für Ihre Feiern.",
         "desc2": "Mit spektakulärem Blick auf den Fjord verbinden wir traditionelles Erbe mit modernem Komfort und Stil.",
         "events": {
             "title": "Wir veranstalten",

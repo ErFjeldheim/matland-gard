@@ -86,26 +86,23 @@
         "activities": {
             "title": "Activités",
             "items": [
-                "Location de bateaux et kayaks",
-                "Pêche dans le fjord et la rivière",
-                "Plage naturelle et plongeoir",
-                "Randonnées en montagne",
-                "Ferme pédagogique avec animaux",
-                "Excursions guidées en yacht sur le fjord",
-                "Événements musicaux dans le hangar à bateaux"
+                "Location de bateaux, kayak et SUP",
+                "Sports nautiques (ski nautique et bouée)",
+                "Excursions guidées sur le fjord",
+                "Ferme pédagogique avec animaux"
             ]
         },
         "prices": {
             "title": "Prix",
             "rental": "Locations",
             "kayaks": "Kayaks",
-            "kayaksDesc": "Location de 2 kayaks pour 3 heures",
+            "kayaksDesc": "Location de kayak",
             "sup": "Planche de paddle (SUP)",
-            "supDesc": "3 heures",
-            "boat12h": "Bateau avec essence",
-            "boat12hDesc": "12 heures",
-            "boat6h": "Bateau avec essence",
-            "boat6hDesc": "6 heures",
+            "supDesc": "Location de SUP",
+            "tobias": "Bateau Tobias (15 pieds avec 9.9cv)",
+            "tobiasDesc": "Carburant inclus",
+            "buster": "Bateau Buster (15 pieds avec 40cv)",
+            "busterDesc": "Carburant et échosondeur inclus",
             "accommodation": "Hébergement",
             "spot": "Emplacement camping-car/caravane",
             "perNight": "par nuit",
@@ -117,7 +114,7 @@
         "subtitle": "Créer des moments mémorables",
         "tagline": "Un cadre parfait pour vos occasions spéciales",
         "sjobuaTitle": "Le hangar à bateaux rénové au bord du fjord",
-        "desc1": "Matland Gård, avec une histoire de plus de 400 ans, propose des lieux uniques pour vos réceptions. Notre hangar à bateaux rénové est le cadre idéal pour des moments mémorables au bord du fjord.",
+        "desc1": "Matland Gård, avec une histoire de plus de 400 ans dans la même famille, offre un lieu unique pour vos événements.",
         "desc2": "Avec des vues spectaculaires sur le fjord, nous combinons l'héritage traditionnel avec le confort et le style modernes.",
         "events": {
             "title": "Nous organisons",

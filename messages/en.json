@@ -69,7 +69,7 @@
         "rules": {
             "title": "Rules & Regulations",
             "checkInOut": "Check-in/Check-out",
-            "checkInOutDesc": "Check-in from 14:00. Check-out by 12:00.",
+            "checkInOutDesc": "Check-out by 12:00. (No deadline for check-in.)",
             "quietTime": "Quiet time",
             "quietTimeDesc": "The area should be quiet between 23:00 and 07:00.",
             "waste": "Waste",
@@ -86,26 +86,23 @@
         "activities": {
             "title": "Activities",
             "items": [
-                "Boat and kayak rental",
-                "Fishing in the fjord and river",
-                "Natural beach and diving tower",
-                "Mountain hikes",
-                "Visiting farm with animals",
-                "Guided fjord trips with yacht",
-                "Music events in the boathouse"
+                "Boat, kayak, and SUP rental",
+                "Water sports (water skiing and tube)",
+                "Guided fjord tours",
+                "Visiting farm with animals"
             ]
         },
         "prices": {
             "title": "Prices",
             "rental": "Rentals",
             "kayaks": "Kayaks",
-            "kayaksDesc": "Rental of 2 kayaks for 3 hours",
+            "kayaksDesc": "Kayak rental",
             "sup": "SUP board",
-            "supDesc": "3 hours",
-            "boat12h": "Boat incl. fuel",
-            "boat12hDesc": "12 hours",
-            "boat6h": "Boat incl. fuel",
-            "boat6hDesc": "6 hours",
+            "supDesc": "SUP rental",
+            "tobias": "Tobias Boat (15ft with 9.9hp)",
+            "tobiasDesc": "Incl. fuel",
+            "buster": "Buster Boat (15ft with 40hp)",
+            "busterDesc": "Incl. fuel and echo sounder",
             "accommodation": "Accommodation",
             "spot": "Motorhome spot",
             "perNight": "per night",
@@ -117,7 +114,7 @@
         "subtitle": "Creating memorable moments",
         "tagline": "The perfect framework for your special occasions",
         "sjobuaTitle": "The renovated boathouse by the fjord",
-        "desc1": "Matland Farm, with a history of over 400 years, offers unique venues for your events. Our renovated boathouse is the perfect setting for memorable moments by the fjord.",
+        "desc1": "Matland Farm, with a history of over 400 years in the same family, offers a unique venue for your events.",
         "desc2": "With spectacular views of the fjord, we combine traditional heritage with modern comfort and style.",
         "events": {
             "title": "We Host",
