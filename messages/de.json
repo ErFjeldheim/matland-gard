@@ -1,0 +1,43 @@
+{
+    "Navigation": {
+        "shop": "Kies & Stein",
+        "parking": "Wohnmobilstellplatz",
+        "venue": "Veranstaltungsort",
+        "contact": "Kontaktieren Sie uns",
+        "admin": "Admin-Bereich",
+        "cart": "Warenkorb"
+    },
+    "Common": {
+        "title": "Matland Gård"
+    },
+    "Footer": {
+        "terms": "Verkaufsbedingungen",
+        "privacy": "Datenschutz",
+        "credits": "Die Website wird von Fjelldata entwickelt, betrieben und gewartet"
+    },
+    "Home": {
+        "heroAlt": "Matland Gård Übersicht",
+        "shopCard": {
+            "title": "Matland Kies & Stein",
+            "desc": "Händler von Skjold Kies & Stein. Wir liefern Herrenhauskies, Schotter und andere Steinprodukte.",
+            "link": "Produkte und Preise ansehen",
+            "overlay": "Kies & Stein"
+        },
+        "campingCard": {
+            "title": "Matland Fjordcamp",
+            "desc": "Erleben Sie die Natur am Fjord. Buchen Sie einen Platz für Wohnmobil oder Jurtenzelt für ein unvergessliches Erlebnis.",
+            "link": "Jetzt buchen",
+            "overlay": "Wohnmobilstellplatz"
+        },
+        "venueCard": {
+            "title": "Veranstaltungen & Feiern",
+            "desc": "Einzigartige Räumlichkeiten für Hochzeiten, Konfirmationen, Firmenfeiern und andere besondere Anlässe.",
+            "link": "Möglichkeiten erkunden",
+            "overlay": "Veranstaltungsort"
+        },
+        "contact": {
+            "title": "Kontaktieren Sie uns",
+            "desc": "Haben Sie Fragen? Wir sind hier, um Ihnen zu helfen."
+        }
+    }
+}

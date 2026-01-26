@@ -1,20 +1,24 @@
-import Navigation from './components/Navigation';
-import Footer from './components/Footer';
+import Navigation from '../components/Navigation';
+import Footer from '../components/Footer';
 import Link from 'next/link';
 import Image from 'next/image';
-import CardCarousel from './components/CardCarousel';
+import CardCarousel from '../components/CardCarousel';
+import { getTranslations } from 'next-intl/server';
 
 import { prisma } from '@/lib/prisma';
 
 export const dynamic = 'force-dynamic';
 
 export default async function HomePage() {
+  const t = await getTranslations('Home');
   const settings = await prisma.setting.findMany();
 
   const getSetting = (key: string, fallback: string) => {
     return settings.find(s => s.key === key)?.value || fallback;
   };
 
+  // Note: Hero content is dynamic from DB, but fallbacks could be translated if we strictly wanted to.
+  // For now, keeping DB content as source of truth for Hero.
   const heroTitle = getSetting('hero_title', 'Velkomen til Matland Gård');
   const heroText = getSetting('hero_text', 'Vi tilbyr steinprodukt av høgaste kvalitet, bobilparkering ved fjorden, og unike lokale til dine selskap.');
   const heroImage = getSetting('hero_image_url', '/images/hero/gard-oversikt.jpg');
@@ -33,7 +37,7 @@ export default async function HomePage() {
       <section className="relative h-[60vh] flex items-center justify-center text-white text-center">
         <Image
           src={heroImage}
-          alt="Matland Gård oversikt"
+          alt={t('heroAlt')}
           fill
           className="object-cover"
           priority
@@ -60,20 +64,19 @@ export default async function HomePage() {
                     '/images/products/Herregårdssingel/bilde-2.jpg',
                     '/images/products/Herregårdssingel/bilde-3.jpg'
                   ]}
-                  alt="Singel & Stein"
+                  alt={t('shopCard.overlay')}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-dark)]/80 to-transparent flex items-end justify-center pb-6 pointer-events-none">
-                  <h3 className="text-2xl font-bold text-white">Singel & Stein</h3>
+                  <h3 className="text-2xl font-bold text-white">{t('shopCard.overlay')}</h3>
                 </div>
               </div>
               <div className="p-6 flex-grow">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-[var(--color-primary)] transition-colors">Matland Singel & Stein</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-[var(--color-primary)] transition-colors">{t('shopCard.title')}</h3>
                 <p className="text-gray-600 mb-4">
-                  Forhandlar av Skjold Singel & Stein. Vi leverer herregårdssingel, pukk og
-                  andre steinprodukt.
+                  {t('shopCard.desc')}
                 </p>
                 <div className="text-[var(--color-primary)] font-semibold flex items-center mt-auto">
-                  Sjå produkt og prisar
+                  {t('shopCard.link')}
                   <svg className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -92,20 +95,19 @@ export default async function HomePage() {
                     '/images/hero/kayak.jpg',
                     '/images/camping/kai.jpg'
                   ]}
-                  alt="Bobilparkering"
+                  alt={t('campingCard.overlay')}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-dark)]/80 to-transparent flex items-end justify-center pb-6 pointer-events-none">
-                  <h3 className="text-2xl font-bold text-white">Bobilparkering</h3>
+                  <h3 className="text-2xl font-bold text-white">{t('campingCard.overlay')}</h3>
                 </div>
               </div>
               <div className="p-6 flex-grow">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-[var(--color-primary)] transition-colors">Matland Fjordcamp</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-[var(--color-primary)] transition-colors">{t('campingCard.title')}</h3>
                 <p className="text-gray-600 mb-4">
-                  Opplev naturen ved fjorden. Bestill plass til bobil eller jurtetelt
-                  for ei uforgløymeleg oppleving.
+                  {t('campingCard.desc')}
                 </p>
                 <div className="text-[var(--color-primary)] font-semibold flex items-center mt-auto">
-                  Bestill no
+                  {t('campingCard.link')}
                   <svg className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -123,19 +125,19 @@ export default async function HomePage() {
                     '/images/arrangement/bryllup.jpg',
                     '/images/arrangement/bordoppsetning.jpg'
                   ]}
-                  alt="Selskapslokale"
+                  alt={t('venueCard.overlay')}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-dark)]/80 to-transparent flex items-end justify-center pb-6 pointer-events-none">
-                  <h3 className="text-2xl font-bold text-white">Selskapslokale</h3>
+                  <h3 className="text-2xl font-bold text-white">{t('venueCard.overlay')}</h3>
                 </div>
               </div>
               <div className="p-6 flex-grow">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-[var(--color-primary)] transition-colors">Selskap & Events</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-[var(--color-primary)] transition-colors">{t('venueCard.title')}</h3>
                 <p className="text-gray-600 mb-4">
-                  Unike lokale for bryllup, konfirmasjonar, firmafestar og andre spesielle anledningar.
+                  {t('venueCard.desc')}
                 </p>
                 <div className="text-[var(--color-primary)] font-semibold flex items-center mt-auto">
-                  Utforsk moglegheiter
+                  {t('venueCard.link')}
                   <svg className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -147,9 +149,9 @@ export default async function HomePage() {
 
         {/* Contact Section */}
         <div className="bg-white rounded-lg shadow-lg p-8 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Kontakt oss</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('contact.title')}</h2>
           <p className="text-gray-600 mb-6">
-            Har du spørsmål? Vi er her for å hjelpe deg.
+            {t('contact.desc')}
           </p>
           <div className="flex flex-col md:flex-row justify-center items-center gap-6">
             <a href={`tel:${contactPhone.replace(/\s/g, '')}`} className="text-[var(--color-primary)] font-semibold hover:text-[var(--color-accent)]">

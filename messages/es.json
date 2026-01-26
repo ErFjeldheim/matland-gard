@@ -1,0 +1,43 @@
+{
+    "Navigation": {
+        "shop": "Grava y Piedra",
+        "parking": "Parking de Autocaravanas",
+        "venue": "Lugar de Eventos",
+        "contact": "Contáctenos",
+        "admin": "Panel de Administración",
+        "cart": "Carrito"
+    },
+    "Common": {
+        "title": "Matland Gård"
+    },
+    "Footer": {
+        "terms": "Condiciones de vente",
+        "privacy": "Política de privacidad",
+        "credits": "El sitio web es desarrollado, operado y mantenido por Fjelldata"
+    },
+    "Home": {
+        "heroAlt": "Resumen de Matland Gård",
+        "shopCard": {
+            "title": "Matland Grava y Piedra",
+            "desc": "Distribuidor de Skjold Grava y Piedra. Entregamos grava señorial, piedra triturada y otros productos de piedra.",
+            "link": "Ver productos y precios",
+            "overlay": "Grava y Piedra"
+        },
+        "campingCard": {
+            "title": "Matland Fjordcamp",
+            "desc": "Experimenta la naturaleza junto al fiordo. Reserva una plaza para autocaravana o tienda yurta para una experiencia inolvidable.",
+            "link": "Reservar ahora",
+            "overlay": "Parking de Autocaravanas"
+        },
+        "venueCard": {
+            "title": "Eventos y Celebraciones",
+            "desc": "Lugares únicos para bodas, confirmaciones, fiestas de empresa y otras ocasiones especiales.",
+            "link": "Explorar oportunidades",
+            "overlay": "Lugar de Eventos"
+        },
+        "contact": {
+            "title": "Contáctenos",
+            "desc": "¿Tiene alguna pregunta? Estamos aquí para ayudarle."
+        }
+    }
+}

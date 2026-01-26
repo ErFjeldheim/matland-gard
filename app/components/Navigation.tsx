@@ -4,8 +4,11 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useCart } from '../context/CartContext';
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
+import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Navigation() {
+  const t = useTranslations('Navigation');
   const { totalItems } = useCart();
   const pathname = usePathname();
   const [isAdmin, setIsAdmin] = useState(false);
@@ -25,14 +28,14 @@ export default function Navigation() {
   }, [pathname]);
 
   const navLinks = [
-    { href: '/nettbutikk', label: 'Singel & Stein' },
-    { href: '/camping', label: 'Bobilparkering' },
-    { href: '/arrangement', label: 'Selskapslokale' },
-    { href: '/kontakt', label: 'Kontakt oss' },
+    { href: '/nettbutikk', label: t('shop') },
+    { href: '/camping', label: t('parking') },
+    { href: '/arrangement', label: t('venue') },
+    { href: '/kontakt', label: t('contact') },
   ];
 
   if (isAdmin) {
-    navLinks.push({ href: '/admin', label: 'Kontrollpanel' });
+    navLinks.push({ href: '/admin', label: t('admin') });
   }
 
   return (
@@ -63,11 +66,11 @@ export default function Navigation() {
             </ul>
 
             {/* Cart Icon - Only show on /nettbutikk page */}
-            {pathname?.startsWith('/nettbutikk') && (
+            {pathname?.includes('/nettbutikk') && (
               <Link
                 href="/handlekurv"
                 className="relative text-white hover:text-[var(--color-accent)] transition-colors hover:scale-110 duration-200"
-                aria-label="Handlekurv"
+                aria-label={t('cart')}
               >
                 <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -79,16 +82,20 @@ export default function Navigation() {
                 )}
               </Link>
             )}
+
+            <LanguageSwitcher />
           </div>
 
           {/* Mobile Right Section */}
           <div className="md:hidden flex items-center space-x-4">
+            <LanguageSwitcher />
+
             {/* Mobile Cart Icon - Only show on /nettbutikk page */}
-            {pathname?.startsWith('/nettbutikk') && (
+            {pathname?.includes('/nettbutikk') && (
               <Link
                 href="/handlekurv"
                 className="relative text-white hover:text-[var(--color-accent)] transition-colors"
-                aria-label="Handlekurv"
+                aria-label={t('cart')}
               >
                 <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />

@@ -1,0 +1,43 @@
+{
+    "Navigation": {
+        "shop": "Singel & Stein",
+        "parking": "Bobilparkering",
+        "venue": "Selskapslokale",
+        "contact": "Kontakt oss",
+        "admin": "Kontrollpanel",
+        "cart": "Handlevogn"
+    },
+    "Common": {
+        "title": "Matland Gård"
+    },
+    "Footer": {
+        "terms": "Salsvilkår",
+        "privacy": "Personvern",
+        "credits": "Nettsida er utvikla, drifta og vedlikehalden av Fjelldata"
+    },
+    "Home": {
+        "heroAlt": "Matland Gård oversikt",
+        "shopCard": {
+            "title": "Matland Singel & Stein",
+            "desc": "Forhandlar av Skjold Singel & Stein. Vi leverer herregårdssingel, pukk og andre steinprodukt.",
+            "link": "Sjå produkt og prisar",
+            "overlay": "Singel & Stein"
+        },
+        "campingCard": {
+            "title": "Matland Fjordcamp",
+            "desc": "Opplev naturen ved fjorden. Bestill plass til bobil eller jurtetelt for ei uforgløymeleg oppleving.",
+            "link": "Bestill no",
+            "overlay": "Bobilparkering"
+        },
+        "venueCard": {
+            "title": "Selskap & Events",
+            "desc": "Unike lokale for bryllup, konfirmasjonar, firmafestar og andre spesielle anledningar.",
+            "link": "Utforsk moglegheiter",
+            "overlay": "Selskapslokale"
+        },
+        "contact": {
+            "title": "Kontakt oss",
+            "desc": "Har du spørsmål? Vi er her for å hjelpe deg."
+        }
+    }
+}

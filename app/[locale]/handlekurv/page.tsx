@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useCart } from '../context/CartContext';
-import Navigation from '../components/Navigation';
-import CheckoutModal from '../components/CheckoutModal';
+import { useCart } from '../../context/CartContext';
+import Navigation from '../../components/Navigation';
+import CheckoutModal from '../../components/CheckoutModal';
 
 export default function HandlekurvPage() {
   const { items, removeItem, updateQuantity, totalPrice, clearCart } = useCart();

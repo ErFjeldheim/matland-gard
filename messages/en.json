@@ -1,0 +1,43 @@
+{
+    "Navigation": {
+        "shop": "Gravel & Stone",
+        "parking": "Motorhome Parking",
+        "venue": "Event Venue",
+        "contact": "Contact Us",
+        "admin": "Admin Panel",
+        "cart": "Shopping Cart"
+    },
+    "Common": {
+        "title": "Matland Farm"
+    },
+    "Footer": {
+        "terms": "Sales Terms",
+        "privacy": "Privacy Policy",
+        "credits": "The website is developed, operated and maintained by Fjelldata"
+    },
+    "Home": {
+        "heroAlt": "Matland Farm overview",
+        "shopCard": {
+            "title": "Matland Gravel & Stone",
+            "desc": "Retailer of Skjold Gravel & Stone. We deliver manor gravel, crushed stone and other stone products.",
+            "link": "View products and prices",
+            "overlay": "Gravel & Stone"
+        },
+        "campingCard": {
+            "title": "Matland Fjordcamp",
+            "desc": "Experience nature by the fjord. Book a spot for motorhome or yurt tent for an unforgettable experience.",
+            "link": "Book now",
+            "overlay": "Motorhome Parking"
+        },
+        "venueCard": {
+            "title": "Events & Functions",
+            "desc": "Unique venues for weddings, confirmations, corporate parties and other special occasions.",
+            "link": "Explore opportunities",
+            "overlay": "Event Venue"
+        },
+        "contact": {
+            "title": "Contact Us",
+            "desc": "Do you have any questions? We are here to help you."
+        }
+    }
+}

@@ -1,0 +1,43 @@
+{
+    "Navigation": {
+        "shop": "Gravier et Pierre",
+        "parking": "Parking Camping-car",
+        "venue": "Lieu d'événement",
+        "contact": "Contactez-nous",
+        "admin": "Panneau d'administration",
+        "cart": "Panier"
+    },
+    "Common": {
+        "title": "Matland Gård"
+    },
+    "Footer": {
+        "terms": "Conditions de vente",
+        "privacy": "Politique de confidentialité",
+        "credits": "Le site web est développé, exploité et maintenu par Fjelldata"
+    },
+    "Home": {
+        "heroAlt": "Vue d'ensemble de Matland Gård",
+        "shopCard": {
+            "title": "Matland Gravier & Pierre",
+            "desc": "Revendeur de Skjold Gravier & Pierre. Nous livrons du gravier de manoir, de la pierre concassée et d'autres produits en pierre.",
+            "link": "Voir produits et prix",
+            "overlay": "Gravier & Pierre"
+        },
+        "campingCard": {
+            "title": "Matland Fjordcamp",
+            "desc": "Découvrez la nature au bord du fjord. Réservez un emplacement pour camping-car ou tente yourte pour une expérience inoubliable.",
+            "link": "Réserver maintenant",
+            "overlay": "Parking Camping-car"
+        },
+        "venueCard": {
+            "title": "Événements & Réceptions",
+            "desc": "Des lieux uniques pour mariages, confirmations, fêtes d'entreprise et autres occasions spéciales.",
+            "link": "Explorer les opportunités",
+            "overlay": "Lieu d'événement"
+        },
+        "contact": {
+            "title": "Contactez-nous",
+            "desc": "Avez-vous des questions ? Nous sommes là pour vous aider."
+        }
+    }
+}

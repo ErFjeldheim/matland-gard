@@ -1,7 +1,7 @@
 'use client';
 
-import Navigation from '../components/Navigation';
-import Footer from '../components/Footer';
+import Navigation from '../../components/Navigation';
+import Footer from '../../components/Footer';
 import dynamic from 'next/dynamic';
 
 // Import map component dynamically to avoid SSR issues
