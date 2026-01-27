@@ -1,6 +1,6 @@
 import { prisma } from '@/lib/prisma';
-import Navigation from '../../components/Navigation';
-import Footer from '../../components/Footer';
+import Navigation from '../../../components/Navigation';
+import Footer from '../../../components/Footer';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import SettingsClient from './SettingsClient';

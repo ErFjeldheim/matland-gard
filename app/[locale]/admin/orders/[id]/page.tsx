@@ -1,6 +1,6 @@
 import { prisma } from '@/lib/prisma';
-import Navigation from '../../../components/Navigation';
-import Footer from '../../../components/Footer';
+import Navigation from '../../../../components/Navigation';
+import Footer from '../../../../components/Footer';
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
@@ -14,13 +14,13 @@ export default async function AdminOrderPage({ params }: { params: Promise<{ id:
   // Check authentication
   const cookieStore = await cookies();
   const isAuthenticated = cookieStore.get('admin-auth')?.value === 'authenticated';
-  
+
   if (!isAuthenticated) {
     redirect('/admin/login');
   }
 
   const { id } = await params;
-  
+
   const order = await prisma.order.findUnique({
     where: { id },
     include: {
