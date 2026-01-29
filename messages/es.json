@@ -212,10 +212,10 @@
             "description": "Cuando la estética y la funcionalidad juegan un papel importante.",
             "longDescription": "Si desea una superficie más firme en patios o entradas, la Graba Señorial Triturada es una buena alternativa a la grava común. Debido a que contiene 'materia cero', se asienta muy bien. Y obtendrá el mismo fino color marrón/beige claro que al usar la Grava Señorial. Ilumina el área exterior y es estéticamente mucho más fina que cuando se usa grava gris ordinaria.\n\nPara cantidades mayores, la grava se puede vender a granel.\n\nPrecio de recogida en Aksdal: 300 kr IVA incluido por tonelada.\nPrecio de recogida en Holmefjord: 900 kr IVA incluido por tonelada."
         },
-        "grus": {
-            "name": "Piedra Triturada",
-            "description": "Piedra triturada natural en diversas fracciones. Perfecta para cimientos, drenaje o caminos.",
-            "longDescription": "Nuestra piedra triturada es piedra natural que resulta excelente para diversos propósitos. Producida a partir de piedra natural local y seleccionada en diferentes fracciones para satisfacer sus necesidades. Ideal para cimientos, drenaje, caminos y obras civiles. Se entrega en Big Bags de 900kg."
+        "sandholdig-jord": {
+            "name": "Tierra arenosa",
+            "description": "Un producto muy adecuado para rellenar irregularidades en el césped.",
+            "longDescription": "Un producto muy adecuado para rellenar irregularidades en el césped."
         },
         "elvestein": {
             "name": "Piedra de Río",

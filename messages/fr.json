@@ -207,10 +207,10 @@
             "description": "Gravier exclusif avec une couleur unique",
             "longDescription": "Le Gravier de Manoir est un gravier exclusif avec une couleur et une structure uniques. Parfait pour les allées, les sentiers et comme revêtement décoratif. Livré en trois tailles."
         },
-        "grus": {
-            "name": "Pierre Concassée",
-            "description": "Pierre concassée naturelle en diverses fractions. Parfait pour les fondations, le drainage ou les routes.",
-            "longDescription": "Notre pierre concassée est une pierre naturelle qui convient parfaitement à une variété d'usages. Produite à partir de pierre naturelle locale et triée en différentes fractions pour répondre à vos besoins. Idéale pour les fondations, le drainage, les routes et le génie civil. Livrée en Big Bags de 900kg."
+        "sandholdig-jord": {
+            "name": "Terre sableuse",
+            "description": "Un produit très approprié pour combler les irrégularités des pelouses.",
+            "longDescription": "Un produit très approprié pour combler les irrégularités des pelouses."
         },
         "elvestein": {
             "name": "Pierre de Rivière",

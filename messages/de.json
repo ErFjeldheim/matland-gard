@@ -207,10 +207,10 @@
             "description": "Exklusiver Kies mit einzigartiger Farbe",
             "longDescription": "Herrenhauskies ist ein exklusiver Kies mit einzigartiger Farbe und Struktur. Perfekt für Einfahrten, Wege und als dekorative Abdeckung. In drei Größen lieferbar."
         },
-        "grus": {
-            "name": "Kies",
-            "description": "Natürlicher Brechsand in verschiedenen Fraktionen. Perfekt als Fundament, Entwässerung oder für Straßen.",
-            "longDescription": "Unser Kies ist natürlich gebrochener Stein, der sich hervorragend für eine Vielzahl von Zwecken eignet. Aus lokalem Naturstein hergestellt und in verschiedene Fraktionen sortiert, um Ihren Anforderungen gerecht zu werden. Ideal für Fundamente, Entwässerung, Straßen und Tiefbau. Geliefert in Bigbags à 900kg."
+        "sandholdig-jord": {
+            "name": "Sandiger Boden",
+            "description": "Ein Produkt, das sich sehr gut zum Auffüllen von Unebenheiten im Rasen eignet.",
+            "longDescription": "Ein Produkt, das sich sehr gut zum Auffüllen von Unebenheiten im Rasen eignet."
         },
         "elvestein": {
             "name": "Flussstein",

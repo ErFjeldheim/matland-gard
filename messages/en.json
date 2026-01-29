@@ -212,10 +212,10 @@
             "description": "When aesthetics and functionality play a role.",
             "longDescription": "If you want a firmer surface in yards or driveways, Manor Crushed Stone is a good alternative to gravel. Because it contains 'zero-substance', it compacts very well. And you get the same fine light brown/beige color as when using Manor Gravel. Brightens up the outdoor area and is aesthetically much finer than when using ordinary gray gravel.\n\nFor larger quantities, the gravel can be sold in bulk.\n\nPickup price Aksdal: 300kr incl. VAT per ton.\nPickup price Holmefjord: 900kr incl. VAT per ton."
         },
-        "grus": {
-            "name": "Crushed Stone",
-            "description": "Natural crushed stone in various fractions. Perfect for foundations, drainage, or roads.",
-            "longDescription": "Our crushed stone is natural stone that is excellent for a variety of purposes. Produced from local natural stone and sorted into different fractions to meet your needs. Ideal for foundations, drainage, roads, and civil engineering. Delivered in Big Bags of 900kg."
+        "sandholdig-jord": {
+            "name": "Sandy soil",
+            "description": "A product that is very suitable for filling unevenness in lawns.",
+            "longDescription": "A product that is very suitable for filling unevenness in lawns."
         },
         "elvestein": {
             "name": "River Stone",
