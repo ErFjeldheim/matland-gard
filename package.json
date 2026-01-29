@@ -16,6 +16,7 @@
     "@prisma/adapter-pg": "6.19.1",
     "@prisma/client": "6.19.1",
     "@stripe/stripe-js": "^8.6.0",
+    "@swc/helpers": "0.5.18",
     "@tailwindcss/typography": "^0.5.19",
     "@types/nodemailer": "^7.0.5",
     "dotenv": "^17.2.3",
