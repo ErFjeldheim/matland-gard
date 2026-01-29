@@ -49,7 +49,7 @@ async function main() {
       slug: "herregardssingel"
     },
     {
-      id: "550e8400-e29b-41d4-a716-446655440006",
+      id: "550e8400-e29b-41d4-a716-446655440004",
       name: "Sand",
       description: "Ren sand med fin lys brun/beige farge",
       price: 150000,
@@ -88,7 +88,7 @@ async function main() {
       slug: "elvestein"
     },
     {
-      id: "550e8400-e29b-41d4-a716-446655440004",
+      id: "550e8400-e29b-41d4-a716-446655440002",
       name: "Sandholdig jord",
       description: "Eit produkt som egner seg svært godt til å fylle i ujevnheter i plen.",
       price: 125000,
@@ -124,7 +124,7 @@ async function main() {
       slug: "herregardsgrus"
     },
     {
-      id: "9c68ced4-f7ac-48a5-9858-18d4060597a0",
+      id: "550e8400-e29b-41d4-a716-446655440006",
       name: "Singelmatter ECCOgravel",
       description: "Stabiliseringsmatter for grus og singel (120x100 cm). Hindrer spor og ugress.",
       price: 24900,
