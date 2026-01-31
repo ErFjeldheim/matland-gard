@@ -27,13 +27,9 @@ jobs:
           # Fix dubious ownership issue for git (essential for update to work)
           git config --global --add safe.directory /var/www/matland-gard
           
-          # Fix potential permission issues in .git directory specifically for current user
-          # We use || true here because this might fail if sudo requires a password
-          sudo chown -R $(whoami):$(whoami) .git 2>/dev/null || true
-          
           # Debug info
           echo "Current commit before update:"
-          git log -1 --oneline
+          git log -1 --oneline || echo "Could not run git log"
           
           # Ensure we're on main branch and force update to latest commit
           git fetch --all
