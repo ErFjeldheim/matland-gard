@@ -1,11 +1,11 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 import Stripe from 'stripe';
 import { getNumberSetting } from '@/lib/settings';
+import { createClient } from '@/utils/supabase/server';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
     // FORCE_UPDATE_DEBUG_1 
@@ -14,11 +14,11 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 // Admin Actions
 export async function updateOrderStatus(orderId: string, status: string) {
-    // Check authentication
-    const cookieStore = await cookies();
-    const isAuthenticated = cookieStore.get('admin-auth')?.value === 'authenticated';
+    // Check authentication via Supabase
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
 
-    if (!isAuthenticated) {
+    if (!user) {
         throw new Error('Ikke autorisert');
     }
 
@@ -48,11 +48,11 @@ export async function updateOrderStatus(orderId: string, status: string) {
 }
 
 export async function deleteOrder(orderId: string) {
-    // Check authentication
-    const cookieStore = await cookies();
-    const isAuthenticated = cookieStore.get('admin-auth')?.value === 'authenticated';
+    // Check authentication via Supabase
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
 
-    if (!isAuthenticated) {
+    if (!user) {
         throw new Error('Ikke autorisert');
     }
 

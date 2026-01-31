@@ -1,15 +1,15 @@
 
 import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
+import { createClient } from '@/utils/supabase/server';
 
 export async function POST(request: Request) {
     try {
-        // Check authentication
-        const cookieStore = await cookies();
-        const isAuthenticated = cookieStore.get('admin-auth')?.value === 'authenticated';
+        // Check authentication via Supabase
+        const supabase = await createClient();
+        const { data: { user } } = await supabase.auth.getUser();
 
-        if (!isAuthenticated) {
+        if (!user) {
             return NextResponse.json(
                 { error: 'Unauthorized' },
                 { status: 401 }

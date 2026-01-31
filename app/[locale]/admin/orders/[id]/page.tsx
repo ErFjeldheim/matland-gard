@@ -3,7 +3,7 @@ import Navigation from '../../../../components/Navigation';
 import Footer from '../../../../components/Footer';
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
-import { cookies } from 'next/headers';
+import { createClient } from '@/utils/supabase/server';
 import OrderStatusUpdater from '../../OrderStatusUpdater';
 import DeleteOrderButton from '../../DeleteOrderButton';
 import CopyButton from '../../CopyButton';
@@ -11,11 +11,11 @@ import CopyButton from '../../CopyButton';
 export const dynamic = 'force-dynamic';
 
 export default async function AdminOrderPage({ params }: { params: Promise<{ id: string }> }) {
-  // Check authentication
-  const cookieStore = await cookies();
-  const isAuthenticated = cookieStore.get('admin-auth')?.value === 'authenticated';
+  // Check authentication via Supabase
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
 
-  if (!isAuthenticated) {
+  if (!user) {
     redirect('/admin/login');
   }
 

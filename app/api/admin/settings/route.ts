@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { cookies } from 'next/headers';
+import { createClient } from '@/utils/supabase/server';
 
 export async function GET() {
-    const cookieStore = await cookies();
-    const isAuthenticated = cookieStore.get('admin-auth')?.value === 'authenticated';
+    // Check authentication via Supabase
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
 
-    if (!isAuthenticated) {
+    if (!user) {
         return NextResponse.json({ error: 'Uautorisert' }, { status: 401 });
     }
 
@@ -15,10 +16,11 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
-    const cookieStore = await cookies();
-    const isAuthenticated = cookieStore.get('admin-auth')?.value === 'authenticated';
+    // Check authentication via Supabase
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
 
-    if (!isAuthenticated) {
+    if (!user) {
         return NextResponse.json({ error: 'Uautorisert' }, { status: 401 });
     }
 

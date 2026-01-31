@@ -1,18 +1,19 @@
 import { prisma } from '@/lib/prisma';
 import Navigation from '../../../components/Navigation';
 import Footer from '../../../components/Footer';
-import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { createClient } from '@/utils/supabase/server';
 import SettingsClient from './SettingsClient';
 import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';
 
 export default async function SettingsPage() {
-    const cookieStore = await cookies();
-    const isAuthenticated = cookieStore.get('admin-auth')?.value === 'authenticated';
+    // Check authentication via Supabase
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
 
-    if (!isAuthenticated) {
+    if (!user) {
         redirect('/admin/login');
     }
 
