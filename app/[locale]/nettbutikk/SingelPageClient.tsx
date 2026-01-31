@@ -1,5 +1,4 @@
 'use client';
-
 import ProductCards from '@/app/components/ProductCards';
 import { useTranslations } from 'next-intl';
 

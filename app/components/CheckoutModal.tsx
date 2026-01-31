@@ -114,7 +114,11 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
           throw new Error(data.error || 'Noko gjekk galt');
         }
 
-        window.location.href = `/bestilling/${data.orderId}`;
+        if (data.redirectUrl) {
+          window.location.href = data.redirectUrl;
+        } else {
+          window.location.href = `/bestilling/${data.orderId}`;
+        }
       }
     } catch (error) {
       alert(error instanceof Error ? error.message : 'Feil ved bestilling');

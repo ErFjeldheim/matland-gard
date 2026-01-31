@@ -3,6 +3,7 @@ import Navigation from '../../../components/Navigation';
 import Footer from '../../../components/Footer';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { retryVippsPayment } from '@/app/actions';
 
 export const dynamic = 'force-dynamic';
 
@@ -11,7 +12,7 @@ export default async function OrderPage({
   searchParams
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ success?: string }>;
+  searchParams: Promise<{ success?: string; vipps?: string }>;
 }) {
   const { id } = await params;
   const { success } = await searchParams;
@@ -31,8 +32,29 @@ export default async function OrderPage({
     notFound();
   }
 
-  // If coming from successful Stripe payment, mark order as paid
-  if (success === 'true' && order.status === 'pending' && order.paymentMethod === 'stripe') {
+  // Check for success from either Stripe or Vipps
+  const paymentSuccess = success === 'true' || (await searchParams).vipps === 'success';
+  let isVerifiedPaid = false;
+
+  if (paymentSuccess && order.status === 'pending') {
+    if (order.paymentMethod === 'stripe' && success === 'true') {
+      isVerifiedPaid = true;
+    } else if (order.paymentMethod === 'vipps' && (await searchParams).vipps === 'success') {
+      try {
+        const { getVippsPayment } = await import('@/app/lib/vipps');
+        const paymentDetails = await getVippsPayment(id);
+        if (paymentDetails.state === 'AUTHORIZED') {
+          isVerifiedPaid = true;
+        } else {
+          console.log(`Vipps payment not authorized for order ${id}. Status: ${paymentDetails.state}`);
+        }
+      } catch (error) {
+        console.error(`Failed to verify Vipps payment for order ${id}:`, error);
+      }
+    }
+  }
+
+  if (isVerifiedPaid) {
     const updatedOrder = await prisma.order.update({
       where: { id },
       data: { status: 'paid' },
@@ -169,19 +191,33 @@ export default async function OrderPage({
               </span>
             </div>
 
-            {/* Payment Info */}
-            {order.paymentMethod === 'vipps' && order.status === 'pending' && (
-              <div className="mt-6 bg-orange-50 border border-orange-200 rounded-lg p-4">
-                <p className="text-orange-800 font-semibold mb-2">Vipps-betaling</p>
-                <p className="text-orange-700 text-sm">
-                  Send {(order.totalAmount / 100).toFixed(0)} kr til <span className="font-bold">954 58 563</span>
-                </p>
-                <p className="text-orange-700 text-sm mt-1">
-                  Oppgi ordrenummer i meldingen: <span className="font-mono font-bold">{order.id.slice(0, 8).toUpperCase()}</span>
-                </p>
-              </div>
-            )}
+
           </div>
+
+
+          {/* Retry Payment for Vipps */}
+          {order.paymentMethod === 'vipps' && order.status === 'pending' && (
+            <div className="mt-6 bg-red-50 border border-red-200 rounded-lg p-6 mb-8">
+              <h4 className="text-red-800 font-semibold mb-2">Betaling ikke gjennomført</h4>
+              <p className="text-red-700 mb-4">
+                Betalingen ble avbrutt eller feilet. Ingen penger er trukket fra din konto.
+              </p>
+              <form action={async () => {
+                'use server';
+                await retryVippsPayment(order.id);
+              }}>
+                <button
+                  type="submit"
+                  className="bg-[#FF5B24] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#E64E1B] transition-colors w-full sm:w-auto flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <span>Betal med Vipps</span>
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" />
+                  </svg>
+                </button>
+              </form>
+            </div>
+          )}
 
           {/* Next Steps */}
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">

@@ -226,6 +226,11 @@
             "name": "Dalles stabilisatrices ECCOgravel",
             "description": "Dalle pratique pour une mise en place sûre du gravier. Empêche les mauvaises herbes et assure un bon drainage. Prix par m².",
             "longDescription": "ECCOgravel sont des dalles stabilisatrices de gravier professionnelles qui stabilisent le gravier et les galets. Cela permet de marcher, de faire du vélo et de pousser une poussette ou un fauteuil roulant facilement sur la surface. Les dalles ont un géotextile intégré qui empêche la pousse des mauvaises herbes."
+        },
+        "test-produkt": {
+            "name": "Produit de test",
+            "description": "Ceci est un produit de test temporaire.",
+            "longDescription": "Ceci est une description longue du produit de test."
         }
     },
     "Checkout": {

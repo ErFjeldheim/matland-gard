@@ -231,6 +231,11 @@
             "name": "Placas estabilizadoras ECCOgravel",
             "description": "Placas estabilizadoras de grava (120x100 cm). Evita surcos y maleza.",
             "longDescription": "Las placas estabilizadoras ECCOgravel permiten tener una superficie de grava tan firme y estable como el asfalto. Perfectas para entradas de garaje, estacionamientos y caminos donde desea un aspecto natural sin que las ruedas o los pies se hundan.\n\n¿Por qué elegir ECCOgravel?:\n- **Estabilidad total:** Evita la formación de surcos y facilita el paso de bicicletas o carritos de bebé.\n- **Malla integrada:** Incluye una membrana antihierba pegada (80 g/m²) que permite el drenaje del agua pero detiene la maleza.\n- **Instalación sencilla:** Las placas de 120x100 cm se adaptan fácilmente con una sierra o radial.\n- **Sostenible:** Fabricadas con plástico reciclado y son 100% reciclables.\n- **Gran resistencia:** Una vez rellenas, soportan el paso de turismos y vehículos más pesados.\n\nEspecificaciones técnicas:\n- Formato de placa: 120 x 100 x 3 cm (1,2 m² por placa).\n- Consumo de grava: aprox. 75 kg por m².\n- Tamaño de grava recomendado: 5 – 25 mm.\n\nEl precio es por metro cuadrado."
+        },
+        "test-produkt": {
+            "name": "Producto de prueba",
+            "description": "Este es un producto de prueba temporal.",
+            "longDescription": "Esta es una descripción larga del producto de prueba."
         }
     },
     "Checkout": {

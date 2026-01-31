@@ -48,6 +48,7 @@ export default async function AdminDashboard() {
     processing: 'Under behandling',
     delivered: 'Levert',
     cancelled: 'Kansellert',
+    refunded: 'Refundert',
   };
 
   const statusColors: Record<string, string> = {
@@ -56,6 +57,7 @@ export default async function AdminDashboard() {
     processing: 'bg-blue-100 text-blue-800',
     delivered: 'bg-purple-100 text-purple-800',
     cancelled: 'bg-red-100 text-red-800',
+    refunded: 'bg-gray-100 text-gray-800',
   };
 
   return (

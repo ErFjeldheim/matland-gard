@@ -15,6 +15,7 @@ const statuses = [
   { value: 'processing', label: 'Under behandling' },
   { value: 'delivered', label: 'Levert' },
   { value: 'cancelled', label: 'Kansellert' },
+  { value: 'refunded', label: 'Refundert' },
 ];
 
 export default function OrderStatusUpdater({ orderId, currentStatus }: OrderStatusUpdaterProps) {
@@ -53,6 +54,7 @@ export default function OrderStatusUpdater({ orderId, currentStatus }: OrderStat
     processing: 'bg-blue-100 text-blue-800 border-blue-300',
     delivered: 'bg-purple-100 text-purple-800 border-purple-300',
     cancelled: 'bg-red-100 text-red-800 border-red-300',
+    refunded: 'bg-gray-100 text-gray-800 border-gray-300',
   };
 
   return (

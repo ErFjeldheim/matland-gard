@@ -6,6 +6,7 @@ import { prisma } from '@/lib/prisma';
 import Stripe from 'stripe';
 import { getNumberSetting } from '@/lib/settings';
 import { createClient } from '@/utils/supabase/server';
+import { sendRefundNotification } from '@/lib/email';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
     // FORCE_UPDATE_DEBUG_1 
@@ -27,7 +28,7 @@ export async function updateOrderStatus(orderId: string, status: string) {
     }
 
     // Validate status
-    const validStatuses = ['pending', 'paid', 'processing', 'delivered', 'cancelled'];
+    const validStatuses = ['pending', 'paid', 'processing', 'delivered', 'cancelled', 'refunded'];
     if (!validStatuses.includes(status)) {
         throw new Error('Ugyldig status');
     }
@@ -36,7 +37,23 @@ export async function updateOrderStatus(orderId: string, status: string) {
         const order = await prisma.order.update({
             where: { id: orderId },
             data: { status },
+            include: {
+                orderItems: {
+                    include: {
+                        product: true
+                    }
+                }
+            }
         });
+
+        // Send refund notification if status is changed to refunded
+        if (status === 'refunded') {
+            try {
+                await sendRefundNotification(order as any);
+            } catch (emailError) {
+                console.error('Failed to send refund notification:', emailError);
+            }
+        }
 
         revalidatePath('/admin');
         revalidatePath(`/admin/orders/${orderId}`);
@@ -252,7 +269,7 @@ export async function createStripeCheckoutSession(data: CheckoutData) {
             line_items: stripeLineItems,
             mode: 'payment',
             success_url: `${process.env.NEXT_PUBLIC_URL}/bestilling/${order.id}?success=true`,
-            cancel_url: `${process.env.NEXT_PUBLIC_URL}/nettbutikk?cancelled=true`,
+            cancel_url: `${process.env.NEXT_PUBLIC_URL}/api/stripe-cancel/${order.id}`,
             metadata: {
                 orderId: order.id,
             },
@@ -269,5 +286,52 @@ export async function createStripeCheckoutSession(data: CheckoutData) {
     } catch (error) {
         console.error('Stripe checkout error:', error);
         throw new Error('Feil ved opprettelse av betaling');
+    }
+}
+
+export async function retryVippsPayment(orderId: string) {
+    if (!orderId) {
+        throw new Error('Mangler ordre-ID');
+    }
+
+    const order = await prisma.order.findUnique({
+        where: { id: orderId },
+    });
+
+    if (!order) {
+        throw new Error('Ordre ikkje funne');
+    }
+
+    if (order.status === 'paid') {
+        throw new Error('Ordren er allerede betalt');
+    }
+
+    // Dynamic import to avoid circular dependency issues if any
+    const { initiateVippsPayment } = await import('@/app/lib/vipps');
+
+    try {
+        const baseUrl = process.env.NEXT_PUBLIC_URL || 'http://localhost:3000';
+        const reference = `${order.id}_retry_${Date.now()}`;
+
+        const vippsResponse = await initiateVippsPayment({
+            orderId: order.id,
+            reference: reference, // Unique reference for retry
+            amount: order.totalAmount, // Already in øre from DB
+            mobileNumber: order.customerPhone,
+            returnUrl: `${baseUrl}/bestilling/${order.id}?vipps=success`,
+            description: `Ordre #${order.id} (Retry) fra Matland Gård`,
+        });
+
+        if (vippsResponse.redirectUrl) {
+            redirect(vippsResponse.redirectUrl);
+        } else {
+            throw new Error('Ingen redirect URL fra Vipps');
+        }
+    } catch (error) {
+        if (error instanceof Error && error.message === 'NEXT_REDIRECT') {
+            throw error;
+        }
+        console.error('Error retrying Vipps payment:', error);
+        throw new Error('Kunne ikke starte Vipps-betaling på nytt');
     }
 }

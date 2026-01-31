@@ -226,6 +226,11 @@
             "name": "Kiesmatten ECCOgravel",
             "description": "Praktische Matte zur sicheren Verlegung von Kies. Verhindert Unkraut und sorgt für gute Entwässerung. Preis pro m².",
             "longDescription": "ECCOgravel sind professionelle Kiesmatten, die Kies und Splitt stabilisieren. Dadurch wird das Gehen, Radfahren und Schieben von Kinderwagen oder Rollstühlen auf der Fläche erleichtert. Die Matten verfügen über ein integriertes Unkrautvlies, das Durchwuchs von unten verhindert."
+        },
+        "test-produkt": {
+            "name": "Test Produkt",
+            "description": "Dies ist ein temporäres Testprodukt.",
+            "longDescription": "Dies ist eine lange Beschreibung des Testprodukts."
         }
     },
     "Checkout": {

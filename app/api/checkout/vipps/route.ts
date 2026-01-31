@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { sendCustomerOrderConfirmation, sendAdminOrderNotification } from '@/lib/email';
 import { getNumberSetting } from '@/lib/settings';
+import { initiateVippsPayment } from '@/app/lib/vipps';
 
 export async function POST(request: NextRequest) {
   try {
@@ -127,38 +128,31 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // Send order confirmation emails
+
+
+    // Initiate Vipps Payment
     try {
-      const orderEmailData = {
+      const baseUrl = process.env.NEXT_PUBLIC_URL || 'http://localhost:3000';
+      const vippsResponse = await initiateVippsPayment({
         orderId: order.id,
-        customerName: order.customerName,
-        customerEmail: order.customerEmail,
-        customerPhone: order.customerPhone,
-        deliveryAddress: order.deliveryAddress,
-        totalAmount: order.totalAmount,
-        shippingMethod: order.shippingMethod,
-        status: order.status,
-        orderItems: order.orderItems,
-      };
+        amount: totalAmount,
+        mobileNumber: customerPhone,
+        returnUrl: `${baseUrl}/api/vipps-callback/${order.id}`,
+        description: `Ordre #${order.id} fra Matland Gård`,
+      });
 
-      await Promise.all([
-        sendCustomerOrderConfirmation(orderEmailData),
-        sendAdminOrderNotification(orderEmailData),
-      ]);
-    } catch (emailError) {
-      console.error('Error sending order confirmation emails:', emailError);
-      // Don't fail the order if email fails
+      return NextResponse.json({
+        orderId: order.id,
+        redirectUrl: vippsResponse.redirectUrl,
+      });
+    } catch (vippsError) {
+      console.error('Error initiating Vipps payment:', vippsError);
+      // Fallback or error handling
+      return NextResponse.json(
+        { error: 'Kunne ikke starte Vipps-betaling. Vennligst prøv igjen eller velg en annen betalingsmetode.' },
+        { status: 500 }
+      );
     }
-
-    // TODO: Implement Vipps ePayment API integration
-    // For now, return order details and phone number for manual Vipps payment
-
-    return NextResponse.json({
-      orderId: order.id,
-      totalAmount,
-      vippsNumber: '+4795458563', // Matland Gård Vipps number
-      message: 'Send betaling via Vipps og oppgi ordrenummer i meldingen'
-    });
   } catch (error) {
     console.error('Vipps checkout error:', error);
     return NextResponse.json(

@@ -21,7 +21,8 @@ function getTransporter() {
 }
 
 interface OrderEmailData {
-  orderId: string;
+  orderId?: string;
+  id?: string; // Support prisma objects directly
   customerName: string;
   customerEmail: string;
   customerPhone: string;
@@ -45,7 +46,7 @@ export async function sendCustomerOrderConfirmation(orderData: OrderEmailData) {
     return;
   }
 
-  const shortOrderId = (orderData.orderId || 'UNKNOWN').slice(0, 8).toUpperCase();
+  const shortOrderId = (orderData.orderId || orderData.id || 'UNKNOWN').slice(0, 8).toUpperCase();
 
   const itemsList = (orderData.orderItems || [])
     .map(
@@ -187,7 +188,7 @@ Telefon: +47 954 58 563
 
 // Send order notification to Matland Gård
 export async function sendAdminOrderNotification(orderData: OrderEmailData) {
-  const shortOrderId = (orderData.orderId || 'UNKNOWN').slice(0, 8).toUpperCase();
+  const shortOrderId = (orderData.orderId || orderData.id || 'UNKNOWN').slice(0, 8).toUpperCase();
 
   const itemsList = (orderData.orderItems || [])
     .map(
@@ -335,5 +336,81 @@ Behandle ordren i admin-panelet.
     console.log('Admin notification email sent successfully');
   } catch (error) {
     console.error('FAILED to send admin notification email:', error);
+  }
+}
+// Send refund notification email to customer and admin
+export async function sendRefundNotification(orderData: OrderEmailData) {
+  if (!orderData.customerEmail) {
+    console.error('Cannot send refund email: No customer email provided');
+    return;
+  }
+
+  const shortOrderId = (orderData.orderId || orderData.id || 'UNKNOWN').slice(0, 8).toUpperCase();
+  const brandPrimary = '#1D546D';
+  const brandBackground = '#F3F4F4';
+
+  const mailOptions = {
+    from: `"Matland Gård" <${process.env.EMAIL_USER || 'matlandgard@gmail.com'}>`,
+    to: `${orderData.customerEmail}, ${process.env.EMAIL_USER || 'matlandgard@gmail.com'}`,
+    subject: `Ordre refundert - ${shortOrderId}`,
+    text: `
+Hei ${orderData.customerName},
+
+Vi har no refundert di bestilling hjå Matland Gård.
+
+Ordrenummer: ${shortOrderId}
+Beløp refundert: ${orderData.totalAmount / 100} NOK
+
+Pengane vil vere på konto i løpet av nokre virkedagar, avhengig av betalingsmetode.
+
+Med venleg helsing,
+Matland Gård
+Telefon: +47 954 58 563
+    `,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #061E29; background-color: white; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+        <div style="background-color: #6C757D; color: white; padding: 25px; text-align: center;">
+          <h1 style="margin: 0; font-size: 24px;">Matland Gård</h1>
+          <p style="margin: 5px 0 0 0; opacity: 0.9;">Ordre refundert</p>
+        </div>
+        
+        <div style="padding: 25px;">
+          <p>Hei ${orderData.customerName},</p>
+          <p>Vi har no refundert di bestilling hjå Matland Gård.</p>
+          
+          <div style="background-color: ${brandBackground}; padding: 15px; margin: 20px 0; border-radius: 5px; border-left: 4px solid #6C757D;">
+            <strong style="color: #6C757D; text-transform: uppercase; font-size: 11px; display: block; margin-bottom: 5px;">Ordrenummer</strong>
+            <span style="font-size: 18px; font-weight: bold; font-family: monospace;">${shortOrderId}</span>
+          </div>
+
+          <table style="width: 100%; border-collapse: collapse; margin-top: 25px;">
+            <tr>
+              <td style="background-color: #F8F9FA; color: #6C757D; padding: 20px; border-radius: 5px; text-align: center; border: 1px solid #ddd;">
+                <div style="font-size: 14px; text-transform: uppercase; opacity: 0.9; margin-bottom: 5px;">Beløp refundert</div>
+                <div style="font-size: 28px; font-weight: bold;">${orderData.totalAmount / 100} NOK</div>
+              </td>
+            </tr>
+          </table>
+
+          <p style="margin-top: 30px; line-height: 1.5;">Pengane vil vere på konto i løpet av nokre virkedagar, avhengig av betalingsmetode.</p>
+
+          <div style="margin-top: 40px; padding-top: 25px; border-top: 1px solid #eee; text-align: center; color: #666; font-size: 14px;">
+            <p style="margin: 0;">Med venleg helsing,<br/>
+            <strong style="color: ${brandPrimary};">Matland Gård</strong><br/>
+            Ådlandsvegen 30, 5642 Holmefjord<br/>
+            Telefon: +47 954 58 563</p>
+          </div>
+        </div>
+      </div>
+    `,
+  };
+
+  try {
+    const transporter = getTransporter();
+    console.log(`Attempting to send refund notification email to ${orderData.customerEmail} and admin...`);
+    const info = await transporter.sendMail(mailOptions);
+    console.log(`Refund notification email sent successfully: ${info.messageId}`);
+  } catch (error) {
+    console.error(`FAILED to send refund notification email:`, error);
   }
 }

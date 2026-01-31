@@ -42,6 +42,7 @@ export default async function AdminOrderPage({ params }: { params: Promise<{ id:
     processing: 'Under behandling',
     delivered: 'Levert',
     cancelled: 'Kansellert',
+    refunded: 'Refundert',
   };
   const statusText = statusTexts[order.status] || order.status;
 
@@ -51,6 +52,7 @@ export default async function AdminOrderPage({ params }: { params: Promise<{ id:
     processing: 'bg-blue-100 text-blue-800',
     delivered: 'bg-purple-100 text-purple-800',
     cancelled: 'bg-red-100 text-red-800',
+    refunded: 'bg-gray-100 text-gray-800',
   };
   const statusColor = statusColors[order.status] || 'bg-gray-100 text-gray-800';
 

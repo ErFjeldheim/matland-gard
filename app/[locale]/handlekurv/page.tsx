@@ -1,17 +1,31 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useCart } from '../../context/CartContext';
 import Navigation from '../../components/Navigation';
 import CheckoutModal from '../../components/CheckoutModal';
+import { useSearchParams } from 'next/navigation';
 
 export default function HandlekurvPage() {
   const { items, removeItem, updateQuantity, totalPrice, clearCart } = useCart();
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const t = useTranslations('Cart');
+  const searchParams = useSearchParams();
+  const [showError, setShowError] = useState(false);
+
+  useEffect(() => {
+    if (searchParams.get('payment_cancelled') === 'true' || searchParams.get('error') === 'payment_verification_failed') {
+      setShowError(true);
+      // Clean up URL without reload
+      const url = new URL(window.location.href);
+      url.searchParams.delete('payment_cancelled');
+      url.searchParams.delete('error');
+      window.history.replaceState({}, '', url);
+    }
+  }, [searchParams]);
 
   if (items.length === 0) {
     return (
@@ -44,6 +58,28 @@ export default function HandlekurvPage() {
       <Navigation />
       <div className="min-h-screen bg-gray-50">
         <div className="container mx-auto px-4 py-12">
+          {showError && (
+            <div className="mb-8 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded shadow-md flex items-center justify-between" role="alert">
+              <div className="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                <div>
+                  <strong className="font-bold">Betalingen gikk ikke gjennom, prøv igjen</strong>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowError(false)}
+                className="text-red-700 hover:text-red-900 font-bold ml-4 cursor-pointer"
+                aria-label="Lukk"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          )}
+
           <div className="flex justify-between items-center mb-8">
             <h1 className="text-4xl font-bold text-gray-900">{t('title')}</h1>
             <button
