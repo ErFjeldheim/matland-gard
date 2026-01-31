@@ -173,6 +173,14 @@ async function main() {
       type: "number",
       createdAt: "2026-01-26T22:22:02.913Z",
       updatedAt: "2026-01-26T22:22:02.913Z"
+    },
+    {
+      id: "10557476-7280-4560-8022-386801931320",
+      key: "hero_image_url",
+      value: "/images/hero/matland-gard-med-utsikt.jpg",
+      type: "string",
+      createdAt: "2026-01-31T18:00:00.000Z",
+      updatedAt: "2026-01-31T18:00:00.000Z"
     }
   ];
 
