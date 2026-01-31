@@ -21,14 +21,22 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: |
+          set -e
           cd /var/www/matland-gard
           
           # Fix potential permission issues in .git directory
           sudo chown -R $(whoami):$(whoami) .git 2>/dev/null || true
           
+          # Debug info
+          echo "Current commit before update:"
+          git log -1 --oneline
+          
           # Ensure we're on main branch and force update to latest commit
           git fetch --all
           git reset --hard origin/main
+          
+          echo "Current commit after update:"
+          git log -1 --oneline
           
           # Stop and remove containers
           docker compose down

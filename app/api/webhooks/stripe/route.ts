@@ -4,7 +4,8 @@ import { prisma } from '@/lib/prisma';
 import { sendCustomerOrderConfirmation, sendAdminOrderNotification } from '@/lib/email';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    apiVersion: '2026-01-28.clover',
+    // FORCE_UPDATE_DEBUG_1
+    apiVersion: '2026-01-28.clover' as any,
 });
 
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
