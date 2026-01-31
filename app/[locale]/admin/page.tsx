@@ -3,17 +3,17 @@ import Navigation from '../../components/Navigation';
 import Footer from '../../components/Footer';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { cookies } from 'next/headers';
 import LogoutButton from './LogoutButton';
+import { createClient } from '@/utils/supabase/server';
 
 export const dynamic = 'force-dynamic';
 
 export default async function AdminDashboard() {
-  // Check authentication
-  const cookieStore = await cookies();
-  const isAuthenticated = cookieStore.get('admin-auth')?.value === 'authenticated';
+  // Check authentication via Supabase
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
 
-  if (!isAuthenticated) {
+  if (!user) {
     redirect('/admin/login');
   }
   // Fetch all orders with related data

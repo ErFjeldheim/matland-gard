@@ -4,11 +4,15 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Navigation from '../../../components/Navigation';
 
+import { createClient } from '@/utils/supabase/client';
+
 export default function AdminLogin() {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const supabase = createClient();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,18 +20,16 @@ export default function AdminLogin() {
     setLoading(true);
 
     try {
-      const response = await fetch('/api/admin/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password }),
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        router.push('/admin');
+      if (error) {
+        setError(error.message);
       } else {
-        setError(data.error || 'Feil passord');
+        router.push('/admin');
+        router.refresh();
       }
     } catch (err) {
       setError('Noe gikk galt. Prøv igjen.');
@@ -51,6 +53,23 @@ export default function AdminLogin() {
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
+                <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
+                  E-post
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full bg-white text-gray-900 border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
+                  placeholder="admin@matlandgard.no"
+                  required
+                  disabled={loading}
+                  autoFocus
+                />
+              </div>
+
+              <div>
                 <label htmlFor="password" className="block text-gray-700 font-medium mb-2">
                   Passord
                 </label>
@@ -60,10 +79,9 @@ export default function AdminLogin() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full bg-white text-gray-900 border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
-                  placeholder="Skriv inn admin-passord"
+                  placeholder="Passord"
                   required
                   disabled={loading}
-                  autoFocus
                 />
               </div>
 

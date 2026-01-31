@@ -1,0 +1,11 @@
+total 40
+drwxr-xr-x 2 deployer deployer 4096 Jan 31 20:16 20260105175808_init
+drwxr-xr-x 2 deployer deployer 4096 Jan 31 20:16 20260106000844_add_orders
+drwxr-xr-x 2 deployer deployer 4096 Jan 31 20:16 20260109223207
+drwxr-xr-x 2 deployer deployer 4096 Jan 31 20:16 20260111132716_add_shipping_method
+drwxr-xr-x 2 deployer deployer 4096 Jan 31 20:16 20260111215030_add_stock_to_products
+drwxr-xr-x 2 deployer deployer 4096 Jan 31 20:16 20260111220142_add_stock_unit_to_products
+drwxr-xr-x 2 deployer deployer 4096 Jan 31 20:16 20260111220837_add_is_active_to_products
+drwxr-xr-x 2 deployer deployer 4096 Jan 31 20:16 20260113235500_add_settings_table
+drwxr-xr-x 2 deployer deployer 4096 Jan 31 20:16 20260114000800_add_slug_to_product
+-rw-rw-r-- 1 deployer deployer  128 Jan 31 20:16 migration_lock.toml

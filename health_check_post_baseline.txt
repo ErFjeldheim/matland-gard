@@ -1,0 +1,17 @@
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+HTTP/1.1 200 OK
+Date: Sat, 31 Jan 2026 19:26:58 GMT
+Server: Apache/2.4.65 (Debian)
+link: <http://new.matlandgard.no/>; rel="alternate"; hreflang="nb", <http://new.matlandgard.no/en>; rel="alternate"; hreflang="en", <http://new.matlandgard.no/de>; rel="alternate"; hreflang="de", <http://new.matlandgard.no/fr>; rel="alternate"; hreflang="fr", <http://new.matlandgard.no/es>; rel="alternate"; hreflang="es", <http://new.matlandgard.no/>; rel="alternate"; hreflang="x-default"
+link: </_next/static/media/797e433ab948586e-s.p.dbea232f.woff2>; rel=preload; as="font"; crossorigin=""; type="font/woff2", </_next/static/media/caa3a2e1cccd8315-s.p.853070df.woff2>; rel=preload; as="font"; crossorigin=""; type="font/woff2", </_next/static/chunks/db407af8961c2979.css>; rel=preload; as="style"
+x-middleware-rewrite: /nb
+Vary: rsc,next-router-state-tree,next-router-prefetch,next-router-segment-prefetch,Accept-Encoding
+X-Powered-By: Next.js
+Cache-Control: no-cache, no-store, must-revalidate
+Content-Type: text/html; charset=utf-8
+set-cookie: NEXT_LOCALE=nb; Path=/; SameSite=lax
+Pragma: no-cache
+Expires: 0
+
