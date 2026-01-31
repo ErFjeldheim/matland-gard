@@ -24,13 +24,11 @@ jobs:
           set -e
           cd /var/www/matland-gard
           
-          # Fix dubious ownership issue for git
+          # Fix dubious ownership issue for git (essential for update to work)
           git config --global --add safe.directory /var/www/matland-gard
           
-          # Ensure all files are owned by deployer as requested
-          sudo chown -R deployer:deployer .
-          
           # Fix potential permission issues in .git directory specifically for current user
+          # We use || true here because this might fail if sudo requires a password
           sudo chown -R $(whoami):$(whoami) .git 2>/dev/null || true
           
           # Debug info
