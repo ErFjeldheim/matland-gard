@@ -65,11 +65,12 @@ cp .env.example .env
 npm install
 ```
 
-### 3. Database Initialization
+### 3. Database-oppsett
+Sørg for at du har lagt inn `DATABASE_URL` i `.env`. Kjør deretter:
 ```bash
-npx prisma migrate dev
 npx prisma generate
 ```
+*(Valgfritt: Bruk `npx prisma migrate dev` dersom du har gjort endringer i `schema.prisma`)*
 
 ### 4. Development
 ```bash
