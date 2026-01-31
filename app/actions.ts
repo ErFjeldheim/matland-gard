@@ -8,7 +8,7 @@ import Stripe from 'stripe';
 import { getNumberSetting } from '@/lib/settings';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    // FORCE_UPDATE_DEBUG_1
+    // FORCE_UPDATE_DEBUG_1 
     apiVersion: '2026-01-28.clover' as any,
 });
 
