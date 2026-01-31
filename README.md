@@ -7,7 +7,7 @@ A modern Next.js 16 e-commerce solution for selling aggregates (stone, gravel, s
 ## 🚀 Tech Stack
 
 - **Framework**: [Next.js 16.1.1](https://nextjs.org/) (React 19)
-- **Database**: [PostgreSQL 15](https://www.postgresql.org/)
+- **BaaS**: [Supabase](https://supabase.com/) (Auth, Database, Storage)
 - **ORM**: [Prisma 6.19.1](https://www.prisma.io/)
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
 - **Payments**: [Stripe](https://stripe.com/)
@@ -65,9 +65,8 @@ cp .env.example .env
 npm install
 ```
 
-### 3. Database Initialization (dev)
+### 3. Database Initialization
 ```bash
-docker compose -f docker-compose.dev.yml up -d
 npx prisma migrate dev
 npx prisma generate
 ```
