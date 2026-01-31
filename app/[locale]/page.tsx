@@ -20,7 +20,7 @@ export default async function HomePage() {
   // Use translations for Hero with fallback to DB values
   const heroTitle = t('hero.title', { defaultValue: getSetting('hero_title', 'Velkomen til Matland Gård') });
   const heroText = t('hero.text', { defaultValue: getSetting('hero_text', 'Vi tilbyr steinprodukt av høgaste kvalitet, bobilparkering ved fjorden, og eit unikt lokale til dine selskap.') });
-  const heroImage = getSetting('hero_image_url', '/images/hero/gard-oversikt.jpg');
+  const heroImage = getSetting('hero_image_url', '/images/hero/matland-gard-med-utsikt.jpg');
   const contactPhone = getSetting('contact_phone', '+47 954 58 563');
   const contactEmail = getSetting('contact_email', 'matlandgard@gmail.com');
   const contactAddress = getSetting('contact_address', 'Ådlandsvegen 30, 5642 Holmefjord');
@@ -115,7 +115,7 @@ export default async function HomePage() {
             </div>
           </Link>
 
-          {/* Selskapslokale */}
+          {/* Sjøbuo selskapslokale */}
           <Link href="/arrangement">
             <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all transform hover:-translate-y-2 cursor-pointer h-full flex flex-col group">
               <div className="relative">

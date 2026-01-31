@@ -38,9 +38,9 @@
         },
         "venueCard": {
             "title": "Selskap & Events",
-            "desc": "Sjøbua Selskapslokale i bildet. Unikt lokale for bryllup, konfirmasjonar, firmafestar og andre spesielle anledningar.",
+            "desc": "Unikt lokale for bryllup, konfirmasjonar, firmafestar og andre spesielle anledningar.",
             "link": "Utforsk moglegheiter",
-            "overlay": "Selskapslokale"
+            "overlay": "Sjøbuo selskapslokale"
         },
         "contact": {
             "title": "Kontakt oss",
@@ -110,10 +110,10 @@
         }
     },
     "Venue": {
-        "title": "Selskapslokale",
+        "title": "Sjøbuo selskapslokale",
         "subtitle": "Skaper minnerike stunder",
-        "tagline": "Sjøbua Selskapslokale i bildet. Perfekt ramme for dine spesielle anledningar",
-        "sjobuaTitle": "Den ominnreia sjøbua ved fjorden",
+        "tagline": "Perfekt ramme for dine spesielle anledningar",
+        "sjobuaTitle": "Den ominnreia sjøbuo ved fjorden",
         "desc1": "Matland Gård med ei historie på over 400år i samme familie, tilbyr eit unikt lokale for dine selskap.",
         "desc2": "Med spektakulær utsikt over fjorden, kombinerer vi tradisjonell arv med moderne komfort og stil.",
         "events": {
@@ -129,7 +129,7 @@
         },
         "locales": {
             "title": "Våre lokale",
-            "sjobua": "Sjøbua",
+            "sjobua": "Sjøbuo",
             "sjobuaDetail1": "Ominnreia til unikt eventlokale",
             "sjobuaDetail2": "Fleksibel kapasitet for alle typar selskap"
         },
@@ -348,7 +348,7 @@
                     ]
                 },
                 "venue": {
-                    "title": "Selskapslokale / Sjøbua",
+                    "title": "Selskapslokale / Sjøbuo",
                     "items": [
                         "For leige av selskapslokale gjeld eigen leigekontrakt som vert signert ved bestilling.",
                         "Avbestilling av selskapslokale må skje seinast 30 dagar før arrangementet.",

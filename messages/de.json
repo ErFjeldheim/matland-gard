@@ -129,7 +129,7 @@
         },
         "locales": {
             "title": "Unsere Räumlichkeiten",
-            "sjobua": "Das Bootshaus (Sjøbua)",
+            "sjobua": "Das Bootshaus (Sjøbuo)",
             "sjobuaDetail1": "Zu einem einzigartigen Veranstaltungsort umgebaut",
             "sjobuaDetail2": "Flexible Kapazität für alle Arten von Feiern"
         },
@@ -343,7 +343,7 @@
                     ]
                 },
                 "venue": {
-                    "title": "Veranstaltungsort / Sjøbua",
+                    "title": "Veranstaltungsort / Sjøbuo",
                     "items": [
                         "Für die Vermietung von Veranstaltungsräumen gilt ein separater Mietvertrag, der bei der Buchung unterzeichnet wird.",
                         "Stornierungen des Veranstaltungsortes müssen spätestens 30 Tage vor der Veranstaltung erfolgen.",

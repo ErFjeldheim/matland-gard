@@ -129,7 +129,7 @@
         },
         "locales": {
             "title": "Nos locaux",
-            "sjobua": "Le Sjøbua",
+            "sjobua": "Le Sjøbuo",
             "sjobuaDetail1": "Rénové en un lieu événementiel unique",
             "sjobuaDetail2": "Capacité flexible pour tous types de fêtes"
         },
@@ -343,7 +343,7 @@
                     ]
                 },
                 "venue": {
-                    "title": "Lieu d'événement / Sjøbua",
+                    "title": "Lieu d'événement / Sjøbuo",
                     "items": [
                         "Pour la location de salles de réception, un contrat de location séparé s'applique, lequel est signé lors de la réservation.",
                         "L'annulation du lieu de l'événement doit avoir lieu au plus tard 30 jours avant l'événement.",

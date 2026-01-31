@@ -129,7 +129,7 @@
         },
         "locales": {
             "title": "Nuestras instalaciones",
-            "sjobua": "El Sjøbua",
+            "sjobua": "El Sjøbuo",
             "sjobuaDetail1": "Renovado como un lugar único para eventos",
             "sjobuaDetail2": "Capacidad flexible para todo tipo de fiestas"
         },
@@ -348,7 +348,7 @@
                     ]
                 },
                 "venue": {
-                    "title": "Lugar de eventos / Sjøbua",
+                    "title": "Lugar de eventos / Sjøbuo",
                     "items": [
                         "Para el alquiler de salas de eventos, se aplica un contrato de alquiler aparte que se firma al realizar la reserva.",
                         "La cancelación del lugar de eventos debe realizarse como máximo 30 días antes del evento.",
