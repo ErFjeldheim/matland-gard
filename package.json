@@ -13,8 +13,8 @@
     "qa:orders": "tsx scripts/qa-diagnose-orders.ts"
   },
   "dependencies": {
-    "@prisma/adapter-pg": "6.19.1",
-    "@prisma/client": "6.19.1",
+    "@prisma/adapter-pg": "^7.3.0",
+    "@prisma/client": "^7.3.0",
     "@stripe/stripe-js": "^8.6.0",
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.93.3",
@@ -43,7 +43,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.1",
-    "prisma": "6.19.1",
+    "prisma": "^7.3.0",
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
     "tsx": "^4.21.0",

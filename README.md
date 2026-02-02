@@ -8,7 +8,7 @@ A modern Next.js 16 e-commerce solution for selling aggregates (stone, gravel, s
 
 - **Framework**: [Next.js 16.1.1](https://nextjs.org/) (React 19)
 - **BaaS**: [Supabase](https://supabase.com/) (Auth, Database, Storage)
-- **ORM**: [Prisma 6.19.1](https://www.prisma.io/)
+- **ORM**: [Prisma 7.3.0](https://www.prisma.io/)
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
 - **Payments**: [Stripe](https://stripe.com/)
 - **Maps**: [Leaflet](https://leafletjs.com/)
