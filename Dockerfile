@@ -13,6 +13,9 @@ FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+# Dummy Database URL for build
+ENV DATABASE_URL="mysql://root:dummy@localhost:3306/dummy"
+
 # Add dummy env vars for build to prevent API routes from failing
 ENV STRIPE_SECRET_KEY=sk_test_dummy_build_key
 ENV NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_dummy_build_key
