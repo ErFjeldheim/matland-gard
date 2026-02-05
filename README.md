@@ -90,4 +90,3 @@ The project is designed to run on a Debian server using Docker Compose.
 ## 📜 License
 
 © 2026 Matland Gård. All rights reserved. This project is proprietary and confidential.
-
