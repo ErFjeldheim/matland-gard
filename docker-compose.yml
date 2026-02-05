@@ -5,6 +5,7 @@ services:
       args:
         NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
         NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+        NEXT_PUBLIC_URL: ${NEXT_PUBLIC_URL}
     ports:
       - "3000:3000"
     environment:
@@ -25,4 +26,3 @@ services:
       - VIPPS_BASE_URL=${VIPPS_BASE_URL}
     restart: unless-stopped
   
-
