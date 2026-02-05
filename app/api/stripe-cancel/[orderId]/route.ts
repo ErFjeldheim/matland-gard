@@ -8,8 +8,10 @@ export async function GET(
 ) {
     const { orderId } = await context.params;
 
+    const baseUrl = process.env.NEXT_PUBLIC_URL || 'https://new.matlandgard.no';
+
     if (!orderId) {
-        return NextResponse.redirect(new URL('/handlekurv', request.url));
+        return NextResponse.redirect(new URL('/handlekurv', baseUrl));
     }
 
     try {
@@ -29,5 +31,5 @@ export async function GET(
     }
 
     // Always redirect to cart with cancelled status
-    return NextResponse.redirect(new URL('/handlekurv?payment_cancelled=true', request.url));
+    return NextResponse.redirect(new URL('/handlekurv?payment_cancelled=true', baseUrl));
 }

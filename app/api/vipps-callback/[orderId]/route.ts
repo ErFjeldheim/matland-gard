@@ -10,8 +10,10 @@ export async function GET(
 ) {
     const { orderId } = await context.params;
 
+    const baseUrl = process.env.NEXT_PUBLIC_URL || 'https://new.matlandgard.no';
+
     if (!orderId) {
-        return NextResponse.redirect(new URL('/nettbutikk', request.url));
+        return NextResponse.redirect(new URL('/nettbutikk', baseUrl));
     }
 
     try {
@@ -21,7 +23,7 @@ export async function GET(
         if (paymentDetails.state === 'AUTHORIZED' || paymentDetails.state === 'CAPTURED') {
             // Redirect to order page with success param
             // The order page will verify status again (redundant but safe) and handle success logic (emails)
-            return NextResponse.redirect(new URL(`/bestilling/${orderId}?vipps=success`, request.url));
+            return NextResponse.redirect(new URL(`/bestilling/${orderId}?vipps=success`, baseUrl));
         }
 
 
@@ -37,11 +39,11 @@ export async function GET(
         }
 
         // Redirect to store with error
-        return NextResponse.redirect(new URL('/handlekurv?payment_cancelled=true', request.url));
+        return NextResponse.redirect(new URL('/handlekurv?payment_cancelled=true', baseUrl));
 
     } catch (error) {
         console.error('Error in Vipps callback:', error);
         // On error, redirect to store with generic error
-        return NextResponse.redirect(new URL('/handlekurv?error=payment_verification_failed', request.url));
+        return NextResponse.redirect(new URL('/handlekurv?error=payment_verification_failed', baseUrl));
     }
 }
