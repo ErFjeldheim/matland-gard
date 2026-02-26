@@ -88,33 +88,16 @@ async function main() {
       slug: "elvestein"
     },
     {
-      id: "550e8400-e29b-41d4-a716-446655440002",
-      name: "Sandholdig jord",
-      description: "Eit produkt som egner seg svært godt til å fylle i ujevnheter i plen.",
-      price: 125000,
-      image: "/images/products/sandholdig-jord/bilde-1.jpg",
-      createdAt: "2026-01-06T21:56:50.963Z",
-      updatedAt: "2026-01-29T01:28:00.000Z",
-      images: [
-        "/images/products/sandholdig-jord/bilde-1.jpg"
-      ],
-      longDescription: "Eit produkt som egner seg svært godt til å fylle i ujevnheter i plen.",
-      videoUrl: null,
-      stock: 1000,
-      stockUnit: "storsekk",
-      isActive: true,
-      slug: "sandholdig-jord"
-    },
-    {
       id: "550e8400-e29b-41d4-a716-446655440008",
       name: "Herregårdsgrus",
       description: "Når estetikk og funksjonalitet spiller ein rolle.",
       price: 150000,
-      image: "/images/products/Pukk og grus/bilde-4.jpg",
+      image: "/images/products/Herregårdsgrus/herregardsgrus_1.jpg",
       createdAt: "2026-01-26T22:22:02.897Z",
       updatedAt: "2026-01-26T22:22:02.897Z",
       images: [
-        "/images/products/Pukk og grus/bilde-4.jpg"
+        "/images/products/Herregårdsgrus/herregardsgrus_1.jpg",
+        "/images/products/Herregårdsgrus/herregardsgrus_2.jpg"
       ],
       longDescription: "Når estetikk og funksjonalitet spiller ein rolle.\n\nØnsker du eit fastere dekke i tun eller innkjørsel er Herregårdsgrus eit godt alternativ til singel. På grunn av at den inneholder 0-stoff setter den seg svært godt. Og du får samme fine lyse brun/beige fargen som ved bruk av Herregårdssingelen. Lyser opp uteområdet og blir estetisk mykje finere enn ved bruk av ordinær grå grus.\n\nVed større kvanta kan grusen selges i løst.\n\nHentepris Aksdal: 300kr inkl. mva pr. tonn.\nHentepris Holmefjord: 900kr inkl. mva pr. tonn.",
       videoUrl: null,
