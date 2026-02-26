@@ -45,3 +45,6 @@ coverage/
 tsconfig.tsbuildinfo
 commit.md
 commit_message.md
+
+# KiloCode
+.kilocode/
