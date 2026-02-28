@@ -27,9 +27,9 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function sitemap({
   params,
 }: {
-  params: Promise<{ locale: string }>;
+  params: { locale: string };
 }) {
-  const { locale } = await params;
+  const { locale } = params;
   
   const validLocale = locales.includes(locale) ? locale : 'nb';
   const localePrefix = validLocale === 'nb' ? '' : `/${validLocale}`;
