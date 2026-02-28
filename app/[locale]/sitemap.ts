@@ -2,6 +2,8 @@ import { Metadata } from 'next';
 import { prisma } from '@/lib/prisma';
 import { locales } from '../../i18n/request';
 
+export const dynamic = 'force-dynamic';
+
 const BASE_URL = 'https://matlandgard.no';
 
 const staticPages = [
