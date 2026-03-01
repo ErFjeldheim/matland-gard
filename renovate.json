@@ -1,0 +1,48 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "schedule": ["every weekend"],
+  "timezone": "Europe/Oslo",
+  "automerge": true,
+  "automergeType": "pr",
+  "platformAutomerge": true,
+  "requiredStatusChecks": null,
+  "packageRules": [
+    {
+      "description": "Group all React packages together",
+      "matchPackagePatterns": ["react", "react-dom", "@types/react"],
+      "groupName": "React packages"
+    },
+    {
+      "description": "Group Next.js ecosystem",
+      "matchPackagePatterns": ["next", "eslint-config-next"],
+      "groupName": "Next.js"
+    },
+    {
+      "description": "Group Prisma packages",
+      "matchPackagePatterns": ["prisma", "@prisma/client", "@prisma/adapter-pg"],
+      "groupName": "Prisma"
+    },
+    {
+      "description": "Auto-merge patch updates",
+      "matchUpdateTypes": ["patch"],
+      "automerge": true
+    },
+    {
+      "description": "Require approval for major updates",
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    },
+    {
+      "description": "Update Node.js in Dockerfile",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["node"],
+      "versioning": "node",
+      "groupName": "Node.js"
+    }
+  ],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 5am on Monday"]
+  }
+}
