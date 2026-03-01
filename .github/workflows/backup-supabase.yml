@@ -43,12 +43,9 @@ jobs:
           mkdir -p ~/.config/rclone
           cat > ~/.config/rclone/rclone.conf << EOF
           [b2]
-          type = s3
-          provider = Backblaze
-          endpoint = s3.eu-central-003.backblazeb2.com
-          access_key_id = ${{ secrets.B2_ACCESS_KEY_ID }}
-          secret_access_key = ${{ secrets.B2_SECRET_ACCESS_KEY }}
-          acl = private
+          type = b2
+          account = ${{ secrets.B2_ACCESS_KEY_ID }}
+          key = ${{ secrets.B2_SECRET_ACCESS_KEY }}
           EOF
           
       - name: Upload to Backblaze B2
