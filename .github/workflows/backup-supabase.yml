@@ -1,4 +1,4 @@
-name: Backup Supabase to Google Drive
+name: Backup Supabase to Backblaze B2
 
 on:
   schedule:
@@ -38,21 +38,27 @@ jobs:
         run: |
           curl -fsSL https://rclone.org/install.sh | sudo bash
           
-      - name: Configure rclone
+      - name: Configure rclone for Backblaze B2
         run: |
           mkdir -p ~/.config/rclone
-          cat > ~/.config/rclone/rclone.conf << 'RCLONEEOF'
-          [gdrive]
-          type = drive
-          scope = drive
-          service_account_file = /tmp/sa.json
-          RCLONEEOF
-          echo '${{ secrets.GOOGLE_DRIVE_SERVICE_ACCOUNT }}' | base64 -d > /tmp/sa.json
+          cat > ~/.config/rclone/rclone.conf << EOF
+          [b2]
+          type = s3
+          provider = Backblaze
+          endpoint = s3.eu-central-003.backblazeb2.com
+          access_key_id = ${{ secrets.B2_ACCESS_KEY_ID }}
+          secret_access_key = ${{ secrets.B2_SECRET_ACCESS_KEY }}
+          acl = private
+          EOF
           
-      - name: Upload to Google Drive
+      - name: Upload to Backblaze B2
         run: |
           FILENAME=$(ls backup-*.tar.gz)
-          rclone copy "$FILENAME" gdrive:${{ secrets.GOOGLE_DRIVE_FOLDER_ID }} -v
+          rclone copy "$FILENAME" b2:${{ secrets.B2_BUCKET_NAME }} -v
+          
+      - name: Cleanup old backups (keep last 30 days)
+        run: |
+          rclone delete b2:${{ secrets.B2_BUCKET_NAME }} --min-age 30d
           
       - name: Backup completed
         run: echo "Backup completed successfully at $(date)"
