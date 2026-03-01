@@ -35,9 +35,19 @@ jobs:
           rm -f roles.sql schema.sql data.sql
       
       - name: Setup rclone
-        uses: AnimMouse/setup-rclone@v1
-        with:
-          rclone_config: ${{ secrets.RCLONE_CONFIG }}
+        run: |
+          curl -fsSL https://rclone.org/install.sh | sudo bash
+          
+      - name: Configure rclone
+        run: |
+          mkdir -p ~/.config/rclone
+          cat > ~/.config/rclone/rclone.conf << 'RCLONEEOF'
+          [gdrive]
+          type = drive
+          scope = drive
+          service_account_file = /tmp/sa.json
+          RCLONEEOF
+          echo '${{ secrets.GOOGLE_DRIVE_SERVICE_ACCOUNT }}' | base64 -d > /tmp/sa.json
           
       - name: Upload to Google Drive
         run: |
