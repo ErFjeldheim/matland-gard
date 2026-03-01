@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import { MetadataRoute } from 'next';
 import { prisma } from '@/lib/prisma';
 import { locales } from '../../i18n/request';
 
@@ -19,18 +19,11 @@ export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: 'Sitemap',
-    robots: 'noindex, follow',
-  };
-}
-
 export default async function sitemap({
   params,
 }: {
   params: { locale: string };
-}) {
+}): Promise<MetadataRoute.Sitemap> {
   const { locale } = params;
   
   const validLocale = locales.includes(locale) ? locale : 'nb';
@@ -41,7 +34,7 @@ export default async function sitemap({
     select: { slug: true, updatedAt: true },
   });
 
-  const urls = [
+  return [
     {
       url: `${BASE_URL}${localePrefix}`,
       lastModified: new Date(),
@@ -61,20 +54,4 @@ export default async function sitemap({
       priority: 0.7,
     })),
   ];
-
-  const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map((url) => `  <url>
-    <loc>${url.url}</loc>
-    <lastmod>${url.lastModified.toISOString()}</lastmod>
-    <changefreq>${url.changeFrequency}</changefreq>
-    <priority>${url.priority}</priority>
-  </url>`).join('\n')}
-</urlset>`;
-
-  return new Response(sitemapXml, {
-    headers: {
-      'Content-Type': 'application/xml',
-    },
-  });
 }

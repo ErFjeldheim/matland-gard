@@ -1,25 +1,26 @@
+import { MetadataRoute } from 'next';
 import { prisma } from '@/lib/prisma';
 
 export const dynamic = 'force-dynamic';
 
 const BASE_URL = 'https://matlandgard.no';
 
-const staticPages = [
-  'arrangement',
-  'camping',
-  'kontakt',
-  'personvern',
-  'vilkar',
-  'handlekurv',
-];
-
-export default async function sitemap() {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const products = await prisma.product.findMany({
     where: { isActive: true, slug: { not: null } },
     select: { slug: true, updatedAt: true },
   });
 
-  const urls = [
+  const staticPages = [
+    'arrangement',
+    'camping',
+    'kontakt',
+    'personvern',
+    'vilkar',
+    'handlekurv',
+  ];
+
+  return [
     {
       url: BASE_URL,
       lastModified: new Date(),
@@ -39,20 +40,4 @@ export default async function sitemap() {
       priority: 0.7,
     })),
   ];
-
-  const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map((url) => `  <url>
-    <loc>${url.url}</loc>
-    <lastmod>${url.lastModified.toISOString()}</lastmod>
-    <changefreq>${url.changeFrequency}</changefreq>
-    <priority>${url.priority}</priority>
-  </url>`).join('\n')}
-</urlset>`;
-
-  return new Response(sitemapXml, {
-    headers: {
-      'Content-Type': 'application/xml',
-    },
-  });
 }
