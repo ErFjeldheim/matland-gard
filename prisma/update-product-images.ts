@@ -2,7 +2,7 @@ import { prisma } from '../lib/prisma';
 
 async function updateProductImages() {
   try {
-    console.log('🔄 Oppdaterer produktbilder...');
+    console.log('Oppdaterer produktbilder...');
 
     // Oppdater Herregårdssingel
     const herregard = await prisma.product.updateMany({
@@ -17,7 +17,7 @@ async function updateProductImages() {
       }
     });
 
-    console.log(`✅ Oppdatert ${herregard.count} Herregårdssingel produkt(er)`);
+    console.log(`Oppdatert ${herregard.count} Herregårdssingel produkt(er)`);
 
     // Oppdater Kirkegårdssingel
     const kirkegard = await prisma.product.updateMany({
@@ -32,7 +32,7 @@ async function updateProductImages() {
       }
     });
 
-    console.log(`✅ Oppdatert ${kirkegard.count} Kirkegårdssingel produkt(er)`);
+    console.log(`Oppdatert ${kirkegard.count} Kirkegårdssingel produkt(er)`);
 
     // Vis oppdaterte produkter
     const products = await prisma.product.findMany({
@@ -48,13 +48,13 @@ async function updateProductImages() {
       }
     });
 
-    console.log('\n📋 Produkter etter oppdatering:');
+    console.log('\nProdukter etter oppdatering:');
     products.forEach(p => {
       console.log(`  - ${p.name}: ${p.image}`);
     });
 
   } catch (error) {
-    console.error('❌ Feil under oppdatering:', error);
+    console.error('Feil under oppdatering:', error);
     process.exit(1);
   } finally {
     await prisma.$disconnect();

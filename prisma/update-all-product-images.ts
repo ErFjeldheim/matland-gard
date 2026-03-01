@@ -4,7 +4,7 @@ import path from 'path';
 
 async function updateAllProductImages() {
   try {
-    console.log('🔄 Oppdaterer alle produktbilder...\n');
+    console.log('Oppdaterer alle produktbilder...\n');
 
     const productsDir = path.join(process.cwd(), 'public/images/products');
     
@@ -22,7 +22,7 @@ async function updateAllProductImages() {
       const folderPath = path.join(productsDir, mapping.folder);
       
       if (!fs.existsSync(folderPath)) {
-        console.log(`⚠️  Mappe ikke funnet: ${mapping.folder}`);
+        console.log(`Mappe ikke funnet: ${mapping.folder}`);
         continue;
       }
 
@@ -37,7 +37,7 @@ async function updateAllProductImages() {
         });
 
       if (files.length === 0) {
-        console.log(`⚠️  Ingen bilder funnet i: ${mapping.folder}`);
+        console.log(`Ingen bilder funnet i: ${mapping.folder}`);
         continue;
       }
 
@@ -62,16 +62,16 @@ async function updateAllProductImages() {
       });
 
       if (result.count > 0) {
-        console.log(`✅ ${mapping.name}:`);
+        console.log(`${mapping.name}:`);
         console.log(`   Forsidebilde: ${coverImage}`);
         console.log(`   Totalt ${allImages.length} bilder`);
       } else {
-        console.log(`⚠️  Produkt ikke funnet i database: ${mapping.name}`);
+        console.log(`Produkt ikke funnet i database: ${mapping.name}`);
       }
     }
 
     // Vis oppdaterte produkter
-    console.log('\n📋 Alle produkter etter oppdatering:');
+    console.log('\nAlle produkter etter oppdatering:');
     const products = await prisma.product.findMany({
       select: {
         name: true,
@@ -88,7 +88,7 @@ async function updateAllProductImages() {
     });
 
   } catch (error) {
-    console.error('❌ Feil under oppdatering:', error);
+    console.error('Feil under oppdatering:', error);
     process.exit(1);
   } finally {
     await prisma.$disconnect();

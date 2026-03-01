@@ -11,7 +11,7 @@ const colors = {
 };
 
 async function diagnoseOrders() {
-    console.log('🕵️ Diagnosing Recent Orders...\n');
+    console.log('Diagnosing Recent Orders...\n');
 
     // Fetch last 15 orders
     const orders = await prisma.order.findMany({
@@ -36,13 +36,13 @@ async function diagnoseOrders() {
         const amount = (order.totalAmount / 100).toFixed(0);
         const itemsCount = order.orderItems.length;
 
-        let statusIcon = '❓';
+        let statusIcon = '?';
         let statusColor = colors.reset;
 
-        if (order.status === 'pending') { statusIcon = '⏳'; statusColor = colors.yellow; }
-        else if (order.status === 'paid') { statusIcon = '💰'; statusColor = colors.green; }
-        else if (order.status === 'delivered') { statusIcon = '🚚'; statusColor = colors.green; }
-        else if (order.status === 'cancelled') { statusIcon = '❌'; statusColor = colors.red; }
+        if (order.status === 'pending') { statusIcon = '~'; statusColor = colors.yellow; }
+        else if (order.status === 'paid') { statusIcon = '$'; statusColor = colors.green; }
+        else if (order.status === 'delivered') { statusIcon = '>'; statusColor = colors.green; }
+        else if (order.status === 'cancelled') { statusIcon = 'X'; statusColor = colors.red; }
 
         console.log(`${statusIcon} ${statusColor}[${order.status.toUpperCase()}]${colors.reset} Order ${colors.bold}${order.id.slice(0, 8)}...${colors.reset} (${date}) - ${amount} kr`);
 
@@ -66,13 +66,13 @@ async function diagnoseOrders() {
         }
 
         if (issues.length > 0) {
-            issues.forEach(i => console.log(`   ${colors.red}⚠️ Issue: ${i}${colors.reset}`));
+            issues.forEach(i => console.log(`   ${colors.red}[!] Issue: ${i}${colors.reset}`));
         } else {
             // console.log(`   ${colors.green}✓ OK${colors.reset}`);
         }
     }
 
-    console.log('\n📊 Summary:');
+    console.log('\nSummary:');
     const pending = orders.filter(o => o.status === 'pending').length;
     const success = orders.filter(o => ['paid', 'processing', 'delivered'].includes(o.status)).length;
 

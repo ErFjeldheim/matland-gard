@@ -2,6 +2,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Pencil } from 'lucide-react';
 
 interface StockUpdaterProps {
   productId: string;
@@ -105,7 +106,7 @@ export default function StockUpdater({ productId, currentStock, stockUnit }: Sto
       title="Klikk for å endre lagerbeholdning"
     >
       <span>{stock} {getUnitText(stock, stockUnit || 'storsekk')}</span>
-      <span className="text-gray-400">✎</span>
+      <Pencil className="h-4 w-4 text-gray-400" />
     </button>
   );
 }

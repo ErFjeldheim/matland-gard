@@ -78,7 +78,7 @@ export default function CampingPage() {
             </p>
 
             <div className="bg-[var(--color-accent)]/20 border-l-4 border-[var(--color-primary)] p-6 mb-6">
-              <h4 className="font-bold text-[var(--color-dark)] mb-2">🏖️ {t('facilities.title')}</h4>
+              <h4 className="font-bold text-[var(--color-dark)] mb-2">{t('facilities.title')}</h4>
               <ul className="text-gray-900 space-y-2">
                 {t.raw('facilities.items').map((item: string) => (
                   <li key={item}>• {item}</li>
@@ -87,7 +87,7 @@ export default function CampingPage() {
             </div>
 
             <div className="bg-gray-100 rounded-lg p-6 mb-6 border border-gray-200">
-              <h4 className="font-bold text-[var(--color-dark)] mb-3">📋 {t('rules.title')}</h4>
+              <h4 className="font-bold text-[var(--color-dark)] mb-3">{t('rules.title')}</h4>
               <ul className="text-gray-900 space-y-2 text-sm">
                 <li>• <b>{t('rules.checkInOut')}:</b> {t('rules.checkInOutDesc')}</li>
                 <li>• <b>{t('rules.quietTime')}:</b> {t('rules.quietTimeDesc')}</li>
@@ -115,15 +115,15 @@ export default function CampingPage() {
               <div className="border-t pt-6">
                 <h5 className="font-semibold text-gray-900 mb-3">{t('booking.contactDirect')}</h5>
                 <div className="space-y-2 text-gray-800">
-                  <p>📞 <a href="tel:+4795458563" className="text-[var(--color-primary)] hover:underline">+47 954 58 563</a></p>
-                  <p>✉️ <a href="mailto:matlandgard@gmail.com" className="text-[var(--color-primary)] hover:underline">matlandgard@gmail.com</a></p>
-                  <p>📍 Ådlandsvegen 30, 5642 Holmefjord</p>
+                  <p><a href="tel:+4795458563" className="text-[var(--color-primary)] hover:underline">+47 954 58 563</a></p>
+                  <p><a href="mailto:matlandgard@gmail.com" className="text-[var(--color-primary)] hover:underline">matlandgard@gmail.com</a></p>
+                  <p>Ådlandsvegen 30, 5642 Holmefjord</p>
                 </div>
               </div>
             </div>
 
             <div className="mt-8 bg-[var(--color-accent)]/20 border border-[var(--color-primary)] rounded-lg p-6">
-              <h5 className="font-bold text-[var(--color-dark)] mb-2">🌲 {t('activities.title')}</h5>
+              <h5 className="font-bold text-[var(--color-dark)] mb-2">{t('activities.title')}</h5>
               <ul className="text-gray-900 space-y-1">
                 {t.raw('activities.items').map((item: string) => (
                   <li key={item}>• {item}</li>

@@ -20,9 +20,9 @@ async function updateStockUnits() {
       data: { stockUnit: 'stk.' },
     });
 
-    console.log('✅ Updated stock units for all products');
+    console.log('Updated stock units for all products');
   } catch (error) {
-    console.error('❌ Error updating stock units:', error);
+    console.error('Error updating stock units:', error);
   } finally {
     await prisma.$disconnect();
   }

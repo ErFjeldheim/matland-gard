@@ -4,7 +4,7 @@
 
 A modern Next.js 16 e-commerce solution for selling aggregates (stone, gravel, sand) and other farm products, featuring full order management and automated payment processing.
 
-## 🚀 Tech Stack
+## Tech Stack
 
 - **Framework**: [Next.js 16.1.1](https://nextjs.org/) (React 19)
 - **BaaS**: [Supabase](https://supabase.com/) (Auth, Database, Storage)
@@ -17,7 +17,7 @@ A modern Next.js 16 e-commerce solution for selling aggregates (stone, gravel, s
 
 ---
 
-## ✨ Features
+## Features
 
 - **Product Management**: Full catalog with image galleries and slug-based routing.
 - **Shopping Cart & Checkout**: Seamless Stripe integration for secure payments.
@@ -29,7 +29,7 @@ A modern Next.js 16 e-commerce solution for selling aggregates (stone, gravel, s
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 .
@@ -52,7 +52,7 @@ Detailed guides for specific systems:
 
 ---
 
-## 🛠️ Getting Started
+## Getting Started
 
 ### 1. Environment Setup
 Copy the example environment file and fill in required keys:
@@ -79,7 +79,7 @@ npm run dev
 
 ---
 
-## 🚢 Deployment
+## Deployment
 
 The project is designed to run on a Debian server using Docker Compose.
 - **Production Server**: `ssh debian-server`
@@ -87,6 +87,6 @@ The project is designed to run on a Debian server using Docker Compose.
 
 ---
 
-## 📜 License
+## License
 
 © 2026 Matland Gård. All rights reserved. This project is proprietary and confidential.

@@ -251,7 +251,7 @@ Behandle ordren i admin-panelet.
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #061E29; background-color: white; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
         <div style="background-color: #061E29; color: white; padding: 20px; text-align: center;">
-          <h2 style="margin: 0;">🔔 NY ORDRE MOTTEKEN</h2>
+          <h2 style="margin: 0;">NY ORDRE MOTTEKEN</h2>
         </div>
         
         <div style="padding: 25px;">
@@ -321,7 +321,7 @@ Behandle ordren i admin-panelet.
           </div>
 
           <div style="background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; border-radius: 0 5px 5px 0;">
-            <p style="margin: 0; font-weight: bold; color: #856404;">⚠️ Handling påkrevd:</p>
+            <p style="margin: 0; font-weight: bold; color: #856404;">Handling påkrevd:</p>
             <p style="margin: 5px 0 0 0; color: #856404;">Logg inn i admin-panelet for å behandle ordren.</p>
           </div>
         </div>

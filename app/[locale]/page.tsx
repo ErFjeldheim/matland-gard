@@ -154,13 +154,13 @@ export default async function HomePage() {
           </p>
           <div className="flex flex-col md:flex-row justify-center items-center gap-6">
             <a href={`tel:${contactPhone.replace(/\s/g, '')}`} className="text-[var(--color-primary)] font-semibold hover:text-[var(--color-accent)]">
-              📞 {contactPhone}
+              {contactPhone}
             </a>
             <a href={`mailto:${contactEmail}`} className="text-[var(--color-primary)] font-semibold hover:text-[var(--color-accent)]">
-              ✉️ {contactEmail}
+              {contactEmail}
             </a>
             <p className="text-gray-600">
-              📍 {contactAddress}
+              {contactAddress}
             </p>
           </div>
         </div>

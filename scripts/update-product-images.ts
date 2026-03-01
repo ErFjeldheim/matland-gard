@@ -31,15 +31,15 @@ async function updateProductImages() {
         data: { image: update.image },
       });
       if (result.count > 0) {
-        console.log(`✅ Oppdatert ${update.name} (${result.count} stk) med bilde: ${update.image}`);
+        console.log(`Oppdatert ${update.name} (${result.count} stk) med bilde: ${update.image}`);
       } else {
-        console.log(`ℹ️ Fant ingen produkter med navn "${update.name}"`);
+        console.log(`Fant ingen produkter med navn "${update.name}"`);
       }
     }
 
-    console.log('\n✅ Alle produktbilder oppdatert!');
+    console.log('\nAlle produktbilder oppdatert!');
   } catch (error) {
-    console.error('❌ Feil ved oppdatering:', error);
+    console.error('Feil ved oppdatering:', error);
   } finally {
     await prisma.$disconnect();
     await pool.end();

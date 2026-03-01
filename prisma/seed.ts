@@ -11,11 +11,11 @@ const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  console.log('🌱 Starter seeding...');
+  console.log('Starter seeding...');
 
   // Slett eksisterende produkter (valgfritt - uncomment hvis du vil tømme tabellen først)
   // await prisma.product.deleteMany();
-  // console.log('🗑️  Slettet eksisterende produkter');
+  // console.log('Slettet eksisterende produkter');
 
   // Merk: Vi bruker upsert her for å unngå duplikater hvis man kjører seed flere ganger uten å slette
 
@@ -136,7 +136,7 @@ async function main() {
       update: product,
       create: product,
     });
-    console.log(`✅ Upserted product: ${product.name}`);
+    console.log(`Upserted product: ${product.name}`);
   }
 
   // Legg til settings
@@ -173,15 +173,15 @@ async function main() {
       update: setting,
       create: setting,
     });
-    console.log(`✅ Upserted setting: ${setting.key}`);
+    console.log(`Upserted setting: ${setting.key}`);
   }
 
-  console.log('🎉 Seeding fullført!');
+  console.log('Seeding fullført!');
 }
 
 main()
   .catch((e) => {
-    console.error('❌ Feil under seeding:', e);
+    console.error('Feil under seeding:', e);
     process.exit(1);
   })
   .finally(async () => {

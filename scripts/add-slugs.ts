@@ -10,7 +10,7 @@ const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-    console.log('🔧 Adding slugs to existing products...');
+    console.log('Adding slugs to existing products...');
 
     // Define slug mappings for existing products
     const slugMappings = [
@@ -28,16 +28,16 @@ async function main() {
             data: { slug: mapping.slug },
         });
         if (updated.count > 0) {
-            console.log(`✅ Updated ${mapping.name} with slug: ${mapping.slug}`);
+            console.log(`Updated ${mapping.name} with slug: ${mapping.slug}`);
         }
     }
 
-    console.log('🎉 All products updated with slugs!');
+    console.log('All products updated with slugs!');
 }
 
 main()
     .catch((e) => {
-        console.error('❌ Error:', e);
+        console.error('Error:', e);
         process.exit(1);
     })
     .finally(async () => {

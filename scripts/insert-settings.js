@@ -21,9 +21,9 @@ async function main() {
         const existing = await prisma.setting.findUnique({ where: { key: setting.key } });
         if (!existing) {
             await prisma.setting.create({ data: setting });
-            console.log(`✅ Created: ${setting.key}`);
+            console.log(`Created: ${setting.key}`);
         } else {
-            console.log(`ℹ️  Exists: ${setting.key}`);
+            console.log(`Exists: ${setting.key}`);
         }
     }
 }

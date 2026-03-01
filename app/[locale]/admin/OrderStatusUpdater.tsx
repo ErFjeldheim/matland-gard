@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Check } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { updateOrderStatus } from '@/app/actions';
 
@@ -74,7 +75,7 @@ export default function OrderStatusUpdater({ orderId, currentStatus }: OrderStat
               } disabled:opacity-50 disabled:cursor-not-allowed`}
           >
             {s.label}
-            {status === s.value && ' ✓'}
+            {status === s.value && <Check className="h-4 w-4 inline-block ml-1" />}
           </button>
         ))}
       </div>

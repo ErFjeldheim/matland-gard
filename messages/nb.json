@@ -197,7 +197,7 @@
         "videoTitle": "Produktvideo",
         "selectSize": "Vel storleik",
         "addToCart": "Legg til i handlekorg",
-        "addedToCart": "✓ Lagt til!",
+        "addedToCart": "Lagt til!",
         "quickCheckout": "Hurtigbetaling",
         "sizeWarning": "Ver vennleg og vel ein storleik før du held fram."
     },
@@ -255,7 +255,7 @@
         "getQuote": "Få tilbod",
         "pickup": "Hent sjølv i Holmefjord",
         "free": "Gratis",
-        "bulkTip": "💡 Tips: Sidan du har 3 eller fleire einingar, kan det løna seg å be om eitt samla tilbod på frakt (vel \"Andre område\" ovanfor).",
+        "bulkTip": "Tips: Sidan du har 3 eller fleire einingar, kan det løna seg å be om eitt samla tilbod på frakt (vel \"Andre område\" ovanfor).",
         "subtotal": "Delsum varer:",
         "shippingFee": "Frakt:",
         "total": "Totalt:",

@@ -74,7 +74,7 @@ export default function ArrangementPage() {
             </p>
 
             <div className="bg-[var(--color-accent)]/20 border-l-4 border-[var(--color-primary)] p-6 mb-6">
-              <h4 className="font-bold text-[var(--color-dark)] mb-2">🎉 {t('events.title')}</h4>
+              <h4 className="font-bold text-[var(--color-dark)] mb-2">{t('events.title')}</h4>
               <ul className="text-gray-900 space-y-2">
                 {t.raw('events.items').map((item: string) => (
                   <li key={item}>• {item}</li>

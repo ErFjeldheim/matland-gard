@@ -10,11 +10,11 @@ const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  console.log('🔄 Oppdaterer produkter...');
+  console.log('Oppdaterer produkter...');
 
   // Slett eksisterende produkter
   await prisma.product.deleteMany();
-  console.log('🗑️  Slettet eksisterende produkter');
+  console.log('Slettet eksisterende produkter');
 
   // Legg til nye produkter basert på Skjold Singel & Stein
   const products = [
@@ -71,15 +71,15 @@ async function main() {
         slug,
       },
     });
-    console.log(`✅ Opprettet: ${created.name} - ${(created.price / 100).toFixed(2)} kr`);
+    console.log(`Opprettet: ${created.name} - ${(created.price / 100).toFixed(2)} kr`);
   }
 
-  console.log('🎉 Produkter oppdatert!');
+  console.log('Produkter oppdatert!');
 }
 
 main()
   .catch((e) => {
-    console.error('❌ Feil under oppdatering:', e);
+    console.error('Feil under oppdatering:', e);
     process.exit(1);
   })
   .finally(async () => {

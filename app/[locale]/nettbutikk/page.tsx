@@ -50,7 +50,7 @@ export default async function SingelPage() {
           <h3 className="text-2xl font-bold text-gray-900 mb-6">{t('info.title')}</h3>
           <div className="grid md:grid-cols-2 gap-8">
             <div>
-              <h4 className="font-semibold text-gray-900 mb-2">📦 {t('info.shipping')}</h4>
+              <h4 className="font-semibold text-gray-900 mb-2">{t('info.shipping')}</h4>
               <p className="text-gray-600 mb-2">{t('info.shippingDesc')}</p>
               <ul className="text-gray-600 space-y-1 ml-4">
                 {t.raw('info.shippingZones').map((zone: string) => (
@@ -65,13 +65,13 @@ export default async function SingelPage() {
               </p>
             </div>
             <div>
-              <h4 className="font-semibold text-gray-900 mb-2">💳 {t('info.payment')}</h4>
+              <h4 className="font-semibold text-gray-900 mb-2">{t('info.payment')}</h4>
               <p className="text-gray-600">
                 {t('info.paymentDesc')}
               </p>
             </div>
             <div>
-              <h4 className="font-semibold text-gray-900 mb-2">📞 {t('info.contact')}</h4>
+              <h4 className="font-semibold text-gray-900 mb-2">{t('info.contact')}</h4>
               <p className="text-gray-600">
                 Telefon: <a href="tel:+4795458563" className="text-[var(--color-primary)] hover:underline">+47 954 58 563</a><br />
                 E-post: <a href="mailto:matlandgard@gmail.com" className="text-[var(--color-primary)] hover:underline">matlandgard@gmail.com</a><br />
@@ -79,7 +79,7 @@ export default async function SingelPage() {
               </p>
             </div>
             <div>
-              <h4 className="font-semibold text-gray-900 mb-2">🏪 {t('info.pickup')}</h4>
+              <h4 className="font-semibold text-gray-900 mb-2">{t('info.pickup')}</h4>
               <p className="text-gray-600">
                 {t.rich('info.pickupDesc', {
                   br: () => <br />,

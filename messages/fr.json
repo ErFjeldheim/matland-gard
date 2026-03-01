@@ -197,7 +197,7 @@
         "videoTitle": "Vidéo du produit",
         "selectSize": "Sélectionner la taille",
         "addToCart": "Ajouter au panier",
-        "addedToCart": "✓ Ajouté !",
+        "addedToCart": "Ajouté !",
         "quickCheckout": "Paiement rapide",
         "sizeWarning": "Veuillez sélectionner une taille avant de continuer."
     },
@@ -255,7 +255,7 @@
         "getQuote": "Obtenir un devis",
         "pickup": "Retrait à Holmefjord",
         "free": "Gratuit",
-        "bulkTip": "💡 Conseil : Comme vous avez 3 unités ou plus, il peut être avantageux de demander un devis de transport combiné (sélectionnez \"Autres régions\" ci-dessus).",
+        "bulkTip": "Conseil : Comme vous avez 3 unités ou plus, il peut être avantageux de demander un devis de transport combiné (sélectionnez \"Autres régions\" ci-dessus).",
         "subtotal": "Sous-total articles :",
         "shippingFee": "Livraison :",
         "total": "Total :",

@@ -22,12 +22,12 @@ async function verifyConnection() {
   });
   
   try {
-    console.log('🔌 Tester SMTP-tilkobling...');
+    console.log('Tester SMTP-tilkobling...');
     await transporter.verify();
-    console.log('✅ SMTP-tilkobling OK!\n');
+    console.log('SMTP-tilkobling OK!\n');
     return true;
   } catch (error) {
-    console.error('❌ SMTP-tilkobling feilet:', error);
+    console.error('SMTP-tilkobling feilet:', error);
     return false;
   }
 }
@@ -64,27 +64,27 @@ async function testEmails() {
     // First verify connection
     const connected = await verifyConnection();
     if (!connected) {
-      console.log('\n❌ Kan ikke fortsette uten gyldig SMTP-tilkobling.');
-      console.log('\n📋 Sjekkliste:');
+      console.log('\nKan ikke fortsette uten gyldig SMTP-tilkobling.');
+      console.log('\nSjekkliste:');
       console.log('1. Er 2-trinns verifisering aktivert på Gmail-kontoen?');
       console.log('2. Er app-passordet generert fra https://myaccount.google.com/apppasswords?');
       console.log('3. Er app-passordet skrevet inn riktig (16 tegn uten mellomrom)?');
       return;
     }
 
-    console.log('📧 Sender test e-poster...\n');
+    console.log('Sender test e-poster...\n');
     
     console.log('1. Sender kundebekreftelse...');
     await sendCustomerOrderConfirmation(testOrder as any);
-    console.log('✅ Kundebekreftelse sendt!\n');
+    console.log('Kundebekreftelse sendt!\n');
     
     console.log('2. Sender admin-varsel...');
     await sendAdminOrderNotification(testOrder as any);
-    console.log('✅ Admin-varsel sendt!\n');
+    console.log('Admin-varsel sendt!\n');
     
-    console.log('✅ Test fullført! Sjekk matlandgard@gmail.com for å se e-postene.');
+    console.log('Test fullført! Sjekk matlandgard@gmail.com for å se e-postene.');
   } catch (error) {
-    console.error('❌ Feil ved sending av e-post:', error);
+    console.error('Feil ved sending av e-post:', error);
     if (error instanceof Error) {
       console.error('Feilmelding:', error.message);
     }

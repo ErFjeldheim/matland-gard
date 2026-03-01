@@ -10,16 +10,16 @@ const colors = {
     blue: "\x1b[34m"
 };
 
-const pass = (msg: string) => console.log(`${colors.green}✅ ${msg}${colors.reset}`);
-const fail = (msg: string) => console.log(`${colors.red}❌ ${msg}${colors.reset}`);
-const warn = (msg: string) => console.log(`${colors.yellow}⚠️ ${msg}${colors.reset}`);
+const pass = (msg: string) => console.log(`${colors.green}[PASS] ${msg}${colors.reset}`);
+const fail = (msg: string) => console.log(`${colors.red}[FAIL] ${msg}${colors.reset}`);
+const warn = (msg: string) => console.log(`${colors.yellow}[WARN] ${msg}${colors.reset}`);
 
 async function verifyData() {
-    console.log('🔍 Verifying Data Integrity...\n');
+    console.log('Verifying Data Integrity...\n');
     let errorCount = 0;
 
     // 1. Check Products
-    console.log('📦 Checking Active Products...');
+    console.log('Checking Active Products...');
     const products = await prisma.product.findMany({
         where: { isActive: true }
     });
@@ -53,7 +53,7 @@ async function verifyData() {
         'shipping_fixed_1500'
     ];
 
-    console.log('⚙️ Checking System Settings...');
+    console.log('Checking System Settings...');
     const settings = await prisma.setting.findMany({
         where: { key: { in: requiredSettings } }
     });

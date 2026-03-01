@@ -197,7 +197,7 @@
         "videoTitle": "Produktvideo",
         "selectSize": "Größe wählen",
         "addToCart": "In den Warenkorb",
-        "addedToCart": "✓ Hinzugefügt!",
+        "addedToCart": "Hinzugefügt!",
         "quickCheckout": "Direktkauf",
         "sizeWarning": "Bitte wählen Sie eine Größe aus, bevor Sie fortfahren."
     },
@@ -255,7 +255,7 @@
         "getQuote": "Angebot anfordern",
         "pickup": "Abholung in Holmefjord",
         "free": "Kostenlos",
-        "bulkTip": "💡 Tipp: Da Sie 3 oder mehr Einheiten haben, kann es vorteilhaft sein, ein kombiniertes Versandangebot anzufordern (wählen Sie oben \"Andere Gebiete\").",
+        "bulkTip": "Tipp: Da Sie 3 oder mehr Einheiten haben, kann es vorteilhaft sein, ein kombiniertes Versandangebot anzufordern (wählen Sie oben \"Andere Gebiete\").",
         "subtotal": "Zwischensumme Artikel:",
         "shippingFee": "Versand:",
         "total": "Gesamt:",

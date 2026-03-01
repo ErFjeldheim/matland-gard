@@ -2,6 +2,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Pencil } from 'lucide-react';
 
 interface PriceUpdaterProps {
     productId: string;
@@ -96,7 +97,7 @@ export default function PriceUpdater({ productId, currentPrice }: PriceUpdaterPr
             title="Klikk for å endre pris"
         >
             <span>{(price / 100).toLocaleString('nb-NO')} kr</span>
-            <span className="text-gray-400">✎</span>
+            <Pencil className="h-4 w-4 text-gray-400" />
         </button>
     );
 }

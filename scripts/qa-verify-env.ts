@@ -13,10 +13,10 @@ const colors = {
     blue: "\x1b[34m"
 };
 
-const pass = (msg: string) => console.log(`${colors.green}✅ ${msg}${colors.reset}`);
-const fail = (msg: string) => console.log(`${colors.red}❌ ${msg}${colors.reset}`);
-const warn = (msg: string) => console.log(`${colors.yellow}⚠️ ${msg}${colors.reset}`);
-const info = (msg: string) => console.log(`${colors.blue}ℹ️ ${msg}${colors.reset}`);
+const pass = (msg: string) => console.log(`${colors.green}[PASS] ${msg}${colors.reset}`);
+const fail = (msg: string) => console.log(`${colors.red}[FAIL] ${msg}${colors.reset}`);
+const warn = (msg: string) => console.log(`${colors.yellow}[WARN] ${msg}${colors.reset}`);
+const info = (msg: string) => console.log(`${colors.blue}[INFO] ${msg}${colors.reset}`);
 
 const requiredVars = [
     'DATABASE_URL',
@@ -28,7 +28,7 @@ const requiredVars = [
 ];
 
 function verifyEnv() {
-    console.log('🔍 Verifying Environment Variables...\n');
+    console.log('Verifying Environment Variables...\n');
 
     let hasError = false;
 

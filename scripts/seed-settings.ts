@@ -13,7 +13,7 @@ const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-    console.log('🌱 Seedar innstillingar...');
+    console.log('Seedar innstillingar...');
 
     const settings = [
         { key: 'herregardssingel_price_4-8mm', value: '1750', type: 'number' },
@@ -34,15 +34,15 @@ async function main() {
             update: {},
             create: setting,
         });
-        console.log(`✅ Innstilling oppretta/oppdatert: ${setting.key}`);
+        console.log(`Innstilling oppretta/oppdatert: ${setting.key}`);
     }
 
-    console.log('🎉 Seeding fullfør!');
+    console.log('Seeding fullfør!');
 }
 
 main()
     .catch((e) => {
-        console.error('❌ Feil under seeding:', e);
+        console.error('Feil under seeding:', e);
         process.exit(1);
     })
     .finally(async () => {
