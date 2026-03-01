@@ -13,7 +13,7 @@ jobs:
       - name: Install PostgreSQL 17 client
         run: |
           sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
-          wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+          curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg
           sudo apt-get update
           sudo apt-get install -y postgresql-client-17
       
@@ -33,13 +33,16 @@ jobs:
         run: |
           tar -czvf backup-$(date +%Y%m%d-%H%M%S).tar.gz roles.sql schema.sql data.sql
           rm -f roles.sql schema.sql data.sql
+      
+      - name: Setup rclone
+        uses: AnimMouse/setup-rclone@v1
+        with:
+          rclone_config: ${{ secrets.RCLONE_CONFIG }}
           
       - name: Upload to Google Drive
-        uses: samuelint/google-drive-upload@v1.2.0
-        with:
-          folder_id: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
-          service_account: ${{ secrets.GOOGLE_DRIVE_SERVICE_ACCOUNT }}
-          source_path: backup-*.tar.gz
+        run: |
+          FILENAME=$(ls backup-*.tar.gz)
+          rclone copy "$FILENAME" gdrive:${{ secrets.GOOGLE_DRIVE_FOLDER_ID }} -v
           
       - name: Backup completed
         run: echo "Backup completed successfully at $(date)"
