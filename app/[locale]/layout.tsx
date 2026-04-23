@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "../globals.css";
 import { CartProvider } from "../context/CartContext";
 
@@ -56,6 +57,18 @@ export default async function RootLayout({
           </CartProvider>
         </NextIntlClientProvider>
       </body>
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=AW-18114380060"
+        strategy="afterInteractive"
+      />
+      <Script id="google-ads-config" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'AW-18114380060');
+        `}
+      </Script>
     </html>
   );
 }
