@@ -31,6 +31,7 @@ export default function Navigation() {
     { href: '/nettbutikk', label: t('shop') },
     { href: '/camping', label: t('parking') },
     { href: '/arrangement', label: t('venue') },
+    { href: '/nettbutikk/om-oss', label: 'Om oss' },
     { href: '/kontakt', label: t('contact') },
   ];
 

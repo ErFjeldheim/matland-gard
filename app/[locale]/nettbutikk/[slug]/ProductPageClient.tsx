@@ -20,10 +20,9 @@ type Product = {
 };
 
 const HERREGAARDSSINGEL_SIZE_OPTIONS = [
-  { size: '2-4mm', price: 199900 },
-  { size: '4-8mm', price: 179900 },
-  { size: '8-16mm', price: 159900 },
-  { size: '16-32mm', price: 159900 }
+  { size: '4-8mm', price: 169900 },
+  { size: '8-16mm', price: 149900 },
+  { size: '16-32mm', price: 139900 }
 ];
 
 const GRUS_SIZE_OPTIONS = [
@@ -36,6 +35,21 @@ const HERREGARDSGRUS_SIZE_OPTIONS = [
   { size: '0-32mm', price: 150000 }
 ];
 
+const SAND_SIZE_OPTIONS = [
+  { size: 'Sand (0-8mm)', price: 95000 },
+  { size: 'Sand til sandkasse (0-2mm)', price: 125000 }
+];
+
+const ELVESTEIN_SIZE_OPTIONS = [
+  { size: 'Sort 1', price: 159900 },
+  { size: 'Sort 2', price: 189900 }
+];
+
+const ECCOGRAVEL_SIZE_OPTIONS = [
+  { size: '2cm', price: 22900 },
+  { size: '3cm', price: 22900 }
+];
+
 export default function ProductPageClient({ product }: { product: Product }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedSize, setSelectedSize] = useState<string>('');
@@ -43,16 +57,18 @@ export default function ProductPageClient({ product }: { product: Product }) {
   const { addItem } = useCart();
   const t = useTranslations('Product');
   const shopT = useTranslations('Shop');
-  const productsT = useTranslations('Products');
 
   // Check if this product requires size selection
-  const requiresSize = product.name === 'Herregårdssingel' || product.name === 'Grus' || product.name === 'Herregårdsgrus';
+  const requiresSize = product.name === 'Herregårdssingel' || product.name === 'Grus' || product.name === 'Herregårdsgrus' || product.name === 'Sand' || product.name === 'Elvestein' || product.name === 'Singelmatter ECCOgravel';
 
   // Get size options based on product
   const getSizeOptions = () => {
     if (product.name === 'Herregårdssingel') return HERREGAARDSSINGEL_SIZE_OPTIONS;
     if (product.name === 'Grus') return GRUS_SIZE_OPTIONS;
     if (product.name === 'Herregårdsgrus') return HERREGARDSGRUS_SIZE_OPTIONS;
+    if (product.name === 'Sand') return SAND_SIZE_OPTIONS;
+    if (product.name === 'Elvestein') return ELVESTEIN_SIZE_OPTIONS;
+    if (product.name === 'Singelmatter ECCOgravel') return ECCOGRAVEL_SIZE_OPTIONS;
     return [];
   };
 
@@ -91,7 +107,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
   const handleAddToCart = () => {
     if (!validateSelection()) return;
 
-    const baseName = productsT(`${product.slug}.name`, { defaultValue: product.name });
+    const baseName = product.name;
     const productName = requiresSize ? `${baseName} (${selectedSize})` : baseName;
 
     addItem({
@@ -185,7 +201,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
           isOpen={isModalOpen}
           product={{
             ...product,
-            name: requiresSize ? `${productsT(`${product.slug}.name`, { defaultValue: product.name })} (${selectedSize})` : productsT(`${product.slug}.name`, { defaultValue: product.name }),
+            name: requiresSize ? `${product.name} (${selectedSize})` : product.name,
             price: currentPrice
           }}
           onClose={() => setIsModalOpen(false)}

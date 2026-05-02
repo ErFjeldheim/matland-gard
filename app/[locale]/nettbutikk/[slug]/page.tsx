@@ -19,7 +19,6 @@ export default async function ProductPage({ params }: { params: Params }) {
   const { slug } = await params;
   const t = await getTranslations('Product');
   const navT = await getTranslations('Navigation');
-  const productsT = await getTranslations('Products');
 
   const product = await prisma.product.findUnique({
     where: { slug },
@@ -29,9 +28,9 @@ export default async function ProductPage({ params }: { params: Params }) {
     notFound();
   }
 
-  const localizedName = productsT(`${product.slug}.name`, { defaultValue: product.name });
-  const localizedDesc = productsT(`${product.slug}.description`, { defaultValue: product.description || '' });
-  const localizedLongDesc = productsT(`${product.slug}.longDescription`, { defaultValue: product.longDescription || '' });
+  const localizedName = product.name;
+  const localizedDesc = product.description || '';
+  const localizedLongDesc = product.longDescription || '';
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -91,7 +90,7 @@ export default async function ProductPage({ params }: { params: Params }) {
         {/* Long Description */}
         {localizedLongDesc && (
           <div className="mt-16 bg-white rounded-lg shadow-lg p-8">
-            <div className="prose prose-lg max-w-none text-gray-900 prose-p:text-gray-900 prose-li:text-gray-900 prose-headings:text-gray-900 prose-strong:text-gray-900">
+            <div className="prose prose-lg max-w-none prose-p:text-gray-900 prose-li:text-gray-900 prose-headings:text-gray-900 prose-strong:text-gray-900 prose-ul:text-gray-900 prose-ol:text-gray-900 prose-hr:border-gray-300">
               <ReactMarkdown>{localizedLongDesc}</ReactMarkdown>
             </div>
           </div>

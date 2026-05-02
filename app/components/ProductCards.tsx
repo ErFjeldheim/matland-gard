@@ -24,7 +24,6 @@ type ProductCardsProps = {
 
 export default function ProductCards({ products }: ProductCardsProps) {
   const t = useTranslations('Shop');
-  const productsT = useTranslations('Products');
 
   return (
     <>
@@ -36,7 +35,7 @@ export default function ProductCards({ products }: ProductCardsProps) {
                 <div className="relative h-64 bg-gray-200 cursor-pointer">
                   <Image
                     src={product.image}
-                    alt={productsT(`${product.slug}.name`, { defaultValue: product.name })}
+                    alt={product.name}
                     fill
                     className="object-cover hover:scale-105 transition-transform duration-300"
                   />
@@ -53,11 +52,11 @@ export default function ProductCards({ products }: ProductCardsProps) {
             <div className="p-6 flex flex-col flex-grow">
               <Link href={`/nettbutikk/${product.slug}`}>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2 hover:text-[var(--color-primary)] transition-colors cursor-pointer">
-                  {productsT(`${product.slug}.name`, { defaultValue: product.name })}
+                  {product.name}
                 </h3>
               </Link>
 
-              <p className="text-gray-800 mb-4">{productsT(`${product.slug}.description`, { defaultValue: product.description || '' })}</p>
+              <p className="text-gray-800 mb-4">{product.description || ''}</p>
 
               <div className="mb-4 mt-auto">
                 <div>

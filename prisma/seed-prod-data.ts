@@ -93,9 +93,9 @@ async function main() {
         id: '550e8400-e29b-41d4-a716-446655440006',
         name: 'Sand',
         slug: 'sand',
-        description: 'Ren sand med fin lys brun/beige farge',
-        longDescription: 'Ren sand med fin lys brun/beige farge som kan brukes til sandkasse, plenstrøssel og støpesand.',
-        price: 150000,
+        description: 'Sand til alle formål og sand til sandkasse. Leveres i big bags på 900kg.',
+        longDescription: 'Vi kan levere sand til alle ulike formål og som egner seg til det meste (0-8mm). Kan også brukes i sandkasser og annen barnelek.\n\nPris per big bag. For bestillinger på over 5 big bags, send oss en forespørsel.\n\n---\n\n**Sand til sandkasse (0-2mm)**\n\nSå mye sand trenger du til sandkassen:\nEn big bag på 800kg vil være nok til sandkasser fra 120 til 160cm.\n\nAndre nyttige sandkassetips:\n- Legg en fiberduk under sanden for at den skal holde lengre og for å unngå ugress.\n- Det er også anbefalt å ha et lokk over sandkassen på natten og når den ikke er i bruk for å unngå at katter og andre dyr kommer til.\n- Sandkasser bør plasseres et solfylt sted for at sanden tørker.\n- Unngå at barna spiser i sandkassen. Smuler og matrester kan tiltrekke dyr og insekter.\n\nSand til sandkasse og barnelek som egner seg godt til å forme og bygge med (0-2mm).\nSanden er ikke godkjent som underlag til lekeplasser.\nVi leverer sandkassesand i big bags på 900kg.',
+        price: 95000,
         image: '/images/products/Sand/bilde-1.jpg',
         images: [
           '/images/products/Sand/bilde-1.jpg',
