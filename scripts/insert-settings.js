@@ -13,8 +13,8 @@ async function main() {
         { key: 'contact_address', value: 'Ådlandsvegen 30, 5642 Holmefjord', type: 'text' },
         { key: 'season_text', value: 'April - Oktober', type: 'text' },
         // Frakt
-        { key: 'shipping_fixed_1000', value: '1000', type: 'number' },
-        { key: 'shipping_fixed_1500', value: '1500', type: 'number' },
+        { key: 'shipping_fixed_1250', value: '1250', type: 'number' },
+        { key: 'shipping_fixed_1875', value: '1875', type: 'number' },
     ];
 
     for (const setting of settings) {

@@ -63,13 +63,16 @@ export default async function HomePage() {
                   alt="Singel & Stein"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-dark)]/80 to-transparent flex items-end justify-center pb-6 pointer-events-none">
-                  <h3 className="text-2xl font-bold text-white">Singel & Stein</h3>
+                  <h3 className="text-2xl font-bold text-white">Herregårdssingel</h3>
                 </div>
               </div>
               <div className="p-6 flex-grow">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-[var(--color-primary)] transition-colors">Matland Singel & Stein</h3>
-                <p className="text-gray-600 mb-4">
+                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-[var(--color-primary)] transition-colors">Herregårdssingel</h3>
+                <p className="text-gray-600 mb-2">
                   Forhandler av produkt frå Skjold Singel & Stein. Vi leverer herregårdssingel, herregårdsgrus og andre steinprodukt.
+                </p>
+                <p className="text-[var(--color-primary)] font-semibold text-sm mb-4">
+                  Nyheit! No òg lager i Bergen Havn.
                 </p>
                 <div className="text-[var(--color-primary)] font-semibold flex items-center mt-auto">
                   Sjå produkt og prisar

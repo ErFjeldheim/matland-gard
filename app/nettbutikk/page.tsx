@@ -31,8 +31,8 @@ export default async function SingelPage() {
     });
 
   const shippingZones = [
-    'Bergen, Vaksdal, Samnanger, Bjørnafjorden: 1000 kr',
-    'Austevoll, Sotra, Askøy, Øygarden, Voss: 1500 kr',
+    'Bergen, Vaksdal, Samnanger, Bjørnafjorden: 1250 kr',
+    'Austevoll, Sotra, Askøy, Øygarden, Voss: 1875 kr',
   ];
 
   return (
@@ -82,8 +82,8 @@ export default async function SingelPage() {
             <div>
               <h4 className="font-semibold text-gray-900 mb-2">Henting</h4>
               <p className="text-gray-600">
-                Hent gratis i Holmefjord<br />
-                Ta med eigen henger<br />
+                Hent sjølv i Holmefjord eller på Dokken i Bergen Havn.<br />
+                Ta med eigen henger.<br />
                 Etter avtale: <a href="tel:+4795458563" className="text-[var(--color-primary)] hover:underline">954 58 563</a>
               </p>
             </div>

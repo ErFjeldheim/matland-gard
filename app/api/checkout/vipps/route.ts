@@ -96,12 +96,14 @@ export async function POST(request: NextRequest) {
     const shippingMultiplier = totalUnits;
 
     // Add shipping fee
-    if (shippingMethod === 'shipping_fixed_1000') {
-      const fee = await getNumberSetting('shipping_fixed_1000', 1000);
+    if (shippingMethod === 'shipping_fixed_1250') {
+      const fee = await getNumberSetting('shipping_fixed_1250', 1250);
       totalAmount += fee * 100 * shippingMultiplier;
-    } else if (shippingMethod === 'shipping_fixed_1500') {
-      const fee = await getNumberSetting('shipping_fixed_1500', 1500);
+    } else if (shippingMethod === 'shipping_fixed_1875') {
+      const fee = await getNumberSetting('shipping_fixed_1875', 1875);
       totalAmount += fee * 100 * shippingMultiplier;
+    } else if (shippingMethod === 'pickup_dokken') {
+      totalAmount += 125 * 100 * shippingMultiplier;
     }
 
     // Create order in database

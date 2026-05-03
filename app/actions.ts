@@ -216,10 +216,12 @@ export async function createStripeCheckoutSession(data: CheckoutData) {
 
     // Add shipping fee
     let shippingFee = 0;
-    if (shippingMethod === 'shipping_fixed_1000') {
-        shippingFee = (await getNumberSetting('shipping_fixed_1000', 1000)) * 100;
-    } else if (shippingMethod === 'shipping_fixed_1500') {
-        shippingFee = (await getNumberSetting('shipping_fixed_1500', 1500)) * 100;
+    if (shippingMethod === 'shipping_fixed_1250') {
+        shippingFee = (await getNumberSetting('shipping_fixed_1250', 1250)) * 100;
+    } else if (shippingMethod === 'shipping_fixed_1875') {
+        shippingFee = (await getNumberSetting('shipping_fixed_1875', 1875)) * 100;
+    } else if (shippingMethod === 'pickup_dokken') {
+        shippingFee = 125 * 100;
     }
 
     if (shippingFee > 0) {
@@ -230,7 +232,7 @@ export async function createStripeCheckoutSession(data: CheckoutData) {
                 currency: 'nok',
                 product_data: {
                     name: 'Frakt',
-                    description: (shippingMethod === 'shipping_fixed_1000' ? 'Sone 1' : 'Sone 2') + (shippingMultiplier > 1 ? ` (x${shippingMultiplier})` : ''),
+                    description: (shippingMethod === 'shipping_fixed_1250' ? 'Sone 1' : shippingMethod === 'shipping_fixed_1875' ? 'Sone 2' : 'Henting Dokken') + (shippingMultiplier > 1 ? ` (x${shippingMultiplier})` : ''),
                 },
                 unit_amount: finalShippingFee,
             },

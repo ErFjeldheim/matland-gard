@@ -66,8 +66,9 @@ export async function sendCustomerOrderConfirmation(orderData: OrderEmailData) {
     shippingText = 'Vi kontaktar deg med tilbod på frakt';
   } else {
     let methodName = 'Frakt';
-    if (orderData.shippingMethod === 'shipping_fixed_1000') methodName = 'Fastpris frakt (Sone 1)';
-    if (orderData.shippingMethod === 'shipping_fixed_1500') methodName = 'Fastpris frakt (Sone 2)';
+    if (orderData.shippingMethod === 'shipping_fixed_1250') methodName = 'Fastpris frakt (Sone 1)';
+    if (orderData.shippingMethod === 'shipping_fixed_1875') methodName = 'Fastpris frakt (Sone 2)';
+    if (orderData.shippingMethod === 'pickup_dokken') methodName = 'Henting Dokkeskjærskaien 3';
 
     // Check if we have a valid calculated shipping cost that is greater than 0
     if (shippingCost > 0) {
@@ -75,8 +76,9 @@ export async function sendCustomerOrderConfirmation(orderData: OrderEmailData) {
     } else {
       // Fallback if calculation yields 0 or negative (shouldn't happen for fixed shipping but good for safety)
       // or if it really is free shipping
-      if (orderData.shippingMethod === 'shipping_fixed_1000') shippingText = 'Fastpris frakt (Sone 1): 1000 NOK';
-      else if (orderData.shippingMethod === 'shipping_fixed_1500') shippingText = 'Fastpris frakt (Sone 2): 1500 NOK';
+      if (orderData.shippingMethod === 'shipping_fixed_1250') shippingText = 'Fastpris frakt (Sone 1): 1250 NOK';
+      else if (orderData.shippingMethod === 'shipping_fixed_1875') shippingText = 'Fastpris frakt (Sone 2): 1875 NOK';
+      else if (orderData.shippingMethod === 'pickup_dokken') shippingText = 'Henting Dokkeskjærskaien 3: 125 NOK';
       else shippingText = `${methodName}: ${shippingCost / 100} NOK`;
     }
   }
@@ -208,14 +210,16 @@ export async function sendAdminOrderNotification(orderData: OrderEmailData) {
     shippingText = 'Tilbod på frakt må sendast';
   } else {
     let methodName = 'Frakt';
-    if (orderData.shippingMethod === 'shipping_fixed_1000') methodName = 'Fastpris frakt (Sone 1)';
-    if (orderData.shippingMethod === 'shipping_fixed_1500') methodName = 'Fastpris frakt (Sone 2)';
+    if (orderData.shippingMethod === 'shipping_fixed_1250') methodName = 'Fastpris frakt (Sone 1)';
+    if (orderData.shippingMethod === 'shipping_fixed_1875') methodName = 'Fastpris frakt (Sone 2)';
+    if (orderData.shippingMethod === 'pickup_dokken') methodName = 'Henting Dokkeskjærskaien 3';
 
     if (shippingCost > 0) {
       shippingText = `${methodName}: ${shippingCost / 100} NOK`;
     } else {
-      if (orderData.shippingMethod === 'shipping_fixed_1000') shippingText = 'Fastpris frakt (Sone 1): 1000 NOK';
-      else if (orderData.shippingMethod === 'shipping_fixed_1500') shippingText = 'Fastpris frakt (Sone 2): 1500 NOK';
+      if (orderData.shippingMethod === 'shipping_fixed_1250') shippingText = 'Fastpris frakt (Sone 1): 1250 NOK';
+      else if (orderData.shippingMethod === 'shipping_fixed_1875') shippingText = 'Fastpris frakt (Sone 2): 1875 NOK';
+      else if (orderData.shippingMethod === 'pickup_dokken') shippingText = 'Henting Dokkeskjærskaien 3: 125 NOK';
       else shippingText = `${methodName}: ${shippingCost / 100} NOK`;
     }
   }

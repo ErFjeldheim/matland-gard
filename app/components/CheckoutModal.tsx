@@ -27,7 +27,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
   const [loading, setLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [paymentMethod, setPaymentMethod] = useState<'vipps' | 'stripe' | null>(null);
-  const [shippingMethod, setShippingMethod] = useState<'shipping_quote' | 'pickup' | 'shipping_fixed_1000' | 'shipping_fixed_1500' | null>(null);
+  const [shippingMethod, setShippingMethod] = useState<'shipping_quote' | 'pickup' | 'shipping_fixed_1250' | 'shipping_fixed_1875' | 'pickup_dokken' | null>(null);
   const [formData, setFormData] = useState({
     customerName: '',
     customerEmail: '',
@@ -49,8 +49,9 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
 
   const getShippingFee = () => {
     const multiplier = totalUnits;
-    if (shippingMethod === 'shipping_fixed_1000') return 1000 * multiplier;
-    if (shippingMethod === 'shipping_fixed_1500') return 1500 * multiplier;
+    if (shippingMethod === 'shipping_fixed_1250') return 1250 * multiplier;
+    if (shippingMethod === 'shipping_fixed_1875') return 1875 * multiplier;
+    if (shippingMethod === 'pickup_dokken') return 125 * multiplier;
     return 0;
   };
 
@@ -235,8 +236,8 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
               <div className="space-y-3">
                 <button
                   type="button"
-                  onClick={() => setShippingMethod('shipping_fixed_1000')}
-                  className={`w-full py-3 px-4 rounded-lg border-2 font-medium transition-all cursor-pointer text-left ${shippingMethod === 'shipping_fixed_1000'
+                  onClick={() => setShippingMethod('shipping_fixed_1250')}
+                  className={`w-full py-3 px-4 rounded-lg border-2 font-medium transition-all cursor-pointer text-left ${shippingMethod === 'shipping_fixed_1250'
                     ? 'border-[var(--color-primary)] bg-[var(--color-accent)]/20 text-[var(--color-dark)]'
                     : 'border-gray-300 hover:border-[var(--color-primary)] text-gray-700'
                     }`}
@@ -244,13 +245,14 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                 >
                   <div className="font-semibold">Frakt: Sone 1</div>
                   <div className="text-xs text-gray-600">Bergen, Vaksdal, Samnanger, Bjørnafjorden</div>
-                  <div className="text-sm font-bold text-[var(--color-primary)]">{1000 * totalUnits} kr</div>
+                  <div className="text-sm font-bold text-[var(--color-primary)]">{1250 * totalUnits} kr</div>
+                  <div className="text-xs text-gray-500">kranbil ikkje inkludert</div>
                 </button>
 
                 <button
                   type="button"
-                  onClick={() => setShippingMethod('shipping_fixed_1500')}
-                  className={`w-full py-3 px-4 rounded-lg border-2 font-medium transition-all cursor-pointer text-left ${shippingMethod === 'shipping_fixed_1500'
+                  onClick={() => setShippingMethod('shipping_fixed_1875')}
+                  className={`w-full py-3 px-4 rounded-lg border-2 font-medium transition-all cursor-pointer text-left ${shippingMethod === 'shipping_fixed_1875'
                     ? 'border-[var(--color-primary)] bg-[var(--color-accent)]/20 text-[var(--color-dark)]'
                     : 'border-gray-300 hover:border-[var(--color-primary)] text-gray-700'
                     }`}
@@ -258,7 +260,8 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                 >
                   <div className="font-semibold">Frakt: Sone 2</div>
                   <div className="text-xs text-gray-600">Austevoll, Sotra, Askøy, Øygarden, Voss</div>
-                  <div className="text-sm font-bold text-[var(--color-primary)]">{1500 * totalUnits} kr</div>
+                  <div className="text-sm font-bold text-[var(--color-primary)]">{1875 * totalUnits} kr</div>
+                  <div className="text-xs text-gray-500">kranbil ikkje inkludert</div>
                 </button>
 
                 <button
@@ -289,6 +292,20 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                   <div className="text-sm font-bold text-green-600">Gratis</div>
                 </button>
 
+                <button
+                  type="button"
+                  onClick={() => setShippingMethod('pickup_dokken')}
+                  className={`w-full py-3 px-4 rounded-lg border-2 font-medium transition-all cursor-pointer text-left ${shippingMethod === 'pickup_dokken'
+                    ? 'border-[var(--color-primary)] bg-[var(--color-accent)]/20 text-[var(--color-dark)]'
+                    : 'border-gray-300 hover:border-[var(--color-primary)] text-gray-700'
+                    }`}
+                  disabled={loading}
+                >
+                  <div className="font-semibold">Henting: Dokkeskjærskaien 3, 5006 Bergen</div>
+                  <div className="text-xs text-gray-600">Etter avtale. Pålasting med truck</div>
+                  <div className="text-sm font-bold text-[var(--color-primary)]">{125 * totalUnits} kr</div>
+                </button>
+
                 {totalUnits >= 3 && (
                   <p className="text-xs text-amber-600 font-medium">
                     Tips: Sidan du har 3 eller fleire einingar, kan det løna seg å be om eitt samla tilbod på frakt (vel "Andre område" ovanfor).
@@ -297,7 +314,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
               </div>
             </div>
 
-            {(shippingMethod && shippingMethod !== 'pickup') && (
+            {(shippingMethod && shippingMethod !== 'pickup' && shippingMethod !== 'pickup_dokken') && (
               <div>
                 <label className="block text-gray-700 font-medium mb-2">
                   Leveringsadresse *

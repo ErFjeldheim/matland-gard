@@ -35,8 +35,7 @@ const HERREGARDSGRUS_SIZE_OPTIONS = [
 ];
 
 const SAND_SIZE_OPTIONS = [
-  { size: 'Sand (0-8mm)', price: 95000 },
-  { size: 'Sand til sandkasse (0-2mm)', price: 125000 }
+  { size: 'Sand til toppdressing og sandkasse (0-2mm)', price: 150000 }
 ];
 
 const ELVESTEIN_SIZE_OPTIONS = [
@@ -55,19 +54,25 @@ export default function ProductPageClient({ product }: { product: Product }) {
   const [addedToCart, setAddedToCart] = useState(false);
   const { addItem } = useCart();
 
-  const requiresSize = product.name === 'Herregårdssingel' || product.name === 'Grus' || product.name === 'Herregårdsgrus' || product.name === 'Sand' || product.name === 'Elvestein' || product.name === 'Singelmatter ECCOgravel';
+  const requiresSize = product.name === 'Herregårdssingel' || product.name === 'Grus' || product.name === 'Herregårdsgrus' || product.slug === 'sand' || product.name === 'Elvestein' || product.name === 'Singelmatter ECCOgravel';
 
   const getSizeOptions = () => {
     if (product.name === 'Herregårdssingel') return HERREGAARDSSINGEL_SIZE_OPTIONS;
     if (product.name === 'Grus') return GRUS_SIZE_OPTIONS;
     if (product.name === 'Herregårdsgrus') return HERREGARDSGRUS_SIZE_OPTIONS;
-    if (product.name === 'Sand') return SAND_SIZE_OPTIONS;
+    if (product.slug === 'sand') return SAND_SIZE_OPTIONS;
     if (product.name === 'Elvestein') return ELVESTEIN_SIZE_OPTIONS;
     if (product.name === 'Singelmatter ECCOgravel') return ECCOGRAVEL_SIZE_OPTIONS;
     return [];
   };
 
   const SIZE_OPTIONS = getSizeOptions();
+  const hasMultipleSizes = SIZE_OPTIONS.length > 1;
+
+  // Auto-select size if there's only one option
+  if (requiresSize && SIZE_OPTIONS.length === 1 && !selectedSize) {
+    setSelectedSize(SIZE_OPTIONS[0].size);
+  }
 
   const getPrice = () => {
     if (!requiresSize) return product.price;
@@ -138,15 +143,13 @@ export default function ProductPageClient({ product }: { product: Product }) {
           <span className="text-gray-500 text-sm ml-2">inkl. mva.</span>
         </div>
         <p className="text-gray-600 text-sm">
-          {product.name.toLowerCase().includes('grus')
-            ? 'per tonn'
-            : product.name.toLowerCase().includes('matte')
-              ? 'per m²'
-              : 'per storsekk (900kg)'}
+          {product.name.toLowerCase().includes('matte')
+            ? 'per m²'
+            : 'per storsekk (900kg)'}
         </p>
       </div>
 
-      {requiresSize && (
+      {requiresSize && hasMultipleSizes && (
         <div className="bg-white rounded-lg shadow-md p-6 mb-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-3">Vel storleik</h3>
           <div className="grid grid-cols-3 gap-3">
