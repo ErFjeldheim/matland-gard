@@ -83,7 +83,7 @@ export default function AboutPage() {
               <h3 className="text-xl font-semibold text-gray-900 mb-3">Kvifor velje oss?</h3>
               <div className="space-y-4 text-gray-600">
                 <p>
-                  <strong className="text-gray-900">Unik kvalitet:</strong> Steinen vår er teken ut i Skjold på Haugalandet og har ein unik beigefarge med innslag av gult som gir uteområdet eit eksklusivt inntrykk.
+                  <strong className="text-gray-900">Unik kvalitet:</strong> Steinen vår er teken ut i Skjold på Haugalandet og har ein unik beigefarge med brun nyanse som gir uteområdet eit eksklusivt inntrykk.
                 </p>
                 <p>
                   <strong className="text-gray-900">Levering til heile Noreg:</strong> Vi kan levere steinprodukt til heile landet, med konkurransedyktige fraktprisar.

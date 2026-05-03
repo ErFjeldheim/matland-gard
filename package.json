@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "update-images": "tsx scripts/update-product-images.ts",
     "qa:env": "tsx scripts/qa-verify-env.ts",
     "qa:data": "tsx scripts/qa-verify-data.ts",
     "qa:orders": "tsx scripts/qa-diagnose-orders.ts"
@@ -48,8 +47,5 @@
     "ts-node": "^10.9.2",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
-  },
-  "prisma": {
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   }
 }
