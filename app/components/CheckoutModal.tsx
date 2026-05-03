@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { createStripeCheckoutSession } from '@/app/actions';
-import { useTranslations } from 'next-intl';
 
 interface CartItem {
   productId: string;
@@ -21,7 +20,7 @@ interface CheckoutModalProps {
   };
   isOpen: boolean;
   onClose: () => void;
-  cartItems?: CartItem[]; // Optional: if provided, we're checking out the entire cart
+  cartItems?: CartItem[];
 }
 
 export default function CheckoutModal({ product, isOpen, onClose, cartItems }: CheckoutModalProps) {
@@ -36,17 +35,14 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
     deliveryAddress: '',
   });
 
-  const t = useTranslations('Checkout');
-
   if (!isOpen) return null;
 
   const isCartCheckout = cartItems && cartItems.length > 0;
 
-  // Calculate total units (storsekker or tons of grus)
   const totalUnits = isCartCheckout
     ? cartItems.reduce((sum, item) => {
       const name = item.productName.toLowerCase();
-      const isUnit = !name.includes('matte'); // Everything except mattene counts as a unit (bag or ton)
+      const isUnit = !name.includes('matte');
       return isUnit ? sum + item.quantity : sum;
     }, 0)
     : (!product.name.toLowerCase().includes('matte') ? quantity : 0);
@@ -66,12 +62,12 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
     e.preventDefault();
 
     if (!shippingMethod) {
-      alert(t('missingShipping'));
+      alert('Ver vennleg og vel leveringsalternativ');
       return;
     }
 
     if (!paymentMethod) {
-      alert(t('missingPayment'));
+      alert('Ver vennleg og vel betalingsmetode');
       return;
     }
 
@@ -131,7 +127,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
       <div className="bg-[var(--foreground)] rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-900">{t('modalTitle', { product: product.name })}</h2>
+            <h2 className="text-2xl font-bold text-gray-900">Bestill {product.name}</h2>
             <button
               onClick={onClose}
               className="text-gray-400 hover:text-gray-600 cursor-pointer"
@@ -144,11 +140,10 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Cart Items Summary or Quantity Selector */}
             {isCartCheckout ? (
               <div>
                 <label className="block text-gray-700 font-medium mb-2">
-                  {t('summary')}
+                  Vareoppsummering
                 </label>
                 <div className="bg-gray-50 rounded-lg p-4 space-y-2 max-h-48 overflow-y-auto">
                   {cartItems.map((item, index) => (
@@ -166,13 +161,13 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                   ))}
                 </div>
                 <p className="text-xs text-gray-500 mt-2">
-                  {t('cartNote')}
+                  For å endre antall eller fjerne varer, gå tilbake til handlekorgja.
                 </p>
               </div>
             ) : (
               <div>
                 <label className="block text-gray-700 font-medium mb-2">
-                  {t('quantityLabel')} {product.name.toLowerCase().includes('grus') ? t('tonn') : t('bag')}
+                  Antall {product.name.toLowerCase().includes('grus') ? '(tonn)' : '(storsekker)'}
                 </label>
                 <div className="flex items-center gap-4">
                   <button
@@ -196,9 +191,8 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
               </div>
             )}
 
-            {/* Customer Info */}
             <div>
-              <label className="block text-gray-700 font-medium mb-2">{t('name')}</label>
+              <label className="block text-gray-700 font-medium mb-2">Namn *</label>
               <input
                 type="text"
                 required
@@ -211,7 +205,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
             </div>
 
             <div>
-              <label className="block text-gray-700 font-medium mb-2">{t('email')}</label>
+              <label className="block text-gray-700 font-medium mb-2">E-post *</label>
               <input
                 type="email"
                 required
@@ -224,7 +218,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
             </div>
 
             <div>
-              <label className="block text-gray-700 font-medium mb-2">{t('phone')}</label>
+              <label className="block text-gray-700 font-medium mb-2">Telefon *</label>
               <input
                 type="tel"
                 required
@@ -236,11 +230,9 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
               />
             </div>
 
-            {/* Shipping Method Selection */}
             <div>
-              <label className="block text-gray-700 font-medium mb-3">{t('shippingTitle')}</label>
+              <label className="block text-gray-700 font-medium mb-3">Velg leveringsalternativ *</label>
               <div className="space-y-3">
-                {/* Region A */}
                 <button
                   type="button"
                   onClick={() => setShippingMethod('shipping_fixed_1000')}
@@ -250,12 +242,11 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                     }`}
                   disabled={loading}
                 >
-                  <div className="font-semibold">{t('sone1')}</div>
-                  <div className="text-xs text-gray-600">{t('sone1Desc')}</div>
+                  <div className="font-semibold">Frakt: Sone 1</div>
+                  <div className="text-xs text-gray-600">Bergen, Vaksdal, Samnanger, Bjørnafjorden</div>
                   <div className="text-sm font-bold text-[var(--color-primary)]">{1000 * totalUnits} kr</div>
                 </button>
 
-                {/* Region B */}
                 <button
                   type="button"
                   onClick={() => setShippingMethod('shipping_fixed_1500')}
@@ -265,12 +256,11 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                     }`}
                   disabled={loading}
                 >
-                  <div className="font-semibold">{t('sone2')}</div>
-                  <div className="text-xs text-gray-600">{t('sone2Desc')}</div>
+                  <div className="font-semibold">Frakt: Sone 2</div>
+                  <div className="text-xs text-gray-600">Austevoll, Sotra, Askøy, Øygarden, Voss</div>
                   <div className="text-sm font-bold text-[var(--color-primary)]">{1500 * totalUnits} kr</div>
                 </button>
 
-                {/* Quote */}
                 <button
                   type="button"
                   onClick={() => setShippingMethod('shipping_quote')}
@@ -280,13 +270,12 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                     }`}
                   disabled={loading}
                 >
-                  <div className="font-semibold">{t('otherArea')}</div>
-                  <div className="text-xs text-gray-600">{t('otherAreaDesc')}</div>
-                  <div className="text-sm font-bold text-green-600">{t('getQuote')}</div>
+                  <div className="font-semibold">Andre område</div>
+                  <div className="text-xs text-gray-600">Vi kontaktar deg raskt for ein god fraktpris</div>
+                  <div className="text-sm font-bold text-green-600">Få tilbod</div>
                 </button>
 
 
-                {/* Pickup */}
                 <button
                   type="button"
                   onClick={() => setShippingMethod('pickup')}
@@ -296,23 +285,22 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                     }`}
                   disabled={loading}
                 >
-                  <div className="font-semibold">{t('pickup')}</div>
-                  <div className="text-sm font-bold text-green-600">{t('free')}</div>
+                  <div className="font-semibold">Hent sjølv i Holmefjord</div>
+                  <div className="text-sm font-bold text-green-600">Gratis</div>
                 </button>
 
                 {totalUnits >= 3 && (
                   <p className="text-xs text-amber-600 font-medium">
-                    {t('bulkTip')}
+                    Tips: Sidan du har 3 eller fleire einingar, kan det løna seg å be om eitt samla tilbod på frakt (vel "Andre område" ovanfor).
                   </p>
                 )}
               </div>
             </div>
 
-            {/* Delivery Address */}
             {(shippingMethod && shippingMethod !== 'pickup') && (
               <div>
                 <label className="block text-gray-700 font-medium mb-2">
-                  {t('deliveryAddress')}
+                  Leveringsadresse *
                 </label>
                 <textarea
                   rows={2}
@@ -320,36 +308,34 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                   value={formData.deliveryAddress}
                   onChange={(e) => setFormData({ ...formData, deliveryAddress: e.target.value })}
                   className="w-full bg-white text-gray-900 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
-                  placeholder={t('addressPlaceholder')}
+                  placeholder="Skriv inn leveringsadressa"
                   disabled={loading}
                 />
               </div>
             )}
 
-            {/* Total */}
             <div className="border-t pt-4">
               <div className="space-y-1">
                 <div className="flex justify-between text-gray-600 text-sm">
-                  <span>{t('subtotal')}</span>
+                  <span>Delsum varer:</span>
                   <span>{baseAmount.toFixed(0)} kr</span>
                 </div>
                 {shippingFee > 0 && (
                   <div className="flex justify-between text-gray-600 text-sm">
-                    <span>{t('shippingFee')}</span>
+                    <span>Frakt:</span>
                     <span>{shippingFee.toFixed(0)} kr</span>
                   </div>
                 )}
                 <div className="flex justify-between items-center text-xl mt-2">
-                  <span className="font-bold text-gray-900">{t('total')}</span>
+                  <span className="font-bold text-gray-900">Totalt:</span>
                   <span className="font-bold text-[var(--color-primary)]">{totalAmount.toFixed(0)} kr</span>
                 </div>
                 <p className="text-xs text-gray-500">inkl. mva.</p>
               </div>
             </div>
 
-            {/* Payment Method Selection */}
             <div>
-              <label className="block text-gray-700 font-medium mb-3">{t('paymentTitle')}</label>
+              <label className="block text-gray-700 font-medium mb-3">Vel betalingsmetode *</label>
               <div className="grid grid-cols-2 gap-3">
                 <button
                   type="button"
@@ -360,7 +346,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                     }`}
                   disabled={loading}
                 >
-                  <span className="text-sm">{t('vipps')}</span>
+                  <span className="text-sm">Vipps</span>
                 </button>
 
                 <button
@@ -372,12 +358,11 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                     }`}
                   disabled={loading}
                 >
-                  <span className="text-sm">{t('card')}</span>
+                  <span className="text-sm">Kort</span>
                 </button>
               </div>
             </div>
 
-            {/* Submit */}
             <button
               type="submit"
               disabled={loading || !paymentMethod || !shippingMethod}
@@ -385,13 +370,13 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                 } text-white px-6 py-4 rounded-lg transition-colors font-semibold flex items-center justify-center text-lg cursor-pointer disabled:cursor-not-allowed`}
             >
               {loading ? (
-                t('processing')
+                'Behandlar...'
               ) : !shippingMethod ? (
-                t('selectShipping')
+                'Vel leveringsalternativ'
               ) : !paymentMethod ? (
-                t('selectPayment')
+                'Vel betalingsmetode'
               ) : (
-                t('complete')
+                'Fullfør bestilling'
               )}
             </button>
           </form>

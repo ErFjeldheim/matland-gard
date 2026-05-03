@@ -1,0 +1,204 @@
+'use client';
+
+import { useState } from 'react';
+import CheckoutModal from '@/app/components/CheckoutModal';
+import { useCart } from '@/app/context/CartContext';
+
+type Product = {
+  id: string;
+  name: string;
+  slug: string;
+  description: string | null;
+  longDescription: string | null;
+  price: number;
+  image: string | null;
+  images: string[];
+  videoUrl: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+const HERREGAARDSSINGEL_SIZE_OPTIONS = [
+  { size: '4-8mm', price: 169900 },
+  { size: '8-16mm', price: 149900 },
+  { size: '16-32mm', price: 139900 }
+];
+
+const GRUS_SIZE_OPTIONS = [
+  { size: '0-16mm', price: 59900 },
+  { size: '0-32mm', price: 59900 }
+];
+
+const HERREGARDSGRUS_SIZE_OPTIONS = [
+  { size: '0-16mm', price: 150000 },
+  { size: '0-32mm', price: 150000 }
+];
+
+const SAND_SIZE_OPTIONS = [
+  { size: 'Sand (0-8mm)', price: 95000 },
+  { size: 'Sand til sandkasse (0-2mm)', price: 125000 }
+];
+
+const ELVESTEIN_SIZE_OPTIONS = [
+  { size: 'Sort 1', price: 159900 },
+  { size: 'Sort 2', price: 189900 }
+];
+
+const ECCOGRAVEL_SIZE_OPTIONS = [
+  { size: '2cm', price: 22900 },
+  { size: '3cm', price: 22900 }
+];
+
+export default function ProductPageClient({ product }: { product: Product }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedSize, setSelectedSize] = useState<string>('');
+  const [addedToCart, setAddedToCart] = useState(false);
+  const { addItem } = useCart();
+
+  const requiresSize = product.name === 'Herregårdssingel' || product.name === 'Grus' || product.name === 'Herregårdsgrus' || product.name === 'Sand' || product.name === 'Elvestein' || product.name === 'Singelmatter ECCOgravel';
+
+  const getSizeOptions = () => {
+    if (product.name === 'Herregårdssingel') return HERREGAARDSSINGEL_SIZE_OPTIONS;
+    if (product.name === 'Grus') return GRUS_SIZE_OPTIONS;
+    if (product.name === 'Herregårdsgrus') return HERREGARDSGRUS_SIZE_OPTIONS;
+    if (product.name === 'Sand') return SAND_SIZE_OPTIONS;
+    if (product.name === 'Elvestein') return ELVESTEIN_SIZE_OPTIONS;
+    if (product.name === 'Singelmatter ECCOgravel') return ECCOGRAVEL_SIZE_OPTIONS;
+    return [];
+  };
+
+  const SIZE_OPTIONS = getSizeOptions();
+
+  const getPrice = () => {
+    if (!requiresSize) return product.price;
+    const sizeOption = SIZE_OPTIONS.find(opt => opt.size === selectedSize);
+    return sizeOption ? sizeOption.price : product.price;
+  };
+
+  const currentPrice = getPrice();
+
+  const getPriceRange = () => {
+    if (!requiresSize) return null;
+    const prices = SIZE_OPTIONS.map(opt => opt.price);
+    const min = Math.min(...prices);
+    const max = Math.max(...prices);
+    if (min === max) return null;
+    return { min, max };
+  };
+
+  const priceRange = getPriceRange();
+
+  const validateSelection = () => {
+    if (requiresSize && !selectedSize) {
+      alert('Ver vennleg og vel ein storleik før du held fram.');
+      return false;
+    }
+    return true;
+  };
+
+  const handleAddToCart = () => {
+    if (!validateSelection()) return;
+
+    const baseName = product.name;
+    const productName = requiresSize ? `${baseName} (${selectedSize})` : baseName;
+
+    addItem({
+      productId: product.id,
+      productName: productName,
+      price: currentPrice,
+      size: selectedSize || undefined,
+      image: product.image || undefined,
+    });
+
+    setAddedToCart(true);
+    setTimeout(() => setAddedToCart(false), 1000);
+  };
+
+  const handleQuickCheckout = () => {
+    if (!validateSelection()) return;
+    setIsModalOpen(true);
+  };
+
+  return (
+    <>
+      {/* Price Display */}
+      <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+        <div className="flex items-baseline mb-2">
+          {requiresSize && !selectedSize && priceRange ? (
+            <>
+              <span className="text-3xl font-bold text-[var(--color-primary)]">
+                {(priceRange.min / 100).toFixed(0)} - {(priceRange.max / 100).toFixed(0)} kr
+              </span>
+            </>
+          ) : (
+            <span className="text-3xl font-bold text-[var(--color-primary)]">
+              {(currentPrice / 100).toFixed(0)} kr
+            </span>
+          )}
+          <span className="text-gray-500 text-sm ml-2">inkl. mva.</span>
+        </div>
+        <p className="text-gray-600 text-sm">
+          {product.name.toLowerCase().includes('grus')
+            ? 'per tonn'
+            : product.name.toLowerCase().includes('matte')
+              ? 'per m²'
+              : 'per storsekk (900kg)'}
+        </p>
+      </div>
+
+      {requiresSize && (
+        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+          <h3 className="text-lg font-semibold text-gray-900 mb-3">Vel storleik</h3>
+          <div className="grid grid-cols-3 gap-3">
+            {SIZE_OPTIONS.map(({ size }) => (
+              <button
+                key={size}
+                onClick={() => setSelectedSize(size)}
+                className={`py-3 px-4 rounded-lg border-2 font-medium transition-all cursor-pointer ${selectedSize === size
+                  ? 'border-[var(--color-primary)] bg-[var(--color-accent)]/20 text-[var(--color-dark)]'
+                  : 'border-gray-300 hover:border-[var(--color-primary)] text-gray-700'
+                  }`}
+              >
+                <div className="text-sm font-semibold">{size}</div>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="space-y-3">
+        <button
+          onClick={handleAddToCart}
+          className="w-full bg-[var(--color-primary)] text-white px-6 py-4 rounded-lg hover:bg-[var(--color-dark)] transition-colors font-semibold flex items-center justify-center text-lg cursor-pointer"
+        >
+          <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+          {addedToCart ? 'Lagt til!' : 'Legg til i handlekorg'}
+        </button>
+
+        <button
+          onClick={handleQuickCheckout}
+          className="w-full bg-[var(--color-accent)] text-white px-6 py-4 rounded-lg hover:bg-[var(--color-dark)] transition-colors font-semibold flex items-center justify-center text-lg cursor-pointer"
+        >
+          <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          Hurtigbetaling
+        </button>
+      </div>
+
+      {isModalOpen && (
+        <CheckoutModal
+          isOpen={isModalOpen}
+          product={{
+            ...product,
+            name: requiresSize ? `${product.name} (${selectedSize})` : product.name,
+            price: currentPrice
+          }}
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
+    </>
+  );
+}

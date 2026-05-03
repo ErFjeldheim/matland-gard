@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 
 type Product = {
   id: string;
@@ -23,8 +22,6 @@ type ProductCardsProps = {
 };
 
 export default function ProductCards({ products }: ProductCardsProps) {
-  const t = useTranslations('Shop');
-
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -63,14 +60,14 @@ export default function ProductCards({ products }: ProductCardsProps) {
                   <span className="text-2xl font-bold text-[var(--color-primary)]">
                     {Math.round(product.price / 100)} kr
                   </span>
-                  <span className="text-gray-500 text-sm ml-1">{t('inclVat')}</span>
+                  <span className="text-gray-500 text-sm ml-1">inkl. mva.</span>
                 </div>
                 <p className="text-gray-600 text-sm">
                   {product.name.toLowerCase().includes('grus')
-                    ? t('perTonn')
+                    ? 'per tonn'
                     : product.name.toLowerCase().includes('matte')
-                      ? t('perM2')
-                      : t('perBag')}
+                      ? 'per m²'
+                      : 'per storsekk (900kg)'}
                 </p>
               </div>
 
@@ -79,7 +76,7 @@ export default function ProductCards({ products }: ProductCardsProps) {
                 href={`/nettbutikk/${product.slug}`}
                 className="block w-full bg-[var(--color-primary)] text-white px-6 py-3 rounded-lg hover:bg-[var(--color-secondary)] active:bg-[var(--color-dark)] focus:ring-4 focus:ring-[var(--color-primary)]/20 transition-all font-semibold text-center shadow-sm hover:shadow-md"
               >
-                {t('viewProduct')}
+                Sjå produkt
               </Link>
             </div>
           </div>

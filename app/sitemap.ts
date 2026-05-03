@@ -5,20 +5,20 @@ export const dynamic = 'force-dynamic';
 
 const BASE_URL = 'https://matlandgard.no';
 
+const staticPages = [
+  'arrangement',
+  'camping',
+  'kontakt',
+  'personvern',
+  'vilkar',
+  'handlekurv',
+];
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const products = await prisma.product.findMany({
     where: { isActive: true, slug: { not: null } },
     select: { slug: true, updatedAt: true },
   });
-
-  const staticPages = [
-    'arrangement',
-    'camping',
-    'kontakt',
-    'personvern',
-    'vilkar',
-    'handlekurv',
-  ];
 
   return [
     {
