@@ -87,7 +87,7 @@ export default function ArrangementPage() {
             </p>
 
             <div className="bg-[var(--color-accent)]/20 border-l-4 border-[var(--color-primary)] p-6 mb-6">
-              <h4 className="font-bold text-[var(--color-dark)] mb-2">Vi arrangerer</h4>
+              <h4 className="font-bold text-[var(--color-dark)] mb-2">Lokalet med tilhørende område og fasiliteter kan leies til</h4>
               <ul className="text-gray-900 space-y-2">
                 {eventsItems.map((item) => (
                   <li key={item}>• {item}</li>
@@ -98,7 +98,7 @@ export default function ArrangementPage() {
 
           <div>
             <div className="bg-white rounded-lg shadow-lg p-8 mb-6">
-              <h4 className="text-2xl font-bold text-gray-900 mb-4">Våre lokale</h4>
+              <h4 className="text-2xl font-bold text-gray-900 mb-4">Vårt lokale</h4>
 
               <div className="space-y-4">
                 <div className="border-l-4 border-[var(--color-primary)] pl-4">

@@ -25,7 +25,7 @@ export default function Navigation() {
   }, [pathname]);
 
   const navLinks = [
-    { href: '/nettbutikk', label: 'Singel & Stein' },
+    { href: '/nettbutikk', label: 'Herregårdssingel' },
     { href: '/camping', label: 'Bobilparkering' },
     { href: '/arrangement', label: 'Selskapslokale' },
     { href: '/nettbutikk/om-oss', label: 'Om oss' },
