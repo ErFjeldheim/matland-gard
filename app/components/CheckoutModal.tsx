@@ -301,8 +301,8 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                     }`}
                   disabled={loading}
                 >
-                  <div className="font-semibold">Henting: Dokkeskjærskaien 3, 5006 Bergen</div>
-                  <div className="text-xs text-gray-600">Etter avtale. Pålasting med truck</div>
+                  <div className="font-semibold">Henting: Skur 25 Møhlenpriskaien 8, 5006 BERGEN</div>
+                  <div className="text-xs text-gray-600">Etter avtale. Pålasting med truck. Området er inngjerdet, så varene står trygt.</div>
                   <div className="text-sm font-bold text-[var(--color-primary)]">{125 * totalUnits} kr</div>
                 </button>
 

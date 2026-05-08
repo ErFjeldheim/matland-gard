@@ -232,7 +232,7 @@ export async function createStripeCheckoutSession(data: CheckoutData) {
                 currency: 'nok',
                 product_data: {
                     name: 'Frakt',
-                    description: (shippingMethod === 'shipping_fixed_1250' ? 'Sone 1' : shippingMethod === 'shipping_fixed_1875' ? 'Sone 2' : 'Henting Dokken') + (shippingMultiplier > 1 ? ` (x${shippingMultiplier})` : ''),
+                    description: (shippingMethod === 'shipping_fixed_1250' ? 'Sone 1' : shippingMethod === 'shipping_fixed_1875' ? 'Sone 2' : 'Henting Skur 25 Møhlenpriskaien 8') + (shippingMultiplier > 1 ? ` (x${shippingMultiplier})` : ''),
                 },
                 unit_amount: finalShippingFee,
             },

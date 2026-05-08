@@ -82,8 +82,9 @@ export default async function SingelPage() {
             <div>
               <h4 className="font-semibold text-gray-900 mb-2">Henting</h4>
               <p className="text-gray-600">
-                Hent sjølv i Holmefjord eller på Dokken i Bergen Havn.<br />
+                Hent sjølv i Holmefjord eller på Skur 25 Møhlenpriskaien 8, 5006 BERGEN.<br />
                 Ta med eigen henger.<br />
+                Området er inngjerdet, så varene står trygt.<br />
                 Etter avtale: <a href="tel:+4795458563" className="text-[var(--color-primary)] hover:underline">954 58 563</a>
               </p>
             </div>

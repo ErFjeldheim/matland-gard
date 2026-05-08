@@ -48,7 +48,7 @@ async function sendCustomerOrderConfirmation(orderData) {
             : orderData.shippingMethod === 'shipping_fixed_1875'
                 ? 'Fastpris frakt (Sone 2): 1875 NOK'
                 : orderData.shippingMethod === 'pickup_dokken'
-                    ? 'Henting Dokkeskjærskaien 3: 125 NOK'
+                    ? 'Henting Skur 25 Møhlenpriskaien 8: 125 NOK'
                     : orderData.shippingMethod === 'shipping_quote'
                         ? 'Vi kontaktar deg med tilbod på frakt'
                         : 'Ikkje spesifisert';
