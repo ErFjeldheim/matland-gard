@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/prisma';
+import type { OrderItem, Product } from '@prisma/client';
 import Navigation from '../../../components/Navigation';
 import Footer from '../../../components/Footer';
 import Link from 'next/link';
@@ -147,7 +148,7 @@ export default async function AdminOrderPage({ params }: { params: Promise<{ id:
             <div className="border-t pt-6 mb-6">
               <h3 className="font-semibold text-gray-900 mb-4 text-lg">Produkter</h3>
               <div className="space-y-4">
-                {order.orderItems.map((item) => (
+                {order.orderItems.map((item: OrderItem & { product: Product }) => (
                   <div key={item.id} className="flex justify-between items-center bg-gray-50 p-4 rounded-lg">
                     <div className="flex-1">
                       <p className="font-medium text-gray-900">{item.product.name}</p>
