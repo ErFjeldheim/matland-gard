@@ -28,6 +28,24 @@ ENV NEXT_PUBLIC_SUPABASE_URL=$NEXT_PUBLIC_SUPABASE_URL
 ENV NEXT_PUBLIC_SUPABASE_ANON_KEY=$NEXT_PUBLIC_SUPABASE_ANON_KEY
 ENV NEXT_PUBLIC_URL=$NEXT_PUBLIC_URL
 
+# Sentry build-time env. Provided as build args (so Dokploy's env can pass them
+# in without baking them into the image). The Sentry Next.js plugin reads these
+# to upload source maps and create a release named after the commit SHA.
+# At runtime SENTRY_DSN is also read from app env (set in Dokploy app config).
+ARG SENTRY_AUTH_TOKEN
+ARG SENTRY_ORG
+ARG SENTRY_PROJECT
+ARG SENTRY_DSN
+ENV SENTRY_AUTH_TOKEN=$SENTRY_AUTH_TOKEN
+ENV SENTRY_ORG=$SENTRY_ORG
+ENV SENTRY_PROJECT=$SENTRY_PROJECT
+ENV SENTRY_DSN=$SENTRY_DSN
+
+# Commit SHA (passed as build arg from Dokploy) becomes the Sentry release name
+# so stack frames in the dashboard can be resolved to the right commit.
+ARG COMMIT_SHA
+ENV NEXT_PUBLIC_SENTRY_RELEASE=$COMMIT_SHA
+
 RUN npx prisma generate
 RUN npm run build
 
