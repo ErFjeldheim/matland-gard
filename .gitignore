@@ -46,5 +46,10 @@ tsconfig.tsbuildinfo
 commit.md
 commit_message.md
 
+# Compiled scripts (artifacts at repo root)
+/*.js
+!/scripts/**/*.js
+!next.config.js
+
 # KiloCode
 .kilocode/

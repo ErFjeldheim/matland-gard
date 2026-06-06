@@ -7,7 +7,7 @@ async function updateAllProductImages() {
     console.log('Oppdaterer alle produktbilder...\n');
 
     const productsDir = path.join(process.cwd(), 'public/images/products');
-    
+
     // Mapping mellom produktnavn og mapper
     const productMappings = [
       { name: 'Herregårdssingel', folder: 'Herregårdssingel' },
@@ -20,7 +20,7 @@ async function updateAllProductImages() {
 
     for (const mapping of productMappings) {
       const folderPath = path.join(productsDir, mapping.folder);
-      
+
       if (!fs.existsSync(folderPath)) {
         console.log(`Mappe ikke funnet: ${mapping.folder}`);
         continue;
@@ -43,7 +43,7 @@ async function updateAllProductImages() {
 
       // Første bilde er forsidebildet
       const coverImage = `/images/products/${mapping.folder}/${files[0]}`;
-      
+
       // Alle bilder til images-arrayet
       const allImages = files.map(file => `/images/products/${mapping.folder}/${file}`);
 

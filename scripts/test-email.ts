@@ -1,5 +1,5 @@
 import { config } from 'dotenv';
-import { sendCustomerOrderConfirmation, sendAdminOrderNotification } from './lib/email';
+import { sendCustomerOrderConfirmation, sendAdminOrderNotification } from '../lib/email';
 
 // Load environment variables
 config();
@@ -20,7 +20,7 @@ async function verifyConnection() {
       pass: process.env.EMAIL_PASSWORD,
     },
   });
-  
+
   try {
     console.log('Tester SMTP-tilkobling...');
     await transporter.verify();
@@ -73,15 +73,15 @@ async function testEmails() {
     }
 
     console.log('Sender test e-poster...\n');
-    
+
     console.log('1. Sender kundebekreftelse...');
     await sendCustomerOrderConfirmation(testOrder as any);
     console.log('Kundebekreftelse sendt!\n');
-    
+
     console.log('2. Sender admin-varsel...');
     await sendAdminOrderNotification(testOrder as any);
     console.log('Admin-varsel sendt!\n');
-    
+
     console.log('Test fullført! Sjekk matlandgard@gmail.com for å se e-postene.');
   } catch (error) {
     console.error('Feil ved sending av e-post:', error);
