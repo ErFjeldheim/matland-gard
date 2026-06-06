@@ -7,6 +7,8 @@
   "automergeType": "pr",
   "platformAutomerge": true,
   "requiredStatusChecks": null,
+  "pruneStaleBranches": true,
+  "labels": ["dependencies"],
   "packageRules": [
     {
       "description": "Group all React packages together",
@@ -24,6 +26,18 @@
       "groupName": "Prisma"
     },
     {
+      "description": "Group Node.js base image in Dockerfile",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["node"],
+      "versioning": "node",
+      "groupName": "Node.js"
+    },
+    {
+      "description": "Group GitHub Actions",
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions"
+    },
+    {
       "description": "Auto-merge patch updates",
       "matchUpdateTypes": ["patch"],
       "automerge": true
@@ -31,18 +45,17 @@
     {
       "description": "Require approval for major updates",
       "matchUpdateTypes": ["major"],
-      "automerge": false
-    },
-    {
-      "description": "Update Node.js in Dockerfile",
-      "matchDatasources": ["docker"],
-      "matchPackageNames": ["node"],
-      "versioning": "node",
-      "groupName": "Node.js"
+      "automerge": false,
+      "labels": ["breaking"]
     }
   ],
   "lockFileMaintenance": {
     "enabled": true,
     "schedule": ["before 5am on Monday"]
+  },
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": ["security"],
+    "automerge": true
   }
 }
