@@ -49,6 +49,32 @@ ENV NEXT_PUBLIC_SENTRY_RELEASE=$COMMIT_SHA
 RUN npx prisma generate
 RUN npm run build
 
+# Sentry source map upload. Runs explicitly via sentry-cli because the
+# @sentry/nextjs plugin hooks into Webpack/Turbopack and is unreliable on
+# Next.js 16's default Turbopack pipeline. We upload the .next/ tree
+# directly: it contains both the server and static source maps we need
+# to deobfuscate stack frames in the Sentry dashboard.
+#
+# Guarded on SENTRY_AUTH_TOKEN so a missing token does not fail the
+# build (the rest of the build is unaffected; we just lose one round
+# of source maps until a token is provided).
+RUN if [ -n "$SENTRY_AUTH_TOKEN" ]; then \
+        echo ">>> uploading Sentry source maps for release $NEXT_PUBLIC_SENTRY_RELEASE" && \
+        npx --yes @sentry/cli@latest sourcemaps upload \
+            --release "$NEXT_PUBLIC_SENTRY_RELEASE" \
+            --org "$SENTRY_ORG" \
+            --project "$SENTRY_PROJECT" \
+            --url-prefix '~/_next' \
+            --url-prefix '/_next' \
+            .next && \
+        npx --yes @sentry/cli@latest releases finalize \
+            --org "$SENTRY_ORG" \
+            --project "$SENTRY_PROJECT" \
+            "$NEXT_PUBLIC_SENTRY_RELEASE" || true; \
+    else \
+        echo ">>> SENTRY_AUTH_TOKEN not set, skipping source map upload"; \
+    fi
+
 # Production
 FROM base AS runner
 ENV NODE_ENV=production

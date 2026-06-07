@@ -31,6 +31,16 @@ const sentryWebpackPluginOptions = {
   hideSourceMaps: true,
   silent: !process.env.SENTRY_AUTH_TOKEN,
 
+  // Disable the plugin's own source-map upload. The Dockerfile runs
+  // an explicit `sentry-cli sourcemaps upload` step after `next build`
+  // because the Webpack/Turbopack hook is unreliable on Next.js 16's
+  // default Turbopack pipeline. Disabling here prevents duplicate
+  // uploads and keeps the runtime SDK injection (which is what this
+  // plugin also does) working as before.
+  sourcemaps: {
+    disable: true,
+  },
+
   // Tag uploaded source maps with the commit SHA so Sentry can resolve
   // stack frames even after multiple deploys to the same release name.
   release: {
