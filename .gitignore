@@ -53,3 +53,6 @@ commit_message.md
 
 # KiloCode
 .kilocode/
+
+# Vitest
+next-env.d.ts

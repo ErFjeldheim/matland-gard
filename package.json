@@ -21,7 +21,10 @@
     "scripts:add-slugs": "tsx scripts/add-slugs.ts",
     "scripts:seed-settings": "tsx scripts/seed-settings.ts",
     "scripts:sync-prod": "bash scripts/sync-prod-data.sh",
-    "scripts:ops-check": "bash scripts/ops-check.sh"
+    "scripts:ops-check": "bash scripts/ops-check.sh",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.4.1",
@@ -53,12 +56,14 @@
     "@types/pg": "^8.16.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitest/coverage-v8": "^2.1.9",
     "eslint": "^9",
     "eslint-config-next": "16.1.1",
     "prisma": "^7.4.1",
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^2.1.9"
   }
 }
