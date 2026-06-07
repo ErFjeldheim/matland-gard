@@ -72,6 +72,40 @@ Major updates need review (the `breaking` label is auto-applied).
   never sent (the only symptom is a valid `eventId` returned from
   `captureException` with no matching issue in the dashboard).
 
+### Known limitation: Sentry release tag is a stale commit SHA
+
+**Symptom**: Sentry's [Releases page](https://sentry.io/organizations/fjelldata/releases/?project=2)
+shows a single release entry, not one per deploy; the **Last Deploy**
+column is empty.
+
+**Cause**: Dokploy does not auto-inject the build's commit SHA
+([Dokploy #4006](https://github.com/Dokploy/dokploy/issues/4006), open
+since March 2026). The Sentry release tag is set via
+`NEXT_PUBLIC_SENTRY_RELEASE=$COMMIT_SHA`, where `COMMIT_SHA` is a
+manual entry in Dokploy → Application → `matlandgard.no` → Build Args.
+That entry has drifted to a stale value
+(`2fe7a0f859edb914db2afeff32c782decd78e379` as of 2026-06-07) because
+nobody updates it per push.
+
+**Impact**: cosmetic, not functional. Source maps from every build are
+tagged with the same release name, and Sentry's deobfuscation uses
+per-file `debugId` matching, so stack frames still resolve. The
+user-visible cost is: one release entry instead of N, an empty
+**Last Deploy**, and no per-deploy regression attribution from Sentry
+alone.
+
+**Workaround** (≈ 10 min, ready to execute when needed):
+1. Remove the `.git` line from `.dockerignore` (line 18).
+2. `Dockerfile`: add `git` to the base image
+   (`apt-get install -y git`), then read
+   `COMMIT_SHA=$(git rev-parse HEAD)` and fall back to it when the
+   `COMMIT_SHA` build arg is empty.
+3. `buildArgs`: delete the `COMMIT_SHA=…` line.
+
+**Revisit** when Dokploy ships the commit-hash injection, when we
+cannot identify a regression's deploy from Sentry alone, or when a
+customer-impacting bug demands release-level rollback confidence.
+
 ## UptimeRobot
 
 - **Monitor**: `matlandgard.no` (HTTP/S)
