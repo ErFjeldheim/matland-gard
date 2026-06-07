@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 
 // Stub next/server with a minimal implementation that captures the
-// middleware's return value so we can assert on status, headers, and
+// proxy's return value so we can assert on status, headers, and
 // the redirect target without spinning up the full Next.js runtime.
 const nextMock = vi.hoisted(() => {
     const chain: any[] = []; // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -31,7 +31,7 @@ vi.mock('next/server', () => ({
     NextResponse: nextMock.NextResponse,
 }));
 
-import { middleware, config } from '@/middleware';
+import { proxy, config } from '@/proxy';
 
 function makeRequest(pathname: string, cookieValue?: string): any { // eslint-disable-line @typescript-eslint/no-explicit-any
     const url = new URL(`https://example.test${pathname}`);
@@ -79,11 +79,11 @@ function clearChain() {
     vi.mocked(nextMock.NextResponse.json).mockClear();
 }
 
-describe('middleware', () => {
+describe('proxy', () => {
     it('lets authenticated requests through', () => {
         clearChain();
         const req = makeRequest('/admin/orders', 'authenticated');
-        const res = middleware(req);
+        const res = proxy(req);
         expect(nextMock.NextResponse.next).toHaveBeenCalled();
         expect(res).toEqual({ kind: 'next' });
     });
@@ -91,7 +91,7 @@ describe('middleware', () => {
     it('redirects unauthenticated /admin/* to /admin/login', () => {
         clearChain();
         const req = makeRequest('/admin/orders/123');
-        const res = middleware(req);
+        const res = proxy(req);
         expect(nextMock.NextResponse.redirect).toHaveBeenCalled();
         const arg = vi.mocked(nextMock.NextResponse.redirect).mock.calls[0]?.[0];
         expect(String(arg)).toContain('/admin/login');
@@ -101,7 +101,7 @@ describe('middleware', () => {
     it('returns 401 JSON for unauthenticated /api/admin/*', () => {
         clearChain();
         const req = makeRequest('/api/admin/products');
-        const res = middleware(req);
+        const res = proxy(req);
         expect(nextMock.NextResponse.json).toHaveBeenCalledWith(
             { error: 'Unauthorized' },
             { status: 401 },
@@ -112,12 +112,12 @@ describe('middleware', () => {
     it('rejects an unauthenticated request with the wrong cookie value', () => {
         clearChain();
         const req = makeRequest('/admin/orders', 'something-else');
-        middleware(req);
+        proxy(req);
         expect(nextMock.NextResponse.redirect).toHaveBeenCalled();
     });
 });
 
-describe('middleware matcher config', () => {
+describe('proxy matcher config', () => {
     it('excludes /admin/login from the page matcher', () => {
         expect(config.matcher).toContain('/admin/((?!login$).*)');
     });
