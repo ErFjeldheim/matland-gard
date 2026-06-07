@@ -59,3 +59,15 @@ model Setting {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+// Tracks Stripe webhook event IDs we have already processed so retries
+// from Stripe (and any concurrent duplicate delivery) are no-ops. Rows
+// are tiny (~200 bytes) and kept forever — a cleanup job can be added
+// later if the table ever grows.
+model ProcessedEvent {
+  id          String   @id
+  type        String
+  processedAt DateTime @default(now())
+
+  @@map("processed_event")
+}
