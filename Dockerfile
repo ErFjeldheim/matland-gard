@@ -69,9 +69,10 @@ RUN if [ -n "$SENTRY_AUTH_TOKEN" ]; then \
             --org "$SENTRY_ORG" \
             --project "$SENTRY_PROJECT" \
             --url-prefix '~/_next' \
-            --ignore 'node_modules' \
-            --ignore '.next/cache' \
-            --ignore '.next/types' \
+            --include 'server/**' \
+            --include 'static/**' \
+            --include 'standalone/.next/server/**' \
+            --include 'standalone/.next/static/**' \
             .next && \
         npx --yes @sentry/cli@latest releases finalize \
             --org "$SENTRY_ORG" \
