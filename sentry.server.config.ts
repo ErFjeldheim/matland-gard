@@ -18,6 +18,9 @@ Sentry.init({
 
   enabled: Boolean(SENTRY_DSN) && process.env.NODE_ENV === "production",
 
+  // TEMP debug to diagnose missing events in the dashboard
+  debug: true,
+
   environment: process.env.NODE_ENV,
   release: process.env.NEXT_PUBLIC_SENTRY_RELEASE,
 });
