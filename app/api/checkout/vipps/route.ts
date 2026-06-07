@@ -3,12 +3,29 @@ import { prisma } from '@/lib/prisma';
 import { sendCustomerOrderConfirmation, sendAdminOrderNotification } from '@/lib/email';
 import { getNumberSetting } from '@/lib/settings';
 import { initiateVippsPayment } from '@/app/lib/vipps';
+import { checkRateLimit, getClientIp } from '@/lib/ratelimit';
 
 /* eslint-disable @typescript-eslint/no-explicit-any -- Vipps checkout uses loosely-typed
    product lookups during price calculation; tightening is a separate refactor. */
 
 export async function POST(request: NextRequest) {
   try {
+    const ip = getClientIp(request);
+    const limit = await checkRateLimit(ip, {
+      limit: 10,
+      window: '1 h',
+      prefix: 'vipps-checkout',
+    });
+    if (!limit.allowed) {
+      return NextResponse.json(
+        { error: 'For mange bestillingar. Prøv igjen seinare.' },
+        {
+          status: 429,
+          headers: { 'Retry-After': String(limit.retryAfter) },
+        },
+      );
+    }
+
     const body = await request.json();
     const { productId, quantity, cartItems, customerName, customerEmail, customerPhone, deliveryAddress, shippingMethod } = body;
 

@@ -5,14 +5,15 @@
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { headers } from 'next/headers';
 import { prisma } from '@/lib/prisma';
 import Stripe from 'stripe';
 import { getNumberSetting } from '@/lib/settings';
 import { createClient } from '@/utils/supabase/server';
 import { sendRefundNotification } from '@/lib/email';
+import { checkRateLimit, getClientIp } from '@/lib/ratelimit';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    // FORCE_UPDATE_DEBUG_1 
     apiVersion: '2026-01-28.clover' as any,
 });
 
@@ -115,6 +116,21 @@ interface CheckoutData {
 
 export async function createStripeCheckoutSession(data: CheckoutData) {
     const { productId, quantity, cartItems, customerName, customerEmail, customerPhone, deliveryAddress, shippingMethod } = data;
+
+    // Rate limit by client IP (server actions don't get a Request object,
+    // so we pull x-forwarded-for from next/headers).
+    const headerStore = await headers();
+    const ip = getClientIp({
+        headers: { get: (name) => headerStore.get(name) },
+    });
+    const limit = await checkRateLimit(ip, {
+        limit: 10,
+        window: '1 h',
+        prefix: 'stripe-checkout',
+    });
+    if (!limit.allowed) {
+        throw new Error('For mange bestillingar. Prøv igjen seinare.');
+    }
 
     // Validate input
     if (!customerName || !customerEmail || !customerPhone) {

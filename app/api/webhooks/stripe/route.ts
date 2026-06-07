@@ -7,7 +7,6 @@ import { sendCustomerOrderConfirmation, sendAdminOrderNotification } from '@/lib
    use narrower event shapes than the generic any; tightening is a separate refactor. */
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    // FORCE_UPDATE_DEBUG_1
     apiVersion: '2026-01-28.clover' as any,
 });
 
