@@ -2,10 +2,6 @@ import * as Sentry from "@sentry/nextjs";
 
 const SENTRY_DSN = process.env.SENTRY_DSN;
 
-console.log(
-  `[sentry.server.config] loaded at ${new Date().toISOString()} dsn=${SENTRY_DSN ? SENTRY_DSN.slice(0, 30) + "..." : "MISSING"} release=${process.env.NEXT_PUBLIC_SENTRY_RELEASE ?? "MISSING"}`,
-);
-
 Sentry.init({
   dsn: SENTRY_DSN,
 
@@ -21,9 +17,6 @@ Sentry.init({
   ignoreTransactions: ["/api/health"],
 
   enabled: Boolean(SENTRY_DSN) && process.env.NODE_ENV === "production",
-
-  // TEMP debug to diagnose missing events in the dashboard
-  debug: true,
 
   environment: process.env.NODE_ENV,
   release: process.env.NEXT_PUBLIC_SENTRY_RELEASE,
