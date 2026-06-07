@@ -63,6 +63,13 @@ Major updates need review (the `breaking` label is auto-applied).
   it is unreliable on Next.js 16's default Turbopack pipeline. The
   Dockerfile step is guarded on `SENTRY_AUTH_TOKEN` so a missing token
   does not fail the build.
+- **Source map filter**: the upload step passes `--ignore '**/node_modules/**'`,
+  `--ignore 'cache/**'`, `--ignore 'types/**'` to skip the standalone
+  bundle's vendored `node_modules` and Next.js build artifacts. URL prefix
+  is `~/_next` (sentry-cli v2 only accepts one prefix; Next.js bundles
+  end up at `/_next/...` at runtime). The `releases finalize` step uses
+  `|| true` because the release was already uploaded and `finalize` only
+  marks the release as "complete" — losing that is non-fatal.
 - **Sample rates**: 5 % client traces / 5 % replays (100 % on error),
   10 % server + edge traces. Tunable in `sentry.{client,server,edge}.config.ts`.
 - **Replays**: all text and media are masked/blocked — PII/address safe by
