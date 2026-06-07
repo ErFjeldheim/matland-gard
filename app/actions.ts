@@ -1,5 +1,8 @@
 'use server';
 
+/* eslint-disable @typescript-eslint/no-explicit-any -- legacy order/Stripe types; tightening
+   this file to strict types is a separate refactor. */
+
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
@@ -123,8 +126,8 @@ export async function createStripeCheckoutSession(data: CheckoutData) {
     }
 
     let totalAmount = 0;
-    let orderItemsData: Array<{ productId: string; quantity: number; price: number }> = [];
-    let stripeLineItems: Array<any> = [];
+    const orderItemsData: Array<{ productId: string; quantity: number; price: number }> = [];
+    const stripeLineItems: Array<any> = [];
 
     const getPriceWithMetadata = async (product: any, size?: string) => {
         if (product.name === 'Herregårdssingel') {

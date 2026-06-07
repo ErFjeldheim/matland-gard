@@ -4,6 +4,9 @@ import { sendCustomerOrderConfirmation, sendAdminOrderNotification } from '@/lib
 import { getNumberSetting } from '@/lib/settings';
 import { initiateVippsPayment } from '@/app/lib/vipps';
 
+/* eslint-disable @typescript-eslint/no-explicit-any -- Vipps checkout uses loosely-typed
+   product lookups during price calculation; tightening is a separate refactor. */
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -25,7 +28,7 @@ export async function POST(request: NextRequest) {
     }
 
     let totalAmount = 0;
-    let orderItemsData: Array<{ productId: string; quantity: number; price: number }> = [];
+    const orderItemsData: Array<{ productId: string; quantity: number; price: number }> = [];
 
     const getPriceWithMetadata = async (product: any, size?: string) => {
       if (product.name === 'Herregårdssingel') {

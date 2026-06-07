@@ -90,7 +90,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
           quantity,
           ...formData,
           shippingMethod,
-          size: (product as any).size
+          size: (product as { size?: string }).size
         };
 
       if (paymentMethod === 'stripe') {
@@ -308,7 +308,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
 
                 {totalUnits >= 3 && (
                   <p className="text-xs text-amber-600 font-medium">
-                    Tips: Sidan du har 3 eller fleire einingar, kan det løna seg å be om eitt samla tilbod på frakt (vel "Andre område" ovanfor).
+                    Tips: Sidan du har 3 eller fleire einingar, kan det løna seg å be om eitt samla tilbod på frakt (vel &quot;Andre område&quot; ovanfor).
                   </p>
                 )}
               </div>

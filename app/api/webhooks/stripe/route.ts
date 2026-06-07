@@ -3,6 +3,9 @@ import Stripe from 'stripe';
 import { prisma } from '@/lib/prisma';
 import { sendCustomerOrderConfirmation, sendAdminOrderNotification } from '@/lib/email';
 
+/* eslint-disable @typescript-eslint/no-explicit-any -- webhook types from the Stripe SDK
+   use narrower event shapes than the generic any; tightening is a separate refactor. */
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
     // FORCE_UPDATE_DEBUG_1
     apiVersion: '2026-01-28.clover' as any,

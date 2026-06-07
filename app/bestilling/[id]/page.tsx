@@ -169,7 +169,7 @@ export default async function OrderPage({
             <div className="border-b pb-6 mb-6">
               <h4 className="font-semibold text-gray-900 mb-3">Produkter</h4>
               <div className="space-y-4">
-                {order.orderItems.map((item: any) => (
+                {order.orderItems.map((item) => (
                   <div key={item.id} className="flex justify-between items-start">
                     <div className="flex-1">
                       <p className="font-medium text-gray-900">{item.product.name}</p>

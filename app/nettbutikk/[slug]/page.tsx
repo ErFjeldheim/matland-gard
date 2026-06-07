@@ -66,7 +66,11 @@ export default async function ProductPage({ params }: { params: Params }) {
             )}
 
             {/* Payment Buttons */}
-            <ProductPageClient product={product as any} />
+            <ProductPageClient product={product as unknown as {
+              id: string; name: string; slug: string; description: string | null;
+              longDescription: string | null; price: number; image: string | null;
+              images: string[]; videoUrl: string | null; createdAt: Date; updatedAt: Date;
+            }} />
 
             {/* Video */}
             {product.videoUrl && (

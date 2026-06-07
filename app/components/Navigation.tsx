@@ -21,6 +21,7 @@ export default function Navigation() {
 
   // Close menu when route changes
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- menu close on route change is intentional
     setIsMenuOpen(false);
   }, [pathname]);
 
