@@ -13,8 +13,8 @@ Sentry.init({
   // process are captured by default in Sentry 10. The Next.js instrumentation
   // hook (registered via withSentryConfig) wires up the App Router.
 
-  // Drop the health endpoint from server-side performance.
-  ignoreTransactions: ["/api/health"],
+  // Drop the health endpoints from server-side performance.
+  ignoreTransactions: ["/api/health", "/api/health/live"],
 
   enabled: Boolean(SENTRY_DSN) && process.env.NODE_ENV === "production",
 

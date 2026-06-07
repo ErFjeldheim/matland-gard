@@ -8,7 +8,7 @@ Sentry.init({
   // 10% of edge transactions (middleware, edge route handlers).
   tracesSampleRate: 0.1,
 
-  ignoreTransactions: ["/api/health"],
+  ignoreTransactions: ["/api/health", "/api/health/live"],
 
   enabled: Boolean(SENTRY_DSN) && process.env.NODE_ENV === "production",
 

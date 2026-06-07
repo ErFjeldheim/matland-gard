@@ -24,9 +24,9 @@ Sentry.init({
   ],
 
   // Drop noisy internal transactions from performance/quota budget.
-  // The health endpoint is the UptimeRobot + Docker HEALTHCHECK target
-  // and is hit every 30s; sampling it would dominate the quota.
-  ignoreTransactions: ["/api/health"],
+  // The health endpoints are the UptimeRobot + Docker HEALTHCHECK targets
+  // and are hit every 30s; sampling them would dominate the quota.
+  ignoreTransactions: ["/api/health", "/api/health/live"],
 
   // Don't send events in local dev — DSN may be unset and noise is unhelpful.
   enabled: Boolean(SENTRY_DSN) && process.env.NODE_ENV === "production",
