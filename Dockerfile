@@ -55,6 +55,10 @@ RUN npm run build
 # directly: it contains both the server and static source maps we need
 # to deobfuscate stack frames in the Sentry dashboard.
 #
+# sentry-cli v2 only accepts a single --url-prefix flag, so we use the
+# Sentry-recommended `~/_next` (the local build output is .next/, served
+# at /_next/... at runtime).
+#
 # Guarded on SENTRY_AUTH_TOKEN so a missing token does not fail the
 # build (the rest of the build is unaffected; we just lose one round
 # of source maps until a token is provided).
@@ -65,7 +69,6 @@ RUN if [ -n "$SENTRY_AUTH_TOKEN" ]; then \
             --org "$SENTRY_ORG" \
             --project "$SENTRY_PROJECT" \
             --url-prefix '~/_next' \
-            --url-prefix '/_next' \
             .next && \
         npx --yes @sentry/cli@latest releases finalize \
             --org "$SENTRY_ORG" \
