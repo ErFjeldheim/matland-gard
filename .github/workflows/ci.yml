@@ -20,17 +20,24 @@ jobs:
     timeout-minutes: 15
 
     env:
-      # Dummy values for steps that load modules which read env at init.
+      # Dummy values for steps that load modules which read env at init
+      # or that Next.js calls while prerendering pages.
       # - DATABASE_URL: prisma.config.ts evaluates env("DATABASE_URL") at
       #   load time, and lib/prisma.ts instantiates pg.Pool at module init.
       # - STRIPE_SECRET_KEY: app/actions.ts and the Stripe webhook route
       #   instantiate `new Stripe(process.env.STRIPE_SECRET_KEY!, ...)`
       #   at module init; a non-empty placeholder satisfies the SDK.
+      # - NEXT_PUBLIC_SUPABASE_URL / NEXT_PUBLIC_SUPABASE_ANON_KEY:
+      #   utils/supabase/{client,server}.ts throw synchronously when
+      #   these are missing, which fires during `next build` while it
+      #   collects page data for prerendering (e.g. /admin/login).
       # None of these need to point at a real service — nothing connects
       # during lint or build, only at runtime.
       DATABASE_URL: postgresql://ci:ci@localhost:5432/ci
       STRIPE_SECRET_KEY: sk_test_ci_dummy
       NEXT_PUBLIC_SITE_URL: https://matlandgard.no
+      NEXT_PUBLIC_SUPABASE_URL: https://ci.supabase.invalid
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ci_dummy_anon_key
 
     steps:
       - name: Checkout
