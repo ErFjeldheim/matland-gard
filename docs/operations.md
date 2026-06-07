@@ -121,7 +121,7 @@ All secrets live in **Dokploy → Application → matlandgard.no → Environment
 (plain multiline `env` string) and **Build Args** (visible in `docker history`).
 
 - **Runtime env** (in `env`): `SENTRY_DSN`, `DATABASE_URL`, `DIRECT_URL`,
-  `NEXT_PUBLIC_SUPABASE_*`, `STRIPE_*`, `VIPPS_*`, `EMAIL_*`, `ADMIN_PASSWORD`.
+  `NEXT_PUBLIC_SUPABASE_*`, `STRIPE_*`, `VIPPS_*`, `EMAIL_*`.
 - **Build args** (in `buildArgs`): `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`,
   `SENTRY_PROJECT`, `COMMIT_SHA`, plus all `NEXT_PUBLIC_SUPABASE_*` and
   Supabase URL/key needed at build time.

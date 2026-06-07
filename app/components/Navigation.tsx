@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useCart } from '../context/CartContext';
 import { useEffect, useState } from 'react';
+import { createClient } from '@/utils/supabase/client';
 
 export default function Navigation() {
   const { totalItems } = useCart();
@@ -12,10 +13,10 @@ export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    // Check admin authentication status
-    fetch('/api/admin/check-auth')
-      .then(res => res.json())
-      .then(data => setIsAdmin(data.isAuthenticated))
+    // Check admin authentication status via Supabase session.
+    const supabase = createClient();
+    supabase.auth.getUser()
+      .then(({ data }) => setIsAdmin(!!data.user))
       .catch(() => setIsAdmin(false));
   }, [pathname]);
 

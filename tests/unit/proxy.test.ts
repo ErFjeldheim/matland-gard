@@ -1,4 +1,8 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeAll } from 'vitest';
+
+vi.hoisted(() => {
+  process.env.NEXT_PUBLIC_SUPABASE_URL = 'https://pbufcmuofitrtwckuqtr.supabase.co';
+});
 
 // Stub next/server with a minimal implementation that captures the
 // proxy's return value so we can assert on status, headers, and
@@ -33,11 +37,11 @@ vi.mock('next/server', () => ({
 
 import { proxy, config } from '@/proxy';
 
-function makeRequest(pathname: string, cookieValue?: string): any { // eslint-disable-line @typescript-eslint/no-explicit-any
+function makeRequest(pathname: string, cookieNames: string[] = []): any { // eslint-disable-line @typescript-eslint/no-explicit-any
     const url = new URL(`https://example.test${pathname}`);
-    const cookies: Record<string, { value: string }> = {};
-    if (cookieValue !== undefined) {
-        cookies['admin-auth'] = { value: cookieValue };
+    const cookies = new Map<string, { value: string }>();
+    for (const name of cookieNames) {
+        cookies.set(name, { value: 'mock-value' });
     }
     const nextUrl = {
         pathname: url.pathname,
@@ -67,7 +71,11 @@ function makeRequest(pathname: string, cookieValue?: string): any { // eslint-di
     return {
         nextUrl,
         cookies: {
-            get: (name: string) => cookies[name],
+            getAll: () =>
+                Array.from(cookies.entries()).map(([name, value]) => ({
+                    name,
+                    value: value.value,
+                })),
         },
     };
 }
@@ -80,12 +88,26 @@ function clearChain() {
 }
 
 describe('proxy', () => {
-    it('lets authenticated requests through', () => {
+    beforeAll(() => {
+        process.env.NEXT_PUBLIC_SUPABASE_URL = 'https://pbufcmuofitrtwckuqtr.supabase.co';
+    });
+
+    it('lets authenticated requests through when the Supabase auth cookie is present', () => {
         clearChain();
-        const req = makeRequest('/admin/orders', 'authenticated');
+        const req = makeRequest('/admin/orders', ['sb-pbufcmuofitrtwckuqtr-auth-token']);
         const res = proxy(req);
         expect(nextMock.NextResponse.next).toHaveBeenCalled();
         expect(res).toEqual({ kind: 'next' });
+    });
+
+    it('lets requests through when chunked Supabase auth cookies are present', () => {
+        clearChain();
+        const req = makeRequest('/admin/orders', [
+            'sb-pbufcmuofitrtwckuqtr-auth-token-0',
+            'sb-pbufcmuofitrtwckuqtr-auth-token-1',
+        ]);
+        proxy(req);
+        expect(nextMock.NextResponse.next).toHaveBeenCalled();
     });
 
     it('redirects unauthenticated /admin/* to /admin/login', () => {
@@ -109,9 +131,16 @@ describe('proxy', () => {
         expect(res).toEqual({ kind: 'json', body: { error: 'Unauthorized' }, status: 401, headers: {} });
     });
 
-    it('rejects an unauthenticated request with the wrong cookie value', () => {
+    it('rejects a request whose cookies do not include a Supabase auth cookie', () => {
         clearChain();
-        const req = makeRequest('/admin/orders', 'something-else');
+        const req = makeRequest('/admin/orders', ['some-other-cookie', 'session=abc']);
+        proxy(req);
+        expect(nextMock.NextResponse.redirect).toHaveBeenCalled();
+    });
+
+    it('rejects a request whose cookie name is from a different Supabase project', () => {
+        clearChain();
+        const req = makeRequest('/admin/orders', ['sb-some-other-project-auth-token']);
         proxy(req);
         expect(nextMock.NextResponse.redirect).toHaveBeenCalled();
     });
@@ -122,7 +151,7 @@ describe('proxy matcher config', () => {
         expect(config.matcher).toContain('/admin/((?!login$).*)');
     });
 
-    it('excludes login, logout, and check-auth from the api matcher', () => {
-        expect(config.matcher).toContain('/api/admin/((?!login|logout|check-auth$).*)');
+    it('matches all /api/admin routes', () => {
+        expect(config.matcher).toContain('/api/admin/(.*)');
     });
 });
