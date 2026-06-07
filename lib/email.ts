@@ -1,5 +1,15 @@
 import nodemailer from 'nodemailer';
 
+export function escapeHtml(value: string | null | undefined): string {
+  if (value === null || value === undefined) return '';
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 // Create transporter function to ensure env vars are loaded
 function getTransporter() {
   if (!process.env.EMAIL_USER || !process.env.EMAIL_PASSWORD) {
@@ -121,7 +131,7 @@ Telefon: +47 954 58 563
         </div>
         
         <div style="padding: 25px;">
-          <p>Hei ${orderData.customerName},</p>
+          <p>Hei ${escapeHtml(orderData.customerName)},</p>
           <p>Takk for di bestilling hjå Matland Gård!</p>
           
           <div style="background-color: ${brandBackground}; padding: 15px; margin: 20px 0; border-radius: 5px; border-left: 4px solid ${brandPrimary};">
@@ -160,7 +170,7 @@ Telefon: +47 954 58 563
             <tr>
               <td style="padding: 15px;">
                 <p style="margin: 0 0 10px 0;"><strong style="color: ${brandPrimary};">Leveringsmetode:</strong><br/>${shippingText}</p>
-                ${orderData.deliveryAddress ? `<p style="margin: 0;"><strong style="color: ${brandPrimary};">Leveringsadresse:</strong><br/>${orderData.deliveryAddress}</p>` : ''}
+                ${orderData.deliveryAddress ? `<p style="margin: 0;"><strong style="color: ${brandPrimary};">Leveringsadresse:</strong><br/>${escapeHtml(orderData.deliveryAddress)}</p>` : ''}
               </td>
             </tr>
           </table>
@@ -280,15 +290,15 @@ Behandle ordren i admin-panelet.
           <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px;">
             <tr>
               <td style="padding: 8px 0; color: #666; width: 100px;">Navn:</td>
-              <td style="padding: 8px 0; font-weight: bold;">${orderData.customerName}</td>
+              <td style="padding: 8px 0; font-weight: bold;">${escapeHtml(orderData.customerName)}</td>
             </tr>
             <tr>
               <td style="padding: 8px 0; color: #666;">E-post:</td>
-              <td style="padding: 8px 0; font-weight: bold;"><a href="mailto:${orderData.customerEmail}" style="color: ${brandPrimary}; text-decoration: none;">${orderData.customerEmail}</a></td>
+              <td style="padding: 8px 0; font-weight: bold;"><a href="mailto:${escapeHtml(orderData.customerEmail)}" style="color: ${brandPrimary}; text-decoration: none;">${escapeHtml(orderData.customerEmail)}</a></td>
             </tr>
             <tr>
               <td style="padding: 8px 0; color: #666;">Telefon:</td>
-              <td style="padding: 8px 0; font-weight: bold;"><a href="tel:${orderData.customerPhone}" style="color: ${brandPrimary}; text-decoration: none;">${orderData.customerPhone}</a></td>
+              <td style="padding: 8px 0; font-weight: bold;"><a href="tel:${escapeHtml(orderData.customerPhone)}" style="color: ${brandPrimary}; text-decoration: none;">${escapeHtml(orderData.customerPhone)}</a></td>
             </tr>
           </table>
 
@@ -321,7 +331,7 @@ Behandle ordren i admin-panelet.
 
           <div style="margin-bottom: 25px; padding: 15px; border: 1px solid #eee; border-radius: 5px;">
             <p style="margin: 0 0 10px 0;"><strong>Leveringsmetode:</strong> ${shippingText}</p>
-            ${orderData.deliveryAddress ? `<p style="margin: 0;"><strong>Leveringsadresse:</strong> ${orderData.deliveryAddress}</p>` : ''}
+            ${orderData.deliveryAddress ? `<p style="margin: 0;"><strong>Leveringsadresse:</strong> ${escapeHtml(orderData.deliveryAddress)}</p>` : ''}
           </div>
 
           <div style="background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; border-radius: 0 5px 5px 0;">
@@ -379,7 +389,7 @@ Telefon: +47 954 58 563
         </div>
         
         <div style="padding: 25px;">
-          <p>Hei ${orderData.customerName},</p>
+          <p>Hei ${escapeHtml(orderData.customerName)},</p>
           <p>Vi har no refundert di bestilling hjå Matland Gård.</p>
           
           <div style="background-color: ${brandBackground}; padding: 15px; margin: 20px 0; border-radius: 5px; border-left: 4px solid #6C757D;">
