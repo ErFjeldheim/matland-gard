@@ -224,7 +224,8 @@ export default async function AdminDashboard() {
                       <div className="text-sm text-gray-900">
                         {order.orderItems.map((item) => (
                           <div key={item.id} className="mb-1">
-                            {item.product.name} × {item.quantity}
+                            {item.product.name}
+                            {item.size && <span className="text-gray-500"> ({item.size})</span>} × {item.quantity}
                           </div>
                         ))}
                       </div>

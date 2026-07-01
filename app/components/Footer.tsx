@@ -6,6 +6,8 @@ export default function Footer() {
           <a href="/vilkar" className="hover:text-[var(--color-accent)] transition-colors">Salsvilkår</a>
           <span className="text-gray-500">|</span>
           <a href="/personvern" className="hover:text-[var(--color-accent)] transition-colors">Personvern</a>
+          <span className="text-gray-500">|</span>
+          <a href="/admin/login" className="hover:text-[var(--color-accent)] transition-colors">Login</a>
         </div>
         <p>&copy; {new Date().getFullYear()} MATLAND GÅRD | <a href="https://fjelldata.com" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--color-accent)] transition-colors">Nettsida er utvikla, drifta og vedlikehalden av Fjelldata</a></p>
       </div>

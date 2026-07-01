@@ -19,6 +19,7 @@ type Product = {
 };
 
 const HERREGAARDSSINGEL_SIZE_OPTIONS = [
+  { size: '2-4mm', price: 189900 },
   { size: '4-8mm', price: 169900 },
   { size: '8-16mm', price: 149900 },
   { size: '16-32mm', price: 139900 }

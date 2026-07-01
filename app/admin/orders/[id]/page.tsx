@@ -153,6 +153,9 @@ export default async function AdminOrderPage({ params }: { params: Promise<{ id:
                     <div className="flex-1">
                       <p className="font-medium text-gray-900">{item.product.name}</p>
                       <p className="text-sm text-gray-600">Antall: {item.quantity}</p>
+                      {item.size && (
+                        <p className="text-sm text-gray-600">Storleik/variant: <span className="font-medium text-gray-900">{item.size}</span></p>
+                      )}
                       <p className="text-sm text-gray-600">Enhetspris: {(item.price / 100).toLocaleString('nb-NO')} kr</p>
                     </div>
                     <p className="font-semibold text-gray-900 text-lg">
