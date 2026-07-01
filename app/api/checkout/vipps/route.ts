@@ -45,13 +45,14 @@ export async function POST(request: NextRequest) {
     }
 
     let totalAmount = 0;
-    const orderItemsData: Array<{ productId: string; quantity: number; price: number }> = [];
+    const orderItemsData: Array<{ productId: string; quantity: number; price: number; size: string | null }> = [];
 
     const getPriceWithMetadata = async (product: any, size?: string) => {
       if (product.name === 'Herregårdssingel') {
-        if (size === '4-8mm') return (await getNumberSetting('herregardssingel_price_4-8mm', 1750)) * 100;
-        if (size === '8-16mm') return (await getNumberSetting('herregardssingel_price_8-16mm', 1500)) * 100;
-        if (size === '16-32mm') return (await getNumberSetting('herregardssingel_price_16-32mm', 1500)) * 100;
+        if (size === '2-4mm') return (await getNumberSetting('herregardssingel_price_2-4mm', 1899)) * 100;
+        if (size === '4-8mm') return (await getNumberSetting('herregardssingel_price_4-8mm', 1699)) * 100;
+        if (size === '8-16mm') return (await getNumberSetting('herregardssingel_price_8-16mm', 1499)) * 100;
+        if (size === '16-32mm') return (await getNumberSetting('herregardssingel_price_16-32mm', 1399)) * 100;
       }
       if (product.name === 'Grus') {
         if (size === '0-16mm') return (await getNumberSetting('grus_price_0-16mm', 599)) * 100;
@@ -80,6 +81,7 @@ export async function POST(request: NextRequest) {
           productId: product.id,
           quantity: item.quantity,
           price: price,
+          size: item.size ?? null,
         });
       }
     } else if (productId && quantity) {
@@ -97,6 +99,7 @@ export async function POST(request: NextRequest) {
         productId: product.id,
         quantity,
         price: price,
+        size: body.size ?? null,
       });
     } else {
       return NextResponse.json(
