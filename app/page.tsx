@@ -3,6 +3,7 @@ import Footer from './components/Footer';
 import Link from 'next/link';
 import Image from 'next/image';
 import CardCarousel from './components/CardCarousel';
+import FreeInspectionBanner from './components/FreeInspectionBanner';
 
 import { prisma } from '@/lib/prisma';
 
@@ -144,6 +145,11 @@ export default async function HomePage() {
               </div>
             </div>
           </Link>
+        </div>
+
+        {/* Free Inspection Banner */}
+        <div className="mb-16">
+          <FreeInspectionBanner />
         </div>
 
         {/* Contact Section */}

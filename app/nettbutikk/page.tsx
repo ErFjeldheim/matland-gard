@@ -3,6 +3,7 @@ import Navigation from '@/app/components/Navigation';
 import Footer from '@/app/components/Footer';
 import Link from 'next/link';
 import SingelPageClient from './SingelPageClient';
+import FreeInspectionBanner from '@/app/components/FreeInspectionBanner';
 
 export const dynamic = 'force-dynamic';
 
@@ -44,6 +45,10 @@ export default async function SingelPage() {
 
       {/* Content */}
       <main className="container mx-auto px-4 py-12">
+        <div className="mb-12">
+          <FreeInspectionBanner />
+        </div>
+
         <SingelPageClient products={products} />
 
         {/* Info Section */}

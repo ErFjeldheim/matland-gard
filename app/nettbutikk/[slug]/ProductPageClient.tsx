@@ -36,7 +36,7 @@ const HERREGARDSGRUS_SIZE_OPTIONS = [
 ];
 
 const SAND_SIZE_OPTIONS = [
-  { size: 'Sand til toppdressing og sandkasse (0-2mm)', price: 150000 }
+  { size: 'Sand til toppdressing og sandkasse (0-2mm)', price: 149000 }
 ];
 
 const ELVESTEIN_SIZE_OPTIONS = [
