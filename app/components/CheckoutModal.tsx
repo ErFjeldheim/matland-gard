@@ -2,6 +2,11 @@
 
 import { useState } from 'react';
 import { createStripeCheckoutSession } from '@/app/actions';
+import {
+  calculateFixedShippingFee,
+  isFixedShippingEligible,
+  isShippingUnit,
+} from '@/lib/shipping';
 
 interface CartItem {
   productId: string;
@@ -27,7 +32,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
   const [loading, setLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [paymentMethod, setPaymentMethod] = useState<'vipps' | 'stripe' | null>(null);
-  const [shippingMethod, setShippingMethod] = useState<'shipping_quote' | 'pickup' | 'shipping_fixed_1250' | 'shipping_fixed_1875' | 'pickup_dokken' | null>(null);
+  const [shippingMethod, setShippingMethod] = useState<'shipping_quote' | 'pickup' | 'shipping_fixed' | 'pickup_dokken' | null>(null);
   const [formData, setFormData] = useState({
     customerName: '',
     customerEmail: '',
@@ -35,23 +40,24 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
     deliveryAddress: '',
   });
 
-  if (!isOpen) return null;
-
   const isCartCheckout = cartItems && cartItems.length > 0;
 
   const totalUnits = isCartCheckout
     ? cartItems.reduce((sum, item) => {
-      const name = item.productName.toLowerCase();
-      const isUnit = !name.includes('matte');
-      return isUnit ? sum + item.quantity : sum;
+      return isShippingUnit(item.productName) ? sum + item.quantity : sum;
     }, 0)
-    : (!product.name.toLowerCase().includes('matte') ? quantity : 0);
+    : (isShippingUnit(product.name) ? quantity : 0);
+
+  const canUseFixedShipping = isFixedShippingEligible(totalUnits);
+
+  const selectedShippingMethod =
+    shippingMethod === 'shipping_fixed' && !canUseFixedShipping ? null : shippingMethod;
+
+  if (!isOpen) return null;
 
   const getShippingFee = () => {
-    const multiplier = totalUnits;
-    if (shippingMethod === 'shipping_fixed_1250') return 1250 * multiplier;
-    if (shippingMethod === 'shipping_fixed_1875') return 1875 * multiplier;
-    if (shippingMethod === 'pickup_dokken') return 125 * multiplier;
+    if (selectedShippingMethod === 'shipping_fixed') return calculateFixedShippingFee(totalUnits);
+    if (selectedShippingMethod === 'pickup_dokken') return 125 * totalUnits;
     return 0;
   };
 
@@ -64,6 +70,11 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
 
     if (!shippingMethod) {
       alert('Ver vennleg og vel leveringsalternativ');
+      return;
+    }
+
+    if (shippingMethod === 'shipping_fixed' && !canUseFixedShipping) {
+      alert('Fastpris frakt gjeld ved bestilling av minst 2 big bags. Vel «Kontakt for fraktpris» eller henting.');
       return;
     }
 
@@ -234,35 +245,26 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
             <div>
               <label className="block text-gray-700 font-medium mb-3">Velg leveringsalternativ *</label>
               <div className="space-y-3">
-                <button
-                  type="button"
-                  onClick={() => setShippingMethod('shipping_fixed_1250')}
-                  className={`w-full py-3 px-4 rounded-lg border-2 font-medium transition-all cursor-pointer text-left ${shippingMethod === 'shipping_fixed_1250'
-                    ? 'border-[var(--color-primary)] bg-[var(--color-accent)]/20 text-[var(--color-dark)]'
-                    : 'border-gray-300 hover:border-[var(--color-primary)] text-gray-700'
-                    }`}
-                  disabled={loading}
-                >
-                  <div className="font-semibold">Frakt: Sone 1</div>
-                  <div className="text-xs text-gray-600">Bergen, Vaksdal, Samnanger, Bjørnafjorden</div>
-                  <div className="text-sm font-bold text-[var(--color-primary)]">{1250 * totalUnits} kr</div>
-                  <div className="text-xs text-gray-500">kranbil ikkje inkludert</div>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setShippingMethod('shipping_fixed_1875')}
-                  className={`w-full py-3 px-4 rounded-lg border-2 font-medium transition-all cursor-pointer text-left ${shippingMethod === 'shipping_fixed_1875'
-                    ? 'border-[var(--color-primary)] bg-[var(--color-accent)]/20 text-[var(--color-dark)]'
-                    : 'border-gray-300 hover:border-[var(--color-primary)] text-gray-700'
-                    }`}
-                  disabled={loading}
-                >
-                  <div className="font-semibold">Frakt: Sone 2</div>
-                  <div className="text-xs text-gray-600">Austevoll, Sotra, Askøy, Øygarden, Voss</div>
-                  <div className="text-sm font-bold text-[var(--color-primary)]">{1875 * totalUnits} kr</div>
-                  <div className="text-xs text-gray-500">kranbil ikkje inkludert</div>
-                </button>
+                {canUseFixedShipping ? (
+                  <button
+                    type="button"
+                    onClick={() => setShippingMethod('shipping_fixed')}
+                    className={`w-full py-3 px-4 rounded-lg border-2 font-medium transition-all cursor-pointer text-left ${shippingMethod === 'shipping_fixed'
+                      ? 'border-[var(--color-primary)] bg-[var(--color-accent)]/20 text-[var(--color-dark)]'
+                      : 'border-gray-300 hover:border-[var(--color-primary)] text-gray-700'
+                      }`}
+                    disabled={loading}
+                  >
+                    <div className="font-semibold">Frakt: Fastpris (heile landet)</div>
+                    <div className="text-xs text-gray-600">1500 kr inkl. mva for 2 big bags, deretter 750 kr per ekstra big bag</div>
+                    <div className="text-sm font-bold text-[var(--color-primary)]">{calculateFixedShippingFee(totalUnits)} kr</div>
+                    <div className="text-xs text-gray-500">kranbil ikkje inkludert</div>
+                  </button>
+                ) : (
+                  <p className="text-xs text-amber-600 font-medium">
+                    Fastpris frakt gjeld ved bestilling av minst 2 big bags. Ta kontakt for fraktpris på mindre bestillingar.
+                  </p>
+                )}
 
                 <button
                   type="button"
@@ -273,7 +275,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                     }`}
                   disabled={loading}
                 >
-                  <div className="font-semibold">Andre område</div>
+                  <div className="font-semibold">Kontakt for fraktpris</div>
                   <div className="text-xs text-gray-600">Vi kontaktar deg raskt for ein god fraktpris</div>
                   <div className="text-sm font-bold text-green-600">Få tilbod</div>
                 </button>
@@ -305,12 +307,6 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                   <div className="text-xs text-gray-600">Etter avtale. Pålasting med truck. Området er inngjerdet, så varene står trygt.</div>
                   <div className="text-sm font-bold text-[var(--color-primary)]">{125 * totalUnits} kr</div>
                 </button>
-
-                {totalUnits >= 3 && (
-                  <p className="text-xs text-amber-600 font-medium">
-                    Tips: Sidan du har 3 eller fleire einingar, kan det løna seg å be om eitt samla tilbod på frakt (vel &quot;Andre område&quot; ovanfor).
-                  </p>
-                )}
               </div>
             </div>
 

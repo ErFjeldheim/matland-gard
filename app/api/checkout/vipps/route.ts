@@ -2,6 +2,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { sendCustomerOrderConfirmation, sendAdminOrderNotification } from '@/lib/email';
 import { getNumberSetting } from '@/lib/settings';
+import {
+  calculateFixedShippingFee,
+  isFixedShippingEligible,
+  isShippingUnit,
+} from '@/lib/shipping';
 import { initiateVippsPayment } from '@/app/lib/vipps';
 import { checkRateLimit, getClientIp } from '@/lib/ratelimit';
 
@@ -108,25 +113,28 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Calculate total units (storsekker or tons of grus) for shipping multiplier
+    // Calculate total units (storsekker or tons of grus) for shipping
     let totalUnits = 0;
     for (const item of orderItemsData) {
       const product = await prisma.product.findUnique({ where: { id: item.productId } });
-      if (product && !product.name.toLowerCase().includes('matte')) {
+      if (product && isShippingUnit(product.name)) {
         totalUnits += item.quantity;
       }
     }
-    const shippingMultiplier = totalUnits;
 
     // Add shipping fee
-    if (shippingMethod === 'shipping_fixed_1250') {
-      const fee = await getNumberSetting('shipping_fixed_1250', 1250);
-      totalAmount += fee * 100 * shippingMultiplier;
-    } else if (shippingMethod === 'shipping_fixed_1875') {
-      const fee = await getNumberSetting('shipping_fixed_1875', 1875);
-      totalAmount += fee * 100 * shippingMultiplier;
+    if (shippingMethod === 'shipping_fixed') {
+      if (!isFixedShippingEligible(totalUnits)) {
+        return NextResponse.json(
+          { error: 'Fastpris frakt gjeld ved bestilling av minst 2 big bags. Vel «Kontakt for fraktpris» eller henting.' },
+          { status: 400 }
+        );
+      }
+      const base = await getNumberSetting('shipping_fixed', 1500);
+      const extraPerUnit = await getNumberSetting('shipping_extra_per_unit', 750);
+      totalAmount += calculateFixedShippingFee(totalUnits, base, extraPerUnit) * 100;
     } else if (shippingMethod === 'pickup_dokken') {
-      totalAmount += 125 * 100 * shippingMultiplier;
+      totalAmount += 125 * 100 * totalUnits;
     }
 
     // Create order in database

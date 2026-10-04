@@ -4,6 +4,7 @@ import Footer from '../../components/Footer';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { retryVippsPayment } from '@/app/actions';
+import { getShippingMethodLabel } from '@/lib/shipping';
 
 export const dynamic = 'force-dynamic';
 
@@ -154,9 +155,7 @@ export default async function OrderPage({
                 {order.shippingMethod && (
                   <p>
                     <span className="font-medium">Levering:</span>{' '}
-                    {order.shippingMethod === 'pickup'
-                      ? 'Henting i Holmefjord'
-                      : 'Vi sender tilbud på frakt'}
+                    {getShippingMethodLabel(order.shippingMethod)}
                   </p>
                 )}
                 {order.deliveryAddress && (
@@ -225,13 +224,15 @@ export default async function OrderPage({
             <ol className="list-decimal list-inside space-y-2 text-blue-800">
               <li>Vi behandler din bestilling</li>
               <li>Du mottar en e-postbekreftelse</li>
-              {order.shippingMethod === 'pickup' ? (
-                <li>Vi kontakter deg for å avtale dato for henting i Holmefjord</li>
-              ) : (
+              {order.shippingMethod === 'pickup' || order.shippingMethod === 'pickup_dokken' ? (
+                <li>Vi kontakter deg for å avtale dato for henting</li>
+              ) : order.shippingMethod === 'shipping_quote' ? (
                 <>
                   <li>Vi kontakter deg med pristilbud på frakt</li>
                   <li>Etter godkjenning arrangerer vi levering</li>
                 </>
+              ) : (
+                <li>Vi arrangerer levering og kontaktar deg for å avtale tidspunkt</li>
               )}
             </ol>
           </div>

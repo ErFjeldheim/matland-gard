@@ -9,6 +9,11 @@ import { headers } from 'next/headers';
 import { prisma } from '@/lib/prisma';
 import Stripe from 'stripe';
 import { getNumberSetting } from '@/lib/settings';
+import {
+    calculateFixedShippingFee,
+    isFixedShippingEligible,
+    isShippingUnit,
+} from '@/lib/shipping';
 import { createClient } from '@/utils/supabase/server';
 import { sendRefundNotification } from '@/lib/email';
 import { checkRateLimit, getClientIp } from '@/lib/ratelimit';
@@ -226,37 +231,38 @@ export async function createStripeCheckoutSession(data: CheckoutData) {
         throw new Error('Manglar produkt eller handlekorg informasjon');
     }
 
-    // Calculate total units (storsekker or tons of grus) for shipping multiplier
+    // Calculate total units (storsekker or tons of grus) for shipping
     let totalUnits = 0;
     for (const item of orderItemsData) {
         const product = await prisma.product.findUnique({ where: { id: item.productId } });
-        if (product && !product.name.toLowerCase().includes('matte')) {
+        if (product && isShippingUnit(product.name)) {
             totalUnits += item.quantity;
         }
     }
-    const shippingMultiplier = totalUnits;
 
     // Add shipping fee
     let shippingFee = 0;
-    if (shippingMethod === 'shipping_fixed_1250') {
-        shippingFee = (await getNumberSetting('shipping_fixed_1250', 1250)) * 100;
-    } else if (shippingMethod === 'shipping_fixed_1875') {
-        shippingFee = (await getNumberSetting('shipping_fixed_1875', 1875)) * 100;
+    if (shippingMethod === 'shipping_fixed') {
+        if (!isFixedShippingEligible(totalUnits)) {
+            throw new Error('Fastpris frakt gjeld ved bestilling av minst 2 big bags. Vel «Kontakt for fraktpris» eller henting.');
+        }
+        const base = await getNumberSetting('shipping_fixed', 1500);
+        const extraPerUnit = await getNumberSetting('shipping_extra_per_unit', 750);
+        shippingFee = calculateFixedShippingFee(totalUnits, base, extraPerUnit) * 100;
     } else if (shippingMethod === 'pickup_dokken') {
-        shippingFee = 125 * 100;
+        shippingFee = 125 * 100 * totalUnits;
     }
 
     if (shippingFee > 0) {
-        const finalShippingFee = shippingFee * shippingMultiplier;
-        totalAmount += finalShippingFee;
+        totalAmount += shippingFee;
         stripeLineItems.push({
             price_data: {
                 currency: 'nok',
                 product_data: {
                     name: 'Frakt',
-                    description: (shippingMethod === 'shipping_fixed_1250' ? 'Sone 1' : shippingMethod === 'shipping_fixed_1875' ? 'Sone 2' : 'Henting Skur 25 Møhlenpriskaien 8') + (shippingMultiplier > 1 ? ` (x${shippingMultiplier})` : ''),
+                    description: (shippingMethod === 'shipping_fixed' ? 'Fastpris (heile landet)' : 'Henting Skur 25 Møhlenpriskaien 8') + (shippingMethod === 'shipping_fixed' ? ` (${totalUnits} big bags)` : totalUnits > 1 ? ` (x${totalUnits})` : ''),
                 },
-                unit_amount: finalShippingFee,
+                unit_amount: shippingFee,
             },
             quantity: 1,
         });

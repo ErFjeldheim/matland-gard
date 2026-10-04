@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import LogoutButton from './LogoutButton';
 import { createClient } from '@/utils/supabase/server';
+import { getShippingMethodLabel } from '@/lib/shipping';
 
 export const dynamic = 'force-dynamic';
 
@@ -39,7 +40,8 @@ export default async function AdminDashboard() {
   const pendingRevenue = pendingOrders.reduce((sum, order) => sum + order.totalAmount, 0);
 
   // Orders by shipping method
-  const pickupOrders = orders.filter(o => o.shippingMethod === 'pickup').length;
+  const pickupOrders = orders.filter(o => o.shippingMethod === 'pickup' || o.shippingMethod === 'pickup_dokken').length;
+  const fixedShippingOrders = orders.filter(o => o.shippingMethod === 'shipping_fixed' || o.shippingMethod === 'shipping_fixed_1250' || o.shippingMethod === 'shipping_fixed_1875').length;
   const deliveryOrders = orders.filter(o => o.shippingMethod === 'shipping_quote').length;
 
   const statusTexts: Record<string, string> = {
@@ -123,8 +125,12 @@ export default async function AdminDashboard() {
             <h3 className="text-gray-900 font-semibold mb-4">Leveringsmetoder</h3>
             <div className="space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-gray-600">Henting i Holmefjord</span>
+                <span className="text-gray-600">Henting</span>
                 <span className="font-bold text-gray-900">{pickupOrders} ordrer</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-gray-600">Fastpris frakt</span>
+                <span className="font-bold text-gray-900">{fixedShippingOrders} ordrer</span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-gray-600">Levering med tilbud</span>
@@ -232,7 +238,7 @@ export default async function AdminDashboard() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className="text-sm text-gray-900">
-                        {order.shippingMethod === 'pickup' ? 'Henting' : 'Levering'}
+                        {getShippingMethodLabel(order.shippingMethod)}
                       </span>
                       {order.deliveryAddress && (
                         <div className="text-xs text-gray-500 mt-1">{order.deliveryAddress}</div>

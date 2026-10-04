@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import { getShippingMethodLabel } from '@/lib/shipping';
 
 export function escapeHtml(value: string | null | undefined): string {
   if (value === null || value === undefined) return '';
@@ -75,10 +76,7 @@ export async function sendCustomerOrderConfirmation(orderData: OrderEmailData) {
   } else if (orderData.shippingMethod === 'shipping_quote') {
     shippingText = 'Vi kontaktar deg med tilbod på frakt';
   } else {
-    let methodName = 'Frakt';
-    if (orderData.shippingMethod === 'shipping_fixed_1250') methodName = 'Fastpris frakt (Sone 1)';
-    if (orderData.shippingMethod === 'shipping_fixed_1875') methodName = 'Fastpris frakt (Sone 2)';
-    if (orderData.shippingMethod === 'pickup_dokken') methodName = 'Henting Skur 25 Møhlenpriskaien 8';
+    const methodName = getShippingMethodLabel(orderData.shippingMethod);
 
     // Check if we have a valid calculated shipping cost that is greater than 0
     if (shippingCost > 0) {
@@ -86,7 +84,8 @@ export async function sendCustomerOrderConfirmation(orderData: OrderEmailData) {
     } else {
       // Fallback if calculation yields 0 or negative (shouldn't happen for fixed shipping but good for safety)
       // or if it really is free shipping
-      if (orderData.shippingMethod === 'shipping_fixed_1250') shippingText = 'Fastpris frakt (Sone 1): 1250 NOK';
+      if (orderData.shippingMethod === 'shipping_fixed') shippingText = 'Fastpris frakt (heile landet): 1500 NOK';
+      else if (orderData.shippingMethod === 'shipping_fixed_1250') shippingText = 'Fastpris frakt (Sone 1): 1250 NOK';
       else if (orderData.shippingMethod === 'shipping_fixed_1875') shippingText = 'Fastpris frakt (Sone 2): 1875 NOK';
       else if (orderData.shippingMethod === 'pickup_dokken') shippingText = 'Henting Skur 25 Møhlenpriskaien 8: 125 NOK';
       else shippingText = `${methodName}: ${shippingCost / 100} NOK`;
@@ -219,15 +218,13 @@ export async function sendAdminOrderNotification(orderData: OrderEmailData) {
   } else if (orderData.shippingMethod === 'shipping_quote') {
     shippingText = 'Tilbod på frakt må sendast';
   } else {
-    let methodName = 'Frakt';
-    if (orderData.shippingMethod === 'shipping_fixed_1250') methodName = 'Fastpris frakt (Sone 1)';
-    if (orderData.shippingMethod === 'shipping_fixed_1875') methodName = 'Fastpris frakt (Sone 2)';
-    if (orderData.shippingMethod === 'pickup_dokken') methodName = 'Henting Skur 25 Møhlenpriskaien 8';
+    const methodName = getShippingMethodLabel(orderData.shippingMethod);
 
     if (shippingCost > 0) {
       shippingText = `${methodName}: ${shippingCost / 100} NOK`;
     } else {
-      if (orderData.shippingMethod === 'shipping_fixed_1250') shippingText = 'Fastpris frakt (Sone 1): 1250 NOK';
+      if (orderData.shippingMethod === 'shipping_fixed') shippingText = 'Fastpris frakt (heile landet): 1500 NOK';
+      else if (orderData.shippingMethod === 'shipping_fixed_1250') shippingText = 'Fastpris frakt (Sone 1): 1250 NOK';
       else if (orderData.shippingMethod === 'shipping_fixed_1875') shippingText = 'Fastpris frakt (Sone 2): 1875 NOK';
       else if (orderData.shippingMethod === 'pickup_dokken') shippingText = 'Henting Skur 25 Møhlenpriskaien 8: 125 NOK';
       else shippingText = `${methodName}: ${shippingCost / 100} NOK`;

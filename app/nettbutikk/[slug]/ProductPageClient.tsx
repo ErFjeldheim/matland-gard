@@ -45,7 +45,7 @@ const ELVESTEIN_SIZE_OPTIONS = [
 ];
 
 const ECCOGRAVEL_SIZE_OPTIONS = [
-  { size: '2cm', price: 22900 },
+  { size: '2cm', price: 19900 },
   { size: '3cm', price: 22900 }
 ];
 
@@ -149,6 +149,39 @@ export default function ProductPageClient({ product }: { product: Product }) {
             : 'per storsekk (900kg)'}
         </p>
       </div>
+
+      {product.name === 'Singelmatter ECCOgravel' && (
+        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+          <h3 className="text-lg font-semibold text-gray-900 mb-3">Storleikar og prisar</h3>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-sm">
+              <thead>
+                <tr className="border-b border-gray-200 text-gray-500">
+                  <th className="py-2 pr-4 font-medium">Tykkelse</th>
+                  <th className="py-2 pr-4 font-medium">Mål (L × B)</th>
+                  <th className="py-2 pr-4 font-medium">Areal pr. matte inkludert duk</th>
+                  <th className="py-2 font-medium">Pris inkl. mva</th>
+                </tr>
+              </thead>
+              <tbody className="text-gray-900">
+                <tr className="border-b border-gray-100">
+                  <td className="py-2 pr-4 font-semibold">2 cm</td>
+                  <td className="py-2 pr-4">80 × 120 cm</td>
+                  <td className="py-2 pr-4">1 m²</td>
+                  <td className="py-2">199 kr / m²</td>
+                </tr>
+                <tr>
+                  <td className="py-2 pr-4 font-semibold">3 cm</td>
+                  <td className="py-2 pr-4">160 × 120 cm</td>
+                  <td className="py-2 pr-4">2 m²</td>
+                  <td className="py-2">229 kr / m²</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="text-gray-500 text-sm mt-3">Pris er pr. kvadratmeter inkludert mva.</p>
+        </div>
+      )}
 
       {requiresSize && hasMultipleSizes && (
         <div className="bg-white rounded-lg shadow-md p-6 mb-6">

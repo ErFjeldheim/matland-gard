@@ -49,8 +49,8 @@ async function verifyData() {
         'herregardssingel_price_16-32mm',
         'grus_price_0-16mm',
         'grus_price_0-32mm',
-        'shipping_fixed_1250',
-        'shipping_fixed_1875'
+        'shipping_fixed',
+        'shipping_extra_per_unit'
     ];
 
     console.log('Checking System Settings...');

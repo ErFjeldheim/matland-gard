@@ -16,15 +16,17 @@ async function generateHtml(orderData) {
 
     const shippingText = orderData.shippingMethod === 'pickup'
         ? 'Henting på staden'
-        : orderData.shippingMethod === 'shipping_fixed_1250'
-            ? 'Fastpris frakt (Sone 1): 1250 NOK'
-            : orderData.shippingMethod === 'shipping_fixed_1875'
-                ? 'Fastpris frakt (Sone 2): 1875 NOK'
-                : orderData.shippingMethod === 'pickup_dokken'
-                    ? 'Henting Skur 25 Møhlenpriskaien 8: 125 NOK'
-                    : orderData.shippingMethod === 'shipping_quote'
-                        ? 'Vi kontaktar deg med tilbod på frakt'
-                        : 'Ikkje spesifisert';
+        : orderData.shippingMethod === 'shipping_fixed'
+            ? 'Fastpris frakt (heile landet): 1500 NOK'
+            : orderData.shippingMethod === 'shipping_fixed_1250'
+                ? 'Fastpris frakt (Sone 1): 1250 NOK'
+                : orderData.shippingMethod === 'shipping_fixed_1875'
+                    ? 'Fastpris frakt (Sone 2): 1875 NOK'
+                    : orderData.shippingMethod === 'pickup_dokken'
+                        ? 'Henting Skur 25 Møhlenpriskaien 8: 125 NOK'
+                        : orderData.shippingMethod === 'shipping_quote'
+                            ? 'Vi kontaktar deg med tilbod på frakt'
+                            : 'Ikkje spesifisert';
 
     const isPaid = orderData.status === 'paid' || orderData.status === 'delivered';
     const totalText = isPaid ? 'Totalbeløp (betalt)' : 'Totalt å betale';

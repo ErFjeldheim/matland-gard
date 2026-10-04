@@ -31,11 +31,6 @@ export default async function SingelPage() {
       return 0;
     });
 
-  const shippingZones = [
-    'Bergen, Vaksdal, Samnanger, Bjørnafjorden: 1250 kr',
-    'Austevoll, Sotra, Askøy, Øygarden, Voss: 1875 kr',
-  ];
-
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -57,17 +52,11 @@ export default async function SingelPage() {
           <div className="grid md:grid-cols-2 gap-8">
             <div>
               <h4 className="font-semibold text-gray-900 mb-2">Fastpris på frakt</h4>
-              <p className="text-gray-600 mb-2">Pris per storsekk/tonn:</p>
-              <ul className="text-gray-600 space-y-1 ml-4">
-                {shippingZones.map((zone) => (
-                  <li key={zone}>• {zone}</li>
-                ))}
-              </ul>
-              <p className="text-gray-600 mt-3 text-sm">
-                <i>Eksempel: 2 storsekkar til Bergen = 2000 kr frakt</i>
+              <p className="text-gray-600 mb-2">
+                1500 kr inkl. mva for 2 big bags – levering til heile landet. Deretter 750 kr inkl. mva per ekstra big bag.
               </p>
               <p className="text-gray-600 mt-2 text-sm italic">
-                Ved bestilling av meir enn 2 einingar, ta kontakt for avtale om fraktpris.
+                Ved større bestillingar kan frakten avvike – vi tek kontakt dersom justering er nødvendig.
               </p>
             </div>
             <div>

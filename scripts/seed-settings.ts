@@ -21,8 +21,8 @@ async function main() {
         { key: 'herregardssingel_price_16-32mm', value: '1500', type: 'number' },
         { key: 'grus_price_0-16mm', value: '599', type: 'number' },
         { key: 'grus_price_0-32mm', value: '599', type: 'number' },
-        { key: 'shipping_fixed_1250', value: '1250', type: 'number' },
-        { key: 'shipping_fixed_1875', value: '1875', type: 'number' },
+        { key: 'shipping_fixed', value: '1500', type: 'number' },
+        { key: 'shipping_extra_per_unit', value: '750', type: 'number' },
         { key: 'contact_email', value: 'matlandgard@gmail.com', type: 'text' },
         { key: 'hero_title', value: 'Velkomen til Matland Gård', type: 'text' },
         { key: 'season_text', value: 'April - Oktober', type: 'text' },
@@ -35,6 +35,13 @@ async function main() {
             create: setting,
         });
         console.log(`Innstilling oppretta/oppdatert: ${setting.key}`);
+    }
+
+    const removed = await prisma.setting.deleteMany({
+        where: { key: { in: ['shipping_fixed_1250', 'shipping_fixed_1875'] } },
+    });
+    if (removed.count > 0) {
+        console.log(`Fjerna utgåtte fraktinnstillingar: ${removed.count}`);
     }
 
     console.log('Seeding fullfør!');

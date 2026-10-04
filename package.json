@@ -16,6 +16,7 @@
     "scripts:test-prisma": "tsx scripts/test-prisma.ts",
     "scripts:check-stock": "tsx scripts/check-stock-units.ts",
     "scripts:update-stock": "tsx scripts/update-stock.ts",
+    "scripts:update-singelmatter": "tsx scripts/update-singelmatter.ts",
     "scripts:update-stock-units": "tsx scripts/update-stock-units.ts",
     "scripts:update-product-images": "tsx scripts/update-all-product-images.ts",
     "scripts:add-slugs": "tsx scripts/add-slugs.ts",

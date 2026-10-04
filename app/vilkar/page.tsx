@@ -79,7 +79,7 @@ export default function TermsPage() {
                             <p>Levering er skjedd når kjøpar, eller hans representant, har overtatt tingen.</p>
                             <ul className="list-disc pl-5 mt-2 space-y-1">
                                 <li><strong>Henting:</strong> Kan gjerast etter avtale på Matland Gård.</li>
-                                <li><strong>Levering:</strong> Vi tilbyr levering i spesifiserte soner (Bergen/Omegn) mot eit frakttillegg. Leveringstidspunkt avtalast nærare.</li>
+                                <li><strong>Levering:</strong> Vi tilbyr levering til heile landet med fastpris frakt ved bestilling av minst 2 big bags, elles etter avtale. Leveringstidspunkt avtalast nærare.</li>
                             </ul>
                         </section>
 

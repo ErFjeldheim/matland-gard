@@ -8,6 +8,7 @@ import { createClient } from '@/utils/supabase/server';
 import OrderStatusUpdater from '../../OrderStatusUpdater';
 import DeleteOrderButton from '../../DeleteOrderButton';
 import CopyButton from '../../CopyButton';
+import { getShippingMethodLabel } from '@/lib/shipping';
 
 export const dynamic = 'force-dynamic';
 
@@ -113,7 +114,7 @@ export default async function AdminOrderPage({ params }: { params: Promise<{ id:
                 <div className="space-y-2 text-gray-600">
                   <p>
                     <span className="font-medium">Metode:</span>{' '}
-                    {order.shippingMethod === 'pickup' ? 'Henting i Holmefjord' : 'Levering med tilbud'}
+                    {getShippingMethodLabel(order.shippingMethod)}
                   </p>
                   {order.deliveryAddress && (
                     <p><span className="font-medium">Adresse:</span> {order.deliveryAddress}</p>
