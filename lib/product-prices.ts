@@ -3,8 +3,8 @@ import { prisma } from './prisma';
 /**
  * Single source of truth for products that are sold in several sizes.
  *
- * Prices are stored in the `Setting` table in kroner (e.g. `1799`) and are
- * returned from this module in øre (e.g. `179900`) so they can be used
+ * Prices are stored in the `Setting` table in kroner (e.g. `1790`) and are
+ * returned from this module in øre (e.g. `179000`) so they can be used
  * directly by checkout code and the UI.
  *
  * The defaults below are only used when a setting is missing from the
@@ -41,10 +41,10 @@ const SIZE_PRICE_CONFIGS: SizePriceConfig[] = [
     slug: 'herregardssingel',
     settingPrefix: 'herregardssingel_price_',
     sizes: [
-      { size: '2-4mm', defaultKroner: 1899 },
-      { size: '4-8mm', defaultKroner: 1799 },
-      { size: '8-16mm', defaultKroner: 1599 },
-      { size: '16-32mm', defaultKroner: 1499 },
+      { size: '2-4mm', defaultKroner: 1890 },
+      { size: '4-8mm', defaultKroner: 1790 },
+      { size: '8-16mm', defaultKroner: 1590 },
+      { size: '16-32mm', defaultKroner: 1490 },
     ],
   },
   {
@@ -80,7 +80,7 @@ const SIZE_PRICE_CONFIGS: SizePriceConfig[] = [
     name: 'Elvestein',
     slug: 'elvestein',
     settingPrefix: 'elvestein_price_',
-    sizes: [{ size: '60-90mm', defaultKroner: 3999 }],
+    sizes: [{ size: '60-90mm', defaultKroner: 3990 }],
   },
   {
     name: 'Singelmatter ECCOgravel',

@@ -21,10 +21,10 @@ describe('resolveSizePrices', () => {
 
     expect(config).toBeDefined();
     expect(resolveSizePrices(config!, new Map())).toEqual([
-      { size: '2-4mm', price: 189900 },
-      { size: '4-8mm', price: 179900 },
-      { size: '8-16mm', price: 159900 },
-      { size: '16-32mm', price: 149900 },
+      { size: '2-4mm', price: 189000 },
+      { size: '4-8mm', price: 179000 },
+      { size: '8-16mm', price: 159000 },
+      { size: '16-32mm', price: 149000 },
     ]);
   });
 
@@ -36,10 +36,10 @@ describe('resolveSizePrices', () => {
     ]);
 
     expect(resolveSizePrices(config!, settings)).toEqual([
-      { size: '2-4mm', price: 189900 },
+      { size: '2-4mm', price: 189000 },
       { size: '4-8mm', price: 175000 },
       { size: '8-16mm', price: 155000 },
-      { size: '16-32mm', price: 149900 },
+      { size: '16-32mm', price: 149000 },
     ]);
   });
 
