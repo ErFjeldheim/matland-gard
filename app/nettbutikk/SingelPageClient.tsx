@@ -8,6 +8,8 @@ type Product = {
   description: string | null;
   longDescription: string | null;
   price: number;
+  priceMin: number;
+  priceMax: number;
   stock: number;
   stockUnit: string;
   isActive: boolean;

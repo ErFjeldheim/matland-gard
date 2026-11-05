@@ -9,6 +9,7 @@ import { headers } from 'next/headers';
 import { prisma } from '@/lib/prisma';
 import Stripe from 'stripe';
 import { getNumberSetting } from '@/lib/settings';
+import { getCheckoutUnitPrice } from '@/lib/product-prices';
 import {
     calculateFixedShippingFee,
     isFixedShippingEligible,
@@ -151,17 +152,7 @@ export async function createStripeCheckoutSession(data: CheckoutData) {
     const stripeLineItems: Array<any> = [];
 
     const getPriceWithMetadata = async (product: any, size?: string) => {
-        if (product.name === 'Herregårdssingel') {
-            if (size === '2-4mm') return (await getNumberSetting('herregardssingel_price_2-4mm', 1899)) * 100;
-            if (size === '4-8mm') return (await getNumberSetting('herregardssingel_price_4-8mm', 1699)) * 100;
-            if (size === '8-16mm') return (await getNumberSetting('herregardssingel_price_8-16mm', 1499)) * 100;
-            if (size === '16-32mm') return (await getNumberSetting('herregardssingel_price_16-32mm', 1399)) * 100;
-        }
-        if (product.name === 'Grus') {
-            if (size === '0-16mm') return (await getNumberSetting('grus_price_0-16mm', 599)) * 100;
-            if (size === '0-32mm') return (await getNumberSetting('grus_price_0-32mm', 599)) * 100;
-        }
-        return product.price;
+        return getCheckoutUnitPrice(product, size);
     };
 
     // Handle cart checkout vs single product checkout

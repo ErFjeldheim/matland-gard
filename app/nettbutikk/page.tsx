@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/prisma';
+import { getProductPriceRange } from '@/lib/product-prices';
 import Navigation from '@/app/components/Navigation';
 import Footer from '@/app/components/Footer';
 import Link from 'next/link';
@@ -21,15 +22,21 @@ export default async function SingelPage() {
     orderBy: { createdAt: 'desc' },
   });
 
-  const products = allProducts
-    .filter((p): p is typeof p & { slug: string } => p.slug !== null)
-    .sort((a, b) => {
-      if (a.name.toLowerCase().includes('herregårdssingel')) return -1;
-      if (b.name.toLowerCase().includes('herregårdssingel')) return 1;
-      if (a.name.toLowerCase().includes('singelmatter')) return 1;
-      if (b.name.toLowerCase().includes('singelmatter')) return -1;
-      return 0;
-    });
+  const products = await Promise.all(
+    allProducts
+      .filter((p): p is typeof p & { slug: string } => p.slug !== null)
+      .sort((a, b) => {
+        if (a.name.toLowerCase().includes('herregårdssingel')) return -1;
+        if (b.name.toLowerCase().includes('herregårdssingel')) return 1;
+        if (a.name.toLowerCase().includes('singelmatter')) return 1;
+        if (b.name.toLowerCase().includes('singelmatter')) return -1;
+        return 0;
+      })
+      .map(async (product) => {
+        const { min, max } = await getProductPriceRange(product);
+        return { ...product, priceMin: min, priceMax: max };
+      }),
+  );
 
   return (
     <div className="min-h-screen bg-gray-50">

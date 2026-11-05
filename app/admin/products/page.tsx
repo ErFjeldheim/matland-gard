@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/prisma';
+import { getProductSizePrices } from '@/lib/product-prices';
 import Navigation from '../../components/Navigation';
 import Footer from '../../components/Footer';
 import Link from 'next/link';
@@ -26,6 +27,12 @@ export default async function AdminProductsPage() {
       createdAt: 'desc',
     },
   });
+
+  const sizePricesByProduct = new Map(
+    await Promise.all(
+      products.map(async (product) => [product.id, await getProductSizePrices(product)] as const),
+    ),
+  );
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -78,7 +85,16 @@ export default async function AdminProductsPage() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {products.map((product) => (
+                {products.map((product) => {
+                  const sizePrices = sizePricesByProduct.get(product.id) ?? [];
+                  const priceMin = sizePrices.length > 0
+                    ? Math.min(...sizePrices.map((option) => option.price))
+                    : product.price;
+                  const priceMax = sizePrices.length > 0
+                    ? Math.max(...sizePrices.map((option) => option.price))
+                    : product.price;
+
+                  return (
                   <tr key={product.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4">
                       <div className="flex items-center">
@@ -101,7 +117,23 @@ export default async function AdminProductsPage() {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <PriceUpdater productId={product.id} currentPrice={product.price} />
+                      {sizePrices.length > 0 ? (
+                        <div>
+                          <div className="text-sm font-semibold text-gray-900">
+                            {priceMin === priceMax
+                              ? `${Math.round(priceMin / 100)} kr`
+                              : `${Math.round(priceMin / 100)} - ${Math.round(priceMax / 100)} kr`}
+                          </div>
+                          <Link
+                            href="/admin/settings"
+                            className="text-xs text-[var(--color-primary)] hover:underline"
+                          >
+                            Endre under Innstillingar
+                          </Link>
+                        </div>
+                      ) : (
+                        <PriceUpdater productId={product.id} currentPrice={product.price} />
+                      )}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <StockUpdater productId={product.id} currentStock={product.stock} stockUnit={product.stockUnit} />
@@ -134,7 +166,8 @@ export default async function AdminProductsPage() {
                       </Link>
                     </td>
                   </tr>
-                ))}
+                  );
+                })}
               </tbody>
             </table>
           </div>

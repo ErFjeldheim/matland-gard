@@ -18,55 +18,26 @@ type Product = {
   updatedAt: Date;
 };
 
-const HERREGAARDSSINGEL_SIZE_OPTIONS = [
-  { size: '2-4mm', price: 189900 },
-  { size: '4-8mm', price: 179900 },
-  { size: '8-16mm', price: 159900 },
-  { size: '16-32mm', price: 149900 }
-];
+type SizePriceOption = {
+  size: string;
+  /** Price in øre */
+  price: number;
+};
 
-const GRUS_SIZE_OPTIONS = [
-  { size: '0-16mm', price: 59900 },
-  { size: '0-32mm', price: 59900 }
-];
-
-const HERREGARDSGRUS_SIZE_OPTIONS = [
-  { size: '0-16mm', price: 150000 },
-  { size: '0-32mm', price: 150000 }
-];
-
-const SAND_SIZE_OPTIONS = [
-  { size: 'Sand til toppdressing og sandkasse (0-2mm)', price: 149000 }
-];
-
-const ELVESTEIN_SIZE_OPTIONS = [
-  { size: '60-90mm', price: 399000 }
-];
-
-const ECCOGRAVEL_SIZE_OPTIONS = [
-  { size: '2cm', price: 19900 },
-  { size: '3cm', price: 22900 }
-];
-
-export default function ProductPageClient({ product }: { product: Product }) {
+export default function ProductPageClient({
+  product,
+  sizeOptions,
+}: {
+  product: Product;
+  sizeOptions: SizePriceOption[];
+}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedSize, setSelectedSize] = useState<string>('');
   const [addedToCart, setAddedToCart] = useState(false);
   const { addItem } = useCart();
 
-  const requiresSize = product.name === 'Herregårdssingel' || product.name === 'Grus' || product.name === 'Herregårdsgrus' || product.slug === 'sand' || product.name === 'Elvestein' || product.name === 'Singelmatter ECCOgravel';
-
-  const getSizeOptions = () => {
-    if (product.name === 'Herregårdssingel') return HERREGAARDSSINGEL_SIZE_OPTIONS;
-    if (product.name === 'Grus') return GRUS_SIZE_OPTIONS;
-    if (product.name === 'Herregårdsgrus') return HERREGARDSGRUS_SIZE_OPTIONS;
-    if (product.slug === 'sand') return SAND_SIZE_OPTIONS;
-    if (product.name === 'Elvestein') return ELVESTEIN_SIZE_OPTIONS;
-    if (product.name === 'Singelmatter ECCOgravel') return ECCOGRAVEL_SIZE_OPTIONS;
-    return [];
-  };
-
-  const SIZE_OPTIONS = getSizeOptions();
+  const SIZE_OPTIONS = sizeOptions;
+  const requiresSize = SIZE_OPTIONS.length > 0;
   const hasMultipleSizes = SIZE_OPTIONS.length > 1;
 
   // Auto-select size if there's only one option
@@ -230,7 +201,8 @@ export default function ProductPageClient({ product }: { product: Product }) {
           product={{
             ...product,
             name: requiresSize ? `${product.name} (${selectedSize})` : product.name,
-            price: currentPrice
+            price: currentPrice,
+            size: selectedSize || undefined,
           }}
           onClose={() => setIsModalOpen(false)}
         />

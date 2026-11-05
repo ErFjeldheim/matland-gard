@@ -54,6 +54,7 @@ export default function SettingsClient({ initialSettings }: SettingsClientProps)
         return key
             .replace(/_/g, ' ')
             .replace('herregardssingel', 'Herregårdssingel')
+            .replace('elvestein', 'Elvestein')
             .replace('price', 'pris')
             .replace('shipping', 'frakt')
             .replace('contact', 'kontakt')

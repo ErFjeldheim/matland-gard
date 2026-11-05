@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/prisma';
+import { getProductSizePrices } from '@/lib/product-prices';
 import Navigation from '@/app/components/Navigation';
 import Footer from '@/app/components/Footer';
 import Link from 'next/link';
@@ -28,6 +29,7 @@ export default async function ProductPage({ params }: { params: Params }) {
   const localizedName = product.name;
   const localizedDesc = product.description || '';
   const localizedLongDesc = product.longDescription || '';
+  const sizeOptions = await getProductSizePrices(product);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -66,11 +68,14 @@ export default async function ProductPage({ params }: { params: Params }) {
             )}
 
             {/* Payment Buttons */}
-            <ProductPageClient product={product as unknown as {
-              id: string; name: string; slug: string; description: string | null;
-              longDescription: string | null; price: number; image: string | null;
-              images: string[]; videoUrl: string | null; createdAt: Date; updatedAt: Date;
-            }} />
+            <ProductPageClient
+              product={product as unknown as {
+                id: string; name: string; slug: string; description: string | null;
+                longDescription: string | null; price: number; image: string | null;
+                images: string[]; videoUrl: string | null; createdAt: Date; updatedAt: Date;
+              }}
+              sizeOptions={sizeOptions}
+            />
 
             {/* Video */}
             {product.videoUrl && (

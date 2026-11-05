@@ -16,9 +16,11 @@ async function main() {
     console.log('Seedar innstillingar...');
 
     const settings = [
-        { key: 'herregardssingel_price_4-8mm', value: '1750', type: 'number' },
-        { key: 'herregardssingel_price_8-16mm', value: '1500', type: 'number' },
-        { key: 'herregardssingel_price_16-32mm', value: '1500', type: 'number' },
+        { key: 'herregardssingel_price_2-4mm', value: '1899', type: 'number' },
+        { key: 'herregardssingel_price_4-8mm', value: '1799', type: 'number' },
+        { key: 'herregardssingel_price_8-16mm', value: '1599', type: 'number' },
+        { key: 'herregardssingel_price_16-32mm', value: '1499', type: 'number' },
+        { key: 'elvestein_price_60-90mm', value: '3999', type: 'number' },
         { key: 'grus_price_0-16mm', value: '599', type: 'number' },
         { key: 'grus_price_0-32mm', value: '599', type: 'number' },
         { key: 'shipping_fixed', value: '1500', type: 'number' },

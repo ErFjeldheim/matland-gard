@@ -22,6 +22,7 @@ interface CheckoutModalProps {
     id: string;
     name: string;
     price: number;
+    size?: string;
   };
   isOpen: boolean;
   onClose: () => void;
@@ -101,7 +102,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
           quantity,
           ...formData,
           shippingMethod,
-          size: (product as { size?: string }).size
+          size: product.size
         };
 
       if (paymentMethod === 'stripe') {

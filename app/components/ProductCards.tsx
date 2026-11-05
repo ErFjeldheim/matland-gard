@@ -10,6 +10,8 @@ type Product = {
   description: string | null;
   longDescription: string | null;
   price: number;
+  priceMin: number;
+  priceMax: number;
   image: string | null;
   images: string[];
   videoUrl: string | null;
@@ -58,7 +60,9 @@ export default function ProductCards({ products }: ProductCardsProps) {
               <div className="mb-4 mt-auto">
                 <div>
                   <span className="text-2xl font-bold text-[var(--color-primary)]">
-                    {Math.round(product.price / 100)} kr
+                    {product.priceMin === product.priceMax
+                      ? `${Math.round(product.priceMin / 100)} kr`
+                      : `${Math.round(product.priceMin / 100)} - ${Math.round(product.priceMax / 100)} kr`}
                   </span>
                   <span className="text-gray-500 text-sm ml-1">inkl. mva.</span>
                 </div>

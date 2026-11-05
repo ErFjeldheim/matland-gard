@@ -44,9 +44,11 @@ async function verifyData() {
     // 2. Check Settings (Shipping Costs)
     // These keys are used in checkout/stripe/route.ts
     const requiredSettings = [
+        'herregardssingel_price_2-4mm',
         'herregardssingel_price_4-8mm',
         'herregardssingel_price_8-16mm',
         'herregardssingel_price_16-32mm',
+        'elvestein_price_60-90mm',
         'grus_price_0-16mm',
         'grus_price_0-32mm',
         'shipping_fixed',
