@@ -17,7 +17,10 @@ export async function getStripeSessionPayment(sessionId: string): Promise<Stripe
   const paymentIntentId =
     typeof session.payment_intent === 'string' ? session.payment_intent : session.payment_intent?.id;
 
-  if (session.status !== 'complete' || !paymentIntentId) return null;
+  // Read the PaymentIntent itself rather than trusting the Checkout Session
+  // status. With manual capture the session can be complete while the payment
+  // is still only authorized.
+  if (!paymentIntentId) return null;
 
   const intent = await stripe.paymentIntents.retrieve(paymentIntentId, { expand: ['latest_charge'] });
 

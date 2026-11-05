@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getVippsPayment } from '@/app/lib/vipps';
 import { prisma } from '@/lib/prisma';
-import { vippsReferenceFor } from '@/lib/reservations';
+import { markReserved, sendReservationEmails, vippsReferenceFor } from '@/lib/reservations';
 
 export async function GET(
     request: NextRequest,
@@ -27,6 +27,25 @@ export async function GET(
         // CAPTURED state is also accepted in case the merchant account is set
         // to capture automatically.
         if (paymentDetails.state === 'AUTHORIZED' || paymentDetails.state === 'CAPTURED') {
+            try {
+                const reserved = await markReserved(orderId, {
+                    reservedAmount: paymentDetails.amount.value,
+                    captureDeadline:
+                        paymentDetails.state === 'AUTHORIZED' && paymentDetails.captureGuaranteedUntil
+                            ? new Date(paymentDetails.captureGuaranteedUntil)
+                            : null,
+                    vippsReference: vippsReferenceFor(order),
+                    captured: paymentDetails.state === 'CAPTURED',
+                });
+                if (reserved) {
+                    await sendReservationEmails(reserved);
+                }
+            } catch (reservationError) {
+                // The success page retries the same verification, so a transient
+                // failure here must not send the customer to an error page.
+                console.error(`Could not reserve order ${orderId} in Vipps callback:`, reservationError);
+            }
+
             return NextResponse.redirect(new URL(`/bestilling/${orderId}?vipps=success`, baseUrl));
         }
 
