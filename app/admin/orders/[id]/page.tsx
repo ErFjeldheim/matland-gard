@@ -6,9 +6,15 @@ import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import { createClient } from '@/utils/supabase/server';
 import OrderStatusUpdater from '../../OrderStatusUpdater';
+import ReservationActions from '../../ReservationActions';
 import DeleteOrderButton from '../../DeleteOrderButton';
 import CopyButton from '../../CopyButton';
 import { getShippingMethodLabel } from '@/lib/shipping';
+import {
+  getReservationActions,
+  isCaptureDeadlinePassed,
+  isReservationOrder,
+} from '@/lib/order-flow';
 
 export const dynamic = 'force-dynamic';
 
@@ -40,9 +46,12 @@ export default async function AdminOrderPage({ params }: { params: Promise<{ id:
 
   const statusTexts: Record<string, string> = {
     pending: 'Venter på betaling',
+    requested: 'Forespørsel mottatt',
+    approved: 'Godkjent',
     paid: 'Betalt',
     processing: 'Under behandling',
     delivered: 'Levert',
+    declined: 'Avslått',
     cancelled: 'Kansellert',
     refunded: 'Refundert',
   };
@@ -50,13 +59,22 @@ export default async function AdminOrderPage({ params }: { params: Promise<{ id:
 
   const statusColors: Record<string, string> = {
     pending: 'bg-yellow-100 text-yellow-800',
+    requested: 'bg-amber-100 text-amber-800',
+    approved: 'bg-blue-100 text-blue-800',
     paid: 'bg-green-100 text-green-800',
     processing: 'bg-blue-100 text-blue-800',
     delivered: 'bg-purple-100 text-purple-800',
+    declined: 'bg-red-100 text-red-800',
     cancelled: 'bg-red-100 text-red-800',
     refunded: 'bg-gray-100 text-gray-800',
   };
   const statusColor = statusColors[order.status] || 'bg-gray-100 text-gray-800';
+
+  const now = new Date();
+  const isReservation = isReservationOrder(order);
+  const reservationActions = getReservationActions(order, now);
+  const deadlinePassed = isCaptureDeadlinePassed(order, now);
+  const formatKr = (amount: number) => `${(amount / 100).toLocaleString('nb-NO')} kr`;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -93,7 +111,29 @@ export default async function AdminOrderPage({ params }: { params: Promise<{ id:
 
             {/* Status Updater */}
             <div className="mb-8 p-6 bg-gray-50 rounded-lg">
-              <OrderStatusUpdater orderId={order.id} currentStatus={order.status} />
+              {isReservation ? (
+                <>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Forespørsel
+                  </label>
+                  <ReservationActions
+                    orderId={order.id}
+                    canApprove={reservationActions.approve}
+                    canDecline={reservationActions.decline}
+                    canCapture={reservationActions.capture}
+                    canMarkDelivered={reservationActions.markDelivered}
+                    canRefund={reservationActions.refund}
+                    amountText={formatKr(order.reservedAmount ?? order.totalAmount)}
+                  />
+                  {order.status === 'approved' && deadlinePassed && (
+                    <p className="mt-3 text-sm text-red-600">
+                      Trekkfristen er passert. Be kunden betale på nytt før du kan trekke beløpet.
+                    </p>
+                  )}
+                </>
+              ) : (
+                <OrderStatusUpdater orderId={order.id} currentStatus={order.status} />
+              )}
             </div>
 
             {/* Order Info Grid */}
@@ -143,6 +183,29 @@ export default async function AdminOrderPage({ params }: { params: Promise<{ id:
                   </div>
                 )}
               </div>
+
+              {isReservation && (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6 p-4 bg-gray-50 rounded-lg">
+                  <div>
+                    <span className="text-gray-600">Reservert beløp:</span>
+                    <p className="font-medium text-gray-900">{formatKr(order.reservedAmount ?? 0)}</p>
+                  </div>
+                  <div>
+                    <span className="text-gray-600">Trukket beløp:</span>
+                    <p className="font-medium text-gray-900">
+                      {order.capturedAmount !== null ? formatKr(order.capturedAmount) : 'Ikkje trekt'}
+                    </p>
+                  </div>
+                  <div>
+                    <span className="text-gray-600">Trekkfrist:</span>
+                    <p className={`font-medium ${deadlinePassed ? 'text-red-600' : 'text-gray-900'}`}>
+                      {order.captureDeadline
+                        ? `${new Date(order.captureDeadline).toLocaleString('nb-NO')}${deadlinePassed ? ' (passert)' : ''}`
+                        : 'Ikkje oppgitt'}
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Order Items */}

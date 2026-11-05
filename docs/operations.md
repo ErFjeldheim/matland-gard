@@ -184,6 +184,47 @@ this machine.
 4. Check the release in the Sentry dashboard — `firstEvent`/`lastEvent` are
    populated when events arrive.
 
+### Handle a request, reservation and capture
+
+New orders are requests, not completed sales. The money is reserved at the
+provider and only captured when the goods are shipped.
+
+| Status | Meaning | Money |
+| --- | --- | --- |
+| `pending` | Payment not confirmed | Nothing reserved |
+| `requested` | Customer approved the payment; request awaiting review | Reserved |
+| `approved` | Matland Gård accepted the request | Reserved |
+| `paid` | Captured | Captured |
+| `processing` / `delivered` | Fulfilment after capture | Captured |
+| `declined` | Request rejected | Reservation released |
+| `refunded` | Captured amount refunded | Refunded |
+
+Admin actions on the order page:
+
+- **Godkjenn forespørsel** moves `requested` → `approved` and emails the customer.
+- **Avslå og frigi reservasjon** releases the reservation at Stripe/Vipps and
+  moves the order to `declined`. This also works if the provider already
+  released the hold because it expired.
+- **Trekk … og marker sendt** captures the full reserved amount, moves the
+  order to `paid`, and emails a receipt.
+- **Refunder …** refunds the captured amount at the provider and moves the
+  order to `refunded`.
+- **Marker levert** is fulfilment only and never moves money.
+
+Capture deadlines:
+
+- Stripe card authorizations normally last **7 days**. The `capture_before`
+  value is stored on the order and shown in admin.
+- Vipps stores `captureGuaranteedUntil`, which the bank sets (often 5–7 days,
+  up to 30 for some cards).
+- If the deadline passes, capture is blocked in the UI and the customer must
+  pay again. Ship or capture before the deadline.
+
+The success page and the Stripe webhook both verify the payment with the
+provider before changing status. The `markReserved` conditional update makes
+sure only one of them can move an order out of `pending`, so emails are not
+sent twice.
+
 ### Common gotchas
 
 - **Next.js private folders**: directories prefixed with `_` (e.g.

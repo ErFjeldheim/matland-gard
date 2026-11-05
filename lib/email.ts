@@ -11,6 +11,19 @@ export function escapeHtml(value: string | null | undefined): string {
     .replace(/'/g, '&#39;');
 }
 
+function adminStatusLabel(status: string): string {
+  switch (status) {
+    case 'paid':
+      return 'BETALT';
+    case 'requested':
+      return 'FORESPURNAD – RESERVERT, IKKJE TRUKKE';
+    case 'approved':
+      return 'GODKJENT – IKKJE TRUKKE ENNÅ';
+    default:
+      return 'IKKJE BETALT';
+  }
+}
+
 // Create transporter function to ensure env vars are loaded
 function getTransporter() {
   if (!process.env.EMAIL_USER || !process.env.EMAIL_PASSWORD) {
@@ -233,16 +246,17 @@ export async function sendAdminOrderNotification(orderData: OrderEmailData) {
 
   const brandPrimary = '#1D546D';
   const brandBackground = '#F3F4F4';
+  const isRequest = orderData.status === 'requested';
 
   const mailOptions = {
     from: `"Matland Gård System" <${process.env.EMAIL_USER || 'matlandgard@gmail.com'}>`,
     to: process.env.EMAIL_USER || 'matlandgard@gmail.com',
-    subject: `Ny ordre motteken - ${shortOrderId}`,
+    subject: `${isRequest ? 'Ny forespurnad motteken' : 'Ny ordre motteken'} - ${shortOrderId}`,
     text: `
-NY ORDRE MOTTEKEN
+${isRequest ? 'NY FORESPURNAD MOTTEKEN' : 'NY ORDRE MOTTEKEN'}
 
 Ordrenummer: ${shortOrderId}
-Status: ${orderData.status}
+Status: ${adminStatusLabel(orderData.status)}
 
 Kundeinformasjon:
 Navn: ${orderData.customerName}
@@ -262,7 +276,7 @@ Behandle ordren i admin-panelet.
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #061E29; background-color: white; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
         <div style="background-color: #061E29; color: white; padding: 20px; text-align: center;">
-          <h2 style="margin: 0;">NY ORDRE MOTTEKEN</h2>
+          <h2 style="margin: 0;">${isRequest ? 'NY FORESPURNAD MOTTEKEN' : 'NY ORDRE MOTTEKEN'}</h2>
         </div>
         
         <div style="padding: 25px;">
@@ -276,7 +290,7 @@ Behandle ordren i admin-panelet.
                 <td style="text-align: right;">
                   <strong style="display: block; font-size: 11px; color: #666; text-transform: uppercase;">Status</strong>
                   <span style="font-size: 14px; font-weight: bold; color: ${orderData.status === 'paid' ? '#2E7D32' : brandPrimary}; border: 1px solid ${orderData.status === 'paid' ? '#C8E6C9' : brandPrimary}; padding: 2px 8px; border-radius: 3px; background: ${orderData.status === 'paid' ? '#E8F5E9' : 'transparent'};">
-                    ${orderData.status === 'paid' ? 'BETALT' : 'IKKJE BETALT'}
+                    ${adminStatusLabel(orderData.status)}
                   </span>
                 </td>
               </tr>
@@ -424,4 +438,138 @@ Telefon: +47 954 58 563
   } catch (error) {
     console.error(`FAILED to send refund notification email:`, error);
   }
+}
+
+type CustomerStatusEmail = {
+  subject: string;
+  heading: string;
+  intro: string;
+  notice: string;
+  tone: 'info' | 'success' | 'warning';
+};
+
+const NOTICE_STYLES = {
+  info: { background: '#E3F2FD', border: '#1D546D', text: '#0D47A1' },
+  success: { background: '#E8F5E9', border: '#2E7D32', text: '#1B5E20' },
+  warning: { background: '#FFF3E0', border: '#EF6C00', text: '#8D4E00' },
+} as const;
+
+async function sendCustomerStatusEmail(orderData: OrderEmailData, email: CustomerStatusEmail) {
+  if (!orderData.customerEmail) {
+    console.error('Cannot send email: No customer email provided');
+    return;
+  }
+
+  const shortOrderId = (orderData.orderId || orderData.id || 'UNKNOWN').slice(0, 8).toUpperCase();
+  const brandPrimary = '#1D546D';
+  const brandBackground = '#F3F4F4';
+  const tone = NOTICE_STYLES[email.tone];
+  const totalText = `${orderData.totalAmount / 100} NOK`;
+
+  const mailOptions = {
+    from: `"Matland Gård" <${process.env.EMAIL_USER || 'matlandgard@gmail.com'}>`,
+    to: orderData.customerEmail,
+    subject: `${email.subject} - ${shortOrderId}`,
+    text: `
+Hei ${orderData.customerName},
+
+${email.intro}
+
+Ordrenummer: ${shortOrderId}
+Totalbeløp: ${totalText}
+
+${email.notice}
+
+Med venleg helsing,
+Matland Gård
+Telefon: +47 954 58 563
+    `,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #061E29; background-color: white; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+        <div style="background-color: ${brandPrimary}; color: white; padding: 25px; text-align: center;">
+          <h1 style="margin: 0; font-size: 24px;">Matland Gård</h1>
+          <p style="margin: 5px 0 0 0; opacity: 0.9;">${escapeHtml(email.heading)}</p>
+        </div>
+
+        <div style="padding: 25px;">
+          <p>Hei ${escapeHtml(orderData.customerName)},</p>
+          <p style="line-height: 1.5;">${escapeHtml(email.intro)}</p>
+
+          <div style="background-color: ${brandBackground}; padding: 15px; margin: 20px 0; border-radius: 5px; border-left: 4px solid ${brandPrimary};">
+            <strong style="color: ${brandPrimary}; text-transform: uppercase; font-size: 11px; display: block; margin-bottom: 5px;">Ordrenummer</strong>
+            <span style="font-size: 18px; font-weight: bold; font-family: monospace;">${shortOrderId}</span>
+          </div>
+
+          <table style="width: 100%; border-collapse: collapse; margin-top: 25px;">
+            <tr>
+              <td style="background-color: ${brandPrimary}; color: white; padding: 20px; border-radius: 5px; text-align: center;">
+                <div style="font-size: 14px; text-transform: uppercase; opacity: 0.9; margin-bottom: 5px;">Totalbeløp</div>
+                <div style="font-size: 28px; font-weight: bold;">${totalText}</div>
+              </td>
+            </tr>
+          </table>
+
+          <div style="margin-top: 20px; padding: 15px; border-radius: 5px; background-color: ${tone.background}; border-left: 4px solid ${tone.border}; color: ${tone.text}; line-height: 1.5;">
+            ${escapeHtml(email.notice)}
+          </div>
+
+          <div style="margin-top: 40px; padding-top: 25px; border-top: 1px solid #eee; text-align: center; color: #666; font-size: 14px;">
+            <p style="margin: 0;">Med venleg helsing,<br/>
+            <strong style="color: ${brandPrimary};">Matland Gård</strong><br/>
+            Ådlandsvegen 30, 5642 Holmefjord<br/>
+            Telefon: +47 954 58 563</p>
+          </div>
+        </div>
+      </div>
+    `,
+  };
+
+  try {
+    const transporter = getTransporter();
+    console.log(`Attempting to send "${email.subject}" to ${orderData.customerEmail}...`);
+    const info = await transporter.sendMail(mailOptions);
+    console.log(`Customer status email sent successfully: ${info.messageId}`);
+  } catch (error) {
+    console.error(`FAILED to send customer status email to ${orderData.customerEmail}:`, error);
+  }
+}
+
+export async function sendCustomerRequestReceived(orderData: OrderEmailData) {
+  return sendCustomerStatusEmail(orderData, {
+    subject: 'Forespurnad mottatt',
+    heading: 'Forespurnad mottatt',
+    intro: 'Takk for forespurnaden din hjå Matland Gård. Vi går gjennom ho og tek kontakt med deg for å stadfeste bestillinga.',
+    notice: 'Beløpet er reservert på betalingsmetoden din, men det blir ikkje trekt før varen er sendt. Forespurnaden er ikkje bindande før vi har stadfesta ho.',
+    tone: 'info',
+  });
+}
+
+export async function sendCustomerRequestApproved(orderData: OrderEmailData) {
+  return sendCustomerStatusEmail(orderData, {
+    subject: 'Forespurnaden din er godkjent',
+    heading: 'Forespurnaden din er godkjent',
+    intro: 'Vi har godkjent bestillinga di. Beløpet blir trekt når varen er sendt, og vi tek kontakt med deg om levering eller henting.',
+    notice: 'Du treng ikkje gjere noko.',
+    tone: 'success',
+  });
+}
+
+export async function sendCustomerRequestDeclined(orderData: OrderEmailData) {
+  return sendCustomerStatusEmail(orderData, {
+    subject: 'Vi kan ikkje ta imot forespurnaden din',
+    heading: 'Forespurnaden din er ikkje godkjent',
+    intro: 'Dessverre kan vi ikkje gjennomføre bestillinga di. Reservasjonen er frigitt, og beløpet blir ikkje trekt.',
+    notice: 'Har du spørsmål, kan du ringe oss på +47 954 58 563 eller sende e-post til matlandgard@gmail.com.',
+    tone: 'warning',
+  });
+}
+
+export async function sendCustomerCaptureReceipt(orderData: OrderEmailData) {
+  return sendCustomerStatusEmail(orderData, {
+    subject: 'Beløpet er trekt',
+    heading: 'Beløpet er trekt',
+    intro: 'Varen er sendt, og beløpet for bestillinga di er trekt. Takk for handelen!',
+    notice: 'Ta kontakt med oss dersom noko ikkje stemmer.',
+    tone: 'success',
+  });
 }

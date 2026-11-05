@@ -5,6 +5,48 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { retryVippsPayment } from '@/app/actions';
 import { getShippingMethodLabel } from '@/lib/shipping';
+import { getVippsPayment } from '@/app/lib/vipps';
+import { getStripeSessionPayment } from '@/lib/stripe-payments';
+import { markReserved, sendReservationEmails, vippsReferenceFor } from '@/lib/reservations';
+
+function getNextSteps(order: { status: string; reservedAmount: number | null; shippingMethod: string | null }): string[] {
+  if (order.reservedAmount !== null) {
+    switch (order.status) {
+      case 'requested':
+        return [
+          'Vi går gjennom forespørselen din og bekrefter bestillingen',
+          'Beløpet er reservert, men ikke trukket',
+          'Beløpet trekkes når varen er sendt',
+        ];
+      case 'approved':
+        return [
+          'Forespørselen din er godkjent',
+          'Beløpet trekkes når varen er sendt',
+          'Vi tar kontakt med deg om levering eller henting',
+        ];
+      case 'paid':
+      case 'processing':
+      case 'delivered':
+        return ['Beløpet er trukket', 'Vi tar kontakt med deg om levering eller henting'];
+      case 'declined':
+        return ['Vi kan dessverre ikke ta denne bestillingen', 'Reservasjonen er frigitt, og beløpet er ikke trukket'];
+      case 'refunded':
+        return ['Beløpet er refundert', 'Det kan ta noen bankdager før pengene er tilbake på konto'];
+      case 'cancelled':
+        return ['Bestillingen er kansellert', 'Ta kontakt med oss dersom du har spørsmål'];
+    }
+  }
+
+  const steps = ['Vi behandler din bestilling', 'Du mottar en e-postbekreftelse'];
+  if (order.shippingMethod === 'pickup' || order.shippingMethod === 'pickup_dokken') {
+    steps.push('Vi kontakter deg for å avtale dato for henting');
+  } else if (order.shippingMethod === 'shipping_quote') {
+    steps.push('Vi kontakter deg med pristilbud på frakt', 'Etter godkjenning arrangerer vi levering');
+  } else {
+    steps.push('Vi arrangerer levering og kontaktar deg for å avtale tidspunkt');
+  }
+  return steps;
+}
 
 export const dynamic = 'force-dynamic';
 
@@ -33,19 +75,40 @@ export default async function OrderPage({
     notFound();
   }
 
-  // Check for success from either Stripe or Vipps
+  // Check for success from either Stripe or Vipps. The order is only moved on
+  // from `pending` after the provider has confirmed the reservation.
   const paymentSuccess = success === 'true' || (await searchParams).vipps === 'success';
-  let isVerifiedPaid = false;
 
   if (paymentSuccess && order.status === 'pending') {
-    if (order.paymentMethod === 'stripe' && success === 'true') {
-      isVerifiedPaid = true;
+    let reserved: Awaited<ReturnType<typeof markReserved>> = null;
+
+    if (order.paymentMethod === 'stripe' && success === 'true' && order.paymentId) {
+      try {
+        const payment = await getStripeSessionPayment(order.paymentId);
+        if (payment) {
+          reserved = await markReserved(id, {
+            reservedAmount: payment.amount,
+            captureDeadline: payment.status === 'reserved' ? payment.captureDeadline : null,
+            stripePaymentIntentId: payment.paymentIntentId,
+            captured: payment.status === 'captured',
+          });
+        }
+      } catch (error) {
+        console.error(`Failed to verify Stripe payment for order ${id}:`, error);
+      }
     } else if (order.paymentMethod === 'vipps' && (await searchParams).vipps === 'success') {
       try {
-        const { getVippsPayment } = await import('@/app/lib/vipps');
-        const paymentDetails = await getVippsPayment(id);
-        if (paymentDetails.state === 'AUTHORIZED') {
-          isVerifiedPaid = true;
+        const paymentDetails = await getVippsPayment(vippsReferenceFor(order));
+        if (paymentDetails.state === 'AUTHORIZED' || paymentDetails.state === 'CAPTURED') {
+          reserved = await markReserved(id, {
+            reservedAmount: paymentDetails.amount.value,
+            captureDeadline:
+              paymentDetails.state === 'AUTHORIZED' && paymentDetails.captureGuaranteedUntil
+                ? new Date(paymentDetails.captureGuaranteedUntil)
+                : null,
+            vippsReference: vippsReferenceFor(order),
+            captured: paymentDetails.state === 'CAPTURED',
+          });
         } else {
           console.log(`Vipps payment not authorized for order ${id}. Status: ${paymentDetails.state}`);
         }
@@ -53,66 +116,61 @@ export default async function OrderPage({
         console.error(`Failed to verify Vipps payment for order ${id}:`, error);
       }
     }
-  }
 
-  if (isVerifiedPaid) {
-    const updatedOrder = await prisma.order.update({
-      where: { id },
-      data: { status: 'paid' },
-      include: {
-        orderItems: {
-          include: {
-            product: true,
-          },
-        },
-      },
-    });
+    if (reserved) {
+      try {
+        await sendReservationEmails(reserved);
+        console.log(`Request emails sent via success page fallback for order: ${id}`);
+      } catch (emailError) {
+        console.error(`Error sending emails via success page fallback for order ${id}:`, emailError);
+      }
 
-    // Send confirmation emails (fallback if webhook is slow or fails)
-    try {
-      const { sendCustomerOrderConfirmation, sendAdminOrderNotification } = await import('@/lib/email');
-      const orderEmailData = {
-        orderId: updatedOrder.id,
-        customerName: updatedOrder.customerName,
-        customerEmail: updatedOrder.customerEmail,
-        customerPhone: updatedOrder.customerPhone,
-        deliveryAddress: updatedOrder.deliveryAddress,
-        totalAmount: updatedOrder.totalAmount,
-        shippingMethod: updatedOrder.shippingMethod,
-        status: updatedOrder.status,
-        orderItems: updatedOrder.orderItems,
-      };
-
-      await Promise.all([
-        sendCustomerOrderConfirmation(orderEmailData),
-        sendAdminOrderNotification(orderEmailData),
-      ]);
-      console.log(`Confirmation emails sent via success page fallback for order: ${id}`);
-    } catch (emailError) {
-      console.error(`Error sending emails via success page fallback for order ${id}:`, emailError);
+      Object.assign(order, reserved);
     }
-
-    // Update local order object
-    Object.assign(order, updatedOrder);
   }
 
   const statusTexts: Record<string, string> = {
     pending: 'Venter på betaling',
+    requested: 'Forespørsel mottatt',
+    approved: 'Godkjent',
     paid: 'Betalt',
     processing: 'Under behandling',
     delivered: 'Levert',
+    declined: 'Avslått',
     cancelled: 'Kansellert',
+    refunded: 'Refundert',
   };
   const statusText = statusTexts[order.status] || order.status;
 
   const statusColors: Record<string, string> = {
     pending: 'bg-yellow-100 text-yellow-800',
+    requested: 'bg-amber-100 text-amber-800',
+    approved: 'bg-blue-100 text-blue-800',
     paid: 'bg-green-100 text-green-800',
     processing: 'bg-blue-100 text-blue-800',
     delivered: 'bg-purple-100 text-purple-800',
+    declined: 'bg-red-100 text-red-800',
     cancelled: 'bg-red-100 text-red-800',
+    refunded: 'bg-gray-100 text-gray-800',
   };
   const statusColor = statusColors[order.status] || 'bg-gray-100 text-gray-800';
+
+  const isReservation = order.reservedAmount !== null;
+  const headline = isReservation
+    ? order.status === 'declined'
+      ? 'Forespørselen din er avslått'
+      : order.status === 'refunded'
+        ? 'Bestillingen er refundert'
+        : order.status === 'cancelled'
+          ? 'Bestillingen er kansellert'
+          : order.status === 'paid' || order.status === 'delivered' || order.status === 'processing'
+            ? 'Takk for din bestilling!'
+            : 'Takk for forespørselen din!'
+    : order.status === 'paid'
+      ? 'Takk for din bestilling!'
+      : 'Bestilling mottatt';
+  const nextSteps = getNextSteps(order);
+  const isNegative = order.status === 'declined' || order.status === 'cancelled';
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -124,12 +182,27 @@ export default async function OrderPage({
       <main className="container mx-auto px-4 py-12">
         <div className="max-w-3xl mx-auto">
           {/* Success Message */}
-          <div className="bg-[var(--color-accent)]/20 border border-[var(--color-primary)] rounded-lg p-6 mb-8 text-center">
-            <svg className="w-16 h-16 text-[var(--color-primary)] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <div
+            className={`rounded-lg p-6 mb-8 text-center border ${
+              isNegative
+                ? 'bg-red-50 border-red-200'
+                : 'bg-[var(--color-accent)]/20 border-[var(--color-primary)]'
+            }`}
+          >
+            <svg
+              className={`w-16 h-16 mx-auto mb-4 ${isNegative ? 'text-red-600' : 'text-[var(--color-primary)]'}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              {isNegative ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              )}
             </svg>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              {order.status === 'paid' ? 'Takk for din bestilling!' : 'Bestilling mottatt'}
+            <h2 className={`text-2xl font-bold mb-2 ${isNegative ? 'text-red-900' : 'text-gray-900'}`}>
+              {headline}
             </h2>
             <p className="text-gray-600">
               Ordrenummer: <span className="font-mono font-bold">{order.id.slice(0, 8).toUpperCase()}</span>
@@ -222,18 +295,9 @@ export default async function OrderPage({
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
             <h4 className="font-semibold text-blue-900 mb-3">Hva skjer nå?</h4>
             <ol className="list-decimal list-inside space-y-2 text-blue-800">
-              <li>Vi behandler din bestilling</li>
-              <li>Du mottar en e-postbekreftelse</li>
-              {order.shippingMethod === 'pickup' || order.shippingMethod === 'pickup_dokken' ? (
-                <li>Vi kontakter deg for å avtale dato for henting</li>
-              ) : order.shippingMethod === 'shipping_quote' ? (
-                <>
-                  <li>Vi kontakter deg med pristilbud på frakt</li>
-                  <li>Etter godkjenning arrangerer vi levering</li>
-                </>
-              ) : (
-                <li>Vi arrangerer levering og kontaktar deg for å avtale tidspunkt</li>
-              )}
+              {nextSteps.map((step) => (
+                <li key={step}>{step}</li>
+              ))}
             </ol>
           </div>
 

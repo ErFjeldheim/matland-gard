@@ -65,12 +65,12 @@ export default function TermsPage() {
 
                         <section>
                             <h2 className="text-2xl font-semibold text-gray-900 mb-4">4. Avtaleinngåing</h2>
-                            <p>Avtalen er bindande for begge partar når kjøpar har sendt si bestilling til seljar.</p>
+                            <p>Bestillinga er ei forespurnad. Ho er ikkje bindande for seljar før seljar har stadfesta ho. Avtalen er bindande for begge partar når seljar har stadfesta forespurnaden.</p>
                         </section>
 
                         <section>
                             <h2 className="text-2xl font-semibold text-gray-900 mb-4">5. Betalinga</h2>
-                            <p>Seljar kan krevje betaling for vara frå det tidspunktet ho blir sendt frå seljar til kjøpar. Dersom kjøpar brukar kredittkort eller debetkort ved betaling, kan seljar reservere kjøpesummen på kortet ved bestilling. Kortet blir belasta same dag som vara blir sendt.</p>
+                            <p>Kjøpesummen blir reservert på Vipps eller kortet ved forespurnad, men ikkje trekt. Seljar trekkjer beløpet når vara er sendt frå seljar til kjøpar. Dersom vara ikkje kan sendast innan reservasjonen varer, kan seljar be kjøpar betale på nytt.</p>
                             <p><strong>Vi tilbyr betaling med Vipps og kortbetaling (Stripe).</strong></p>
                         </section>
 

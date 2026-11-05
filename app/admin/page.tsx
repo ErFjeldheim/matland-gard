@@ -33,11 +33,15 @@ export default async function AdminDashboard() {
 
   // Calculate statistics
   const totalOrders = orders.length;
-  const totalRevenue = orders.reduce((sum, order) => sum + order.totalAmount, 0);
+  const capturedOrders = orders.filter(o => ['paid', 'processing', 'delivered'].includes(o.status));
+  const totalRevenue = capturedOrders.reduce(
+    (sum, order) => sum + (order.capturedAmount ?? order.totalAmount),
+    0,
+  );
   const paidOrders = orders.filter(o => o.status === 'paid');
-  const pendingOrders = orders.filter(o => o.status === 'pending');
-  const paidRevenue = paidOrders.reduce((sum, order) => sum + order.totalAmount, 0);
-  const pendingRevenue = pendingOrders.reduce((sum, order) => sum + order.totalAmount, 0);
+  const reservedOrders = orders.filter(o => o.status === 'requested' || o.status === 'approved');
+  const paidRevenue = paidOrders.reduce((sum, order) => sum + (order.capturedAmount ?? order.totalAmount), 0);
+  const reservedRevenue = reservedOrders.reduce((sum, order) => sum + order.totalAmount, 0);
 
   // Orders by shipping method
   const pickupOrders = orders.filter(o => o.shippingMethod === 'pickup' || o.shippingMethod === 'pickup_dokken').length;
@@ -46,18 +50,24 @@ export default async function AdminDashboard() {
 
   const statusTexts: Record<string, string> = {
     pending: 'Venter på betaling',
+    requested: 'Forespørsel mottatt',
+    approved: 'Godkjent',
     paid: 'Betalt',
     processing: 'Under behandling',
     delivered: 'Levert',
+    declined: 'Avslått',
     cancelled: 'Kansellert',
     refunded: 'Refundert',
   };
 
   const statusColors: Record<string, string> = {
     pending: 'bg-yellow-100 text-yellow-800',
+    requested: 'bg-amber-100 text-amber-800',
+    approved: 'bg-blue-100 text-blue-800',
     paid: 'bg-green-100 text-green-800',
     processing: 'bg-blue-100 text-blue-800',
     delivered: 'bg-purple-100 text-purple-800',
+    declined: 'bg-red-100 text-red-800',
     cancelled: 'bg-red-100 text-red-800',
     refunded: 'bg-gray-100 text-gray-800',
   };
@@ -111,11 +121,11 @@ export default async function AdminDashboard() {
           </div>
 
           <div className="bg-white rounded-lg shadow-lg p-6">
-            <h3 className="text-gray-600 text-sm font-medium mb-2">Venter på Betaling</h3>
-            <p className="text-2xl font-bold text-yellow-600">
-              {(pendingRevenue / 100).toLocaleString('nb-NO')} kr
+            <h3 className="text-gray-600 text-sm font-medium mb-2">Reservert, ikke trukket</h3>
+            <p className="text-2xl font-bold text-amber-600">
+              {(reservedRevenue / 100).toLocaleString('nb-NO')} kr
             </p>
-            <p className="text-sm text-gray-500 mt-1">{pendingOrders.length} ordrer</p>
+            <p className="text-sm text-gray-500 mt-1">{reservedOrders.length} forespørsler</p>
           </div>
         </div>
 

@@ -16,8 +16,20 @@ import {
     isShippingUnit,
 } from '@/lib/shipping';
 import { createClient } from '@/utils/supabase/server';
-import { sendRefundNotification } from '@/lib/email';
+import {
+    sendCustomerCaptureReceipt,
+    sendCustomerRequestApproved,
+    sendCustomerRequestDeclined,
+    sendRefundNotification,
+} from '@/lib/email';
 import { checkRateLimit, getClientIp } from '@/lib/ratelimit';
+import {
+    canDeleteOrder,
+    getReservationActions,
+    isAllowedManualStatus,
+    isCaptureDeadlinePassed,
+} from '@/lib/order-flow';
+import { captureReservation, refundReservation, releaseReservation } from '@/lib/reservations';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
     apiVersion: '2026-01-28.clover' as any,
@@ -41,6 +53,14 @@ export async function updateOrderStatus(orderId: string, status: string) {
     const validStatuses = ['pending', 'paid', 'processing', 'delivered', 'cancelled', 'refunded'];
     if (!validStatuses.includes(status)) {
         throw new Error('Ugyldig status');
+    }
+
+    const existing = await prisma.order.findUnique({ where: { id: orderId } });
+    if (!existing) {
+        throw new Error('Ordre ikkje funne');
+    }
+    if (!isAllowedManualStatus(existing, status)) {
+        throw new Error('Denne ordren må handsamast med knappane for forespurnaden (godkjenn, avslå eller trekk beløp).');
     }
 
     try {
@@ -87,6 +107,11 @@ export async function deleteOrder(orderId: string) {
         throw new Error('Mangler ordre-ID');
     }
 
+    const existing = await prisma.order.findUnique({ where: { id: orderId } });
+    if (existing && !canDeleteOrder(existing)) {
+        throw new Error('Ordren har ein aktiv reservasjon eller er allereie trekt. Avslå forespurnaden først, eller behald ordren for bokføring.');
+    }
+
     try {
         await prisma.order.delete({
             where: { id: orderId },
@@ -98,6 +123,179 @@ export async function deleteOrder(orderId: string) {
         console.error('Delete order error:', error);
         throw new Error('Kunne ikke slette ordre');
     }
+}
+
+async function assertAdminUser() {
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+        throw new Error('Ikke autorisert');
+    }
+}
+
+async function loadOrderForAction(orderId: string) {
+    if (!orderId) {
+        throw new Error('Mangler ordre-ID');
+    }
+
+    const order = await prisma.order.findUnique({ where: { id: orderId } });
+    if (!order) {
+        throw new Error('Ordre ikkje funne');
+    }
+
+    return order;
+}
+
+async function loadOrderWithItems(orderId: string) {
+    return prisma.order.findUnique({
+        where: { id: orderId },
+        include: {
+            orderItems: {
+                include: {
+                    product: true,
+                },
+            },
+        },
+    });
+}
+
+export async function approveOrder(orderId: string) {
+    await assertAdminUser();
+    const order = await loadOrderForAction(orderId);
+
+    if (!getReservationActions(order).approve) {
+        throw new Error('Forespurnaden kan ikkje godkjennast no');
+    }
+
+    const result = await prisma.order.updateMany({
+        where: { id: orderId, status: 'requested' },
+        data: { status: 'approved' },
+    });
+    if (result.count === 0) {
+        throw new Error('Forespurnaden er allereie handsama');
+    }
+
+    const approved = await loadOrderWithItems(orderId);
+    if (approved) {
+        await sendCustomerRequestApproved(approved);
+    }
+
+    revalidatePath('/admin');
+    revalidatePath(`/admin/orders/${orderId}`);
+    return { success: true };
+}
+
+export async function declineOrder(orderId: string) {
+    await assertAdminUser();
+    const order = await loadOrderForAction(orderId);
+
+    if (!getReservationActions(order).decline) {
+        throw new Error('Forespurnaden kan ikkje avslåast no');
+    }
+
+    try {
+        await releaseReservation(order);
+    } catch (error) {
+        console.error(`Failed to release reservation for order ${orderId}:`, error);
+        throw new Error('Kunne ikkje frigi reservasjonen. Prøv igjen, eller sjekk betalingsleverandøren.');
+    }
+
+    const result = await prisma.order.updateMany({
+        where: { id: orderId, status: { in: ['requested', 'approved'] } },
+        data: { status: 'declined' },
+    });
+    if (result.count === 0) {
+        console.error(`Reservation released but status not updated for order ${orderId}`);
+        throw new Error('Reservasjonen er frigitt, men statusen blei ikkje oppdatert. Kontakt utviklar.');
+    }
+
+    const declined = await loadOrderWithItems(orderId);
+    if (declined) {
+        await sendCustomerRequestDeclined(declined);
+    }
+
+    revalidatePath('/admin');
+    revalidatePath(`/admin/orders/${orderId}`);
+    return { success: true };
+}
+
+export async function captureOrder(orderId: string) {
+    await assertAdminUser();
+    const order = await loadOrderForAction(orderId);
+
+    if (!getReservationActions(order).capture) {
+        if (order.status === 'approved' && isCaptureDeadlinePassed(order, new Date())) {
+            throw new Error('Trekkfristen er passert. Be kunden betale på nytt.');
+        }
+        throw new Error('Beløpet kan ikkje trekkast no');
+    }
+
+    let capturedAmount: number;
+    try {
+        capturedAmount = await captureReservation(order);
+    } catch (error) {
+        console.error(`Failed to capture order ${orderId}:`, error);
+        throw new Error('Kunne ikkje trekke beløpet. Sjekk betalingsleverandøren før du prøver igjen.');
+    }
+
+    const result = await prisma.order.updateMany({
+        where: { id: orderId, status: 'approved' },
+        data: { status: 'paid', capturedAmount, capturedAt: new Date() },
+    });
+    if (result.count === 0) {
+        console.error(`Captured ${capturedAmount} øre but status not updated for order ${orderId}`);
+        throw new Error('Beløpet er trekt, men statusen blei ikkje oppdatert. Kontakt utviklar.');
+    }
+
+    const paid = await loadOrderWithItems(orderId);
+    if (paid) {
+        await sendCustomerCaptureReceipt(paid);
+    }
+
+    revalidatePath('/admin');
+    revalidatePath(`/admin/orders/${orderId}`);
+    return { success: true, capturedAmount };
+}
+
+export async function refundOrder(orderId: string) {
+    await assertAdminUser();
+    const order = await loadOrderForAction(orderId);
+
+    if (!getReservationActions(order).refund) {
+        throw new Error('Beløpet kan ikkje refunderast no');
+    }
+
+    let refundedAmount: number;
+    try {
+        refundedAmount = await refundReservation(order);
+    } catch (error) {
+        console.error(`Failed to refund order ${orderId}:`, error);
+        throw new Error('Kunne ikkje refundere beløpet. Sjekk betalingsleverandøren før du prøver igjen.');
+    }
+
+    if (refundedAmount !== (order.reservedAmount ?? order.totalAmount)) {
+        console.error(`Refunded ${refundedAmount} øre for order ${orderId}, expected ${order.reservedAmount}`);
+        throw new Error('Refusjonen gav eit anna beløp enn forventa. Kontakt utviklar før du gjer meir.');
+    }
+
+    const result = await prisma.order.updateMany({
+        where: { id: orderId, status: order.status },
+        data: { status: 'refunded' },
+    });
+    if (result.count === 0) {
+        console.error(`Refunded ${refundedAmount} øre but status not updated for order ${orderId}`);
+        throw new Error('Beløpet er refundert, men statusen blei ikkje oppdatert. Kontakt utviklar.');
+    }
+
+    const refunded = await loadOrderWithItems(orderId);
+    if (refunded) {
+        await sendRefundNotification(refunded as any);
+    }
+
+    revalidatePath('/admin');
+    revalidatePath(`/admin/orders/${orderId}`);
+    return { success: true, refundedAmount };
 }
 
 // Checkout Actions
@@ -145,6 +343,10 @@ export async function createStripeCheckoutSession(data: CheckoutData) {
 
     if (!shippingMethod) {
         throw new Error('Manglar leveringsalternativ');
+    }
+
+    if (shippingMethod === 'shipping_quote') {
+        throw new Error('Dette leveringsalternativet er ikkje tilgjengeleg i nettbutikken. Ta kontakt for levering.');
     }
 
     let totalAmount = 0;
@@ -235,7 +437,7 @@ export async function createStripeCheckoutSession(data: CheckoutData) {
     let shippingFee = 0;
     if (shippingMethod === 'shipping_fixed') {
         if (!isFixedShippingEligible(totalUnits)) {
-            throw new Error('Fastpris frakt gjeld ved bestilling av minst 2 big bags. Vel «Kontakt for fraktpris» eller henting.');
+            throw new Error('Fastpris frakt gjeld ved bestilling av minst 2 big bags. Vel henting, eller ta kontakt for levering.');
         }
         const base = await getNumberSetting('shipping_fixed', 1500);
         const extraPerUnit = await getNumberSetting('shipping_extra_per_unit', 750);
@@ -289,6 +491,14 @@ export async function createStripeCheckoutSession(data: CheckoutData) {
             payment_method_types: ['card'],
             line_items: stripeLineItems,
             mode: 'payment',
+            payment_intent_data: {
+                capture_method: 'manual',
+            },
+            custom_text: {
+                submit: {
+                    message: 'Beløpet blir reservert, men ikkje trekt før varen er sendt.',
+                },
+            },
             success_url: `${process.env.NEXT_PUBLIC_URL}/bestilling/${order.id}?success=true`,
             cancel_url: `${process.env.NEXT_PUBLIC_URL}/api/stripe-cancel/${order.id}`,
             metadata: {
@@ -327,6 +537,10 @@ export async function retryVippsPayment(orderId: string) {
         throw new Error('Ordren er allerede betalt');
     }
 
+    if (order.status !== 'pending') {
+        throw new Error('Ordren kan ikkje betalast på nytt');
+    }
+
     // Dynamic import to avoid circular dependency issues if any
     const { initiateVippsPayment } = await import('@/app/lib/vipps');
 
@@ -344,6 +558,10 @@ export async function retryVippsPayment(orderId: string) {
         });
 
         if (vippsResponse.redirectUrl) {
+            await prisma.order.update({
+                where: { id: order.id },
+                data: { vippsReference: reference },
+            });
             redirect(vippsResponse.redirectUrl);
         } else {
             throw new Error('Ingen redirect URL fra Vipps');

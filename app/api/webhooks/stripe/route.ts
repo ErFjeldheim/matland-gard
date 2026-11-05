@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { prisma } from '@/lib/prisma';
-import { sendCustomerOrderConfirmation, sendAdminOrderNotification } from '@/lib/email';
+import { getStripeSessionPayment } from '@/lib/stripe-payments';
+import { markReserved, sendReservationEmails } from '@/lib/reservations';
 
 /* eslint-disable @typescript-eslint/no-explicit-any -- webhook types from the Stripe SDK
    use narrower event shapes than the generic any; tightening is a separate refactor. */
@@ -39,18 +40,8 @@ export async function POST(req: NextRequest) {
     }
 
     // Dispatch by event type. The handler returns the order that was just
-    // marked paid (so we can email the customer), or null for no-op cases.
-    let paidOrder: {
-        id: string;
-        customerName: string;
-        customerEmail: string;
-        customerPhone: string;
-        deliveryAddress: string | null;
-        totalAmount: number;
-        shippingMethod: string | null;
-        status: string;
-        orderItems: any[];
-    } | null = null;
+    // reserved (or captured) so we can email the customer, or null for no-op cases.
+    let reservedOrder: Awaited<ReturnType<typeof markReserved>> = null;
 
     switch (event.type) {
         case 'checkout.session.completed': {
@@ -58,7 +49,7 @@ export async function POST(req: NextRequest) {
             const orderId = session.metadata?.orderId;
 
             if (orderId) {
-                console.log(`Processing successful payment for order: ${orderId}`);
+                console.log(`Processing authorized payment for order: ${orderId}`);
 
                 const existingOrder = await prisma.order.findUnique({
                     where: { id: orderId },
@@ -70,29 +61,18 @@ export async function POST(req: NextRequest) {
                 }
 
                 if (existingOrder.status === 'pending') {
-                    const order = await prisma.order.update({
-                        where: { id: orderId },
-                        data: { status: 'paid' },
-                        include: {
-                            orderItems: {
-                                include: {
-                                    product: true,
-                                },
-                            },
-                        },
-                    });
+                    const payment = await getStripeSessionPayment(session.id);
 
-                    paidOrder = {
-                        id: order.id,
-                        customerName: order.customerName,
-                        customerEmail: order.customerEmail,
-                        customerPhone: order.customerPhone,
-                        deliveryAddress: order.deliveryAddress,
-                        totalAmount: order.totalAmount,
-                        shippingMethod: order.shippingMethod,
-                        status: order.status,
-                        orderItems: order.orderItems,
-                    };
+                    if (!payment) {
+                        console.error(`Checkout session ${session.id} for order ${orderId} has no reservation yet`);
+                    } else {
+                        reservedOrder = await markReserved(orderId, {
+                            reservedAmount: payment.amount,
+                            captureDeadline: payment.status === 'reserved' ? payment.captureDeadline : null,
+                            stripePaymentIntentId: payment.paymentIntentId,
+                            captured: payment.status === 'captured',
+                        });
+                    }
                 } else {
                     console.log(`Order ${orderId} already has status: ${existingOrder.status}. Skipping duplicate emails.`);
                 }
@@ -107,7 +87,7 @@ export async function POST(req: NextRequest) {
     // Mark as processed BEFORE sending emails. This means a failure during
     // the order update above causes no row to be written and Stripe will
     // retry cleanly; a failure during email send below just logs and
-    // returns 200 so the order is not left "paid but unremembered".
+    // returns 200 so the order is not left "reserved but unremembered".
     try {
         await prisma.processedEvent.create({
             data: { id: event.id, type: event.type },
@@ -120,15 +100,12 @@ export async function POST(req: NextRequest) {
         }
     }
 
-    if (paidOrder) {
+    if (reservedOrder) {
         try {
-            await Promise.all([
-                sendCustomerOrderConfirmation(paidOrder),
-                sendAdminOrderNotification(paidOrder),
-            ]);
-            console.log(`Confirmation emails sent for order: ${paidOrder.id}`);
+            await sendReservationEmails(reservedOrder);
+            console.log(`Request emails sent for order: ${reservedOrder.id}`);
         } catch (emailError) {
-            console.error(`Error sending emails for order ${paidOrder.id}:`, emailError);
+            console.error(`Error sending emails for order ${reservedOrder.id}:`, emailError);
         }
     }
 

@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { sendCustomerOrderConfirmation, sendAdminOrderNotification } from '@/lib/email';
 import { getNumberSetting } from '@/lib/settings';
 import { getCheckoutUnitPrice } from '@/lib/product-prices';
 import {
@@ -46,6 +45,13 @@ export async function POST(request: NextRequest) {
     if (!shippingMethod) {
       return NextResponse.json(
         { error: 'Manglar leveringsalternativ' },
+        { status: 400 }
+      );
+    }
+
+    if (shippingMethod === 'shipping_quote') {
+      return NextResponse.json(
+        { error: 'Dette leveringsalternativet er ikkje tilgjengeleg i nettbutikken. Ta kontakt for levering.' },
         { status: 400 }
       );
     }
@@ -117,7 +123,7 @@ export async function POST(request: NextRequest) {
     if (shippingMethod === 'shipping_fixed') {
       if (!isFixedShippingEligible(totalUnits)) {
         return NextResponse.json(
-          { error: 'Fastpris frakt gjeld ved bestilling av minst 2 big bags. Vel «Kontakt for fraktpris» eller henting.' },
+          { error: 'Fastpris frakt gjeld ved bestilling av minst 2 big bags. Vel henting, eller ta kontakt for levering.' },
           { status: 400 }
         );
       }

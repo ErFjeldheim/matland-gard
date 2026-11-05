@@ -33,7 +33,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
   const [loading, setLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [paymentMethod, setPaymentMethod] = useState<'vipps' | 'stripe' | null>(null);
-  const [shippingMethod, setShippingMethod] = useState<'shipping_quote' | 'pickup' | 'shipping_fixed' | 'pickup_dokken' | null>(null);
+  const [shippingMethod, setShippingMethod] = useState<'pickup' | 'shipping_fixed' | 'pickup_dokken' | null>(null);
   const [formData, setFormData] = useState({
     customerName: '',
     customerEmail: '',
@@ -75,7 +75,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
     }
 
     if (shippingMethod === 'shipping_fixed' && !canUseFixedShipping) {
-      alert('Fastpris frakt gjeld ved bestilling av minst 2 big bags. Vel «Kontakt for fraktpris» eller henting.');
+      alert('Fastpris frakt gjeld ved bestilling av minst 2 big bags. Vel henting, eller ta kontakt for levering.');
       return;
     }
 
@@ -140,7 +140,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
       <div className="bg-[var(--foreground)] rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-900">Bestill {product.name}</h2>
+            <h2 className="text-2xl font-bold text-gray-900">Send forespurnad</h2>
             <button
               onClick={onClose}
               className="text-gray-400 hover:text-gray-600 cursor-pointer"
@@ -153,6 +153,11 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="bg-[var(--color-accent)]/20 border border-[var(--color-primary)] rounded-lg p-4 text-sm text-gray-800">
+              <p className="font-semibold mb-1">Dette er ei forespurnad.</p>
+              <p>Beløpet blir reservert, men ikkje trekt før varen er sendt. Bestillinga er ikkje bindande før vi har stadfesta ho.</p>
+            </div>
+
             {isCartCheckout ? (
               <div>
                 <label className="block text-gray-700 font-medium mb-2">
@@ -263,23 +268,10 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
                   </button>
                 ) : (
                   <p className="text-xs text-amber-600 font-medium">
-                    Fastpris frakt gjeld ved bestilling av minst 2 big bags. Ta kontakt for fraktpris på mindre bestillingar.
+                    Fastpris frakt gjeld ved bestilling av minst 2 big bags. For mindre bestillingar med levering, ta kontakt på telefon 954 58 563 eller e-post.
                   </p>
                 )}
 
-                <button
-                  type="button"
-                  onClick={() => setShippingMethod('shipping_quote')}
-                  className={`w-full py-3 px-4 rounded-lg border-2 font-medium transition-all cursor-pointer text-left ${shippingMethod === 'shipping_quote'
-                    ? 'border-[var(--color-primary)] bg-[var(--color-accent)]/20 text-[var(--color-dark)]'
-                    : 'border-gray-300 hover:border-[var(--color-primary)] text-gray-700'
-                    }`}
-                  disabled={loading}
-                >
-                  <div className="font-semibold">Kontakt for fraktpris</div>
-                  <div className="text-xs text-gray-600">Vi kontaktar deg raskt for ein god fraktpris</div>
-                  <div className="text-sm font-bold text-green-600">Få tilbod</div>
-                </button>
 
 
                 <button
@@ -390,7 +382,7 @@ export default function CheckoutModal({ product, isOpen, onClose, cartItems }: C
               ) : !paymentMethod ? (
                 'Vel betalingsmetode'
               ) : (
-                'Fullfør bestilling'
+                'Send forespurnad'
               )}
             </button>
           </form>
