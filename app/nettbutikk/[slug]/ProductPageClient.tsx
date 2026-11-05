@@ -20,9 +20,9 @@ type Product = {
 
 const HERREGAARDSSINGEL_SIZE_OPTIONS = [
   { size: '2-4mm', price: 189900 },
-  { size: '4-8mm', price: 169900 },
-  { size: '8-16mm', price: 149900 },
-  { size: '16-32mm', price: 139900 }
+  { size: '4-8mm', price: 179900 },
+  { size: '8-16mm', price: 159900 },
+  { size: '16-32mm', price: 149900 }
 ];
 
 const GRUS_SIZE_OPTIONS = [
@@ -40,8 +40,7 @@ const SAND_SIZE_OPTIONS = [
 ];
 
 const ELVESTEIN_SIZE_OPTIONS = [
-  { size: 'Sort 1', price: 159900 },
-  { size: 'Sort 2', price: 189900 }
+  { size: '60-90mm', price: 399000 }
 ];
 
 const ECCOGRAVEL_SIZE_OPTIONS = [
