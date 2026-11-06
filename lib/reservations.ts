@@ -36,6 +36,8 @@ export type ReservedPayment = {
   // True when the payment was already captured at the provider (for example a
   // Stripe payment created before manual capture was enabled).
   captured?: boolean;
+  // Exact captured amount when the provider reports one.
+  capturedAmount?: number;
 };
 
 export function vippsReferenceFor(order: Pick<ReservationOrder, 'id' | 'vippsReference'>): string {
@@ -55,7 +57,9 @@ export async function markReserved(orderId: string, payment: ReservedPayment) {
       captureDeadline: payment.captureDeadline,
       stripePaymentIntentId: payment.stripePaymentIntentId,
       vippsReference: payment.vippsReference,
-      capturedAmount: payment.captured ? payment.reservedAmount : undefined,
+      capturedAmount: payment.captured
+        ? (payment.capturedAmount ?? payment.reservedAmount)
+        : undefined,
       capturedAt: payment.captured ? now : undefined,
     },
   });

@@ -124,6 +124,13 @@ interface VippsPaymentDetails {
     };
 }
 
+export function isVippsPaymentCaptured(payment: VippsPaymentDetails): boolean {
+    // Vipps can keep the state as AUTHORIZED after a capture. The aggregate is
+    // therefore the reliable signal for whether the money was actually taken.
+    const captured = payment.aggregate?.capturedAmount.value ?? 0;
+    return payment.state === 'CAPTURED' || captured >= payment.amount.value;
+}
+
 export async function getVippsPayment(reference: string): Promise<VippsPaymentDetails> {
     const accessToken = await getVippsAccessToken();
 

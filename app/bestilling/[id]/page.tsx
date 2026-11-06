@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { retryVippsPayment } from '@/app/actions';
 import { getShippingMethodLabel } from '@/lib/shipping';
-import { getVippsPayment } from '@/app/lib/vipps';
+import { getVippsPayment, isVippsPaymentCaptured } from '@/app/lib/vipps';
 import { getStripeSessionPayment } from '@/lib/stripe-payments';
 import { markReserved, sendReservationEmails, vippsReferenceFor } from '@/lib/reservations';
 
@@ -100,14 +100,20 @@ export default async function OrderPage({
       try {
         const paymentDetails = await getVippsPayment(vippsReferenceFor(order));
         if (paymentDetails.state === 'AUTHORIZED' || paymentDetails.state === 'CAPTURED') {
+          // Vipps can report AUTHORIZED even after a capture, so the aggregate
+          // decides whether the money was actually taken.
+          const captured = isVippsPaymentCaptured(paymentDetails);
           reserved = await markReserved(id, {
             reservedAmount: paymentDetails.amount.value,
             captureDeadline:
-              paymentDetails.state === 'AUTHORIZED' && paymentDetails.captureGuaranteedUntil
+              !captured && paymentDetails.captureGuaranteedUntil
                 ? new Date(paymentDetails.captureGuaranteedUntil)
                 : null,
             vippsReference: vippsReferenceFor(order),
-            captured: paymentDetails.state === 'CAPTURED',
+            captured,
+            capturedAmount: captured
+              ? (paymentDetails.aggregate?.capturedAmount.value ?? paymentDetails.amount.value)
+              : undefined,
           });
         } else {
           console.log(`Vipps payment not authorized for order ${id}. Status: ${paymentDetails.state}`);

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getVippsPayment } from '@/app/lib/vipps';
+import { getVippsPayment, isVippsPaymentCaptured } from '@/app/lib/vipps';
 import { prisma } from '@/lib/prisma';
 import { markReserved, sendReservationEmails, vippsReferenceFor } from '@/lib/reservations';
 
@@ -28,14 +28,20 @@ export async function GET(
         // to capture automatically.
         if (paymentDetails.state === 'AUTHORIZED' || paymentDetails.state === 'CAPTURED') {
             try {
+                // Vipps can report AUTHORIZED even after a capture, so the
+                // aggregate decides whether the money was actually taken.
+                const captured = isVippsPaymentCaptured(paymentDetails);
                 const reserved = await markReserved(orderId, {
                     reservedAmount: paymentDetails.amount.value,
                     captureDeadline:
-                        paymentDetails.state === 'AUTHORIZED' && paymentDetails.captureGuaranteedUntil
+                        !captured && paymentDetails.captureGuaranteedUntil
                             ? new Date(paymentDetails.captureGuaranteedUntil)
                             : null,
                     vippsReference: vippsReferenceFor(order),
-                    captured: paymentDetails.state === 'CAPTURED',
+                    captured,
+                    capturedAmount: captured
+                        ? (paymentDetails.aggregate?.capturedAmount.value ?? paymentDetails.amount.value)
+                        : undefined,
                 });
                 if (reserved) {
                     await sendReservationEmails(reserved);
